@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 16:17:43 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/04 18:19:25 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/04 21:24:37 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ size_t				parse_flags(const char *format, t_arg *arg)
 
 	i = 0;
 	j = 0;
-	while (FLAGS[i])
+	while (FLAGS_V[i])
 	{
-		if (format[j] == FLAGS[i] && (i = -1))
+		if (format[j] == FLAGS_V[i] && (i = -1))
 			printf("\t\tfound the flag '%c' in pos %d\n", format[j], j++);
 		i++;
 	}
