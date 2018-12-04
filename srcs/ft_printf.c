@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 21:56:12 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/04 02:13:10 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/04 02:40:58 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,19 @@ int				get_converters(const char *format, char **buffer, va_list *lst)
 
 	blen = 0;
 	if (!buffer)
-		return (ERROR);
+		return (-2);
 	if (*buffer != NULL)
 		blen = ft_strlen(*buffer);
 	if (*format != '%')
-		return (ERROR);
-	i = 1;
+		return (-3);
+	i = 2;
+	if (ft_contains(format[1], "%") && ++format)
+		i = 1;
 	tmp = *buffer;
-	if (!(*buffer = ft_strmcat(*buffer, "%", blen + i)))
-		return (ERROR);
+	if (!(*buffer = ft_strmcat(*buffer, format, blen + i)))
+		return (-4);
 	free(tmp);
-	return (i);
+	return (2);
 }
 
 int				ft_printf(const char *format, ...)
@@ -71,9 +73,9 @@ int				ft_printf(const char *format, ...)
 	format += size;
 	while (*format)
 	{
-		if (*format != '%' || (size = get_converters(++format, &buf, &lst)) < 0)
-			return (ft_freturn(buf, ERROR));
-		if ((size + get_format(format += size, &buf)) < 0)
+		if ((size = get_converters(format, &buf, &lst)) < 0)
+			return (ft_freturn(buf, size));
+		if ((size = get_format(format += size, &buf)) < 0)
 			return (ft_freturn(buf, ERROR));
 		format += size;
 	}

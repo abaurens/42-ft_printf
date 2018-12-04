@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 22:25:56 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/04 01:44:49 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/04 02:47:15 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@
 int		main(void)
 {
 	int	i;
+	const char	*test = "LOL%%\n";
 
-	i = printf("LOL%%\n");
+	i = printf(test, "ol");
 	printf("returned : %d\n\n", i);
 
-	i = ft_printf("LOL%%\n");
+	i = ft_printf(test, "ol");
 	printf("returned : %d\n", i);
 	return (0);
 }
