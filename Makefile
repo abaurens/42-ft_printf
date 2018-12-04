@@ -6,7 +6,7 @@
 #    By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 16:23:33 by abaurens          #+#    #+#              #
-#    Updated: 2018/12/04 01:36:17 by abaurens         ###   ########.fr        #
+#    Updated: 2018/12/04 16:19:31 by abaurens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRCD        =   srcs
 OBJD        =   objs
 
 SRC         =   main.c	\
+				core.c	\
 				ft_printf.c
 
 CFLAGS      +=  -I./includes -W -Wall -Wextra -ansi -pedantic #-Werror
