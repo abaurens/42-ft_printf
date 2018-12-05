@@ -6,7 +6,7 @@
 #    By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 16:23:33 by abaurens          #+#    #+#              #
-#    Updated: 2018/12/04 16:19:31 by abaurens         ###   ########.fr        #
+#    Updated: 2018/12/05 01:40:21 by abaurens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRC         =   main.c	\
 				core.c	\
 				ft_printf.c
 
-CFLAGS      +=  -I./includes -W -Wall -Wextra -ansi -pedantic #-Werror
+CFLAGS      +=  -I./includes -g -W -Wall -Wextra -ansi #-pedantic #-Werror
 LIB_DIR     :=  $(shell find . -type d -name '$(LIB)')
 
 OBJ         :=  $(addprefix $(OBJD)/,$(SRC:.c=.o))
