@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 16:17:43 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/05 09:46:21 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/05 21:12:31 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,33 @@
 #include <stdlib.h>
 #include "ft_printf.h"
 #include "libft.h"
+
+int					parse_chain_format(t_char *format, t_printf *data, int *val)
+{
+	int				i;
+
+	i = 0;
+	*val = 0;
+	while (format[i] && format[i] >= '0' && format[i] <= '9')
+		i++;
+	if (i <= 0)
+	{
+		if (format[i] == '$' || data->use_chain_format == TRUE)
+			return (-1);
+		data->use_chain_format = FALSE;
+		return (0);
+	}
+	if (format[i] != '$' && data->use_chain_format == MAYBE)
+	{
+		data->use_chain_format = FALSE;
+		return (0);
+	}
+	if (format[i] != '$' || data->use_chain_format == FALSE)
+		return (-1);
+	data->use_chain_format = TRUE;
+	*val = ft_atoi(format);
+	return (i + 1);
+}
 
 int					get_format(t_char *format, t_printf *data)
 {
@@ -43,7 +70,7 @@ size_t				parse_flags(t_char *format, t_arg *arg)
 
 	j = 0;
 	i = -1;
-	tab = (char []){F_MINS, F_ZERO, F_PLUS, F_SPAC, F_HASH, F_COLO};
+	tab = (char[]){F_MINS, F_ZERO, F_PLUS, F_SPAC, F_HASH, F_COLO};
 	while ((c = FLAGS_V[++i]))
 	{
 		if (format[j] == c && (++j))
@@ -55,26 +82,16 @@ size_t				parse_flags(t_char *format, t_arg *arg)
 	return (j);
 }
 
-size_t				parse_min_width(t_char *format, t_printf *data, t_arg *arg)
+int					parse_min_width(t_char *format, t_printf *data, t_arg *arg)
 {
 	int				i;
 
 	i = 0;
-	arg->min_width = 0;
-	if (*format == '*' || data->use_chain_format)
+	if ((arg->min_width = 0) || *format == '*')
 	{
-		i = 1;
-		if (*format != '*')
+		if ((i = parse_chain_format(format + 1, data, &arg->min_width_idx)) < 0)
 			return (-1);
-		arg->min_width_idx = 0;
-		while (format[i] && format[i] >= '0' && format[i] <= '9')
-			i++;
-		if (i > 1)
-		{
-			if (format[i++] != '$')
-				return (-1);
-			arg->min_width_idx = ft_atoi(format + 1);
-		}
+		++i;
 		return (i);
 	}
 	arg->min_width = ft_atoi(format);
@@ -83,37 +100,27 @@ size_t				parse_min_width(t_char *format, t_printf *data, t_arg *arg)
 	return (i);
 }
 
-size_t				parse_precision(t_char *format, t_printf *data, t_arg *arg)
+int					parse_precision(t_char *format, t_printf *data, t_arg *arg)
 {
 	int				i;
 
 	i = 0;
-	arg->precision = 0;
-	if (*format++ != '.')
+	if ((arg->precision = 0) || *format++ != '.')
 		return (0);
-	if (*format == '*' || data->use_chain_format)
+	if (*format == '*')
 	{
-		i = 1;
-		if (*format != '*')
+		if ((i = parse_chain_format(format + 1, data, &arg->precision_idx)) < 0)
 			return (-1);
-		arg->precision_idx = 0;
-		while (format[i] && format[i] >= '0' && format[i] <= '9')
-			i++;
-		if (i > 1)
-		{
-			if (format[i++] != '$')
-				return (-1);
-			arg->min_width_idx = ft_atoi(format + 1);
-		}
+		++i;
 		return (i + 1);
 	}
-	arg->precision = ft_atoi(format);
 	while (format[i] && format[i] >= '0' && format[i] <= '9')
 		i++;
+	arg->precision = ft_atoi(format);
 	return (i + 1);
 }
 
-size_t				process_args(const char *format, t_printf *data)
+int					process_args(const char *format, t_printf *data)
 {
 	int				i;
 	t_arg			arg;
@@ -122,46 +129,28 @@ size_t				process_args(const char *format, t_printf *data)
 	i = 0;
 	arg.flags = 0;
 	f = (format + 1);
-	printf("\t$ format, flags, min_width, precision, convertion : |%.*s|\n", ft_idxof('\n', f), f);
-
-	while (data->use_chain_format && f[i] && f[i] >= '0' && f[i] <= '9')
-		i++;
-	if (i > 0)
-	{
-		if (f[i] != '$')
-			return (-1);
-		arg.flag_idx = ft_atoi(f);
-		data->use_chain_format = TRUE;
-		f += i + 1;
-	}
-	printf("\tflags, min_width, precision, convertion :           |%.*s|\n", ft_idxof('\n', f), f);
-
+	if ((i = parse_chain_format(f, data, &arg.flag_idx)) < 0)
+		return (-1);
+	f += i;
 	if ((i = parse_flags(f, &arg)) < 0)
 		return (-1);
-	printf("\tmin_width, precision, convertion :                  |%.*s|\n", ft_idxof('\n', f), f);
 	f += i;
 	if ((i = parse_min_width(f, data, &arg)) < 0)
 		return (-1);
 	f += i;
-	printf("\tprecision, convertion:                              |%.*s|\n", ft_idxof('\n', f), f);
 	if ((i = parse_precision(f, data, &arg)) < 0)
 		return (-1);
 	f += i;
-	printf("\tconvertion :                                        |%.*s|\n", ft_idxof('\n', f), f);
-
-	printf("\nstruct value :\nusing $ format : %d\nenabeled flags : %d\nminimum field width : %d\nprecision : %d\n",
-		data->use_chain_format,
-		arg.flags,
-		arg.min_width,
-		arg.precision);
-	exit(0);
-	return (0);
+	if (!ft_contains(*f, CONV_V))
+		return (-1);
+	arg.conv_id = ft_idxof(*f++, CONV_V);
+	return (f - format);
 }
 
 int						get_args(const char *format, t_printf *data)
 {
 	size_t				blen;
-	size_t				i;
+	int					i;
 
 	blen = 0;
 	(void)blen;
@@ -169,6 +158,7 @@ int						get_args(const char *format, t_printf *data)
 		return (ERROR);
 	if (data->buf != NULL)
 		blen = ft_strlen(data->buf);
-	i = process_args(format, data);
+	if ((i = process_args(format, data)) < 0)
+		return (1);
 	return (i);
 }

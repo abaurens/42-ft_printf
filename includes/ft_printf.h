@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 21:58:06 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/05 09:43:27 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/05 20:21:22 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 # define F_HASH 0b00010000
 # define F_COLO 0b00100000
 
+# define CONV_V "dioxXucsfeEgGpn%"
+
 typedef const char	t_char;
 
 typedef enum	e_bool
@@ -40,6 +42,7 @@ typedef enum	e_bool
 typedef struct	s_arg
 {
 	char		flags;
+	int			conv_id;
 	int			min_width;
 	int			precision;
 	int			flag_idx;
@@ -57,16 +60,16 @@ typedef struct	s_printf
 /*
 **	core.c
 */
-int		get_args(const char *format, t_printf *data);
-int		get_format(const char *format, t_printf *data);
+int				get_args(const char *format, t_printf *data);
+int				get_format(const char *format, t_printf *data);
 
-int		ft_printf(const char *format, ...);
-int		ft_bprintf(const char *format, ...);
-int		ft_dprintf(int fd, const char *format, ...);
-int		ft_sprintf(char *str, const char *format, ...);
-int		ft_fprintf(FILE *stream, const char *format, ...);
-int		ft_snprintf(char *str, size_t size, const char *format, ...);
+int				ft_printf(const char *format, ...);
+int				ft_bprintf(const char *format, ...);
+int				ft_dprintf(int fd, const char *format, ...);
+int				ft_sprintf(char *str, const char *format, ...);
+int				ft_fprintf(FILE *stream, const char *format, ...);
+int				ft_snprintf(char *str, size_t size, const char *format, ...);
 
-int		ft_asprintf(char **strp, const char *fmt, ...);
+int				ft_asprintf(char **strp, const char *fmt, ...);
 
 #endif
