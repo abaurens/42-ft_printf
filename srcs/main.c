@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 22:25:56 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/06 16:45:29 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/06 17:15:20 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int		main(void)
 {
 	int			i;
-	const char	*test = "%1$*.5d\n";//"\t|%#'+- 01$#'+- 0*2$#'+- 0.*2$#'+- 0l#'+- 0l#'+- 0%\n";
+	const char	*test = "\t|%#'+- 0$#'+- 0*2$#'+- 0.*2$#'+- 0l#'+- 0l#'+- 0d\n";
 
 	printf("Testing printf with format %s\n", test);
 	fflush(stdout);
