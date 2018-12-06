@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 16:17:43 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/06 16:41:07 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/07 00:21:47 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 #include "ft_printf.h"
 #include "libft.h"
 
-int					parse_flags(t_char *format, t_arg *arg)
+int				get_flags(t_char *format, t_arg *arg)
 {
-	char			*tab;
-	char			c;
-	int				i;
-	int				j;
+	char		*tab;
+	char		c;
+	int			i;
+	int			j;
 
 	j = 0;
 	i = -1;
@@ -36,9 +36,9 @@ int					parse_flags(t_char *format, t_arg *arg)
 	return (j);
 }
 
-int					parse_chain_format(t_char *format, t_printf *data, int *val)
+int				get_chain_format(t_char *format, t_printf *data, int *val)
 {
-	int				i;
+	int			i;
 
 	i = 0;
 	*val = 0;
@@ -63,11 +63,11 @@ int					parse_chain_format(t_char *format, t_printf *data, int *val)
 	return (i + 1);
 }
 
-int					get_format(t_char *format, t_printf *data)
+int				get_non_arg(t_char *format, t_printf *data)
 {
-	char			*tmp;
-	size_t			blen;
-	size_t			i;
+	char		*tmp;
+	size_t		blen;
+	size_t		i;
 
 	blen = 0;
 	if (!data)
@@ -82,17 +82,17 @@ int					get_format(t_char *format, t_printf *data)
 	return (i);
 }
 
-int					parse_min_width(t_char *format, t_printf *data, t_arg *arg)
+int				get_min_width(t_char *format, t_printf *data, t_arg *arg)
 {
-	int				i;
-	const char		*f;
+	int			i;
+	const char	*f;
 
 	i = 0;
 	f = format;
-	format += parse_flags(format, arg);
+	format += get_flags(format, arg);
 	if ((arg->min_width = 0) || *format == '*')
 	{
-		if ((i = parse_chain_format(format + 1, data, &arg->min_width_idx)) < 0)
+		if ((i = get_chain_format(format + 1, data, &arg->min_width_idx)) < 0)
 			return (0);
 		++i;
 		return ((format + i) - f);
@@ -103,19 +103,19 @@ int					parse_min_width(t_char *format, t_printf *data, t_arg *arg)
 	return ((format + i) - f);
 }
 
-int					parse_precision(t_char *format, t_printf *data, t_arg *arg)
+int				get_precision(t_char *format, t_printf *data, t_arg *arg)
 {
-	int				i;
-	const char		*f;
+	int			i;
+	const char	*f;
 
 	i = 0;
 	f = format;
-	format += parse_flags(format, arg);
+	format += get_flags(format, arg);
 	if ((arg->precision = 0) || *format++ != '.')
 		return (0);
 	if (*format == '*')
 	{
-		if ((i = parse_chain_format(format + 1, data, &arg->precision_idx)) < 0)
+		if ((i = get_chain_format(format + 1, data, &arg->precision_idx)) < 0)
 			return (0);
 		++i;
 		return ((format + i + 1) - f);
@@ -126,19 +126,18 @@ int					parse_precision(t_char *format, t_printf *data, t_arg *arg)
 	return ((format + i + 1) - f);
 }
 
-int					parse_length_modifier(t_char *format, t_printf *data,
-	t_arg *arg)
+int				get_length_modifier(t_char *format, t_printf *data, t_arg *arg)
 {
-	char			c;
-	int				i;
-	int				j;
+	char		c;
+	int			i;
+	int			j;
 
 	j = 0;
 	i = -1;
 	(void)data;
 	while ((c = LEN_MD[++i]))
 	{
-		j += parse_flags(format + j, arg);
+		j += get_flags(format + j, arg);
 		if (format[j] == c && (++j))
 		{
 			i = -1;
@@ -147,38 +146,40 @@ int					parse_length_modifier(t_char *format, t_printf *data,
 	return (j);
 }
 
-int					process_args(const char **format, t_printf *data, t_arg *a)
+int				(*g_funcs[])(const char *, t_printf *, t_arg *) =
 {
-	int				i;
-	const char		*f;
+	get_min_width,
+	get_precision,
+	get_length_modifier
+};
+
+int				process_args(const char **format, t_printf *data, t_arg *arg)
+{
+	int			i;
+	const char	*f;
 
 	i = 0;
-	a->flags = 0;
 	f = *format;
-	*format += parse_flags(*format + 1, a) + 1;
-	printf("R : |%s\n", *format);
-	if ((i = parse_chain_format(*format, data, &a->flag_idx)) < 0)
-		i = 0;
-	*format += i;
-	printf("R : |%s", *format);
-	*format += parse_min_width(*format, data, a);
-	*format += parse_precision(*format, data, a);
-	*format += parse_length_modifier(*format, data, a);
-	a->conv_c = *(*format)++;
-	if (!ft_contains(a->conv_c, CONV_V))
-		return (*format - f);
-	a->conv_id = ft_idxof(a->conv_c, CONV_V);
-	i = (*format - f);
-	return (i);
+	arg->flags = 0;
+	*format += get_flags(*format + 1, arg) + 1;
+	if ((i = get_chain_format(*format, data, &arg->flag_idx)) >= 0)
+		*format += i;
+	i = 0;
+	while (i < 3)
+		*format += g_funcs[i++](*format, data, arg);
+	arg->conv_c = *(*format)++;
+	if (ft_contains(arg->conv_c, CONV_V))
+		arg->conv_id = ft_idxof(arg->conv_c, CONV_V);
+	return (*format - f);
 }
 
-int						get_args(const char **format, t_printf *data)
+int				get_args(const char **format, t_printf *data)
 {
-	size_t				blen;
-	char				tb[2];
-	char				*tmp;
-	t_arg				arg;
-	int					i;
+	size_t		blen;
+	char		tb[2];
+	char		*tmp;
+	t_arg		arg;
+	int			i;
 
 	blen = 0;
 	(void)blen;
@@ -190,8 +191,8 @@ int						get_args(const char **format, t_printf *data)
 	if ((i = process_args(format, data, &arg)) < 0)
 		return (0);
 	tb[0] = arg.conv_c;
-	tmp = ft_strmcat(data->buf, tb, -1);
+	/*tmp = ft_strmcat(data->buf, tb, -1);
 	free(data->buf);
-	data->buf = tmp;
+	data->buf = tmp;*/
 	return (i);
 }

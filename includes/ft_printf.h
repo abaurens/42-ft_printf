@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 21:58:06 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/06 14:25:31 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/07 00:23:29 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,47 +31,50 @@
 # define LEN_MD "hlLqjzt"
 # define CONV_V "diouxXeEfFgGaAcCsSpnm%"
 
-typedef const char	t_char;
+typedef const char		t_char;
+typedef enum e_bool		t_bool;
+typedef struct s_arg	t_arg;
+typedef struct s_printf	t_printf;
 
-typedef enum	e_bool
+enum		e_bool
 {
 	FALSE,
 	TRUE,
 	MAYBE
-}				t_bool;
+};
 
-typedef struct	s_arg
+struct		s_arg
 {
-	char		flags;
-	char		conv_c;
-	int			conv_id;
-	int			min_width;
-	int			precision;
-	int			flag_idx;
-	int			precision_idx;
-	int			min_width_idx;
-}				t_arg;
+	char	flags;
+	char	conv_c;
+	int		conv_id;
+	int		min_width;
+	int		precision;
+	int		flag_idx;
+	int		precision_idx;
+	int		min_width_idx;
+};
 
-typedef struct	s_printf
+struct		s_printf
 {
-	t_bool		use_chain_format;
-	char		*buf;
-	va_list		lst;
-}				t_printf;
+	t_bool	use_chain_format;
+	char	*buf;
+	va_list	lst;
+};
 
 /*
 **	core.c
 */
-int				get_args(const char **format, t_printf *data);
-int				get_format(const char *format, t_printf *data);
+int			get_args(const char **format, t_printf *data);
+int			get_non_arg(const char *format, t_printf *data);
 
-int				ft_printf(const char *format, ...);
-int				ft_bprintf(const char *format, ...);
-int				ft_dprintf(int fd, const char *format, ...);
-int				ft_sprintf(char *str, const char *format, ...);
-int				ft_fprintf(FILE *stream, const char *format, ...);
-int				ft_snprintf(char *str, size_t size, const char *format, ...);
+int			ft_printf(const char *format, ...);
+int			ft_bprintf(const char *format, ...);
+int			ft_dprintf(int fd, const char *format, ...);
+int			ft_sprintf(char *str, const char *format, ...);
+int			ft_fprintf(FILE *stream, const char *format, ...);
+int			ft_snprintf(char *str, size_t size, const char *format, ...);
 
-int				ft_asprintf(char **strp, const char *fmt, ...);
+int			ft_asprintf(char **strp, const char *fmt, ...);
 
 #endif
