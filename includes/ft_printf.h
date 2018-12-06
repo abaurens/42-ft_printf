@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 21:58:06 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/05 20:21:22 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/06 14:25:31 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@
 # define F_HASH 0b00010000
 # define F_COLO 0b00100000
 
-# define CONV_V "dioxXucsfeEgGpn%"
+# define LEN_MD "hlLqjzt"
+# define CONV_V "diouxXeEfFgGaAcCsSpnm%"
 
 typedef const char	t_char;
 
@@ -42,6 +43,7 @@ typedef enum	e_bool
 typedef struct	s_arg
 {
 	char		flags;
+	char		conv_c;
 	int			conv_id;
 	int			min_width;
 	int			precision;
@@ -60,7 +62,7 @@ typedef struct	s_printf
 /*
 **	core.c
 */
-int				get_args(const char *format, t_printf *data);
+int				get_args(const char **format, t_printf *data);
 int				get_format(const char *format, t_printf *data);
 
 int				ft_printf(const char *format, ...);
