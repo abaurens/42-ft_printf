@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 21:58:06 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/07 18:32:12 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/07 18:33:13 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ int			parse_arg(const char **format, t_printf *data, t_arg *arg);
 /*
 **	ft_printf.c
 */
-int			ft_printf(const char *format, ...)
-__attribute__((format(printf,1,2)));
+int			ft_printf(const char *format,
+	...) __attribute__((format(printf,1,2)));
 
 int			ft_bprintf(const char *format, ...);
 int			ft_dprintf(int fd, const char *format, ...);
