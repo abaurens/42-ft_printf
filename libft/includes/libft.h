@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 16:09:37 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/04 01:54:02 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/07 15:03:15 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int					ft_isascii(int c);
 int					ft_isprint(int c);
 int					ft_tolower(int c);
 int					ft_toupper(int c);
+int					ft_putchar(int c);
 int					ft_atoi(const char *str);
 int					ft_freturn(void *ptr, int ret);
 int					ft_strcmp(const char *s1, const char *s2);
@@ -61,7 +62,6 @@ size_t				ft_strlcat(char *dst, const char *src, size_t size);
 
 void				ft_putnbr(int n);
 void				ft_strclr(char *s);
-void				ft_putchar(int c);
 void				ft_memdel(void **ap);
 void				ft_strdel(char **as);
 void				ft_putstr(char const *s);

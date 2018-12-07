@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 21:56:12 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/07 00:23:21 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/07 11:28:43 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int				ft_printf(const char *format, ...)
 		return (ft_freturn(data.buf, ERROR));
 	while (*(format += size))
 	{
-		if ((size = get_args(&format, &data)) < 0)
+		if ((size = get_arg(&format, &data)) < 0)
 			return (ft_freturn(data.buf, ERROR));
 		if ((size = get_non_arg(format, &data)) < 0)
 			return (ft_freturn(data.buf, ERROR));

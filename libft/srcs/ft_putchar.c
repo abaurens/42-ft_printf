@@ -6,14 +6,14 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 00:36:27 by abaurens          #+#    #+#             */
-/*   Updated: 2018/11/13 13:35:06 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/07 15:03:18 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "libft.h"
 
-void	ft_putchar(int c)
+int			ft_putchar(int c)
 {
 	char	u[4];
 	size_t	len;
@@ -36,5 +36,5 @@ void	ft_putchar(int c)
 			}
 		}
 	}
-	write(1, u + (4 - len), len);
+	return (write(1, u + (4 - len), len));
 }

@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 21:58:06 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/07 00:23:29 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/07 17:51:40 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,26 @@
 # include <stdio.h>
 # include <stdarg.h>
 
+# include <wchar.h>
+# include <stddef.h>
+# include <inttypes.h>
+
 # define ERROR -1
 
-# define FLAGS_V "-0+ #'"
-
-# define FLAG_C 6
 # define F_MINS	0b00000001
 # define F_ZERO	0b00000010
 # define F_PLUS	0b00000100
 # define F_SPAC 0b00001000
 # define F_HASH 0b00010000
 # define F_COLO 0b00100000
+# define FLAGS_V "-0+ #'"
+# define FLAG_C 6
+
+extern int const g_flags_masks[];
 
 # define LEN_MD "hlLqjzt"
 # define CONV_V "diouxXeEfFgGaAcCsSpnm%"
 
-typedef const char		t_char;
 typedef enum e_bool		t_bool;
 typedef struct s_arg	t_arg;
 typedef struct s_printf	t_printf;
@@ -48,9 +52,9 @@ struct		s_arg
 	char	flags;
 	char	conv_c;
 	int		conv_id;
+	int		flag_idx;
 	int		min_width;
 	int		precision;
-	int		flag_idx;
 	int		precision_idx;
 	int		min_width_idx;
 };
@@ -65,10 +69,20 @@ struct		s_printf
 /*
 **	core.c
 */
-int			get_args(const char **format, t_printf *data);
+int			get_arg(const char **format, t_printf *data);
 int			get_non_arg(const char *format, t_printf *data);
 
-int			ft_printf(const char *format, ...);
+/*
+**	args.c
+*/
+int			parse_arg(const char **format, t_printf *data, t_arg *arg);
+
+/*
+**	ft_printf.c
+*/
+int			ft_printf(const char *format, ...)
+			__attribute__((format(printf, 1, 2)));
+
 int			ft_bprintf(const char *format, ...);
 int			ft_dprintf(int fd, const char *format, ...);
 int			ft_sprintf(char *str, const char *format, ...);

@@ -6,7 +6,7 @@
 #    By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 16:23:33 by abaurens          #+#    #+#              #
-#    Updated: 2018/12/05 01:40:21 by abaurens         ###   ########.fr        #
+#    Updated: 2018/12/07 17:27:53 by abaurens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,11 +19,12 @@ LIB         =   libft
 SRCD        =   srcs
 OBJD        =   objs
 
-SRC         =   main.c	\
-				core.c	\
-				ft_printf.c
+SRC         =   main.c		\
+				core.c		\
+				ft_printf.c	\
+				parse_args.c
 
-CFLAGS      +=  -I./includes -g -W -Wall -Wextra -ansi #-pedantic #-Werror
+CFLAGS      +=  -I./includes -g -W -Wall -Wextra -ansi #-Werror #-pedantic
 LIB_DIR     :=  $(shell find . -type d -name '$(LIB)')
 
 OBJ         :=  $(addprefix $(OBJD)/,$(SRC:.c=.o))
