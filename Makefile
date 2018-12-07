@@ -6,7 +6,7 @@
 #    By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 16:23:33 by abaurens          #+#    #+#              #
-#    Updated: 2018/12/07 17:27:53 by abaurens         ###   ########.fr        #
+#    Updated: 2018/12/08 00:10:17 by abaurens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,18 +47,29 @@ objs/%.o:   $(SRCD)/%.c
 
 all:    $(NAME)
 
-clean:
+cleanlib:
 ifneq ($(LIB_DIR),)
 	@make -C $(LIB_DIR) clean
 endif
+
+cleand:
 	$(RM) $(OBJD)
 
-fclean:
+clean:	cleanlib cleand
+
+fcleanlib:
 ifneq ($(LIB_DIR),)
 	@make -C $(LIB_DIR) fclean
 endif
-	$(RM) $(OBJD)
+
+fcleand:	cleand
 	$(RM) $(NAME)
+
+fclean:	fcleanlib fcleand
+
+red:	fcleand all
+
+relib:	fcleanlib all
 
 re: fclean all
 

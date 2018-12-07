@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 16:17:43 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/07 14:13:37 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/08 00:23:43 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,14 @@ static void		print_arg_data(t_arg *arg, t_bool use_chain_format)
 	while (FLAGS_V[++j])
 		printf(" Flag '%c' : %d\n", FLAGS_V[j],
 			(arg->flags & g_flags_masks[j]) != 0);
+	if (use_chain_format == TRUE && arg->precision == 0)
+		printf(" Precision index : %d\n", arg->precision_idx);
+	else
+		printf(" Precision : %d\n", arg->precision);
 	if (use_chain_format == TRUE && arg->min_width == 0)
 		printf(" Minimum field width index : %d\n", arg->min_width_idx);
 	else
 		printf(" Minimum field width : %d\n", arg->min_width);
-	if (use_chain_format == TRUE && arg->precision == 0)
-		printf(" Minimum precision index : %d\n", arg->precision_idx);
-	else
-		printf(" Minimum precision : %d\n", arg->precision);
 	printf(" Length modifier : (nan)\n");
 }
 
@@ -64,8 +64,6 @@ int				get_arg(const char **format, t_printf *data)
 
 	if (!data || (format && *format && **format && **format != '%'))
 		return (ERROR);
-	/*if (data->buf != NULL)
-		blen = ft_strlen(data->buf);*/
 	if ((i = parse_arg(format, data, &arg)) < 0)
 		return (0);
 	print_arg_data(&arg, data->use_chain_format);

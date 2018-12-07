@@ -6,30 +6,23 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 22:25:56 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/07 18:01:39 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/08 00:51:36 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "ft_printf.h"
 
 int				main(void)
 {
-	int			l;
-	intmax_t	i;
-	ptrdiff_t	g;
-	wchar_t		c;
-	wint_t		wi;
-	long double lf;
-	const char	*test = " |%#'+- 01$#'+- 0*2$#'+- 0.*2$#'+- 0l#'+- 0l#'+- 0d\n";
+	int			i;
+	const char	*test = " |%1$#'+- 0*2$.*2$lld\n";
 
 	/**/
-	l = 5;
-	i = l;
-	g = l;
-	lf = 0.0;
-	ft_printf("%lf\n", lf);
-	exit(0);
+	i = 0;
+	printf(" |% .3zd\n", (size_t)42);
+	exit(i);
 	/**
 	printf("Testing printf with format %s\n", test);
 	fflush(stdout);

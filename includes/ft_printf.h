@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 21:58:06 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/07 18:33:13 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/08 00:54:22 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # include <stdio.h>
 # include <stdarg.h>
+# include <wchar.h>
+# include <stddef.h>
+# include <inttypes.h>
 
 # define ERROR -1
 
@@ -24,13 +27,18 @@
 # define F_SPAC 0b00001000
 # define F_HASH 0b00010000
 # define F_COLO 0b00100000
-# define FLAGS_V "-0+ #'"
+# define FLAGS_V "-0+ #'I"
 # define FLAG_C 6
 
 extern int const g_flags_masks[];
 
-# define LEN_MD "hlLqjzt"
-# define CONV_V "diouxXeEfFgGaAcCsSpnm%"
+# define LEN_MD "hlLqjzZtq"
+# define CONV_V "diouxXeEfFgGaAcCsSpnmbrk%"
+/*
+**	b = nombre binaire
+**	r = string avec caracteres non imprimable
+**	k = date au format ISO
+*/
 
 typedef enum e_bool		t_bool;
 typedef struct s_arg	t_arg;
