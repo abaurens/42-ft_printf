@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 22:25:56 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/08 00:51:36 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/08 20:52:36 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int				main(void)
 
 	/**/
 	i = 0;
-	printf(" |% .3zd\n", (size_t)42);
+	ft_printf(" |%'+-.30hhlld\n", 42ll, 5);
 	exit(i);
 	/**
 	printf("Testing printf with format %s\n", test);

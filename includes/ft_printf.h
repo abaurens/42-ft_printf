@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 21:58:06 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/08 00:54:22 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/08 19:38:39 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,13 @@
 # define F_SPAC 0b00001000
 # define F_HASH 0b00010000
 # define F_COLO 0b00100000
+# define F_CAPI 0b01000000
 # define FLAGS_V "-0+ #'I"
-# define FLAG_C 6
+# define FLAG_C 7
 
 extern int const g_flags_masks[];
 
-# define LEN_MD "hlLqjzZtq"
+# define LEN_MD "qjzZtlLh"
 # define CONV_V "diouxXeEfFgGaAcCsSpnmbrk%"
 /*
 **	b = nombre binaire
@@ -61,6 +62,7 @@ struct		s_arg
 	int		precision;
 	int		precision_idx;
 	int		min_width_idx;
+	int		length_modifier;
 };
 
 struct		s_printf
