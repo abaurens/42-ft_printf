@@ -6,11 +6,11 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 18:26:04 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/07 18:26:52 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/09 17:25:48 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	convert_u_integer_hex(void)
+void	convert_u_integer_hexa(void)
 {
 	;
 }

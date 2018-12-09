@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 16:09:37 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/07 15:03:15 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/09 22:29:34 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int					ft_tolower(int c);
 int					ft_toupper(int c);
 int					ft_putchar(int c);
 int					ft_atoi(const char *str);
+int					ft_putchar_fd(int c, int fd);
 int					ft_freturn(void *ptr, int ret);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strequ(char const *s1, char const *s2);
@@ -68,7 +69,6 @@ void				ft_putstr(char const *s);
 void				ft_putendl(char const *s);
 void				ft_bzero(void *s, size_t n);
 void				ft_putnbr_fd(int n, int fd);
-void				ft_putchar_fd(int c, int fd);
 void				ft_putstr_fd(char const *s, int fd);
 void				ft_putendl_fd(char const *s, int fd);
 void				ft_striter(char *s, void (*f)(char *));

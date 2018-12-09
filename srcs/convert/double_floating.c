@@ -6,11 +6,11 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 18:19:18 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/07 18:19:28 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/09 17:28:29 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	convert_double(void)
+void	convert_double_floating(void)
 {
 	;
 }

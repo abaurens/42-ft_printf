@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 21:58:06 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/09 02:23:29 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/09 17:59:26 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,37 +30,42 @@
 # define F_CAPI 0b01000000
 # define FLAGS_V "-0+ #'I"
 # define FLAG_C 7
+
 /*
 **	I = print the value with the locale digits if any (only used for i, u and d)
 */
-
 
 extern int const g_flags_masks[];
 
 # define LEN_MD "qjzZtlLh"
 # define NO_ARG "%"
-# define CONV_V "diouxXeEfFgGaAcCsSpnmbrk"
+# define CONV_V "diuoxXfFeEgGaAcCsSpnmbrk"
+
 /*
 **	i, d = signed decimal
 **	o = unsigned octal
 **	u = unsigned decimal
 **	x, X = unsigned hexadecimal (low and up case)
-**	e = double (and floats casted to double) but printd in the form xxxxe±yyy
-**	E = same as e but the exposant letter 'e' is upcase
 **	f = double (and floats casted to double)
 **	F = double (and floats casted to double) but NAN and INFINITY are upcase
+**	e = double (and floats casted to double) but printd in the form xxxxe+-yyy
+**	E = same as e but the exposant letter 'e' is upcase
 **	g = the most compact between f and e
 **	G = same as g but between f and E
-**	a = double (and floats casted to double) in lowcase hexadecimal with the form [-]0xh.hhhhp±dd
-**	A = double (and floats casted to double) in upcase hexadecimal with the form [-]0Xh.hhhhP±dd
+**	a = double (and floats casted to double) in lowcase hexadecimal
+**		with the form [-]0xh.hhhhp+-dd
+**	A = double (and floats casted to double) in upcase hexadecimal
+**		with the form [-]0Xh.hhhhP+-dd (same as a, but X and P are upcase)
 **	c = 1 byte character
 **	C = wide character (wchar)
 **	s = 1 byte character string
 **	S = wide character string
 **	p = pointer address (in hexadecimal format)
-**	n = place the number of character writed by this printf until this convertion into an int pointer
+**	n = place the number of character writed by this printf until this
+**		convertion into an int pointer
 **	m = prints the value of strerror(errno) (NO ARG)
-**	% = only print a percent char (because % is used to escape conversions) (NO ARG)
+**	% = only print a percent char
+**		(because % is used to escape conversions) (NO ARG)
 **
 **	b = nombre binaire
 **	r = string avec caracteres non imprimable
@@ -114,7 +119,7 @@ int			parse_arg(const char **format, t_printf *data, t_arg *arg);
 **	ft_printf.c
 */
 int			ft_printf(const char *format,
-	...) __attribute__((format(printf,1,2)));
+		...) __attribute__((format(printf,1,2)));
 
 int			ft_bprintf(const char *format, ...);
 int			ft_dprintf(int fd, const char *format, ...);
