@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 21:58:06 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/09 02:16:42 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/09 02:23:29 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@
 extern int const g_flags_masks[];
 
 # define LEN_MD "qjzZtlLh"
-# define NO_ARG "%m"
-# define CONV_V "diouxXeEfFgGaAcCsSpnbrk"
+# define NO_ARG "%"
+# define CONV_V "diouxXeEfFgGaAcCsSpnmbrk"
 /*
 **	i, d = signed decimal
 **	o = unsigned octal

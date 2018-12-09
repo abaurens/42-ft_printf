@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 16:17:43 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/09 02:17:04 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/09 02:20:45 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void		print_arg_data(t_arg *arg, t_bool use_chain_format)
 	else
 		printf(" Minimum field width : %d\n", arg->min_width);
 	printf(" Length modifier : %d (%c)\n", arg->length_modifier,
-		"\0qjzZtlLhH"[arg->length_modifier]);
+		" qjzZtlLhH"[arg->length_modifier]);
 }
 
 int				get_arg(const char **format, t_printf *data)

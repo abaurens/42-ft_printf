@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 11:21:48 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/09 02:16:58 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/09 02:24:51 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,10 +136,8 @@ static int		get_length_modifier(const char *frm, t_printf *data, t_arg *arg)
 		j++;
 	}
 	while ((c = LEN_MD[++i]))
-	{
 		if (frm[j] == c && (++j))
 			i = -1;
-	}
 	return (j);
 }
 
@@ -178,5 +176,7 @@ int				parse_arg(const char **format, t_printf *data, t_arg *arg)
 	arg->conv_id = -1;
 	if (ft_contains(arg->conv_c, CONV_V))
 		arg->conv_id = ft_idxof(arg->conv_c, CONV_V);
+	if (arg->conv_c == 'm')
+		arg->w_arg = FALSE;
 	return (*format - f);
 }
