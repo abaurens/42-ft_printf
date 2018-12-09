@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 11:21:48 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/08 20:51:49 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/09 02:16:58 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,17 +157,23 @@ int				parse_arg(const char **format, t_printf *data, t_arg *arg)
 
 	i = 0;
 	f = *format;
-	arg->flags = 0;
 	(*format)++;
+	arg->flags = 0;
+	arg->w_arg = TRUE;
+	while (NO_ARG[i] && **format != NO_ARG[i])
+		i++;
+	if (NO_ARG[i] && NO_ARG[i] == **format)
+	{
+		arg->conv_id = i;
+		arg->w_arg = FALSE;
+		arg->conv_c = *(*format)++;
+		return (*format - f);
+	}
 	if ((i = get_chain_format(*format, data, &arg->flag_idx)) >= 0)
 		*format += i;
 	i = 0;
 	while (i < 3)
-	{
-		printf("format : |%.*s\n", ft_idxof('\n', *format), *format);
 		*format += g_funcs[i++](*format, data, arg);
-
-	}
 	arg->conv_c = *(*format)++;
 	arg->conv_id = -1;
 	if (ft_contains(arg->conv_c, CONV_V))

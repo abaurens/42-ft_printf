@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 21:58:06 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/08 19:38:39 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/09 02:16:42 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,38 @@
 # define F_CAPI 0b01000000
 # define FLAGS_V "-0+ #'I"
 # define FLAG_C 7
+/*
+**	I = print the value with the locale digits if any (only used for i, u and d)
+*/
+
 
 extern int const g_flags_masks[];
 
 # define LEN_MD "qjzZtlLh"
-# define CONV_V "diouxXeEfFgGaAcCsSpnmbrk%"
+# define NO_ARG "%m"
+# define CONV_V "diouxXeEfFgGaAcCsSpnbrk"
 /*
+**	i, d = signed decimal
+**	o = unsigned octal
+**	u = unsigned decimal
+**	x, X = unsigned hexadecimal (low and up case)
+**	e = double (and floats casted to double) but printd in the form xxxxe±yyy
+**	E = same as e but the exposant letter 'e' is upcase
+**	f = double (and floats casted to double)
+**	F = double (and floats casted to double) but NAN and INFINITY are upcase
+**	g = the most compact between f and e
+**	G = same as g but between f and E
+**	a = double (and floats casted to double) in lowcase hexadecimal with the form [-]0xh.hhhhp±dd
+**	A = double (and floats casted to double) in upcase hexadecimal with the form [-]0Xh.hhhhP±dd
+**	c = 1 byte character
+**	C = wide character (wchar)
+**	s = 1 byte character string
+**	S = wide character string
+**	p = pointer address (in hexadecimal format)
+**	n = place the number of character writed by this printf until this convertion into an int pointer
+**	m = prints the value of strerror(errno) (NO ARG)
+**	% = only print a percent char (because % is used to escape conversions) (NO ARG)
+**
 **	b = nombre binaire
 **	r = string avec caracteres non imprimable
 **	k = date au format ISO
@@ -54,6 +80,7 @@ enum		e_bool
 
 struct		s_arg
 {
+	t_bool	w_arg;
 	char	flags;
 	char	conv_c;
 	int		conv_id;
