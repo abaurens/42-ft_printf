@@ -6,12 +6,15 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 22:25:56 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/09 02:23:06 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/09 05:23:02 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+#include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "ft_error.h"
 #include "ft_printf.h"
 
 int				main(void)
@@ -21,7 +24,10 @@ int				main(void)
 
 	/**/
 	i = 0;
-	ft_printf("A%-2.5mB\n");
+	/*open("lol", O_RDONLY);*/
+	printf("error : %m\n");
+	/*open("lol", O_RDONLY);*/
+	ft_perror("error ");
 	exit(i);
 	/**
 	printf("Testing printf with format %s\n", test);

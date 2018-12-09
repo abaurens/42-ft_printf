@@ -6,11 +6,11 @@
 #    By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 16:23:33 by abaurens          #+#    #+#              #
-#    Updated: 2018/12/08 00:10:17 by abaurens         ###   ########.fr        #
+#    Updated: 2018/12/09 05:27:09 by abaurens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC          =   gcc -xc
+CC          =   gcc
 RM          =   rm -rf
 CP          =   cp -rf
 LINKER      =   gcc
@@ -21,6 +21,7 @@ OBJD        =   objs
 
 SRC         =   main.c		\
 				core.c		\
+				ft_error.c	\
 				ft_printf.c	\
 				parse_args.c
 
