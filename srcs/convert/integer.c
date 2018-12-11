@@ -6,11 +6,11 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 18:20:02 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/07 18:24:31 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/11 14:35:43 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 void	convert_integer(void)
 {
-	;
+	write(1, "NUMBER", 6);
 }

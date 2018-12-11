@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 04:02:07 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/09 22:49:03 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/11 15:48:45 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <errno.h>
 #include "ft_error.h"
 #include "libft.h"
-#include <stdio.h>
 
 char		*ft_strerror(const int errnum)
 {

@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 22:25:56 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/11 14:19:40 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/11 16:29:07 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ int				main(void)
 {
 	int			i;
 
-	i = printf("%%\n", 5l);
+	i = printf("%#-+ '010.5lld\n", 5ll);
 	fflush(stdout);
 	printf("returned : %d\n\n", i);
 	fflush(stdout);
-	i = ft_printf("%%\n", 5l);
+	i = ft_printf("%#-+ '010.5lld\n", 5ll);
 	printf("returned : %d\n", i);
 	fflush(stdout);
 	return (0);

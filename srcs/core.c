@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 16:17:43 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/11 14:26:03 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/11 16:32:04 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include "ft_printf.h"
 #include "libft.h"
+#include "parser.h"///
 
 int				get_non_arg(const char *format, t_printf *data)
 {
@@ -58,7 +59,6 @@ static void		print_arg_data(t_arg *arg, t_bool use_chain_format)
 		printf(" Minimum field width : %d\n", arg->min_width);
 	printf(" Length modifier : %d (%c)\n", arg->length_modifier,
 		" qjzZtlLhH"[arg->length_modifier]);
-	arg->conv.func();
 }
 
 int				get_arg(const char **format, t_printf *data)
@@ -66,10 +66,14 @@ int				get_arg(const char **format, t_printf *data)
 	t_arg		arg;
 	int			i;
 
+	arg.flags = 0;
+	arg.w_arg = TRUE;
 	if (!data || (format && *format && **format && **format != '%'))
 		return (ERROR);
 	if ((i = parse_arg(format, data, &arg)) < 0)
 		return (0);
 	print_arg_data(&arg, data->use_chain_format);
+	if (arg.conv.func != NULL)
+		arg.conv.func();
 	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 11:21:48 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/11 14:24:32 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/11 16:07:43 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,140 +14,8 @@
 #include <stdlib.h>
 #include "ft_printf.h"
 #include "converter.h"
+#include "parser.h"
 #include "libft.h"
-
-int const g_flags_masks[] =
-{
-	F_MINS,
-	F_ZERO,
-	F_PLUS,
-	F_SPAC,
-	F_HASH,
-	F_COLO
-};
-
-static int		get_flags(const char *format, t_arg *arg)
-{
-	char		c;
-	int			i;
-	int			j;
-
-	j = 0;
-	i = -1;
-	while ((c = FLAGS_V[++i]))
-	{
-		if (format[j] == c && (++j))
-		{
-			arg->flags |= g_flags_masks[i];
-			i = -1;
-		}
-	}
-	return (j);
-}
-
-static int		get_chain_format(const char *format, t_printf *data, int *val)
-{
-	int			i;
-
-	i = 0;
-	*val = 0;
-	while (format[i] && (format[i] >= '0' && format[i] <= '9'))
-		i++;
-	if (i <= 0)
-	{
-		if (format[i] == '$' || data->use_chain_format == TRUE)
-			return (-1);
-		data->use_chain_format = FALSE;
-		return (i);
-	}
-	if (format[i] != '$' && data->use_chain_format == MAYBE)
-	{
-		data->use_chain_format = FALSE;
-		return (i);
-	}
-	if (format[i] != '$' || data->use_chain_format == FALSE)
-		return (-1);
-	data->use_chain_format = TRUE;
-	*val = ft_atoi(format);
-	return (i + 1);
-}
-
-static int		get_min_width(const char *format, t_printf *data, t_arg *arg)
-{
-	int			i;
-	const char	*f;
-
-	i = 0;
-	f = format;
-	format += get_flags(format, arg);
-	if ((arg->min_width = 0) || *format == '*')
-	{
-		if ((i = get_chain_format(format + 1, data, &arg->min_width_idx)) < 0)
-			return (0);
-		++i;
-		return ((format + i) - f);
-	}
-	arg->min_width = ft_atoi(format);
-	while (format[i] && format[i] >= '0' && format[i] <= '9')
-		i++;
-	return ((format + i) - f);
-}
-
-static int		get_precision(const char *format, t_printf *data, t_arg *arg)
-{
-	int			i;
-	const char	*f;
-
-	i = 0;
-	f = format;
-	if ((arg->precision = 0) || format[i++] != '.')
-		return (0);
-	if (format[i] == '*')
-	{
-		format += (i + 1);
-		if ((i = get_chain_format(format, data, &arg->precision_idx)) < 0)
-			return (0);
-		return ((format + i) - f);
-	}
-	while (format[i] && format[i] >= '0' && format[i] <= '9')
-		i++;
-	arg->precision = ft_atoi(format);
-	return ((format + i) - f);
-}
-
-static int		get_length_modifier(const char *frm, t_printf *data, t_arg *arg)
-{
-	char		c;
-	int			i;
-	int			j;
-
-	j = 0;
-	i = -1;
-	c = *frm;
-	(void)data;
-	arg->length_modifier = -1;
-	if (ft_contains(frm[j], LEN_MD) == 1)
-		arg->length_modifier = ft_idxof(frm[j++], LEN_MD);
-	arg->length_modifier++;
-	if (frm[j] == c)
-	{
-		if (c != 'l' && c != 'h')
-			return (j);
-		arg->length_modifier++;
-		j++;
-	}
-	while ((c = LEN_MD[++i]))
-		if (frm[j] == c && (++j))
-			i = -1;
-	return (j);
-}
-
-static int		(*g_funcs[])(const char *, t_printf *, t_arg *) =
-{
-	get_min_width,
-	get_precision,
-	get_length_modifier
-};
 
 int				parse_arg(const char **format, t_printf *data, t_arg *arg)
 {
@@ -156,8 +24,6 @@ int				parse_arg(const char **format, t_printf *data, t_arg *arg)
 
 	i = 0;
 	f = (*format)++;
-	arg->flags = 0;
-	arg->w_arg = TRUE;
 	while (g_no_arg_conv[i].c && **format != g_no_arg_conv[i].c)
 		i++;
 	if (**format == g_no_arg_conv[i].c)
@@ -166,13 +32,6 @@ int				parse_arg(const char **format, t_printf *data, t_arg *arg)
 		arg->conv = g_no_arg_conv[i];
 		return (++(*format) - f);
 	}
-	/*if (NO_ARG[i] && NO_ARG[i] == **format)
-	{
-		arg->conv.id = i;
-		arg->w_arg = FALSE;
-		arg->conv.c = *(*format)++;
-		return (*format - f);
-	}*/
 	if ((i = get_chain_format(*format, data, &arg->flag_idx)) >= 0)
 		*format += i;
 	i = 0;
@@ -181,6 +40,8 @@ int				parse_arg(const char **format, t_printf *data, t_arg *arg)
 	i = 0;
 	while (g_converters[i].c && g_converters[i].c != *(*format))
 		i++;
+	if (g_converters[i].c == *(*format))
+		(*format)++;
 	arg->conv = g_converters[i];
 	return (*format - f);
 }

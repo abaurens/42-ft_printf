@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 21:58:06 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/11 13:59:41 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/11 16:31:11 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,6 @@
 # include <inttypes.h>
 
 # define ERROR -1
-
-# define F_MINS	0b00000001
-# define F_ZERO	0b00000010
-# define F_PLUS	0b00000100
-# define F_SPAC 0b00001000
-# define F_HASH 0b00010000
-# define F_COLO 0b00100000
-# define F_CAPI 0b01000000
-# define FLAGS_V "-0+ #'I"
-# define FLAG_C 7
-
-/*
-**	I = print the value with the locale digits if any (only used for i, u and d)
-*/
-
-extern int const g_flags_masks[];
 
 typedef enum e_bool		t_bool;
 typedef struct s_arg	t_arg;

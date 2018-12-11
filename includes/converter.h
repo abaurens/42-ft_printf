@@ -6,14 +6,13 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 13:53:50 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/11 14:00:29 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/11 16:01:02 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONVERTER_H
 # define CONVERTER_H
 
-# define LEN_MD "qjzZtlLh"
 # define NO_ARG "%"
 # define CONV_V "diuoxXfFeEgGaAcCsSpnmbrk"
 
@@ -89,13 +88,13 @@ void			convert_u_integer_binary(void);
 void			convert_non_printable_string(void);
 void			convert_iso_date(void);
 
-static t_converter	g_no_arg_conv[] =
+static const t_converter	g_no_arg_conv[] =
 {
 	{'%', 0, convert_percent},
 	{0, 0, (void *)0x0}
 };
 
-static t_converter	g_converters[] =
+static const t_converter	g_converters[] =
 {
 	{'d', 0, convert_integer},
 	{'i', 1, convert_integer},

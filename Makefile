@@ -6,7 +6,7 @@
 #    By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 16:23:33 by abaurens          #+#    #+#              #
-#    Updated: 2018/12/11 14:12:46 by abaurens         ###   ########.fr        #
+#    Updated: 2018/12/11 16:03:17 by abaurens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRC         =   main.c							\
 				ft_error.c						\
 				ft_printf.c						\
 				parse_args.c					\
+				parser_functions.c				\
 				\
 				convert/char.c					\
 				convert/double_compact.c		\
