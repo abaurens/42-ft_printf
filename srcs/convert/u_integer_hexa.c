@@ -6,11 +6,13 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 18:26:04 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/09 17:25:48 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/11 20:41:04 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	convert_u_integer_hexa(void)
+#include "../../includes/ft_types.h"
+
+void	convert_u_integer_hexa(t_printf *data, t_arg *arg)
 {
 	;
 }

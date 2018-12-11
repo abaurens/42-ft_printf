@@ -6,11 +6,13 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 18:20:02 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/11 14:35:43 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/11 20:40:54 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	convert_integer(void)
+#include "../../includes/ft_types.h"
+
+void	convert_integer(t_printf *data, t_arg *arg)
 {
-	write(1, "NUMBER", 6);
+	;
 }

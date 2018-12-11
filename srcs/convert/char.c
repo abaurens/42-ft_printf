@@ -6,11 +6,13 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 18:16:59 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/07 18:17:08 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/11 20:42:20 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	convert_char(void)
+#include "../../includes/ft_types.h"
+
+void	convert_char(t_printf *data, t_arg *arg)
 {
 	;
 }

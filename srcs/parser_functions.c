@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 15:57:31 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/11 16:11:35 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/11 18:14:49 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,10 @@ static int		get_min_width(const char *format, t_printf *data, t_arg *arg)
 	i = 0;
 	f = format;
 	format += get_flags(format, arg);
+	arg->min_width_idx = 0;
 	if ((arg->min_width = 0) || *format == '*')
 	{
+		arg->min_width_idx = ++data->arg_count;
 		if ((i = get_chain_format(format + 1, data, &arg->min_width_idx)) < 0)
 			return (0);
 		++i;
@@ -60,11 +62,13 @@ static int		get_precision(const char *format, t_printf *data, t_arg *arg)
 
 	i = 0;
 	f = format;
-	if ((arg->precision = 0) || format[i++] != '.')
+	arg->precision_idx = 0;
+	if ((arg->precision = 0) || *format++ != '.')
 		return (0);
-	if (format[i] == '*')
+	if (*format == '*')
 	{
-		format += (i + 1);
+		format += 1;
+		arg->precision_idx = ++data->arg_count;
 		if ((i = get_chain_format(format, data, &arg->precision_idx)) < 0)
 			return (0);
 		return ((format + i) - f);
@@ -102,12 +106,11 @@ static int		get_length_modifier(const char *frm, t_printf *data, t_arg *arg)
 	return (j);
 }
 
-int				get_chain_format(const char *format, t_printf *data, int *val)
+int				get_chain_format(const char *format, t_printf *data, size_t *v)
 {
 	int			i;
 
 	i = 0;
-	*val = 0;
 	while (format[i] && (format[i] >= '0' && format[i] <= '9'))
 		i++;
 	if (i <= 0)
@@ -120,12 +123,12 @@ int				get_chain_format(const char *format, t_printf *data, int *val)
 	if (format[i] != '$' && data->use_chain_format == MAYBE)
 	{
 		data->use_chain_format = FALSE;
-		return (i);
+		return (-1);
 	}
 	if (format[i] != '$' || data->use_chain_format == FALSE)
 		return (-1);
 	data->use_chain_format = TRUE;
-	*val = ft_atoi(format);
+	*v = ft_atoi(format);
 	return (i + 1);
 }
 

@@ -6,11 +6,13 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:45:31 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/09 17:45:42 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/11 20:42:29 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	convert_iso_date(void)
+#include "../../includes/ft_types.h"
+
+void	convert_iso_date(t_printf *data, t_arg *arg)
 {
 	;
 }

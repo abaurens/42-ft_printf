@@ -6,11 +6,13 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:30:24 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/09 17:30:32 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/11 20:41:20 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	convert_double_hexa(void)
+#include "../../includes/ft_types.h"
+
+void	convert_double_hexa(t_printf *data, t_arg *arg)
 {
 	;
 }

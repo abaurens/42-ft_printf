@@ -6,11 +6,13 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 21:02:59 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/09 17:25:55 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/11 20:41:01 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	convert_u_integer_octal(void)
+#include "../../includes/ft_types.h"
+
+void	convert_u_integer_octal(t_printf *data, t_arg *arg)
 {
 	;
 }

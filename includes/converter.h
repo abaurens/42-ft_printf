@@ -6,27 +6,17 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 13:53:50 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/11 16:01:02 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/11 20:36:38 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONVERTER_H
 # define CONVERTER_H
 
+# include "ft_types.h"
+
 # define NO_ARG "%"
 # define CONV_V "diuoxXfFeEgGaAcCsSpnmbrk"
-
-# ifndef STRUCT_S_CONVERTER_DEFINED
-#  define STRUCT_S_CONVERTER_DEFINED
-
-typedef struct	s_converter
-{
-	char		c;
-	int			id;
-	void		(*func)(void);
-}				t_converter;
-
-# endif
 
 /*
 **	i, d = signed decimal
@@ -62,65 +52,60 @@ typedef struct	s_converter
 /*
 **	convert/
 */
-void			convert_percent(void);
-void			convert_integer(void);
-void			convert_integer(void);
-void			convert_u_integer(void);
-void			convert_u_integer_octal(void);
-void			convert_u_integer_hexa(void);
-void			convert_u_integer_hexa(void);
-void			convert_double_floating(void);
-void			convert_double_floating(void);
-void			convert_double_scientific(void);
-void			convert_double_scientific(void);
-void			convert_double_compact(void);
-void			convert_double_compact(void);
-void			convert_double_hexa(void);
-void			convert_double_hexa(void);
-void			convert_char(void);
-void			convert_wide_char(void);
-void			convert_string(void);
-void			convert_wide_char_string(void);
-void			convert_pointer(void);
-void			convert_length(void);
-void			convert_strerror(void);
-void			convert_u_integer_binary(void);
-void			convert_non_printable_string(void);
-void			convert_iso_date(void);
-
-static const t_converter	g_no_arg_conv[] =
-{
-	{'%', 0, convert_percent},
-	{0, 0, (void *)0x0}
-};
+void			convert_percent(t_printf *data, t_arg *arg);
+void			convert_integer(t_printf *data, t_arg *arg);
+void			convert_integer(t_printf *data, t_arg *arg);
+void			convert_u_integer(t_printf *data, t_arg *arg);
+void			convert_u_integer_octal(t_printf *data, t_arg *arg);
+void			convert_u_integer_hexa(t_printf *data, t_arg *arg);
+void			convert_u_integer_hexa(t_printf *data, t_arg *arg);
+void			convert_double_floating(t_printf *data, t_arg *arg);
+void			convert_double_floating(t_printf *data, t_arg *arg);
+void			convert_double_scientific(t_printf *data, t_arg *arg);
+void			convert_double_scientific(t_printf *data, t_arg *arg);
+void			convert_double_compact(t_printf *data, t_arg *arg);
+void			convert_double_compact(t_printf *data, t_arg *arg);
+void			convert_double_hexa(t_printf *data, t_arg *arg);
+void			convert_double_hexa(t_printf *data, t_arg *arg);
+void			convert_char(t_printf *data, t_arg *arg);
+void			convert_wide_char(t_printf *data, t_arg *arg);
+void			convert_string(t_printf *data, t_arg *arg);
+void			convert_wide_char_string(t_printf *data, t_arg *arg);
+void			convert_pointer(t_printf *data, t_arg *arg);
+void			convert_length(t_printf *data, t_arg *arg);
+void			convert_strerror(t_printf *data, t_arg *arg);
+void			convert_u_integer_binary(t_printf *data, t_arg *arg);
+void			convert_non_printable_string(t_printf *data, t_arg *arg);
+void			convert_iso_date(t_printf *data, t_arg *arg);
 
 static const t_converter	g_converters[] =
 {
-	{'d', 0, convert_integer},
-	{'i', 1, convert_integer},
-	{'u', 2, convert_u_integer},
-	{'o', 3, convert_u_integer_octal},
-	{'x', 4, convert_u_integer_hexa},
-	{'X', 5, convert_u_integer_hexa},
-	{'f', 6, convert_double_floating},
-	{'F', 7, convert_double_floating},
-	{'e', 8, convert_double_scientific},
-	{'E', 9, convert_double_scientific},
-	{'g', 10, convert_double_compact},
-	{'G', 11, convert_double_compact},
-	{'a', 12, convert_double_hexa},
-	{'A', 13, convert_double_hexa},
-	{'c', 14, convert_char},
-	{'C', 15, convert_wide_char},
-	{'s', 16, convert_string},
-	{'S', 17, convert_wide_char_string},
-	{'p', 18, convert_pointer},
-	{'n', 19, convert_length},
-	{'m', 20, convert_strerror},
-	{'b', 21, convert_u_integer_binary},
-	{'r', 22, convert_non_printable_string},
-	{'k', 23, convert_iso_date},
-	{0, 0, (void *)0x0}
+	{'%', FALSE, convert_percent},
+	{'d', TRUE, convert_integer},
+	{'i', TRUE, convert_integer},
+	{'u', TRUE, convert_u_integer},
+	{'o', TRUE, convert_u_integer_octal},
+	{'x', TRUE, convert_u_integer_hexa},
+	{'X', TRUE, convert_u_integer_hexa},
+	{'f', TRUE, convert_double_floating},
+	{'F', TRUE, convert_double_floating},
+	{'e', TRUE, convert_double_scientific},
+	{'E', TRUE, convert_double_scientific},
+	{'g', TRUE, convert_double_compact},
+	{'G', TRUE, convert_double_compact},
+	{'a', TRUE, convert_double_hexa},
+	{'A', TRUE, convert_double_hexa},
+	{'c', TRUE, convert_char},
+	{'C', TRUE, convert_wide_char},
+	{'s', TRUE, convert_string},
+	{'S', TRUE, convert_wide_char_string},
+	{'p', TRUE, convert_pointer},
+	{'n', TRUE, convert_length},
+	{'m', FALSE, convert_strerror},
+	{'b', TRUE, convert_u_integer_binary},
+	{'r', TRUE, convert_non_printable_string},
+	{'k', TRUE, convert_iso_date},
+	{'\0', MAYBE, (void *)0x0}
 };
 
 #endif

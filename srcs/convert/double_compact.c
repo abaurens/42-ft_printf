@@ -6,11 +6,13 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:29:42 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/09 17:29:51 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/11 20:41:17 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	convert_double_compact(void)
+#include "../../includes/ft_types.h"
+
+void	convert_double_compact(t_printf *data, t_arg *arg)
 {
 	;
 }

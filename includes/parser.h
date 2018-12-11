@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 15:58:22 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/11 16:29:40 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/11 18:13:44 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,6 @@ static int const g_flags_masks[] =
 	F_CAPI
 };
 
-int			get_chain_format(const char *format, t_printf *data, int *val);
+int			get_chain_format(const char *format, t_printf *data, size_t *v);
 
 #endif
