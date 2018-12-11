@@ -6,7 +6,7 @@
 #    By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 16:23:33 by abaurens          #+#    #+#              #
-#    Updated: 2018/12/09 05:27:09 by abaurens         ###   ########.fr        #
+#    Updated: 2018/12/11 14:12:46 by abaurens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,11 +19,31 @@ LIB         =   libft
 SRCD        =   srcs
 OBJD        =   objs
 
-SRC         =   main.c		\
-				core.c		\
-				ft_error.c	\
-				ft_printf.c	\
-				parse_args.c
+SRC         =   main.c							\
+				core.c							\
+				ft_error.c						\
+				ft_printf.c						\
+				parse_args.c					\
+				\
+				convert/char.c					\
+				convert/double_compact.c		\
+				convert/double_floating.c		\
+				convert/double_hexa.c			\
+				convert/double_scientific.c		\
+				convert/integer.c				\
+				convert/iso_formated_date.c		\
+				convert/length.c				\
+				convert/non_printable_string.c	\
+				convert/percent.c				\
+				convert/pointer.c				\
+				convert/strerror.c				\
+				convert/string.c				\
+				convert/u_integer.c				\
+				convert/u_integer_binary.c		\
+				convert/u_integer_hexa.c		\
+				convert/u_integer_octal.c		\
+				convert/wide_character.c		\
+				convert/wide_character_string.c
 
 CFLAGS      +=  -I./includes -g -W -Wall -Wextra -ansi #-Werror #-pedantic
 LIB_DIR     :=  $(shell find . -type d -name '$(LIB)')

@@ -6,13 +6,14 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 11:21:48 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/09 17:46:34 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/11 14:24:32 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include <stdlib.h>
 #include "ft_printf.h"
+#include "converter.h"
 #include "libft.h"
 
 int const g_flags_masks[] =
@@ -154,29 +155,32 @@ int				parse_arg(const char **format, t_printf *data, t_arg *arg)
 	const char	*f;
 
 	i = 0;
-	f = *format;
-	(*format)++;
+	f = (*format)++;
 	arg->flags = 0;
 	arg->w_arg = TRUE;
-	while (NO_ARG[i] && **format != NO_ARG[i])
+	while (g_no_arg_conv[i].c && **format != g_no_arg_conv[i].c)
 		i++;
-	if (NO_ARG[i] && NO_ARG[i] == **format)
+	if (**format == g_no_arg_conv[i].c)
 	{
-		arg->conv_id = i;
 		arg->w_arg = FALSE;
-		arg->conv_c = *(*format)++;
-		return (*format - f);
+		arg->conv = g_no_arg_conv[i];
+		return (++(*format) - f);
 	}
+	/*if (NO_ARG[i] && NO_ARG[i] == **format)
+	{
+		arg->conv.id = i;
+		arg->w_arg = FALSE;
+		arg->conv.c = *(*format)++;
+		return (*format - f);
+	}*/
 	if ((i = get_chain_format(*format, data, &arg->flag_idx)) >= 0)
 		*format += i;
 	i = 0;
 	while (i < 3)
 		*format += g_funcs[i++](*format, data, arg);
-	arg->conv_c = *(*format)++;
-	arg->conv_id = -1;
-	if (ft_contains(arg->conv_c, CONV_V))
-		arg->conv_id = ft_idxof(arg->conv_c, CONV_V);
-	if (arg->conv_c == 'm')
-		arg->w_arg = FALSE;
+	i = 0;
+	while (g_converters[i].c && g_converters[i].c != *(*format))
+		i++;
+	arg->conv = g_converters[i];
 	return (*format - f);
 }

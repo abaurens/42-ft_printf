@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 21:58:06 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/09 17:59:26 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/11 13:59:41 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,96 +37,74 @@
 
 extern int const g_flags_masks[];
 
-# define LEN_MD "qjzZtlLh"
-# define NO_ARG "%"
-# define CONV_V "diuoxXfFeEgGaAcCsSpnmbrk"
-
-/*
-**	i, d = signed decimal
-**	o = unsigned octal
-**	u = unsigned decimal
-**	x, X = unsigned hexadecimal (low and up case)
-**	f = double (and floats casted to double)
-**	F = double (and floats casted to double) but NAN and INFINITY are upcase
-**	e = double (and floats casted to double) but printd in the form xxxxe+-yyy
-**	E = same as e but the exposant letter 'e' is upcase
-**	g = the most compact between f and e
-**	G = same as g but between f and E
-**	a = double (and floats casted to double) in lowcase hexadecimal
-**		with the form [-]0xh.hhhhp+-dd
-**	A = double (and floats casted to double) in upcase hexadecimal
-**		with the form [-]0Xh.hhhhP+-dd (same as a, but X and P are upcase)
-**	c = 1 byte character
-**	C = wide character (wchar)
-**	s = 1 byte character string
-**	S = wide character string
-**	p = pointer address (in hexadecimal format)
-**	n = place the number of character writed by this printf until this
-**		convertion into an int pointer
-**	m = prints the value of strerror(errno) (NO ARG)
-**	% = only print a percent char
-**		(because % is used to escape conversions) (NO ARG)
-**
-**	b = nombre binaire
-**	r = string avec caracteres non imprimable
-**	k = date au format ISO
-*/
-
 typedef enum e_bool		t_bool;
 typedef struct s_arg	t_arg;
 typedef struct s_printf	t_printf;
 
-enum		e_bool
+enum			e_bool
 {
 	FALSE,
 	TRUE,
 	MAYBE
 };
 
-struct		s_arg
+# ifndef STRUCT_S_CONVERTER_DEFINED
+#  define STRUCT_S_CONVERTER_DEFINED
+
+typedef struct	s_converter
 {
-	t_bool	w_arg;
-	char	flags;
-	char	conv_c;
-	int		conv_id;
-	int		flag_idx;
-	int		min_width;
-	int		precision;
-	int		precision_idx;
-	int		min_width_idx;
-	int		length_modifier;
+	char		c;
+	int			id;
+	void		(*func)(void);
+}				t_converter;
+
+# endif
+
+struct			s_arg
+{
+	t_converter	conv;
+	t_bool		w_arg;
+	char		flags;
+	char		conv_c;
+	int			conv_id;
+	int			flag_idx;
+	int			min_width;
+	int			precision;
+	int			precision_idx;
+	int			min_width_idx;
+	int			length_modifier;
 };
 
-struct		s_printf
+struct			s_printf
 {
-	t_bool	use_chain_format;
-	char	*buf;
-	va_list	lst;
+	t_bool		use_chain_format;
+	char		*buf;
+	va_list		lst;
 };
 
 /*
 **	core.c
 */
-int			get_arg(const char **format, t_printf *data);
-int			get_non_arg(const char *format, t_printf *data);
+int				get_arg(const char **format, t_printf *data);
+int				get_non_arg(const char *format, t_printf *data);
 
 /*
 **	args.c
 */
-int			parse_arg(const char **format, t_printf *data, t_arg *arg);
+int				parse_arg(const char **format, t_printf *data, t_arg *arg);
 
 /*
 **	ft_printf.c
 */
-int			ft_printf(const char *format,
-		...) __attribute__((format(printf,1,2)));
+int				ft_printf(const char *format,
+					...) __attribute__((format(printf,1,2)));
 
-int			ft_bprintf(const char *format, ...);
-int			ft_dprintf(int fd, const char *format, ...);
-int			ft_sprintf(char *str, const char *format, ...);
-int			ft_fprintf(FILE *stream, const char *format, ...);
-int			ft_snprintf(char *str, size_t size, const char *format, ...);
+int				ft_bprintf(const char *format, ...);
+int				ft_dprintf(int fd, const char *format, ...);
+int				ft_sprintf(char *str, const char *format, ...);
+int				ft_fprintf(FILE *stream, const char *format, ...);
+int				ft_snprintf(char *str, size_t size, const char *format, ...);
 
-int			ft_asprintf(char **strp, const char *fmt, ...);
+int				ft_asprintf(char **strp, const char *fmt, ...);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 16:17:43 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/09 17:46:27 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/11 14:26:03 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ static void		print_arg_data(t_arg *arg, t_bool use_chain_format)
 	int			j;
 
 	j = -1;
-	printf("Conversion type : %d (%c)\n", arg->conv_id, arg->conv_c);
+	printf("Conversion type : %d (%c)(%p)\n", arg->conv.id, arg->conv.c,
+		arg->conv.func);
 	printf(" consume argument ? : %s\n", arg->w_arg == TRUE ? "Yes" : "No");
 	printf(" Using $ style ? : %s\n", use_chain_format == TRUE ? "Yes" : "No");
 	if (use_chain_format == TRUE)
@@ -57,6 +58,7 @@ static void		print_arg_data(t_arg *arg, t_bool use_chain_format)
 		printf(" Minimum field width : %d\n", arg->min_width);
 	printf(" Length modifier : %d (%c)\n", arg->length_modifier,
 		" qjzZtlLhH"[arg->length_modifier]);
+	arg->conv.func();
 }
 
 int				get_arg(const char **format, t_printf *data)
