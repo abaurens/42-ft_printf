@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   non_printable_string.c                             :+:      :+:    :+:   */
+/*   ft_numlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/09 17:44:41 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/12 19:50:19 by abaurens         ###   ########.fr       */
+/*   Created: 2018/12/12 23:25:16 by abaurens          #+#    #+#             */
+/*   Updated: 2018/12/12 23:30:24 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/ft_types.h"
-#include "../../includes/debug.h"
+#include <string.h>
 
-void	convert_non_printable_string(t_printf *data, t_arg *arg)
+size_t		ft_numlen(int nb)
 {
-	UNUSED(data);
-	UNUSED(arg);
+	size_t	len;
+
+	len = 1;
+	if (nb < 0)
+		len++;
+	while ((nb /= 10) > 0)
+		len++;
+	return (len);
 }

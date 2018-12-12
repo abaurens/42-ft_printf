@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 21:58:06 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/11 20:06:50 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/12 23:00:22 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # include <stdio.h>
 # include "ft_types.h"
+
+# define LEN_MD			"qjzZtlLh"
+# define LEN_MD_CHRS	" qjzZtlLhH"
 
 /*
 **	core.c
@@ -45,6 +48,6 @@ int				ft_asprintf(char **strp, const char *fmt, ...);
 **	argument_manager.c
 */
 void			clear_list(t_ftlist *lst);
-void			get_arg(t_printf *data, size_t idx);
+int				get_arg(t_printf *data, size_t idx, void *val);
 
 #endif

@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   non_printable_string.c                             :+:      :+:    :+:   */
+/*   ft_unsignedlen.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/09 17:44:41 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/12 19:50:19 by abaurens         ###   ########.fr       */
+/*   Created: 2018/12/12 23:29:54 by abaurens          #+#    #+#             */
+/*   Updated: 2018/12/12 23:34:25 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/ft_types.h"
-#include "../../includes/debug.h"
+#include <string.h>
 
-void	convert_non_printable_string(t_printf *data, t_arg *arg)
+size_t		ft_unsignedlen(unsigned int nb)
 {
-	UNUSED(data);
-	UNUSED(arg);
+	size_t	len;
+
+	len = 1;
+	while ((nb /= 10) > 0)
+	{
+		len++;
+	}
+	return (len);
 }

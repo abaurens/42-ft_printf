@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 15:58:22 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/11 18:13:44 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/12 23:00:10 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@
 /*
 **	I = print the value with the locale digits if any (only used for i, u and d)
 */
-
-# define LEN_MD "qjzZtlLh"
 
 extern int	(*const g_funcs[])(const char *, t_printf *, t_arg *);
 

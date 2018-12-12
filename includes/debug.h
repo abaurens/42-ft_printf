@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   non_printable_string.c                             :+:      :+:    :+:   */
+/*   debug.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/09 17:44:41 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/12 19:50:19 by abaurens         ###   ########.fr       */
+/*   Created: 2018/12/12 19:47:03 by abaurens          #+#    #+#             */
+/*   Updated: 2018/12/12 19:47:55 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/ft_types.h"
-#include "../../includes/debug.h"
+#ifndef DEBUG_H
+# define DEBUG_H
 
-void	convert_non_printable_string(t_printf *data, t_arg *arg)
-{
-	UNUSED(data);
-	UNUSED(arg);
-}
+# include "ft_types.h"
+
+# define UNUSED(x) ((void)(x))
+
+/*
+**	debug.c
+*/
+void		print_arg_data(t_arg *arg, t_bool idx_given);
+
+#endif

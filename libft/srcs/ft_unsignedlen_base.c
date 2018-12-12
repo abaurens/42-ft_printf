@@ -1,20 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   non_printable_string.c                             :+:      :+:    :+:   */
+/*   ft_unsignedlen_base.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/09 17:44:41 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/12 19:50:19 by abaurens         ###   ########.fr       */
+/*   Created: 2018/12/12 23:30:48 by abaurens          #+#    #+#             */
+/*   Updated: 2018/12/12 23:36:30 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/ft_types.h"
-#include "../../includes/debug.h"
+#include <string.h>
+#include "libft.h"
 
-void	convert_non_printable_string(t_printf *data, t_arg *arg)
+size_t		ft_unsignedlen_base(unsigned int nb, const char *base)
 {
-	UNUSED(data);
-	UNUSED(arg);
+	size_t	len;
+	size_t	blen;
+
+	len = 1;
+	if (!base || !ft_isbase(base))
+		return (0);
+	blen = ft_strlen(base);
+	while ((nb /= blen) > 0)
+	{
+		len++;
+	}
+	return (len);
 }

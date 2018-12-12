@@ -6,7 +6,7 @@
 #    By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 16:08:06 by abaurens          #+#    #+#              #
-#    Updated: 2018/12/04 01:54:51 by abaurens         ###   ########.fr        #
+#    Updated: 2018/12/12 23:35:40 by abaurens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,10 @@ SRC		=		ft_strmapi.c		\
 				ft_strdel.c			\
 				ft_strclr.c			\
 				ft_itoa.c			\
+				ft_numlen.c			\
+				ft_numlen_base.c	\
+				ft_unsignedlen.c	\
+				ft_unsignedlen_base.c	\
 				ft_putnbr_base.c	\
 				ft_putnbr_base_fd.c	\
 				ft_isbase.c			\

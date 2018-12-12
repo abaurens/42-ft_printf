@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 16:09:37 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/11 19:45:29 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/12 23:36:07 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,13 @@ int					ft_strnequ(char const *s1, char const *s2, size_t n);
 
 long				ft_atol_base(const char *str, const char *base);
 
+size_t				ft_numlen(int nb);
 size_t				ft_strlen(const char *str);
+size_t				ft_unsignedlen(unsigned int nb);
 size_t				ft_idxof(char c, const char *str);
+size_t				ft_numlen_base(int nb, const char *base);
 size_t				ft_strlcat(char *dst, const char *src, size_t size);
+size_t				ft_unsignedlen_base(unsigned int nb, const char *base);
 
 void				ft_putnbr(int n);
 void				ft_strclr(char *s);

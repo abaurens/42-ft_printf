@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 18:29:02 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/11 20:42:41 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/12 22:55:24 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,15 @@ typedef enum			e_bool
 
 typedef struct			s_converter
 {
-	const char			c;
-	const t_bool		w_arg;
-	void				(*const func)(t_printf *data, t_arg *arg);
+	char				c;
+	t_bool				w_arg;
+	void				(*func)(t_printf *data, t_arg *arg);
 }						t_converter;
 
 struct					s_arg
 {
 	t_converter			conv;
+	long long			value;
 	size_t				precision_idx;
 	size_t				flag_idx;
 	size_t				min_width_idx;

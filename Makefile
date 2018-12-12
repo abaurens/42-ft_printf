@@ -6,7 +6,7 @@
 #    By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 16:23:33 by abaurens          #+#    #+#              #
-#    Updated: 2018/12/11 19:48:58 by abaurens         ###   ########.fr        #
+#    Updated: 2018/12/12 19:33:03 by abaurens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,9 @@ LIB         =   libft
 SRCD        =   srcs
 OBJD        =   objs
 
-SRC         =   main.c							\
+SRC         =   debug.c							\
+				\
+				main.c							\
 				core.c							\
 				ft_error.c						\
 				ft_printf.c						\
