@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   printf_lltoa.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/03 22:25:56 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/13 20:20:21 by abaurens         ###   ########.fr       */
+/*   Created: 2018/12/13 18:26:44 by abaurens          #+#    #+#             */
+/*   Updated: 2018/12/13 18:44:19 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
-#include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
-#include <stdlib.h>
-#include <limits.h>
-#include "ft_printf.h"
-#include "ft_error.h"
 #include "libft.h"
 
-int				main(void)
+char		*printf_lltoa(long long int nb, const int min)
 {
-	int			i;
+	int		len;
+	char	*ret;
 
-	i = printf("   printf : LOL %ld\n", (long)UINT_MAX);
-	printf("Returned %d\n\n", i);
-	fflush(stdout);
-	i = ft_printf("ft_printf : LOL %ld\n", (long)UINT_MAX);
-	ft_printf("Returned %d\n", i);
-	return (0);
+	if ((len = ft_numlen(nb)) < (min + (nb < 0)))
+		len = (min + (nb < 0));
+	if (!(ret = (char *)malloc(len + 1)))
+		return (NULL);
+	ret[len] = 0;
+	ft_memset(ret, '0', len);
+	ret[0] = (nb < 0 ? '-' : '0');
+	while (nb != 0)
+	{
+		ret[--len] = (ft_abs(nb % 10) + '0');
+		nb /= 10;
+	}
+	return (ret);
 }

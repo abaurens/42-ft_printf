@@ -1,21 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   double_scientific.c                                :+:      :+:    :+:   */
+/*   ft_maximum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/09 17:28:58 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/13 20:39:33 by abaurens         ###   ########.fr       */
+/*   Created: 2018/12/13 16:51:24 by abaurens          #+#    #+#             */
+/*   Updated: 2018/12/13 17:03:57 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/ft_types.h"
-#include "../../includes/debug.h"
-
-char	*convert_double_scientific(t_printf *data, t_arg *arg)
+long long int	ft_max(long long int a, long long int b)
 {
-	UNUSED(data);
-	UNUSED(arg);
-	return (NULL);
+	return (a > b ? a : b);
 }

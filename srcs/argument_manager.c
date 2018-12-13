@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 19:28:24 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/12 20:43:10 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/13 16:56:10 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,26 +46,10 @@ static int		rm_last(t_ftlist *lst)
 	return (0);
 }
 
-static int		rm_first(t_ftlist *lst)
-{
-	t_lst_elem	*rm;
-
-	if (!lst || !lst->tail || !lst->head || !lst->size)
-		return (0);
-	rm = lst->head;
-	lst->head = rm->next;
-	if (rm == lst->tail)
-		lst->tail = NULL;
-	free(rm);
-	lst->size--;
-	return (0);
-}
-
 void			clear_list(t_ftlist *lst)
 {
 	while (lst && lst->head && lst->tail && lst->size)
 	{
-		rm_first(lst);
 		rm_last(lst);
 	}
 }

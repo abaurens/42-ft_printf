@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 16:09:37 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/12 23:36:07 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/13 18:49:01 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int					ft_toupper(int c);
 int					ft_putchar(int c);
 int					ft_atoi(const char *str);
 int					ft_putchar_fd(int c, int fd);
-int					ft_freturn(void *ptr, int ret);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strequ(char const *s1, char const *s2);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
@@ -57,13 +56,14 @@ int					ft_strnequ(char const *s1, char const *s2, size_t n);
 
 long				ft_atol_base(const char *str, const char *base);
 
-size_t				ft_numlen(int nb);
+size_t				ft_numlen(long long int nb);
 size_t				ft_strlen(const char *str);
-size_t				ft_unsignedlen(unsigned int nb);
+size_t				ft_unsignedlen(unsigned long long int nb);
 size_t				ft_idxof(char c, const char *str);
-size_t				ft_numlen_base(int nb, const char *base);
+size_t				ft_numlen_base(long long int nb, const char *base);
 size_t				ft_strlcat(char *dst, const char *src, size_t size);
-size_t				ft_unsignedlen_base(unsigned int nb, const char *base);
+size_t				ft_unsignedlen_base(unsigned long long int nb,
+						const char *base);
 
 void				ft_putnbr(int n);
 void				ft_strclr(char *s);
@@ -91,6 +91,8 @@ char				ft_isbase(const char *base);
 char				ft_contains(char c, const char *str);
 
 char				*ft_itoa(int n);
+char				*ft_lltoa(long long int nb);
+char				*ft_lltoa_base(long long int nb, const char *base);
 char				*ft_strnew(size_t size);
 char				*ft_strtrim(char const *s);
 char				*ft_strdup(const char *src);
@@ -110,5 +112,10 @@ char				*ft_strnstr(const char *haystack, const char *needle,
 								size_t len);
 
 char				**ft_strsplit(char const *s, char c);
+
+long long int		ft_abs(long long int nb);
+long long int		ft_min(long long int a, long long int b);
+long long int		ft_max(long long int a, long long int b);
+long long int		ft_freturn(void *ptr, long long int ret);
 
 #endif

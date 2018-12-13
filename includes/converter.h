@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 13:53:50 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/12 23:22:12 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/13 20:44:12 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,25 +52,25 @@
 /*
 **	convert/
 */
-void			convert_percent(t_printf *data, t_arg *arg);
-void			convert_integer(t_printf *const data, t_arg *const arg);
-void			convert_u_integer(t_printf *data, t_arg *arg);
-void			convert_u_integer_octal(t_printf *data, t_arg *arg);
-void			convert_u_integer_hexa(t_printf *data, t_arg *arg);
-void			convert_double_floating(t_printf *data, t_arg *arg);
-void			convert_double_scientific(t_printf *data, t_arg *arg);
-void			convert_double_compact(t_printf *data, t_arg *arg);
-void			convert_double_hexa(t_printf *data, t_arg *arg);
-void			convert_char(t_printf *data, t_arg *arg);
-void			convert_wide_char(t_printf *data, t_arg *arg);
-void			convert_string(t_printf *data, t_arg *arg);
-void			convert_wide_char_string(t_printf *data, t_arg *arg);
-void			convert_pointer(t_printf *data, t_arg *arg);
-void			convert_length(t_printf *data, t_arg *arg);
-void			convert_strerror(t_printf *data, t_arg *arg);
-void			convert_u_integer_binary(t_printf *data, t_arg *arg);
-void			convert_non_printable_string(t_printf *data, t_arg *arg);
-void			convert_iso_date(t_printf *data, t_arg *arg);
+char			*convert_percent(t_printf *data, t_arg *arg);
+char			*convert_integer(t_printf *const data, t_arg *const arg);
+char			*convert_u_integer(t_printf *data, t_arg *arg);
+char			*convert_u_integer_octal(t_printf *data, t_arg *arg);
+char			*convert_u_integer_hexa(t_printf *data, t_arg *arg);
+char			*convert_double_floating(t_printf *data, t_arg *arg);
+char			*convert_double_scientific(t_printf *data, t_arg *arg);
+char			*convert_double_compact(t_printf *data, t_arg *arg);
+char			*convert_double_hexa(t_printf *data, t_arg *arg);
+char			*convert_char(t_printf *data, t_arg *arg);
+char			*convert_wide_char(t_printf *data, t_arg *arg);
+char			*convert_string(t_printf *data, t_arg *arg);
+char			*convert_wide_char_string(t_printf *data, t_arg *arg);
+char			*convert_pointer(t_printf *data, t_arg *arg);
+char			*convert_length(t_printf *data, t_arg *arg);
+char			*convert_strerror(t_printf *data, t_arg *arg);
+char			*convert_u_integer_binary(t_printf *data, t_arg *arg);
+char			*convert_non_printable_string(t_printf *data, t_arg *arg);
+char			*convert_iso_date(t_printf *data, t_arg *arg);
 
 static const t_converter	g_converters[] =
 {

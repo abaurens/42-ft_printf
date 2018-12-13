@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 16:17:43 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/12 19:34:49 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/13 16:56:23 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include <stdlib.h>
 #include "ft_printf.h"
 #include "libft.h"
+
+#include "debug.h"
 
 int				get_non_arg(const char *format, t_printf *data)
 {

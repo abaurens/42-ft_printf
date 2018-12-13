@@ -1,21 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   double_scientific.c                                :+:      :+:    :+:   */
+/*   absolute.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/09 17:28:58 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/13 20:39:33 by abaurens         ###   ########.fr       */
+/*   Created: 2018/12/13 16:49:13 by abaurens          #+#    #+#             */
+/*   Updated: 2018/12/13 17:02:39 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/ft_types.h"
-#include "../../includes/debug.h"
-
-char	*convert_double_scientific(t_printf *data, t_arg *arg)
+long long int		ft_abs(long long int nb)
 {
-	UNUSED(data);
-	UNUSED(arg);
-	return (NULL);
+	return (nb < 0 ? -nb : nb);
 }

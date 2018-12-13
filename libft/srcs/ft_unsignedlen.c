@@ -6,18 +6,18 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 23:29:54 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/12 23:34:25 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/13 17:13:20 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
 
-size_t		ft_unsignedlen(unsigned int nb)
+size_t		ft_unsignedlen(unsigned long long int nb)
 {
 	size_t	len;
 
 	len = 1;
-	while ((nb /= 10) > 0)
+	while ((nb /= 10) != 0)
 	{
 		len++;
 	}

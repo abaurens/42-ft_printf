@@ -6,28 +6,15 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 15:58:22 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/12 23:00:10 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/13 15:40:07 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
+# include "ft_types.h"
 # include "ft_printf.h"
-
-# define F_MINS	0b00000001
-# define F_ZERO	0b00000010
-# define F_PLUS	0b00000100
-# define F_SPAC 0b00001000
-# define F_HASH 0b00010000
-# define F_COLO 0b00100000
-# define F_CAPI 0b01000000
-# define FLAGS_V "-0+ #'I"
-# define FLAG_C 7
-
-/*
-**	I = print the value with the locale digits if any (only used for i, u and d)
-*/
 
 extern int	(*const g_funcs[])(const char *, t_printf *, t_arg *);
 

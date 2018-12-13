@@ -6,14 +6,14 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 23:30:48 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/12 23:36:30 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/13 17:13:12 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
 #include "libft.h"
 
-size_t		ft_unsignedlen_base(unsigned int nb, const char *base)
+size_t		ft_unsignedlen_base(unsigned long long int nb, const char *base)
 {
 	size_t	len;
 	size_t	blen;

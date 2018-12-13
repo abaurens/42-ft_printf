@@ -6,20 +6,20 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 23:25:16 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/12 23:30:24 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/13 17:12:52 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
 
-size_t		ft_numlen(int nb)
+size_t		ft_numlen(long long int nb)
 {
 	size_t	len;
 
 	len = 1;
 	if (nb < 0)
 		len++;
-	while ((nb /= 10) > 0)
+	while ((nb /= 10) != 0)
 		len++;
 	return (len);
 }
