@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 18:20:02 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/13 20:48:52 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/13 22:19:24 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,13 @@ static char		*integer(t_printf *const data, t_arg *const arg)
 	v = (int)arg->value;
 	if (arg->flags & F_ZERO)
 		arg->precision = arg->min_width - (v < 0);
+	if ((arg->flags & (F_PLUS | F_SPAC)) && v > 0)
+		v = -v;
 	if (!(tab = padded_lltoa(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
+	if ((arg->flags & (F_PLUS | F_SPAC)) && (int)arg->value > 0)
+		tab[ft_idxof('-', tab)] = (arg->flags & F_PLUS) ? '+' : ' ';
 	tab = (char *)ft_freturn(tab, (long long)ft_strmcat(data->buf, tab, -1));
 	if (!tab)
 		return (NULL);
@@ -41,9 +45,13 @@ static char		*long_integer(t_printf *const data, t_arg *const arg)
 	v = (long int)arg->value;
 	if (arg->flags & F_ZERO)
 		arg->precision = arg->min_width - (v < 0);
+	if ((arg->flags & (F_PLUS | F_SPAC)) && v > 0)
+		v = -v;
 	if (!(tab = padded_lltoa(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
+	if ((arg->flags & (F_PLUS | F_SPAC)) && (long int)arg->value > 0)
+		tab[ft_idxof('-', tab)] = (arg->flags & F_PLUS) ? '+' : ' ';
 	tab = (char *)ft_freturn(tab, (long long)ft_strmcat(data->buf, tab, -1));
 	if (!tab)
 		return (NULL);
@@ -58,9 +66,13 @@ static char		*long_long_integer(t_printf *const data, t_arg *const arg)
 	v = (long long)arg->value;
 	if (arg->flags & F_ZERO)
 		arg->precision = arg->min_width - (v < 0);
+	if ((arg->flags & (F_PLUS | F_SPAC)) && v > 0)
+		v = -v;
 	if (!(tab = padded_lltoa(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
+	if ((arg->flags & (F_PLUS | F_SPAC)) && (long long)arg->value > 0)
+		tab[ft_idxof('-', tab)] = (arg->flags & F_PLUS) ? '+' : ' ';
 	tab = (char *)ft_freturn(tab, (long long)ft_strmcat(data->buf, tab, -1));
 	if (!tab)
 		return (NULL);
@@ -75,9 +87,13 @@ static char		*short_integer(t_printf *const data, t_arg *const arg)
 	v = (short int)arg->value;
 	if (arg->flags & F_ZERO)
 		arg->precision = arg->min_width - (v < 0);
+	if ((arg->flags & (F_PLUS | F_SPAC)) && v > 0)
+		v = -v;
 	if (!(tab = padded_lltoa(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
+	if ((arg->flags & (F_PLUS | F_SPAC)) && (short int)arg->value > 0)
+		tab[ft_idxof('-', tab)] = (arg->flags & F_PLUS) ? '+' : ' ';
 	tab = (char *)ft_freturn(tab, (long long)ft_strmcat(data->buf, tab, -1));
 	if (!tab)
 		return (NULL);
@@ -92,9 +108,13 @@ static char		*short_short_integer(t_printf *const data, t_arg *const arg)
 	v = (signed char)arg->value;
 	if (arg->flags & F_ZERO)
 		arg->precision = arg->min_width - (v < 0);
+	if ((arg->flags & (F_PLUS | F_SPAC)) && v > 0)
+		v = -v;
 	if (!(tab = padded_lltoa(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
+	if ((arg->flags & (F_PLUS | F_SPAC)) && (signed char)arg->value > 0)
+		tab[ft_idxof('-', tab)] = (arg->flags & F_PLUS) ? '+' : ' ';
 	tab = (char *)ft_freturn(tab, (long long)ft_strmcat(data->buf, tab, -1));
 	if (!tab)
 		return (NULL);
@@ -109,9 +129,13 @@ static char		*intmax_integer(t_printf *const data, t_arg *const arg)
 	v = (intmax_t)arg->value;
 	if (arg->flags & F_ZERO)
 		arg->precision = arg->min_width - (v < 0);
+	if ((arg->flags & (F_PLUS | F_SPAC)) && v > 0)
+		v = -v;
 	if (!(tab = padded_lltoa(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
+	if ((arg->flags & (F_PLUS | F_SPAC)) && (intmax_t)arg->value > 0)
+		tab[ft_idxof('-', tab)] = (arg->flags & F_PLUS) ? '+' : ' ';
 	tab = (char *)ft_freturn(tab, (long long)ft_strmcat(data->buf, tab, -1));
 	if (!tab)
 		return (NULL);
@@ -126,9 +150,13 @@ static char		*size_integer(t_printf *const data, t_arg *const arg)
 	v = (size_t)arg->value;
 	if (arg->flags & F_ZERO)
 		arg->precision = arg->min_width - ((long long)v < 0);
+	if ((arg->flags & (F_PLUS | F_SPAC)) && v > 0)
+		v = -v;
 	if (!(tab = padded_lltoa(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
+	if ((arg->flags & (F_PLUS | F_SPAC)) && (size_t)arg->value > 0)
+		tab[ft_idxof('-', tab)] = (arg->flags & F_PLUS) ? '+' : ' ';
 	tab = (char *)ft_freturn(tab, (long long)ft_strmcat(data->buf, tab, -1));
 	if (!tab)
 		return (NULL);
@@ -143,9 +171,13 @@ static char		*ptrdiff_integer(t_printf *const data, t_arg *const arg)
 	v = (ptrdiff_t)arg->value;
 	if (arg->flags & F_ZERO)
 		arg->precision = arg->min_width - (v < 0);
+	if ((arg->flags & (F_PLUS | F_SPAC)) && v > 0)
+		v = -v;
 	if (!(tab = padded_lltoa(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
+	if ((arg->flags & (F_PLUS | F_SPAC)) && (ptrdiff_t)arg->value > 0)
+		tab[ft_idxof('-', tab)] = (arg->flags & F_PLUS) ? '+' : ' ';
 	tab = (char *)ft_freturn(tab, (long long)ft_strmcat(data->buf, tab, -1));
 	if (!tab)
 		return (NULL);
@@ -170,7 +202,6 @@ char			*convert_integer(t_printf *const data, t_arg *const arg)
 	int			i;
 	long long	prec;
 	long long	min;
-	char		*res;
 
 	min = arg->min_width;
 	prec = arg->precision;
@@ -185,6 +216,7 @@ char			*convert_integer(t_printf *const data, t_arg *const arg)
 		arg->flags &= ~F_ZERO;
 	while (g_funcs[i].c && g_funcs[i].c != LEN_MD_CHRS[arg->length_modifier])
 		i++;
-	res = g_funcs[i].func(data, arg);
-	return (res);
+	if (!g_funcs[i].c)
+		return (NULL);
+	return (g_funcs[i].func(data, arg));
 }
