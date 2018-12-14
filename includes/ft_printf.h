@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 21:58:06 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/13 19:13:39 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/14 16:29:39 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,15 @@ int				get_arg(t_printf *data, size_t idx, void *val);
 **	printf_lltoa.c
 */
 char			*printf_lltoa(long long int nb, const int min);
-char			*padded_lltoa(long long nb, const int min_d, int pad, char r);
+char			*padded_lltoa(long long nb, const int min_d, const int pad,
+								char r);
+char			*padded_ulltoa(unsigned long long nb, const int min_d,
+								const int pad, char r);
+char			*padded_ulltoa_octal(unsigned long long nb, const int min_d,
+									const int pad, char r);
+char			*padded_ulltoa_hexahup(unsigned long long nb, const int min_d,
+									const int pad, char r);
+char			*padded_ulltoa_hexadown(unsigned long long nb, const int min_d,
+									const int pad, char r);
 
 #endif

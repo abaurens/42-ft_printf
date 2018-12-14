@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   integer.c                                          :+:      :+:    :+:   */
+/*   u_integer_hexadown.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/07 18:20:02 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/14 16:09:20 by abaurens         ###   ########.fr       */
+/*   Created: 2018/12/07 18:26:04 by abaurens          #+#    #+#             */
+/*   Updated: 2018/12/14 16:35:52 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,105 +16,85 @@
 #include "debug.h"
 #include "libft.h"
 
-static char		*integer(t_printf *const data, t_arg *const arg)
+static char			*integer(t_printf *const data, t_arg *const arg)
 {
-	int			v;
-	char		*tab;
+	unsigned int	v;
+	char			*tab;
 
-	v = (int)arg->value;
+	v = (unsigned int)arg->value;
 	if (arg->flags & F_ZERO)
-		arg->precision = arg->min_width - (v < 0);
-	if ((arg->flags & (F_PLUS | F_SPAC)) && v >= 0)
-		arg->precision++;
-	if (!(tab = padded_lltoa(v, arg->precision, arg->min_width,
+		arg->precision = arg->min_width;
+	if (!(tab = padded_ulltoa_hexadown(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
-	if ((arg->flags & (F_PLUS | F_SPAC)) && (int)arg->value >= 0)
-		tab[ft_idxof('0', tab)] = (arg->flags & F_PLUS) ? '+' : ' ';
 	tab = (char *)ft_freturn(tab, (long long)ft_strmcat(data->buf, tab, -1));
 	if (!tab)
 		return (NULL);
 	return (data->buf = (char *)ft_freturn(data->buf, (long long)tab));
 }
 
-static char		*long_integer(t_printf *const data, t_arg *const arg)
+static char			*long_integer(t_printf *const data, t_arg *const arg)
 {
-	long int	v;
-	char		*tab;
+	unsigned long	v;
+	char			*tab;
 
 	v = (long int)arg->value;
 	if (arg->flags & F_ZERO)
-		arg->precision = arg->min_width - (v < 0);
-	if ((arg->flags & (F_PLUS | F_SPAC)) && v >= 0)
-		arg->precision++;
-	if (!(tab = padded_lltoa(v, arg->precision, arg->min_width,
+		arg->precision = arg->min_width;
+	if (!(tab = padded_ulltoa_hexadown(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
-	if ((arg->flags & (F_PLUS | F_SPAC)) && (long int)arg->value >= 0)
-		tab[ft_idxof('0', tab)] = (arg->flags & F_PLUS) ? '+' : ' ';
 	tab = (char *)ft_freturn(tab, (long long)ft_strmcat(data->buf, tab, -1));
 	if (!tab)
 		return (NULL);
 	return (data->buf = (char *)ft_freturn(data->buf, (long long)tab));
 }
 
-static char		*long_long_integer(t_printf *const data, t_arg *const arg)
+static char			*long_long_integer(t_printf *const data, t_arg *const arg)
 {
-	long long	v;
-	char		*tab;
+	unsigned long long	v;
+	char				*tab;
 
-	v = (long long)arg->value;
+	v = (unsigned long long)arg->value;
 	if (arg->flags & F_ZERO)
-		arg->precision = arg->min_width - (v < 0);
-	if ((arg->flags & (F_PLUS | F_SPAC)) && v >= 0)
-		arg->precision++;
-	if (!(tab = padded_lltoa(v, arg->precision, arg->min_width,
+		arg->precision = arg->min_width;
+	if (!(tab = padded_ulltoa_hexadown(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
-	if ((arg->flags & (F_PLUS | F_SPAC)) && (long long)arg->value >= 0)
-		tab[ft_idxof('0', tab)] = (arg->flags & F_PLUS) ? '+' : ' ';
 	tab = (char *)ft_freturn(tab, (long long)ft_strmcat(data->buf, tab, -1));
 	if (!tab)
 		return (NULL);
 	return (data->buf = (char *)ft_freturn(data->buf, (long long)tab));
 }
 
-static char		*short_integer(t_printf *const data, t_arg *const arg)
+static char			*short_integer(t_printf *const data, t_arg *const arg)
 {
-	short int	v;
-	char		*tab;
+	unsigned short	v;
+	char			*tab;
 
-	v = (short int)arg->value;
+	v = (unsigned short int)arg->value;
 	if (arg->flags & F_ZERO)
-		arg->precision = arg->min_width - (v < 0);
-	if ((arg->flags & (F_PLUS | F_SPAC)) && v >= 0)
-		arg->precision++;
-	if (!(tab = padded_lltoa(v, arg->precision, arg->min_width,
+		arg->precision = arg->min_width;
+	if (!(tab = padded_ulltoa_hexadown(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
-	if ((arg->flags & (F_PLUS | F_SPAC)) && (short int)arg->value >= 0)
-		tab[ft_idxof('0', tab)] = (arg->flags & F_PLUS) ? '+' : ' ';
 	tab = (char *)ft_freturn(tab, (long long)ft_strmcat(data->buf, tab, -1));
 	if (!tab)
 		return (NULL);
 	return (data->buf = (char *)ft_freturn(data->buf, (long long)tab));
 }
 
-static char		*short_short_integer(t_printf *const data, t_arg *const arg)
+static char			*short_short_integer(t_printf *const data, t_arg *const arg)
 {
-	signed char	v;
-	char		*tab;
+	unsigned char	v;
+	char			*tab;
 
-	v = (signed char)arg->value;
+	v = (unsigned char)arg->value;
 	if (arg->flags & F_ZERO)
-		arg->precision = arg->min_width - (v < 0);
-	if ((arg->flags & (F_PLUS | F_SPAC)) && v >= 0)
-		arg->precision++;
-	if (!(tab = padded_lltoa(v, arg->precision, arg->min_width,
+		arg->precision = arg->min_width;
+	if (!(tab = padded_ulltoa_hexadown(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
-	if ((arg->flags & (F_PLUS | F_SPAC)) && (signed char)arg->value >= 0)
-		tab[ft_idxof('0', tab)] = (arg->flags & F_PLUS) ? '+' : ' ';
 	tab = (char *)ft_freturn(tab, (long long)ft_strmcat(data->buf, tab, -1));
 	if (!tab)
 		return (NULL);
@@ -123,19 +103,15 @@ static char		*short_short_integer(t_printf *const data, t_arg *const arg)
 
 static char		*intmax_integer(t_printf *const data, t_arg *const arg)
 {
-	intmax_t	v;
+	uintmax_t	v;
 	char		*tab;
 
-	v = (intmax_t)arg->value;
+	v = (uintmax_t)arg->value;
 	if (arg->flags & F_ZERO)
-		arg->precision = arg->min_width - (v < 0);
-	if ((arg->flags & (F_PLUS | F_SPAC)) && v >= 0)
-		arg->precision++;
-	if (!(tab = padded_lltoa(v, arg->precision, arg->min_width,
+		arg->precision = arg->min_width;
+	if (!(tab = padded_ulltoa_hexadown(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
-	if ((arg->flags & (F_PLUS | F_SPAC)) && (intmax_t)arg->value >= 0)
-		tab[ft_idxof('0', tab)] = (arg->flags & F_PLUS) ? '+' : ' ';
 	tab = (char *)ft_freturn(tab, (long long)ft_strmcat(data->buf, tab, -1));
 	if (!tab)
 		return (NULL);
@@ -149,14 +125,10 @@ static char		*size_integer(t_printf *const data, t_arg *const arg)
 
 	v = (size_t)arg->value;
 	if (arg->flags & F_ZERO)
-		arg->precision = arg->min_width - ((long long)v < 0);
-	if ((arg->flags & (F_PLUS | F_SPAC)) && (long long)v >= 0)
-		arg->precision++;
-	if (!(tab = padded_lltoa(v, arg->precision, arg->min_width,
+		arg->precision = arg->min_width;
+	if (!(tab = padded_ulltoa_hexadown(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
-	if ((arg->flags & (F_PLUS | F_SPAC)) && (long long)v >= 0)
-		tab[ft_idxof('0', tab)] = (arg->flags & F_PLUS) ? '+' : ' ';
 	tab = (char *)ft_freturn(tab, (long long)ft_strmcat(data->buf, tab, -1));
 	if (!tab)
 		return (NULL);
@@ -171,13 +143,9 @@ static char		*ptrdiff_integer(t_printf *const data, t_arg *const arg)
 	v = (ptrdiff_t)arg->value;
 	if (arg->flags & F_ZERO)
 		arg->precision = arg->min_width - (v < 0);
-	if ((arg->flags & (F_PLUS | F_SPAC)) && v >= 0)
-		v = -v;
-	if (!(tab = padded_lltoa(v, arg->precision, arg->min_width,
+	if (!(tab = padded_ulltoa_hexadown(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
-	if ((arg->flags & (F_PLUS | F_SPAC)) && (ptrdiff_t)arg->value >= 0)
-		tab[ft_idxof('0', tab)] = (arg->flags & F_PLUS) ? '+' : ' ';
 	tab = (char *)ft_freturn(tab, (long long)ft_strmcat(data->buf, tab, -1));
 	if (!tab)
 		return (NULL);
@@ -197,7 +165,7 @@ static const t_converter	g_funcs[] =
 	{'\0', FALSE, NULL}
 };
 
-char			*convert_integer(t_printf *const data, t_arg *const arg)
+char	*convert_u_integer_hexadown(t_printf *data, t_arg *arg)
 {
 	int			i;
 	long long	prec;

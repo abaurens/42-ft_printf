@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 18:29:02 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/14 02:10:36 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/14 15:36:40 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define F_HASH 0b00010000
 # define F_COLO 0b00100000
 # define FLAGS_V "-0+ #'"
-# define FLAG_C 7
+# define FLAG_C 6
 
 /*
 **	I = print the value with the locale digits if any (only used for i, u and d)

@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 23:30:48 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/13 17:13:12 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/14 16:17:26 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,7 @@ size_t		ft_unsignedlen_base(unsigned long long int nb, const char *base)
 	if (!base || !ft_isbase(base))
 		return (0);
 	blen = ft_strlen(base);
-	while ((nb /= blen) > 0)
-	{
+	while ((nb /= blen) != 0)
 		len++;
-	}
 	return (len);
 }
