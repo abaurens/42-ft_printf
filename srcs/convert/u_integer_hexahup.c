@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 18:26:04 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/14 16:28:39 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/14 20:05:26 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,13 @@ static char			*integer(t_printf *const data, t_arg *const arg)
 	v = (unsigned int)arg->value;
 	if (arg->flags & F_ZERO)
 		arg->precision = arg->min_width;
+	if ((arg->flags & F_HASH) && v != 0)
+		arg->precision += 2;
 	if (!(tab = padded_ulltoa_hexahup(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
+	if ((arg->flags & F_HASH) && v != 0)
+		tab[ft_idxof('0', tab) + 1] = 'X';
 	tab = (char *)ft_freturn(tab, (long long)ft_strmcat(data->buf, tab, -1));
 	if (!tab)
 		return (NULL);
@@ -41,9 +45,13 @@ static char			*long_integer(t_printf *const data, t_arg *const arg)
 	v = (long int)arg->value;
 	if (arg->flags & F_ZERO)
 		arg->precision = arg->min_width;
+	if ((arg->flags & F_HASH) && v != 0)
+		arg->precision += 2;
 	if (!(tab = padded_ulltoa_hexahup(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
+	if ((arg->flags & F_HASH) && v != 0)
+		tab[ft_idxof('0', tab) + 1] = 'X';
 	tab = (char *)ft_freturn(tab, (long long)ft_strmcat(data->buf, tab, -1));
 	if (!tab)
 		return (NULL);
@@ -58,9 +66,13 @@ static char			*long_long_integer(t_printf *const data, t_arg *const arg)
 	v = (unsigned long long)arg->value;
 	if (arg->flags & F_ZERO)
 		arg->precision = arg->min_width;
+	if ((arg->flags & F_HASH) && v != 0)
+		arg->precision += 2;
 	if (!(tab = padded_ulltoa_hexahup(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
+	if ((arg->flags & F_HASH) && v != 0)
+		tab[ft_idxof('0', tab) + 1] = 'X';
 	tab = (char *)ft_freturn(tab, (long long)ft_strmcat(data->buf, tab, -1));
 	if (!tab)
 		return (NULL);
@@ -75,9 +87,13 @@ static char			*short_integer(t_printf *const data, t_arg *const arg)
 	v = (unsigned short int)arg->value;
 	if (arg->flags & F_ZERO)
 		arg->precision = arg->min_width;
+	if ((arg->flags & F_HASH) && v != 0)
+		arg->precision += 2;
 	if (!(tab = padded_ulltoa_hexahup(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
+	if ((arg->flags & F_HASH) && v != 0)
+		tab[ft_idxof('0', tab) + 1] = 'X';
 	tab = (char *)ft_freturn(tab, (long long)ft_strmcat(data->buf, tab, -1));
 	if (!tab)
 		return (NULL);
@@ -92,9 +108,13 @@ static char			*short_short_integer(t_printf *const data, t_arg *const arg)
 	v = (unsigned char)arg->value;
 	if (arg->flags & F_ZERO)
 		arg->precision = arg->min_width;
+	if ((arg->flags & F_HASH) && v != 0)
+		arg->precision += 2;
 	if (!(tab = padded_ulltoa_hexahup(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
+	if ((arg->flags & F_HASH) && v != 0)
+		tab[ft_idxof('0', tab) + 1] = 'X';
 	tab = (char *)ft_freturn(tab, (long long)ft_strmcat(data->buf, tab, -1));
 	if (!tab)
 		return (NULL);
@@ -109,9 +129,13 @@ static char		*intmax_integer(t_printf *const data, t_arg *const arg)
 	v = (uintmax_t)arg->value;
 	if (arg->flags & F_ZERO)
 		arg->precision = arg->min_width;
+	if ((arg->flags & F_HASH) && v != 0)
+		arg->precision += 2;
 	if (!(tab = padded_ulltoa_hexahup(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
+	if ((arg->flags & F_HASH) && v != 0)
+		tab[ft_idxof('0', tab) + 1] = 'X';
 	tab = (char *)ft_freturn(tab, (long long)ft_strmcat(data->buf, tab, -1));
 	if (!tab)
 		return (NULL);
@@ -126,9 +150,13 @@ static char		*size_integer(t_printf *const data, t_arg *const arg)
 	v = (size_t)arg->value;
 	if (arg->flags & F_ZERO)
 		arg->precision = arg->min_width;
+	if ((arg->flags & F_HASH) && v != 0)
+		arg->precision += 2;
 	if (!(tab = padded_ulltoa_hexahup(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
+	if ((arg->flags & F_HASH) && v != 0)
+		tab[ft_idxof('0', tab) + 1] = 'X';
 	tab = (char *)ft_freturn(tab, (long long)ft_strmcat(data->buf, tab, -1));
 	if (!tab)
 		return (NULL);
@@ -142,10 +170,14 @@ static char		*ptrdiff_integer(t_printf *const data, t_arg *const arg)
 
 	v = (ptrdiff_t)arg->value;
 	if (arg->flags & F_ZERO)
-		arg->precision = arg->min_width - (v < 0);
+		arg->precision = arg->min_width;
+	if ((arg->flags & F_HASH) && v != 0)
+		arg->precision += 2;
 	if (!(tab = padded_ulltoa_hexahup(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
+	if ((arg->flags & F_HASH) && v != 0)
+		tab[ft_idxof('0', tab) + 1] = 'X';
 	tab = (char *)ft_freturn(tab, (long long)ft_strmcat(data->buf, tab, -1));
 	if (!tab)
 		return (NULL);
@@ -185,6 +217,6 @@ char	*convert_u_integer_hexahup(t_printf *data, t_arg *arg)
 	while (g_funcs[i].c && g_funcs[i].c != LEN_MD_CHRS[arg->length_modifier])
 		i++;
 	if (!g_funcs[i].c)
-		return (NULL);
+		return (g_funcs[0].func(data, arg));
 	return (g_funcs[i].func(data, arg));
 }

@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 13:53:50 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/14 16:34:48 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/14 19:56:52 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,16 @@ char			*convert_strerror(t_printf *data, t_arg *arg);
 char			*convert_u_integer_binary(t_printf *data, t_arg *arg);
 char			*convert_non_printable_string(t_printf *data, t_arg *arg);
 char			*convert_iso_date(t_printf *data, t_arg *arg);
+
+/*
+**	wide_character_string.c
+*/
+char			*wide_character_string(t_printf *data, t_arg *arg);
+
+/*
+**	wide_character.c
+*/
+char			*wide_character(t_printf *data, t_arg *arg);
 
 static const t_converter	g_converters[] =
 {

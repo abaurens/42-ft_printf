@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 21:02:59 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/14 17:02:17 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/14 20:05:38 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,6 +217,6 @@ char	*convert_u_integer_octal(t_printf *data, t_arg *arg)
 	while (g_funcs[i].c && g_funcs[i].c != LEN_MD_CHRS[arg->length_modifier])
 		i++;
 	if (!g_funcs[i].c)
-		return (NULL);
+		return (g_funcs[0].func(data, arg));
 	return (g_funcs[i].func(data, arg));
 }

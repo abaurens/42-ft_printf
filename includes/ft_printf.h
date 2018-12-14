@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 21:58:06 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/14 16:29:39 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/14 20:10:38 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ char			*printf_lltoa(long long int nb, const int min);
 char			*padded_lltoa(long long nb, const int min_d, const int pad,
 								char r);
 char			*padded_ulltoa(unsigned long long nb, const int min_d,
+								const int pad, char r);
+char			*padded_ulltoa_bin(unsigned long long nb, const int min_d,
 								const int pad, char r);
 char			*padded_ulltoa_octal(unsigned long long nb, const int min_d,
 									const int pad, char r);

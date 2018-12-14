@@ -6,7 +6,7 @@
 #    By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 16:23:33 by abaurens          #+#    #+#              #
-#    Updated: 2018/12/14 16:34:25 by abaurens         ###   ########.fr        #
+#    Updated: 2018/12/14 20:11:39 by abaurens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRC         =   debug.c								\
 				convert/padded_lltoa.c				\
 				convert/printf_lltoa.c				\
 				convert/padded_ulltoa.c				\
+				convert/padded_ulltoa_bin.c			\
 				convert/padded_ulltoa_octal.c		\
 				convert/padded_ulltoa_hexahup.c		\
 				convert/padded_ulltoa_hexadown.c	\
