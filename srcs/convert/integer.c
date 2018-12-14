@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 18:20:02 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/13 22:19:24 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/14 01:04:01 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,8 +211,8 @@ char			*convert_integer(t_printf *const data, t_arg *const arg)
 		return (NULL);
 	i = 0;
 	arg->min_width = (((int)min) < 0 ? 0 : (int)min);
-	if ((arg->precision = (((int)prec) < 0 ? 0 : (int)prec)) ||
-		(arg->flags & F_MINS))
+	if ((arg->precision = (((int)prec) < 0 ? 0 : (int)prec))
+		|| (arg->flags & F_MINS))
 		arg->flags &= ~F_ZERO;
 	while (g_funcs[i].c && g_funcs[i].c != LEN_MD_CHRS[arg->length_modifier])
 		i++;

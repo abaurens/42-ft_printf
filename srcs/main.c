@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 22:25:56 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/13 22:18:04 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/14 02:10:53 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include "ft_printf.h"
 #include "ft_error.h"
 #include "libft.h"
+
+#include <locale.h>
 
 int				main(void)
 {

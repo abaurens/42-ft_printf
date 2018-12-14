@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 18:29:02 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/13 22:19:54 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/14 02:10:36 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@
 # define F_SPAC 0b00001000
 # define F_HASH 0b00010000
 # define F_COLO 0b00100000
-# define F_CAPI 0b01000000
-# define FLAGS_V "-0+ #'I"
+# define FLAGS_V "-0+ #'"
 # define FLAG_C 7
 
 /*
