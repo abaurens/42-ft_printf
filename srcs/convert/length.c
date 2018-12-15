@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 18:17:28 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/14 21:39:50 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/15 13:10:28 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ char			*convert_length(t_printf *data, t_arg *arg)
 	int			i;
 
 	i = 0;
+	if (get_arg(data, arg->flag_idx, &arg->value))
+		return (NULL);
 	while (g_funcs[i].c && g_funcs[i].c != LEN_MD_CHRS[arg->length_modifier])
 		i++;
 	if (!g_funcs[i].c)

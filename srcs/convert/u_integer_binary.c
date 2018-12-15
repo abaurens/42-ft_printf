@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:40:26 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/14 20:10:02 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/15 17:28:45 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,17 @@ static char			*integer(t_printf *const data, t_arg *const arg)
 	int				len;
 
 	v = (unsigned int)arg->value;
-	if (arg->flags & F_ZERO)
+	if ((len = ft_unsignedlen_base(v, "01")) > arg->precision)
+		arg->precision = len;
+	if (arg->flags & F_ZERO && arg->min_width > arg->precision)
 		arg->precision = arg->min_width;
-	if (arg->flags & F_HASH
-		&& (len = ft_unsignedlen_base(v, "01")) >= arg->precision)
-		arg->precision = len + 1;
+	if ((arg->flags & F_HASH) && v != 0 && arg->precision < (len + 2))
+		arg->precision += ((len + 2) - arg->precision);
 	if (!(tab = padded_ulltoa_bin(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
+	if ((arg->flags & F_HASH) && v != 0)
+		tab[ft_idxof('0', tab) + 1] = 'b';
 	tab = (char *)ft_freturn(tab, (long long)ft_strmcat(data->buf, tab, -1));
 	if (!tab)
 		return (NULL);
@@ -44,14 +47,17 @@ static char			*long_integer(t_printf *const data, t_arg *const arg)
 	int				len;
 
 	v = (long int)arg->value;
-	if (arg->flags & F_ZERO)
+	if ((len = ft_unsignedlen_base(v, "01")) > arg->precision)
+		arg->precision = len;
+	if (arg->flags & F_ZERO && arg->min_width > arg->precision)
 		arg->precision = arg->min_width;
-	if (arg->flags & F_HASH
-		&& (len = ft_unsignedlen_base(v, "01")) >= arg->precision)
-		arg->precision = len + 1;
+	if ((arg->flags & F_HASH) && v != 0 && arg->precision < (len + 2))
+		arg->precision += ((len + 2) - arg->precision);
 	if (!(tab = padded_ulltoa_bin(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
+	if ((arg->flags & F_HASH) && v != 0)
+		tab[ft_idxof('0', tab) + 1] = 'b';
 	tab = (char *)ft_freturn(tab, (long long)ft_strmcat(data->buf, tab, -1));
 	if (!tab)
 		return (NULL);
@@ -65,14 +71,17 @@ static char			*long_long_integer(t_printf *const data, t_arg *const arg)
 	int					len;
 
 	v = (unsigned long long)arg->value;
-	if (arg->flags & F_ZERO)
+	if ((len = ft_unsignedlen_base(v, "01")) > arg->precision)
+		arg->precision = len;
+	if (arg->flags & F_ZERO && arg->min_width > arg->precision)
 		arg->precision = arg->min_width;
-	if (arg->flags & F_HASH
-		&& (len = ft_unsignedlen_base(v, "01")) >= arg->precision)
-		arg->precision = len + 1;
+	if ((arg->flags & F_HASH) && v != 0 && arg->precision < (len + 2))
+		arg->precision += ((len + 2) - arg->precision);
 	if (!(tab = padded_ulltoa_bin(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
+	if ((arg->flags & F_HASH) && v != 0)
+		tab[ft_idxof('0', tab) + 1] = 'b';
 	tab = (char *)ft_freturn(tab, (long long)ft_strmcat(data->buf, tab, -1));
 	if (!tab)
 		return (NULL);
@@ -86,14 +95,17 @@ static char			*short_integer(t_printf *const data, t_arg *const arg)
 	int				len;
 
 	v = (unsigned short int)arg->value;
-	if (arg->flags & F_ZERO)
+	if ((len = ft_unsignedlen_base(v, "01")) > arg->precision)
+		arg->precision = len;
+	if (arg->flags & F_ZERO && arg->min_width > arg->precision)
 		arg->precision = arg->min_width;
-	if (arg->flags & F_HASH
-		&& (len = ft_unsignedlen_base(v, "01")) >= arg->precision)
-		arg->precision = len + 1;
+	if ((arg->flags & F_HASH) && v != 0 && arg->precision < (len + 2))
+		arg->precision += ((len + 2) - arg->precision);
 	if (!(tab = padded_ulltoa_bin(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
+	if ((arg->flags & F_HASH) && v != 0)
+		tab[ft_idxof('0', tab) + 1] = 'b';
 	tab = (char *)ft_freturn(tab, (long long)ft_strmcat(data->buf, tab, -1));
 	if (!tab)
 		return (NULL);
@@ -107,14 +119,17 @@ static char			*short_short_integer(t_printf *const data, t_arg *const arg)
 	int				len;
 
 	v = (unsigned char)arg->value;
-	if (arg->flags & F_ZERO)
+	if ((len = ft_unsignedlen_base(v, "01")) > arg->precision)
+		arg->precision = len;
+	if (arg->flags & F_ZERO && arg->min_width > arg->precision)
 		arg->precision = arg->min_width;
-	if (arg->flags & F_HASH
-		&& (len = ft_unsignedlen_base(v, "01")) >= arg->precision)
-		arg->precision = len + 1;
+	if ((arg->flags & F_HASH) && v != 0 && arg->precision < (len + 2))
+		arg->precision += ((len + 2) - arg->precision);
 	if (!(tab = padded_ulltoa_bin(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
+	if ((arg->flags & F_HASH) && v != 0)
+		tab[ft_idxof('0', tab) + 1] = 'b';
 	tab = (char *)ft_freturn(tab, (long long)ft_strmcat(data->buf, tab, -1));
 	if (!tab)
 		return (NULL);
@@ -128,14 +143,17 @@ static char		*intmax_integer(t_printf *const data, t_arg *const arg)
 	int			len;
 
 	v = (uintmax_t)arg->value;
-	if (arg->flags & F_ZERO)
+	if ((len = ft_unsignedlen_base(v, "01")) > arg->precision)
+		arg->precision = len;
+	if (arg->flags & F_ZERO && arg->min_width > arg->precision)
 		arg->precision = arg->min_width;
-	if (arg->flags & F_HASH
-		&& (len = ft_unsignedlen_base(v, "01")) >= arg->precision)
-		arg->precision = len + 1;
+	if ((arg->flags & F_HASH) && v != 0 && arg->precision < (len + 2))
+		arg->precision += ((len + 2) - arg->precision);
 	if (!(tab = padded_ulltoa_bin(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
+	if ((arg->flags & F_HASH) && v != 0)
+		tab[ft_idxof('0', tab) + 1] = 'b';
 	tab = (char *)ft_freturn(tab, (long long)ft_strmcat(data->buf, tab, -1));
 	if (!tab)
 		return (NULL);
@@ -149,14 +167,17 @@ static char		*size_integer(t_printf *const data, t_arg *const arg)
 	int			len;
 
 	v = (size_t)arg->value;
-	if (arg->flags & F_ZERO)
+	if ((len = ft_unsignedlen_base(v, "01")) > arg->precision)
+		arg->precision = len;
+	if (arg->flags & F_ZERO && arg->min_width > arg->precision)
 		arg->precision = arg->min_width;
-	if (arg->flags & F_HASH
-		&& (len = ft_unsignedlen_base(v, "01")) >= arg->precision)
-		arg->precision = len + 1;
+	if ((arg->flags & F_HASH) && v != 0 && arg->precision < (len + 2))
+		arg->precision += ((len + 2) - arg->precision);
 	if (!(tab = padded_ulltoa_bin(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
+	if ((arg->flags & F_HASH) && v != 0)
+		tab[ft_idxof('0', tab) + 1] = 'b';
 	tab = (char *)ft_freturn(tab, (long long)ft_strmcat(data->buf, tab, -1));
 	if (!tab)
 		return (NULL);
@@ -170,14 +191,17 @@ static char		*ptrdiff_integer(t_printf *const data, t_arg *const arg)
 	int			len;
 
 	v = (ptrdiff_t)arg->value;
-	if (arg->flags & F_ZERO)
+	if ((len = ft_unsignedlen_base(v, "01")) > arg->precision)
+		arg->precision = len;
+	if (arg->flags & F_ZERO && arg->min_width > arg->precision)
 		arg->precision = arg->min_width;
-	if (arg->flags & F_HASH
-		&& (len = ft_unsignedlen_base(v, "01")) >= arg->precision)
-		arg->precision = len + 1;
+	if ((arg->flags & F_HASH) && v != 0 && arg->precision < (len + 2))
+		arg->precision += ((len + 2) - arg->precision);
 	if (!(tab = padded_ulltoa_bin(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
+	if ((arg->flags & F_HASH) && v != 0)
+		tab[ft_idxof('0', tab) + 1] = 'b';
 	tab = (char *)ft_freturn(tab, (long long)ft_strmcat(data->buf, tab, -1));
 	if (!tab)
 		return (NULL);

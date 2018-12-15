@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 22:25:56 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/14 20:03:30 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/15 18:25:24 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,22 @@
 #include "ft_error.h"
 #include "libft.h"
 
+#include <errno.h>
 #include <locale.h>
 
 int				main(void)
 {
 	int			i;
+	int			j;
 
 	setlocale(LC_ALL, "");
-	i = printf("   printf : LOL %lc\n", L'¢');
-	printf("Returned %d\n\n", i);
+	errno = 0;
+	i = 0;
+	j = printf("   printf : LOL %010.5m\n");
+	printf("Returned %d and i = %d\n\n", j, i);
 	fflush(stdout);
-	i = ft_printf("ft_printf : LOL %lc\n", L'¢');
-	ft_printf("Returned %d\n", i);
+	errno = 0;
+	j = ft_printf("ft_printf : LOL %010.5m\n");
+	ft_printf("Returned %d and i = %d\n", j, i);
 	return (0);
 }

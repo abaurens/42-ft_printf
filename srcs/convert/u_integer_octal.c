@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 21:02:59 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/14 20:05:38 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/15 17:32:07 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,12 @@ static char			*integer(t_printf *const data, t_arg *const arg)
 	int				len;
 
 	v = (unsigned int)arg->value;
-	if (arg->flags & F_ZERO)
+	if ((len = ft_unsignedlen_base(v, "01234567")) > arg->precision)
+		arg->precision = len;
+	if (arg->flags & F_ZERO && arg->min_width > arg->precision)
 		arg->precision = arg->min_width;
-	if (arg->flags & F_HASH
-		&& (len = ft_unsignedlen_base(v, "01234567")) >= arg->precision)
-		arg->precision = len + 1;
+	if (arg->flags & F_HASH && v != 0 && arg->precision <= len)
+		arg->precision++;
 	if (!(tab = padded_ulltoa_octal(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
@@ -44,11 +45,12 @@ static char			*long_integer(t_printf *const data, t_arg *const arg)
 	int				len;
 
 	v = (long int)arg->value;
-	if (arg->flags & F_ZERO)
+	if ((len = ft_unsignedlen_base(v, "01234567")) > arg->precision)
+		arg->precision = len;
+	if (arg->flags & F_ZERO && arg->min_width > arg->precision)
 		arg->precision = arg->min_width;
-	if (arg->flags & F_HASH
-		&& (len = ft_unsignedlen_base(v, "01234567")) >= arg->precision)
-		arg->precision = len + 1;
+	if (arg->flags & F_HASH && v != 0 && arg->precision <= len)
+		arg->precision++;
 	if (!(tab = padded_ulltoa_octal(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
@@ -65,11 +67,12 @@ static char			*long_long_integer(t_printf *const data, t_arg *const arg)
 	int					len;
 
 	v = (unsigned long long)arg->value;
-	if (arg->flags & F_ZERO)
+	if ((len = ft_unsignedlen_base(v, "01234567")) > arg->precision)
+		arg->precision = len;
+	if (arg->flags & F_ZERO && arg->min_width > arg->precision)
 		arg->precision = arg->min_width;
-	if (arg->flags & F_HASH
-		&& (len = ft_unsignedlen_base(v, "01234567")) >= arg->precision)
-		arg->precision = len + 1;
+	if (arg->flags & F_HASH && v != 0 && arg->precision <= len)
+		arg->precision++;
 	if (!(tab = padded_ulltoa_octal(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
@@ -86,11 +89,12 @@ static char			*short_integer(t_printf *const data, t_arg *const arg)
 	int				len;
 
 	v = (unsigned short int)arg->value;
-	if (arg->flags & F_ZERO)
+	if ((len = ft_unsignedlen_base(v, "01234567")) > arg->precision)
+		arg->precision = len;
+	if (arg->flags & F_ZERO && arg->min_width > arg->precision)
 		arg->precision = arg->min_width;
-	if (arg->flags & F_HASH
-		&& (len = ft_unsignedlen_base(v, "01234567")) >= arg->precision)
-		arg->precision = len + 1;
+	if (arg->flags & F_HASH && v != 0 && arg->precision <= len)
+		arg->precision++;
 	if (!(tab = padded_ulltoa_octal(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
@@ -107,11 +111,12 @@ static char			*short_short_integer(t_printf *const data, t_arg *const arg)
 	int				len;
 
 	v = (unsigned char)arg->value;
-	if (arg->flags & F_ZERO)
+	if ((len = ft_unsignedlen_base(v, "01234567")) > arg->precision)
+		arg->precision = len;
+	if (arg->flags & F_ZERO && arg->min_width > arg->precision)
 		arg->precision = arg->min_width;
-	if (arg->flags & F_HASH
-		&& (len = ft_unsignedlen_base(v, "01234567")) >= arg->precision)
-		arg->precision = len + 1;
+	if (arg->flags & F_HASH && v != 0 && arg->precision <= len)
+		arg->precision++;
 	if (!(tab = padded_ulltoa_octal(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
@@ -128,11 +133,12 @@ static char		*intmax_integer(t_printf *const data, t_arg *const arg)
 	int			len;
 
 	v = (uintmax_t)arg->value;
-	if (arg->flags & F_ZERO)
+	if ((len = ft_unsignedlen_base(v, "01234567")) > arg->precision)
+		arg->precision = len;
+	if (arg->flags & F_ZERO && arg->min_width > arg->precision)
 		arg->precision = arg->min_width;
-	if (arg->flags & F_HASH
-		&& (len = ft_unsignedlen_base(v, "01234567")) >= arg->precision)
-		arg->precision = len + 1;
+	if (arg->flags & F_HASH && v != 0 && arg->precision <= len)
+		arg->precision++;
 	if (!(tab = padded_ulltoa_octal(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
@@ -149,11 +155,12 @@ static char		*size_integer(t_printf *const data, t_arg *const arg)
 	int			len;
 
 	v = (size_t)arg->value;
-	if (arg->flags & F_ZERO)
+	if ((len = ft_unsignedlen_base(v, "01234567")) > arg->precision)
+		arg->precision = len;
+	if (arg->flags & F_ZERO && arg->min_width > arg->precision)
 		arg->precision = arg->min_width;
-	if (arg->flags & F_HASH
-		&& (len = ft_unsignedlen_base(v, "01234567")) >= arg->precision)
-		arg->precision = len + 1;
+	if (arg->flags & F_HASH && v != 0 && arg->precision <= len)
+		arg->precision++;
 	if (!(tab = padded_ulltoa_octal(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
@@ -170,11 +177,12 @@ static char		*ptrdiff_integer(t_printf *const data, t_arg *const arg)
 	int			len;
 
 	v = (ptrdiff_t)arg->value;
-	if (arg->flags & F_ZERO)
+	if ((len = ft_unsignedlen_base(v, "01234567")) > arg->precision)
+		arg->precision = len;
+	if (arg->flags & F_ZERO && arg->min_width > arg->precision)
 		arg->precision = arg->min_width;
-	if (arg->flags & F_HASH
-		&& (len = ft_unsignedlen_base(v, "01234567")) >= arg->precision)
-		arg->precision = len + 1;
+	if (arg->flags & F_HASH && v != 0 && arg->precision <= len)
+		arg->precision++;
 	if (!(tab = padded_ulltoa_octal(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);

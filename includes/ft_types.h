@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 18:29:02 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/14 15:36:40 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/15 18:14:33 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ struct					s_printf
 	size_t				arg_count;
 	t_ftlist			args;
 	char				*buf;
+	int					err;
 	va_list				va_lst;
 };
 

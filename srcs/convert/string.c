@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 17:45:42 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/14 19:37:04 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/15 18:22:34 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static char		*character_string(t_printf *data, t_arg *arg)
 		v = "(null)";
 	if ((len = ft_strlen(v)) > arg->precision && arg->precision)
 		len = arg->precision;
-	if ((tab_len = arg->min_width) && tab_len < len)
+	if ((tab_len = arg->min_width) < len)
 		tab_len = len;
 	if (!(res = malloc(tab_len + 1)))
 		return (NULL);
