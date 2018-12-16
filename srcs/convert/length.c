@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 18:17:28 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/15 13:10:28 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/16 20:39:49 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,15 @@ static char		*size_integer(t_printf *const data, t_arg *const arg)
 	return (data->buf);
 }
 
+static char		*ssize_integer(t_printf *const data, t_arg *const arg)
+{
+	ssize_t		*v;
+
+	v = (ssize_t *)arg->value;
+	*v = ft_strlen(data->buf);
+	return (data->buf);
+}
+
 static char		*ptrdiff_integer(t_printf *const data, t_arg *const arg)
 {
 	ptrdiff_t	*v;
@@ -94,7 +103,9 @@ static const t_converter	g_funcs[] =
 	{'j', TRUE, intmax_integer},
 	{'l', TRUE, long_integer},
 	{'L', TRUE, long_long_integer},
+	{'q', TRUE, long_long_integer},
 	{'z', TRUE, size_integer},
+	{'Z', TRUE, ssize_integer},
 	{'t', TRUE, ptrdiff_integer},
 	{'\0', FALSE, NULL}
 };

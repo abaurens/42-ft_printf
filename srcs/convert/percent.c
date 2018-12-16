@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 20:54:23 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/14 16:58:54 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/16 20:37:27 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,5 @@ char		*convert_percent(t_printf *data, t_arg *arg)
 	buf = ft_strmcat(data->buf, "%", -1);
 	free(data->buf);
 	data->buf = buf;
-	return (NULL);
+	return (data->buf);
 }

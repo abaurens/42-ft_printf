@@ -6,14 +6,13 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 21:02:59 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/15 17:32:07 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/16 20:39:19 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "ft_printf.h"
 #include "ft_types.h"
-#include "debug.h"
 #include "libft.h"
 
 static char			*integer(t_printf *const data, t_arg *const arg)
@@ -170,6 +169,28 @@ static char		*size_integer(t_printf *const data, t_arg *const arg)
 	return (data->buf = (char *)ft_freturn(data->buf, (long long)tab));
 }
 
+static char		*ssize_integer(t_printf *const data, t_arg *const arg)
+{
+	ssize_t		v;
+	char		*tab;
+	int			len;
+
+	v = (ssize_t)arg->value;
+	if ((len = ft_unsignedlen_base(v, "01234567")) > arg->precision)
+		arg->precision = len;
+	if (arg->flags & F_ZERO && arg->min_width > arg->precision)
+		arg->precision = arg->min_width;
+	if (arg->flags & F_HASH && v != 0 && arg->precision <= len)
+		arg->precision++;
+	if (!(tab = padded_ulltoa_octal(v, arg->precision, arg->min_width,
+		(arg->flags & F_MINS) != 0)))
+		return (NULL);
+	tab = (char *)ft_freturn(tab, (long long)ft_strmcat(data->buf, tab, -1));
+	if (!tab)
+		return (NULL);
+	return (data->buf = (char *)ft_freturn(data->buf, (long long)tab));
+}
+
 static char		*ptrdiff_integer(t_printf *const data, t_arg *const arg)
 {
 	ptrdiff_t	v;
@@ -200,7 +221,9 @@ static const t_converter	g_funcs[] =
 	{'j', TRUE, intmax_integer},
 	{'l', TRUE, long_integer},
 	{'L', TRUE, long_long_integer},
+	{'q', TRUE, long_long_integer},
 	{'z', TRUE, size_integer},
+	{'Z', TRUE, ssize_integer},
 	{'t', TRUE, ptrdiff_integer},
 	{'\0', FALSE, NULL}
 };

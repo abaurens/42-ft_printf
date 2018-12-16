@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 18:29:02 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/15 18:14:33 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/16 16:19:59 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdarg.h>
 # include <stddef.h>
 # include <inttypes.h>
+# include <time.h>
 
 # define ERROR -1
 
@@ -36,6 +37,7 @@
 
 typedef struct s_arg	t_arg;
 typedef struct s_printf	t_printf;
+typedef struct tm		t_tm;
 
 typedef enum			e_bool
 {

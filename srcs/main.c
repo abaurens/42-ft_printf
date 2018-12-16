@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 22:25:56 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/15 18:25:24 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/16 20:22:22 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 #include <errno.h>
 #include <locale.h>
+#include <time.h>
 
 int				main(void)
 {
@@ -28,13 +29,16 @@ int				main(void)
 	int			j;
 
 	setlocale(LC_ALL, "");
-	errno = 0;
 	i = 0;
-	j = printf("   printf : LOL %010.5m\n");
+	j = printf("   printf : LOL %p\n", 10);
 	printf("Returned %d and i = %d\n\n", j, i);
 	fflush(stdout);
-	errno = 0;
-	j = ft_printf("ft_printf : LOL %010.5m\n");
+	j = ft_printf("ft_printf : LOL %k\n", time(NULL));
+	j = ft_printf("ft_printf : LOL %#k\n", time(NULL));
+	j = ft_printf("ft_printf : LOL %#k\n", time(NULL) - 61 * 24 * 3600 - 3600);
+	j = ft_printf("ft_printf : LOL %#k\n", time(NULL) + 60);
+	j = ft_printf("ft_printf : LOL %#k\n", 15728400);
+	j = ft_printf("ft_printf : LOL %#k\n", 1529258700);
 	ft_printf("Returned %d and i = %d\n", j, i);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 21:56:12 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/15 18:15:12 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/16 16:19:53 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <unistd.h>
 #include <errno.h>
 #include "ft_printf.h"
+#include "ft_types.h"
 #include "libft.h"
 
 int				ft_printf(const char *format, ...)
