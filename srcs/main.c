@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 22:25:56 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/16 20:22:22 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/17 16:00:05 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,10 @@ int				main(void)
 
 	setlocale(LC_ALL, "");
 	i = 0;
-	j = printf("   printf : LOL %p\n", 10);
+	j = printf("   printf : LOL %s\n", "Test\rtest");
 	printf("Returned %d and i = %d\n\n", j, i);
 	fflush(stdout);
-	j = ft_printf("ft_printf : LOL %k\n", time(NULL));
-	j = ft_printf("ft_printf : LOL %#k\n", time(NULL));
-	j = ft_printf("ft_printf : LOL %#k\n", time(NULL) - 61 * 24 * 3600 - 3600);
-	j = ft_printf("ft_printf : LOL %#k\n", time(NULL) + 60);
-	j = ft_printf("ft_printf : LOL %#k\n", 15728400);
-	j = ft_printf("ft_printf : LOL %#k\n", 1529258700);
+	j = ft_printf("ft_printf : LOL %#r\n", "Test\rtest\n");
 	ft_printf("Returned %d and i = %d\n", j, i);
 	return (0);
 }

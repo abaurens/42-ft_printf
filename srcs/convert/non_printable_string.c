@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:44:41 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/17 15:59:42 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/17 16:14:49 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static size_t		ft_unprint_strlen(const char *s)
 	return (len);
 }
 
-static char			*ft_unprint_strncpy(char *dest, char *src, size_t n)
+static char			*ft_unprint_strncpy(char *dest, char *src, size_t n, char l)
 {
 	register char	*d;
 	register char	*s;
@@ -40,8 +40,10 @@ static char			*ft_unprint_strncpy(char *dest, char *src, size_t n)
 	s = src;
 	if (n <= 0 || !dest || !src)
 		return (dest);
-	while (*s)
+	while (*s || l)
 	{
+		if (*s == 0)
+			l = 0;
 		*d = *s;
 		if (!ft_isprint(*s))
 		{
@@ -50,7 +52,8 @@ static char			*ft_unprint_strncpy(char *dest, char *src, size_t n)
 			*d++ = "0123456789abcdef"[((*s / 16) % 16)];
 		}
 		d++;
-		s++;
+		if (*s)
+			s++;
 	}
 	return (dest);
 }
@@ -73,9 +76,7 @@ static char			*non_printable(t_printf *data, t_arg *arg)
 	res[tab_len] = 0;
 	ft_memset(res, (arg->flags & F_ZERO) ? '0' : ' ', tab_len);
 	tab_len -= ((arg->flags & F_MINS) ? tab_len : len);
-	ft_unprint_strncpy(res + tab_len, v, len);
-	if (arg->flags & F_HASH)
-		ft_strncpy(res + tab_len + len - 3, "\\00", 3);
+	ft_unprint_strncpy(res + tab_len, v, len, (arg->flags & F_HASH));
 	res = (char *)ft_freturn(res, (long long)ft_strmcat(data->buf, res, -1));
 	if (!res)
 		return (NULL);
