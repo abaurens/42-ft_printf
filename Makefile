@@ -6,7 +6,7 @@
 #    By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 16:23:33 by abaurens          #+#    #+#              #
-#    Updated: 2018/12/17 16:05:00 by abaurens         ###   ########.fr        #
+#    Updated: 2018/12/17 17:01:58 by abaurens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRC         =   debug.c								\
 				ft_error.c							\
 				ft_printf.c							\
 				parse_args.c						\
+				floating_point.c					\
 				parser_functions.c					\
 				argument_manager.c					\
 				convert/padded_lltoa.c				\

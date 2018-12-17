@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 18:29:02 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/16 16:19:59 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/17 21:36:55 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,91 @@ typedef enum			e_bool
 	TRUE,
 	MAYBE
 }						t_bool;
+
+typedef struct			s_float
+{
+	unsigned char		sign;
+	unsigned char		exponent;
+	char				mantisa_sign;
+	uint32_t			mantisa;
+}						t_float;
+
+typedef long double			t_ft_dbl;
+
+typedef union			u_float_conv
+{
+	t_ft_dbl			value;
+	unsigned char		bytes[sizeof(t_ft_dbl)];
+}						t_float_conv;
+
+typedef union			u_ldbl
+{
+	long double			d;
+	struct
+	{
+# if __BYTE_ORDER == __BIG_ENDIAN
+
+		unsigned int	negative:1;
+		unsigned int	exponent:15;
+		unsigned int	empty:16;
+		unsigned int	mantissa0:32;
+		unsigned int	mantissa1:32;
+# else
+#  if __FLOAT_WORD_ORDER == __BIG_ENDIAN
+
+		unsigned int	exponent:15;
+		unsigned int	negative:1;
+		unsigned int	empty:16;
+		unsigned int	mantissa0:32;
+		unsigned int	mantissa1:32;
+#  else
+
+		unsigned int	mantissa1:32;
+		unsigned int	mantissa0:32;
+		unsigned int	exponent:15;
+		unsigned int	negative:1;
+		unsigned int	empty:16;
+#  endif
+# endif
+
+	}					dta;
+	struct
+	{
+# if __BYTE_ORDER == __BIG_ENDIAN
+
+		unsigned int	negative:1;
+		unsigned int	exponent:15;
+		unsigned int	empty:16;
+		unsigned int	one:1;
+		unsigned int	quiet_nan:1;
+		unsigned int	mantissa0:30;
+		unsigned int	mantissa1:32;
+# else
+#  if __FLOAT_WORD_ORDER == __BIG_ENDIAN
+
+		unsigned int	exponent:15;
+		unsigned int	negative:1;
+		unsigned int	empty:16;
+		unsigned int	mantissa0:30;
+		unsigned int	quiet_nan:1;
+		unsigned int	one:1;
+		unsigned int	mantissa1:32;
+#  else
+
+		unsigned int	mantissa1:32;
+		unsigned int	mantissa0:30;
+		unsigned int	quiet_nan:1;
+		unsigned int	one:1;
+		unsigned int	exponent:15;
+		unsigned int	negative:1;
+		unsigned int	empty:16;
+#  endif
+# endif
+
+	}					dta_nan;
+}						t_ldbl;
+
+# define IEEE854_LONG_DOUBLE_BIAS 0x3fff
 
 typedef struct			s_converter
 {
