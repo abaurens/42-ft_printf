@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 21:58:06 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/14 20:10:38 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/17 16:06:16 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,12 @@ char			*padded_ulltoa_hexahup(unsigned long long nb, const int min_d,
 									const int pad, char r);
 char			*padded_ulltoa_hexadown(unsigned long long nb, const int min_d,
 									const int pad, char r);
+
+/*
+**	unicode.c
+*/
+size_t			ft_wstrlen(const wchar_t *wstr);
+size_t			wchartochars(char *dst, wchar_t c);
+char			*ft_wstrtostr(char *dst, const wchar_t *src);
 
 #endif

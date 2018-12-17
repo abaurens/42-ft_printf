@@ -6,7 +6,7 @@
 #    By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 16:23:33 by abaurens          #+#    #+#              #
-#    Updated: 2018/12/14 20:11:39 by abaurens         ###   ########.fr        #
+#    Updated: 2018/12/17 16:05:00 by abaurens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRC         =   debug.c								\
 				\
 				main.c								\
 				core.c								\
+				unicode.c							\
 				ft_error.c							\
 				ft_printf.c							\
 				parse_args.c						\

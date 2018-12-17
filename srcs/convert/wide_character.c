@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:31:35 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/14 20:05:51 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/17 16:03:52 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,70 +15,6 @@
 #include "ft_types.h"
 #include "converter.h"
 #include "libft.h"
-
-static size_t			ft_wstrlen(const wchar_t *wstr)
-{
-	register wchar_t	*s;
-	register size_t		l;
-
-	l = 0;
-	s = (wchar_t *)wstr;
-	while (*s)
-	{
-		l++;
-		if (*s >= 0x80)
-			l++;
-		if (*s >= 0x800)
-			l++;
-		if (*s >= 0x10000)
-			l++;
-		s++;
-	}
-	return (l);
-}
-
-static size_t			wchartochars(char *dst, wchar_t c)
-{
-	char				u[4];
-	size_t				len;
-
-	len = 1;
-	ft_bzero(u, 4);
-	u[3] = (c & 0b01111111);
-	if (c >= 0x80 && len++)
-	{
-		u[3] = 0b10000000 | (c & 0b00111111);
-		u[2] = 0b11000000 | ((c >> 6) & 0b00011111);
-		if (c >= 0x800 && len++)
-		{
-			u[2] = 0b10000000 | ((c >> 6) & 0b00111111);
-			u[1] = 0b11100000 | ((c >> 12) & 0b00001111);
-			if (c >= 0x10000 && len++)
-			{
-				u[1] = 0b10000000 | ((c >> 12) & 0b00111111);
-				u[0] = 0b11110000 | ((c >> 18) & 0b00000111);
-			}
-		}
-	}
-	ft_memcpy(dst, u + (4 - len), len);
-	return (len);
-}
-
-static char				*ft_wstrtostr(char *dst, const wchar_t *src)
-{
-	char				l;
-	char				*d;
-
-	d = (char *)dst;
-	while (*src)
-	{
-		l = wchartochars(d, *src);
-		d += l;
-		src++;
-	}
-	*d = 0;
-	return (dst);
-}
 
 char					*wide_character(t_printf *data, t_arg *arg)
 {
