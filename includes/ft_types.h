@@ -6,19 +6,20 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 18:29:02 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/17 21:36:55 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/18 03:23:07 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_TYPES_H
 # define FT_TYPES_H
 
+# include <time.h>
 # include <wchar.h>
+# include <unistd.h>
 # include <string.h>
 # include <stdarg.h>
 # include <stddef.h>
 # include <inttypes.h>
-# include <time.h>
 
 # define ERROR -1
 
@@ -38,6 +39,7 @@
 typedef struct s_arg	t_arg;
 typedef struct s_printf	t_printf;
 typedef struct tm		t_tm;
+typedef long double			t_ft_dbl;
 
 typedef enum			e_bool
 {
@@ -54,8 +56,6 @@ typedef struct			s_float
 	uint32_t			mantisa;
 }						t_float;
 
-typedef long double			t_ft_dbl;
-
 typedef union			u_float_conv
 {
 	t_ft_dbl			value;
@@ -67,55 +67,14 @@ typedef union			u_ldbl
 	long double			d;
 	struct
 	{
-# if __BYTE_ORDER == __BIG_ENDIAN
-
-		unsigned int	negative:1;
-		unsigned int	exponent:15;
-		unsigned int	empty:16;
-		unsigned int	mantissa0:32;
-		unsigned int	mantissa1:32;
-# else
-#  if __FLOAT_WORD_ORDER == __BIG_ENDIAN
-
-		unsigned int	exponent:15;
-		unsigned int	negative:1;
-		unsigned int	empty:16;
-		unsigned int	mantissa0:32;
-		unsigned int	mantissa1:32;
-#  else
-
 		unsigned int	mantissa1:32;
 		unsigned int	mantissa0:32;
 		unsigned int	exponent:15;
 		unsigned int	negative:1;
 		unsigned int	empty:16;
-#  endif
-# endif
-
 	}					dta;
 	struct
 	{
-# if __BYTE_ORDER == __BIG_ENDIAN
-
-		unsigned int	negative:1;
-		unsigned int	exponent:15;
-		unsigned int	empty:16;
-		unsigned int	one:1;
-		unsigned int	quiet_nan:1;
-		unsigned int	mantissa0:30;
-		unsigned int	mantissa1:32;
-# else
-#  if __FLOAT_WORD_ORDER == __BIG_ENDIAN
-
-		unsigned int	exponent:15;
-		unsigned int	negative:1;
-		unsigned int	empty:16;
-		unsigned int	mantissa0:30;
-		unsigned int	quiet_nan:1;
-		unsigned int	one:1;
-		unsigned int	mantissa1:32;
-#  else
-
 		unsigned int	mantissa1:32;
 		unsigned int	mantissa0:30;
 		unsigned int	quiet_nan:1;
@@ -123,9 +82,6 @@ typedef union			u_ldbl
 		unsigned int	exponent:15;
 		unsigned int	negative:1;
 		unsigned int	empty:16;
-#  endif
-# endif
-
 	}					dta_nan;
 }						t_ldbl;
 

@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 16:39:57 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/17 21:39:40 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/18 03:49:07 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,29 +68,37 @@
 00000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000
 */
 
+/*
+**	m*b^e
+**
+**	m = mantissa
+**	b = RADIX (base)
+**	e = exponent
+**
+**	3*2^1
+*/
+
 t_float				get_float_components(t_ft_dbl d)
 {
 	t_float			ret;
 	t_ldbl			test;
-	/*
 	int				exp_ln;
 	int				man_ln;
 	int				exponent_max;
 	t_float_conv	conv;
 
-	exp_ln = -1;
+	exp_ln = 0;
 	ft_bzero(&conv, sizeof(conv));
 	conv.value = d;
-	man_ln = LDBL_MANT_DIG;
+	man_ln = LDBL_MANT_DIG - (sizeof(d) == sizeof(double));
 	exponent_max = LDBL_MAX_EXP;
 	while (exponent_max != 0 && (++exp_ln || 1))
 		exponent_max /= 2;
-	*/
-	test.d = d;
+	/*test.d = d;
 	ft_bzero(&ret, sizeof(ret));
-	ft_printf("negative : %d\n", test.dta_nan.negative);
-	/*
-	printf("d            = %Lf\n", d);
+	ft_printf("negative : %d\n", test.dta_nan.quiet_nan);*/
+
+	printf("d            = %Lf\n", (long double)d);
 	printf("sizeof(d)    = %lu\n", sizeof(d));
 	printf("bits in d    = %lu\n\n", sizeof(d) * 8);
 	printf("FLT_RADIX    = %d\n", FLT_RADIX);
@@ -100,36 +108,50 @@ t_float				get_float_components(t_ft_dbl d)
 	printf("total used   = %d\n", exp_ln + man_ln + 1);
 
 	exponent_max = sizeof(d) * 8;
-	/*while (exponent_max < (exp_ln + man_ln + 1))
-		exponent_max *= 2;*//*
 	printf("requiered bits : %d\n", exponent_max);
-	printf("\n");
 	exponent_max -= (exp_ln + man_ln + 1);
-	while (exponent_max > 0)
+	printf("\n");
+	printf("S");
+	int i = 0;
+	while (i < exp_ln)
 	{
-		printf("0");
-		exponent_max--;
-		if (!exponent_max)
-			printf("");
+		if (((i + 1) % 8) == 0 && i)
+			printf(" ");
+		printf("E");
+		i++;
 	}
-	printf("1");
-	while (exp_ln)
+	if ((i++ % 8) == 0 && i)
+		printf(" ");
+	int j = 0;
+	while (j < man_ln)
 	{
-		printf("0");
-		exp_ln--;
-	}
-	printf("");
-	while (man_ln)
-	{
-		printf("0");
-		man_ln--;
+		if ((i % 8) == 0 && i)
+			printf(" ");
+		printf("M");
+		i++;
+		j++;
 	}
 	printf("\n");
-	while (man_ln < (int)sizeof(d))
+	i = 0;
+	while (i < (int)sizeof(d) && !conv.bytes[sizeof(d) - (i + 1)])
+		i++;
+	while (i < (int)sizeof(d))
 	{
-		ft_printf("%.8b", conv.bytes[sizeof(d) - (man_ln + 1)]);
-		man_ln++;
+		ft_printf("%.8b ", conv.bytes[sizeof(d) - (i + 1)]);
+		i++;
 	}
-	ft_printf("\n");*/
+	ft_printf("\n");
+
+	unsigned long int	mantissa;
+	unsigned short int	exponent;
+	unsigned char		negative;
+
+	ft_memcpy(&mantissa, conv.bytes, man_ln / 8);
+	exponent = *((unsigned short *)(conv.bytes + (man_ln / 8)));
+	negative = exponent >> exp_ln;
+	exponent &= ~(1 << exp_ln);
+	ft_printf("mantissa : %lb\n", mantissa);
+	ft_printf("exponent : %.15b\n", exponent);
+	ft_printf("negative : %1.1b\n", negative);
 	return (ret);
 }

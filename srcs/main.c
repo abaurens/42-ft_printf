@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 22:25:56 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/17 21:39:48 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/18 03:49:42 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 
 int				main(void)
 {
+	long double	d;
 	/*
 	int			i;
 	int			j;
@@ -40,8 +41,11 @@ int				main(void)
 	j = ft_printf("ft_printf : LOL %#r\n", "Test\rtest\n");
 	ft_printf("Returned %d and i = %d\n", j, i);
 	printf("sizeof(double) = %lu, sizeof(long double) = %lu\n",
-			sizeof(long long int), sizeof(long double));*/
+			sizeof(long long int), sizeof(long double));
 	fflush(stdout);
-	get_float_components(-1.0);
+	*/
+	d = -3.0;
+	get_float_components(d);
+	printf("%Lf\n", d);
 	return (0);
 }
