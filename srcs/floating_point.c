@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 16:39:57 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/18 03:49:07 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/18 04:56:31 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,10 @@
 **	e = exponent
 **
 **	3*2^1
+**
+**	bits in mantissa are equals to :
+**	2^0, 2^-1, 2^-2, 2^-3, 2^-4, ..., 2^-man_ln
+**	 ^-- this value is only in the mantissa part with long double.
 */
 
 t_float				get_float_components(t_ft_dbl d)
@@ -110,37 +114,23 @@ t_float				get_float_components(t_ft_dbl d)
 	exponent_max = sizeof(d) * 8;
 	printf("requiered bits : %d\n", exponent_max);
 	exponent_max -= (exp_ln + man_ln + 1);
-	printf("\n");
-	printf("S");
 	int i = 0;
-	while (i < exp_ln)
-	{
-		if (((i + 1) % 8) == 0 && i)
-			printf(" ");
-		printf("E");
-		i++;
-	}
-	if ((i++ % 8) == 0 && i)
-		printf(" ");
-	int j = 0;
-	while (j < man_ln)
-	{
-		if ((i % 8) == 0 && i)
-			printf(" ");
-		printf("M");
-		i++;
-		j++;
-	}
-	printf("\n");
-	i = 0;
 	while (i < (int)sizeof(d) && !conv.bytes[sizeof(d) - (i + 1)])
 		i++;
-	while (i < (int)sizeof(d))
-	{
-		ft_printf("%.8b ", conv.bytes[sizeof(d) - (i + 1)]);
-		i++;
-	}
+	while (++i <= (int)sizeof(d))
+		ft_printf("%.8b ", conv.bytes[sizeof(d) - i]);
 	ft_printf("\n");
+
+	printf("\n");
+	printf("S ");
+	i = -1;
+	while (++i < exp_ln)
+		printf("E");
+	printf(" ");
+	i = -1;
+	while (++i < man_ln)
+		printf("M");
+	printf("\n");
 
 	unsigned long int	mantissa;
 	unsigned short int	exponent;
@@ -150,8 +140,8 @@ t_float				get_float_components(t_ft_dbl d)
 	exponent = *((unsigned short *)(conv.bytes + (man_ln / 8)));
 	negative = exponent >> exp_ln;
 	exponent &= ~(1 << exp_ln);
-	ft_printf("mantissa : %lb\n", mantissa);
-	ft_printf("exponent : %.15b\n", exponent);
-	ft_printf("negative : %1.1b\n", negative);
+	ft_printf("%.1b %.15hb %.*lb\n", negative, exponent, man_ln, mantissa);
+	ft_printf("  %.15lb\n", LDBL_MAX_EXP - 1);
+	printf("%Lf\n", d);
 	return (ret);
 }

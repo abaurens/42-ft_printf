@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 22:25:56 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/18 03:49:42 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/18 04:35:58 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ int				main(void)
 			sizeof(long long int), sizeof(long double));
 	fflush(stdout);
 	*/
-	d = -3.0;
+	d = 1.5;
 	get_float_components(d);
-	printf("%Lf\n", d);
 	return (0);
 }
