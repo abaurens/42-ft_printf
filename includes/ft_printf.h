@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 21:58:06 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/17 20:55:20 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/18 20:32:24 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,10 @@ char			*ft_wstrtostr(char *dst, const wchar_t *src);
 **	floating_point.c
 */
 t_float				get_float_components(t_ft_dbl d);
+
+/*
+**	big_num.c
+*/
+char		*bignum_add_dot(const char *n1, const char *n2);
 
 #endif

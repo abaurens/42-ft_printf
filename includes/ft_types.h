@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 18:29:02 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/18 03:23:07 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/18 14:12:55 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ typedef struct			s_float
 {
 	unsigned char		sign;
 	unsigned char		exponent;
-	char				mantisa_sign;
 	uint32_t			mantisa;
 }						t_float;
 
