@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 22:25:56 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/18 22:40:44 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/19 20:15:22 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@
 int				main(void)
 {
 	long double	d;
+
 	/*
 	int			i;
 	int			j;
-
 	setlocale(LC_ALL, "");
 	i = 0;
 	j = printf("   printf : LOL %s\n", "Test\rtest");
@@ -44,8 +44,8 @@ int				main(void)
 			sizeof(long long int), sizeof(long double));
 	fflush(stdout);
 	*/
-	d = -1254628731.185165968765;
-	get_float_components(d);
-	printf("%Lf\n", d);
+	d = -LDBL_MAX;
+	print_float(d);
+	/*printf("%Lf\n", d);*/
 	return (0);
 }

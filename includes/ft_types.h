@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 18:29:02 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/18 14:12:55 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/19 21:18:12 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ typedef enum			e_bool
 typedef struct			s_float
 {
 	unsigned char		sign;
-	unsigned char		exponent;
-	uint32_t			mantisa;
+	int					exponent;
+	unsigned long int	mantissa;
 }						t_float;
 
 typedef union			u_float_conv
@@ -60,31 +60,6 @@ typedef union			u_float_conv
 	t_ft_dbl			value;
 	unsigned char		bytes[sizeof(t_ft_dbl)];
 }						t_float_conv;
-
-typedef union			u_ldbl
-{
-	long double			d;
-	struct
-	{
-		unsigned int	mantissa1:32;
-		unsigned int	mantissa0:32;
-		unsigned int	exponent:15;
-		unsigned int	negative:1;
-		unsigned int	empty:16;
-	}					dta;
-	struct
-	{
-		unsigned int	mantissa1:32;
-		unsigned int	mantissa0:30;
-		unsigned int	quiet_nan:1;
-		unsigned int	one:1;
-		unsigned int	exponent:15;
-		unsigned int	negative:1;
-		unsigned int	empty:16;
-	}					dta_nan;
-}						t_ldbl;
-
-# define IEEE854_LONG_DOUBLE_BIAS 0x3fff
 
 typedef struct			s_converter
 {
