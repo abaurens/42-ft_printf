@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 21:58:06 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/18 20:32:24 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/21 16:29:51 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdio.h>
 # include "ft_types.h"
+# include "ft_bigfloat.h"
 
 # define LEN_MD			"qjzZtlLh"
 # define LEN_MD_CHRS	" qjzZtlLhH"
@@ -78,10 +79,11 @@ char			*ft_wstrtostr(char *dst, const wchar_t *src);
 **	floating_point.c
 */
 t_float				get_float_components(t_ft_dbl d);
+void				print_float(t_ft_dbl d);
 
 /*
 **	big_num.c
 */
-char		*bignum_add_dot(const char *n1, const char *n2);
-
+char				*bignum_add_dot(const char *n1, const char *n2);
+t_bflt				*two_pow(int pow);
 #endif

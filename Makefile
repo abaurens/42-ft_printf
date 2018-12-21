@@ -6,7 +6,7 @@
 #    By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 16:23:33 by abaurens          #+#    #+#              #
-#    Updated: 2018/12/18 20:32:43 by abaurens         ###   ########.fr        #
+#    Updated: 2018/12/21 16:11:10 by abaurens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ RM          =   rm -rf
 CP          =   cp -rf
 LINKER      =   gcc
 NAME        =   ft_printf
-LIB         =   libft
+LIBFT		=	./libft/libft.a
+LIBBNUM		=	./libbignum/libbnum.a
 SRCD        =   srcs
 OBJD        =   objs
 
@@ -61,21 +62,21 @@ SRC         =   debug.c								\
 				convert/wide_character_string.c
 
 CFLAGS      +=  -I./includes -g -W -Wall -Wextra -ansi #-Werror #-pedantic
-LIB_DIR     :=  $(shell find . -type d -name '$(LIB)')
 
 OBJ         :=  $(addprefix $(OBJD)/,$(SRC:.c=.o))
 SRC         :=  $(addprefix $(SRCD)/,$(SRC))
 
-ifneq ($(LIB_DIR),)
-CFLAGS      +=  -I$(LIB_DIR)/includes
-LDFLAGS     +=  -L$(LIB_DIR) -lft
-endif
+CFLAGS      +=  -I$(dir $(LIBFT))includes -I$(dir $(LIBBNUM))includes
+LDFLAGS     +=  -L$(dir $(LIBFT)) -lft -L$(dir $(LIBBNUM)) -lbnum
 
-$(NAME):    $(OBJ)
-ifneq ($(LIB_DIR),)
-	@make -C $(LIB_DIR)
-endif
+$(NAME):    $(LIBFT) $(LIBBNUM) $(OBJ)
 	$(LINKER) -o $(NAME) $(OBJ) $(LDFLAGS)
+
+$(LIBFT):
+	@make -C $(dir $(LIBFT))
+
+$(LIBBNUM):
+	@make -C $(dir $(LIBBNUM))
 
 objs/%.o:   $(SRCD)/%.c
 	@mkdir -p $(dir $@)
@@ -84,9 +85,8 @@ objs/%.o:   $(SRCD)/%.c
 all:    $(NAME)
 
 cleanlib:
-ifneq ($(LIB_DIR),)
-	@make -C $(LIB_DIR) clean
-endif
+	@make -C $(dir $(LIBFT)) clean
+	@make -C $(dir $(LIBBNUM)) clean
 
 cleand:
 	$(RM) $(OBJD)
@@ -94,9 +94,8 @@ cleand:
 clean:	cleanlib cleand
 
 fcleanlib:
-ifneq ($(LIB_DIR),)
-	@make -C $(LIB_DIR) fclean
-endif
+	@make -C $(dir $(LIBFT)) fclean
+	@make -C $(dir $(LIBBNUM)) fclean
 
 fcleand:	cleand
 	$(RM) $(NAME)
