@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 16:39:57 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/21 18:50:09 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/21 20:44:24 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static const char				*g_man_vals[] =
 	NULL
 };
 
-t_float				get_float_components(t_ft_dbl d)
+static t_float		get_float_components(long double d)
 {
 	t_float			ret;
 	t_float_conv	conv;
@@ -108,50 +108,50 @@ t_float				get_float_components(t_ft_dbl d)
 	return (ret);
 }
 
-t_bflt				*get_mantissa(t_float *f)
+static t_bflt		*get_mantissa(t_float *f)
 {
 	int				i;
-	t_bflt			exp;
+	t_bflt			expo;
 	t_bflt			*tmp;
 	t_bflt			*mant;
 
 	i = 0;
 	mant = new_bflt("0");
-	ft_bzero(&exp, sizeof(t_bflt));
+	ft_bzero(&expo, sizeof(t_bflt));
 	while (mant && i < LDBL_MANT_DIG)
 	{
 		if (!((f->mantissa >> (LDBL_MANT_DIG - ++i)) & 0b1))
 			continue ;
 		tmp = mant;
-		if (set_bflt(&exp, g_man_vals[i - 1]))
+		if (set_bflt(&expo, g_man_vals[i - 1]))
 		{
-			mant = add_bflt(&exp, mant);
+			mant = add_bflt(&expo, mant);
 			del_bflt(tmp);
 		}
 	}
+	unset_bflt(&expo);
 	return (mant);
 }
 
-char				*print_float(t_ft_dbl d)
+char				*ft_ldtoa(long double d)
 {
 	t_float			fl;
 	t_bflt			*tmp;
-	t_bflt			*exp;
+	t_bflt			*expo;
 	t_bflt			*mant;
 	char			*res;
 
 	res = NULL;
 	fl = get_float_components(d);
 	mant = get_mantissa(&fl);
-	exp = two_pow(fl.exponent);
-	mant = NULL;
-	tmp = exp;
-	if (exp && mant)
-		exp = mul_bflt(exp, mant);
+	expo = two_pow(fl.exponent);
+	tmp = expo;
+	if ((expo && mant) || (expo = NULL))
+		expo = mul_bflt(expo, mant);
 	del_bflt(mant);
 	del_bflt(tmp);
-	if (exp)
-		res = bflt_tostr(exp);
-	del_bflt(exp);
+	if (expo)
+		res = bflt_tostr(expo);
+	del_bflt(expo);
 	return (res);
 }

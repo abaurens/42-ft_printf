@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 18:29:02 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/19 21:18:12 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/21 20:42:50 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@
 typedef struct s_arg	t_arg;
 typedef struct s_printf	t_printf;
 typedef struct tm		t_tm;
-typedef long double			t_ft_dbl;
 
 typedef enum			e_bool
 {
@@ -57,8 +56,8 @@ typedef struct			s_float
 
 typedef union			u_float_conv
 {
-	t_ft_dbl			value;
-	unsigned char		bytes[sizeof(t_ft_dbl)];
+	long double			value;
+	unsigned char		bytes[sizeof(long double)];
 }						t_float_conv;
 
 typedef struct			s_converter

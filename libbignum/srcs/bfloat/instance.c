@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 06:20:27 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/21 19:04:16 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/21 20:21:02 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,8 @@ void		del_bflt(t_bflt const *const num)
 {
 	if (num)
 	{
-		if (num->entl)
-			free(num->ent);
-		if (num->decl)
-			free(num->dec);
+		free(num->ent);
+		free(num->dec);
 	}
 	free((void *)num);
 }
