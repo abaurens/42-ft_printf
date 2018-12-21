@@ -6,7 +6,7 @@
 #    By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 16:23:33 by abaurens          #+#    #+#              #
-#    Updated: 2018/12/21 16:11:10 by abaurens         ###   ########.fr        #
+#    Updated: 2018/12/21 18:58:57 by abaurens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,8 +66,8 @@ CFLAGS      +=  -I./includes -g -W -Wall -Wextra -ansi #-Werror #-pedantic
 OBJ         :=  $(addprefix $(OBJD)/,$(SRC:.c=.o))
 SRC         :=  $(addprefix $(SRCD)/,$(SRC))
 
-CFLAGS      +=  -I$(dir $(LIBFT))includes -I$(dir $(LIBBNUM))includes
-LDFLAGS     +=  -L$(dir $(LIBFT)) -lft -L$(dir $(LIBBNUM)) -lbnum
+CFLAGS      +=  -I$(dir $(LIBBNUM))includes -I$(dir $(LIBFT))includes
+LDFLAGS     +=  -L$(dir $(LIBBNUM)) -lbnum -L$(dir $(LIBFT)) -lft
 
 $(NAME):    $(LIBFT) $(LIBBNUM) $(OBJ)
 	$(LINKER) -o $(NAME) $(OBJ) $(LDFLAGS)
