@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 07:28:35 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/21 17:14:24 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/21 19:03:53 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ char		*bflt_tostr(t_bflt const *const num)
 	char	*res;
 
 	i = 0;
+	if (!num)
+		return (NULL);
 	if (!(res = malloc(num->len + 1)))
 		return (NULL);
 	res[num->len] = 0;
