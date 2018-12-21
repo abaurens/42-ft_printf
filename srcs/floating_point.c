@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 16:39:57 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/21 17:28:08 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/21 18:50:09 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,53 +17,6 @@
 #include "ft_types.h"
 #include "libft.h"
 
-void					print_double_binary(long double d)
-{
-	int					i;
-	int					exp_ln;
-	int					man_ln;
-	int					exponent_max;
-	t_float_conv		conv;
-
-	exp_ln = 0;
-	ft_bzero(&conv, sizeof(conv));
-	conv.value = d;
-	man_ln = LDBL_MANT_DIG - (sizeof(d) == sizeof(double));
-	exponent_max = LDBL_MAX_EXP;
-	while (exponent_max != 0 && (++exp_ln || 1))
-		exponent_max /= 2;
-	printf("d            = %Lf\n", (long double)d);
-	printf("sizeof(d)    = %lu\n", sizeof(d));
-	printf("bits in d    = %lu\n\n", sizeof(d) * 8);
-	printf("FLT_RADIX    = %d\n", FLT_RADIX);
-	printf("DBL_MAX_EXP  = %d\n", LDBL_MAX_EXP);
-	printf("DBL_MANT_DIG = %d\n", LDBL_MANT_DIG);
-	printf("exponent len = %d\n", exp_ln);
-	printf("total used   = %d\n", exp_ln + man_ln + 1);
-	exponent_max = sizeof(d) * 8;
-	printf("requiered bits : %d\n", exponent_max);
-	exponent_max -= (exp_ln + man_ln + 1);
-	i = 0;
-	while (i < (int)sizeof(d) && !conv.bytes[sizeof(d) - (i + 1)])
-		i++;
-	while (++i <= (int)sizeof(d))
-		ft_printf("%.8b ", conv.bytes[sizeof(d) - i]);
-	ft_printf("\n");
-	printf("\n");
-	printf("S ");
-	i = -1;
-	while (++i < exp_ln)
-		printf("E");
-	printf(" ");
-	i = -1;
-	while (++i < man_ln)
-		printf("M");
-	printf("\n");
-}
-/*
-**	1111111111111111111111111
-**	1000101101000100101100110010101101010111100000001011100000000000
-*/
 static const char				*g_man_vals[] =
 {
 	"1.0",
@@ -133,12 +86,12 @@ static const char				*g_man_vals[] =
 	NULL
 };
 
-t_float					get_float_components(t_ft_dbl d)
+t_float				get_float_components(t_ft_dbl d)
 {
-	t_float				ret;
-	t_float_conv		conv;
-	int					exp_ln;
-	int					man_ln;
+	t_float			ret;
+	t_float_conv	conv;
+	int				exp_ln;
+	int				man_ln;
 
 	exp_ln = 0;
 	ft_bzero(&conv, sizeof(conv));
@@ -151,46 +104,54 @@ t_float					get_float_components(t_ft_dbl d)
 	ret.exponent = *((unsigned short *)(conv.bytes + (man_ln / 8)));
 	ret.sign = ret.exponent >> exp_ln;
 	ret.exponent &= ~(1 << exp_ln);
-	ft_printf("%.1b %.15b %.*lb\n", ret.sign, ret.exponent,
-									man_ln, ret.mantissa);
 	ret.exponent -= (LDBL_MAX_EXP - 1);
 	return (ret);
 }
 
-void					print_float(t_ft_dbl d)
+t_bflt				*get_mantissa(t_float *f)
 {
-	int					i;
-	t_float				fl;
-	t_bflt				*tmp;
-	t_bflt				*exp;
-	t_bflt				*mantissa;
+	int				i;
+	t_bflt			exp;
+	t_bflt			*tmp;
+	t_bflt			*mant;
 
 	i = 0;
-	fl = get_float_components(d);
-	exp = new_bflt("1.1");
-	mantissa = new_bflt("0");
-	while (i < LDBL_MANT_DIG)
+	mant = new_bflt("0");
+	ft_bzero(&exp, sizeof(t_bflt));
+	while (mant && i < LDBL_MANT_DIG)
 	{
-		if (!((fl.mantissa >> (LDBL_MANT_DIG - ++i)) & 0b1))
+		if (!((f->mantissa >> (LDBL_MANT_DIG - ++i)) & 0b1))
 			continue ;
-		tmp = mantissa;
-		unset_bflt(exp);
-		set_bflt(exp, g_man_vals[i - 1]);
-		mantissa = add_bflt(exp, mantissa);
-		del_bflt(tmp);
+		tmp = mant;
+		if (set_bflt(&exp, g_man_vals[i - 1]))
+		{
+			mant = add_bflt(&exp, mant);
+			del_bflt(tmp);
+		}
 	}
-	del_bflt(exp);
-	/*ft_putstr("2^");
-	ft_putnbr(fl.exponent);
-	ft_putstr(" * ");*/
-	/*print_bflt(mantissa);*/
-	printf("%s * %d^%d\n", bflt_tostr(mantissa), FLT_RADIX, fl.exponent);
-	if (!(exp = two_pow(fl.exponent)))
-		return ;
-	/*print_bflt(exp);*/
+	return (mant);
+}
+
+char				*print_float(t_ft_dbl d)
+{
+	t_float			fl;
+	t_bflt			*tmp;
+	t_bflt			*exp;
+	t_bflt			*mant;
+	char			*res;
+
+	res = NULL;
+	fl = get_float_components(d);
+	mant = get_mantissa(&fl);
+	exp = two_pow(fl.exponent);
+	mant = NULL;
 	tmp = exp;
-	exp = mul_bflt(exp, mantissa);
+	if (exp && mant)
+		exp = mul_bflt(exp, mant);
+	del_bflt(mant);
 	del_bflt(tmp);
-	print_bflt(exp);
+	if (exp)
+		res = bflt_tostr(exp);
 	del_bflt(exp);
+	return (res);
 }
