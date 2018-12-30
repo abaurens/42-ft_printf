@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 18:29:02 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/30 21:59:27 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/30 22:21:58 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ struct					s_arg
 {
 	t_converter			conv;
 	long long			value;
+	long double			ldbl;
 	size_t				precision_idx;
 	size_t				flag_idx;
 	size_t				min_width_idx;

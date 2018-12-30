@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 18:19:18 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/30 22:04:22 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/30 22:27:20 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@
 
 static char		*std_double(t_printf *const data, t_arg *const arg)
 {
-	double		v;
-
-	ft_memcpy(&v, &arg->value, sizeof(v));
-	printf("%f", v);
-	fflush(stdout);
 	return (NULL);
 }
 
 static char		*long_double(t_printf *const data, t_arg *const arg)
 {
+	long double	v;
+
+	v = (long double)arg->ldbl;
+	printf("%Lf", v);
+	fflush(stdout);
 	return (NULL);
 }
 
@@ -100,7 +100,7 @@ char			*convert_double_floating(t_printf *data, t_arg *arg)
 
 	min = arg->min_width;
 	prec = arg->precision;
-	i = get_arg_f(data, arg->flag_idx, &arg->value);
+	i = get_arg_f(data, arg->flag_idx, &arg->ldbl);
 	i = (i || (arg->min_width_idx && get_arg(data, arg->min_width_idx, &min)));
 	if (i || (arg->precision_idx && get_arg(data, arg->precision_idx, &prec)))
 		return (NULL);
