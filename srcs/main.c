@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 22:25:56 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/21 20:45:01 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/30 21:54:05 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,7 @@
 
 int				main(void)
 {
-	long double	d;
-	char		*r;
-
+	double	d;
 	/*
 	int			i;
 	int			j;
@@ -45,10 +43,8 @@ int				main(void)
 			sizeof(long long int), sizeof(long double));
 	fflush(stdout);
 	*/
-	d = LDBL_MAX;
-	if ((r = ft_ldtoa(d)))
-		printf("%s\n", r);
-	free(r);
-	/*printf("\n%.0Lf\n", d);*/
+	d = 1;
+	printf("\n%f\n", d);
+	ft_printf("\n%f\n", d);
 	return (0);
 }

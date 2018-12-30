@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 18:29:02 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/21 20:42:50 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/30 21:59:27 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ struct					s_arg
 typedef struct			s_lst_elem
 {
 	long long int		value;
+	long long int		ldbl;
 	struct s_lst_elem	*next;
 	struct s_lst_elem	*prev;
 }						t_lst_elem;

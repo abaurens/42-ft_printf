@@ -6,7 +6,7 @@
 #    By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 16:23:33 by abaurens          #+#    #+#              #
-#    Updated: 2018/12/21 18:58:57 by abaurens         ###   ########.fr        #
+#    Updated: 2018/12/30 22:15:23 by abaurens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,7 @@ SRC         =   debug.c								\
 				convert/wide_character.c			\
 				convert/wide_character_string.c
 
-CFLAGS      +=  -I./includes -g -W -Wall -Wextra -ansi #-Werror #-pedantic
+CFLAGS      +=  -I./includes -g -W -Wall -Wextra #-ansi #-Werror #-pedantic
 
 OBJ         :=  $(addprefix $(OBJD)/,$(SRC:.c=.o))
 SRC         :=  $(addprefix $(SRCD)/,$(SRC))
