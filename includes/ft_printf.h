@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 21:58:06 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/30 21:52:23 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/31 13:04:00 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ int				ft_asprintf(char **strp, const char *fmt, ...);
 **	argument_manager.c
 */
 void			clear_list(t_ftlist *lst);
-int				get_arg(t_printf *data, size_t idx, void *val);
+t_lst_elem		*get_arg_f(t_printf *data, const size_t idx);
+int				get_arg(t_printf *data, size_t idx, long long int *val);
 
 /*
 **	printf_lltoa.c

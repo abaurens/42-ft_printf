@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 18:29:02 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/30 22:21:58 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/31 12:37:22 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,9 @@ typedef struct			s_converter
 struct					s_arg
 {
 	t_converter			conv;
-	long long			value;
+	long long int		value;
 	long double			ldbl;
+	double				dbl;
 	size_t				precision_idx;
 	size_t				flag_idx;
 	size_t				min_width_idx;
@@ -84,7 +85,8 @@ struct					s_arg
 typedef struct			s_lst_elem
 {
 	long long int		value;
-	long long int		ldbl;
+	long double			ldbl;
+	double				dbl;
 	struct s_lst_elem	*next;
 	struct s_lst_elem	*prev;
 }						t_lst_elem;

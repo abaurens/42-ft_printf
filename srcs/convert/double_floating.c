@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 18:19:18 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/30 22:27:20 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/02 00:15:25 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,90 @@
 #include "ft_types.h"
 #include "libft.h"
 
-static char		*std_double(t_printf *const data, t_arg *const arg)
+static char		*alloc_res(size_t dtl, t_arg *arg, size_t add)
 {
-	return (NULL);
+	size_t		i;
+	size_t		l;
+	char		*res;
+
+	l = 0;
+	i = 0;
+	l = dtl;
+	if (arg->precision && ++l)
+		while (i++ < (size_t)arg->precision)
+			l++;
+	i = 0;
+	if (!arg->precision && (arg->flags & F_HASH))
+		i++;
+	if (!(res = ft_memalloc(l + i + add + 1)))
+		return (NULL);
+	i = 0;
+	while (i++ < l + add)
+		res[i - 1] = arg->flags & F_ZERO ? '0' : ' ';
+	return (res);
+}
+
+static char		*build_res(t_arg *arg)
+{
+	size_t		i;
+	size_t		add;
+	int			entl;
+	char		*val;
+	char		*rs;
+
+	add = 0;
+	if (!(val = ft_ldtoa(arg->ldbl)))
+		return (NULL);
+	i = ft_idxof(0, val);
+	entl = ft_idxof('.', val);
+	while (--i > (size_t)entl)
+		if (val[i - 1] != '.' && val[i] >= '5' && (val[i] = '0'))
+			val[i - 1]++;
+	i = (arg->ldbl >= 0.0 && (arg->flags & (F_SPAC | F_PLUS)));
+	if ((entl + (int)i + arg->precision + (!!arg->precision)) < arg->min_width)
+		add = arg->min_width - (entl + i + arg->precision + (!!arg->precision));
+	if (!(rs = alloc_res(entl + i, arg, add)) || (arg->precision && !++entl))
+		return (NULL);
+	add *= !(arg->flags & F_MINS);
+	ft_memcpy(rs + add + i, val, ft_min(ft_strlen(val), entl + arg->precision));
+	free(val);
+	if (i)
+		rs[add] = (arg->flags & F_PLUS) ? '+' : ' ';
+	return (rs);
 }
 
 static char		*long_double(t_printf *const data, t_arg *const arg)
 {
-	long double	v;
+	size_t		i;
+	int			j;
+	char		*res;
 
-	v = (long double)arg->ldbl;
-	printf("%Lf", v);
-	fflush(stdout);
-	return (NULL);
+	j = 0;
+	res = build_res(arg);
+	if ((arg->flags & F_ZERO) && arg->ldbl < 0.0 && (i = ft_idxof('-', res)))
+	{
+		res[i] = res[0];
+		res[0] = '-';
+	}
+	i = ft_idxof('.', res);
+	while (!(arg->flags & F_ZERO) && j < arg->precision && res[i + ++j])
+		if (res[i + j] == ' ')
+			res[i + j] = '0';
+	j = 0;
+	while (res[j] >= '0' && res[j] <= '9')
+		j++;
+	if (arg->flags & F_HASH)
+		res[j] = '.';
+	res = (char *)ft_freturn(res, (long long)ft_strmcat(data->buf, res, -1));
+	if (!res)
+		return (NULL);
+	return (data->buf = (char *)ft_freturn(data->buf, (long long)res));
+}
+
+static char		*std_double(t_printf *const data, t_arg *const arg)
+{
+	arg->ldbl = (long double)arg->dbl;
+	return (long_double(data, arg));
 }
 
 static const t_converter	g_funcs[] =
@@ -40,74 +111,25 @@ static const t_converter	g_funcs[] =
 	{'\0', FALSE, NULL}
 };
 
-static int		add_arg_f(t_ftlist *lst, long long int value, long double ldbl)
-{
-	t_lst_elem	*new;
-
-	if (!lst || !(new = malloc(sizeof(t_lst_elem))))
-		return (1);
-	new->value = value;
-	new->ldbl = ldbl;
-	new->next = NULL;
-	new->prev = lst->tail;
-	if (lst->tail)
-		lst->tail->next = new;
-	lst->tail = new;
-	if (!lst->head)
-		lst->head = new;
-	lst->size++;
-	return (0);
-}
-
-static int		get_at_f(t_ftlist *lst, const size_t idx, long double *val)
-{
-	size_t		i;
-	t_lst_elem	*cur;
-
-	i = 0;
-	cur = lst->head;
-	if (lst->size < idx)
-		return (1);
-	while (cur && ++i < idx)
-		cur = cur->next;
-	if (cur)
-		*val = cur->ldbl;
-	return (0);
-}
-
-static int		get_arg_f(t_printf *data, const size_t idx, void *val)
-{
-	va_list		cpy;
-
-	va_copy(cpy, data->va_lst);
-	if (idx == 0 || !data)
-		return (0);
-	while (data->args.size < idx)
-	{
-		if (add_arg_f(&data->args, va_arg(data->va_lst, long long int),
-			va_arg(cpy, long double)))
-			return (1);
-	}
-	va_end(cpy);
-	return (get_at_f(&data->args, idx, val));
-}
-
 char			*convert_double_floating(t_printf *data, t_arg *arg)
 {
 	int			i;
-	long long	prec;
 	long long	min;
+	long long	prec;
+	t_lst_elem	*tmp;
 
 	min = arg->min_width;
 	prec = arg->precision;
-	i = get_arg_f(data, arg->flag_idx, &arg->ldbl);
+	i = ((tmp = get_arg_f(data, arg->flag_idx)) == NULL);
 	i = (i || (arg->min_width_idx && get_arg(data, arg->min_width_idx, &min)));
 	if (i || (arg->precision_idx && get_arg(data, arg->precision_idx, &prec)))
 		return (NULL);
 	i = 0;
+	arg->dbl = tmp->dbl;
+	arg->ldbl = tmp->ldbl;
 	arg->min_width = (((int)min) < 0 ? 0 : (int)min);
-	if ((arg->precision = (((int)prec) < 0 ? 0 : (int)prec))
-		|| (arg->flags & F_MINS))
+	arg->precision = (((int)prec) < 0 ? 6 : (int)prec);
+	if (arg->flags & F_MINS)
 		arg->flags &= ~F_ZERO;
 	while (g_funcs[i].c && g_funcs[i].c != LEN_MD_CHRS[arg->length_modifier])
 		i++;

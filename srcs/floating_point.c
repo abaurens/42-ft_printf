@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 16:39:57 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/21 20:44:24 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/31 13:47:14 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,9 +127,9 @@ static t_bflt		*get_mantissa(t_float *f)
 		{
 			mant = add_bflt(&expo, mant);
 			del_bflt(tmp);
+			unset_bflt(&expo);
 		}
 	}
-	unset_bflt(&expo);
 	return (mant);
 }
 
@@ -153,5 +153,7 @@ char				*ft_ldtoa(long double d)
 	if (expo)
 		res = bflt_tostr(expo);
 	del_bflt(expo);
+	if (fl.sign)
+		res = (char *)ft_freturn(res, ft_strmcat("-", res, -1));
 	return (res);
 }

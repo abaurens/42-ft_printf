@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 22:25:56 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/30 22:26:40 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/02 00:15:49 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,10 @@
 int				main(void)
 {
 	double	d;
-	/*
-	int			i;
-	int			j;
-	setlocale(LC_ALL, "");
-	i = 0;
-	j = printf("   printf : LOL %s\n", "Test\rtest");
-	printf("Returned %d and i = %d\n\n", j, i);
+
+	d = 10;
+	printf("R : %.f\n", d);
 	fflush(stdout);
-	j = ft_printf("ft_printf : LOL %#r\n", "Test\rtest\n");
-	ft_printf("Returned %d and i = %d\n", j, i);
-	printf("sizeof(double) = %lu, sizeof(long double) = %lu\n",
-			sizeof(long long int), sizeof(long double));
-	fflush(stdout);
-	*/
-	d = 1;
-	printf("\n%Lf\n", d);
-	ft_printf("\n%Lf\n", d);
+	ft_printf("F : %.f\n", d);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 15:57:31 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/13 16:41:44 by abaurens         ###   ########.fr       */
+/*   Updated: 2018/12/31 13:19:39 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,9 @@ static int		get_precision(const char *format, t_printf *data, t_arg *arg)
 
 	i = 0;
 	f = format;
+	arg->precision = -1;
 	arg->precision_idx = 0;
-	if ((arg->precision = 0) || *format++ != '.')
+	if (*format++ != '.')
 		return (0);
 	if (*format == '*')
 	{

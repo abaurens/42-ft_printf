@@ -6,7 +6,7 @@
 #    By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 16:23:33 by abaurens          #+#    #+#              #
-#    Updated: 2018/12/30 22:15:23 by abaurens         ###   ########.fr        #
+#    Updated: 2018/12/31 13:08:49 by abaurens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRC         =   debug.c								\
 				ft_error.c							\
 				ft_printf.c							\
 				parse_args.c						\
+				list_manager.c						\
 				floating_point.c					\
 				parser_functions.c					\
 				argument_manager.c					\
