@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 16:39:57 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/31 13:47:14 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/02 20:28:57 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,6 @@ char				*ft_ldtoa(long double d)
 		res = bflt_tostr(expo);
 	del_bflt(expo);
 	if (fl.sign)
-		res = (char *)ft_freturn(res, ft_strmcat("-", res, -1));
+		res = (char *)ft_freturn(res, (long)ft_strmcat("-", res, -1));
 	return (res);
 }
