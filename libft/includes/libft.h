@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 16:09:37 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/13 18:49:01 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/02 22:17:06 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ char				ft_isbase(const char *base);
 char				ft_contains(char c, const char *str);
 
 char				*ft_itoa(int n);
+char				*ft_strupcase(char *str);
 char				*ft_lltoa(long long int nb);
 char				*ft_lltoa_base(long long int nb, const char *base);
 char				*ft_strnew(size_t size);

@@ -6,7 +6,7 @@
 #    By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 16:08:06 by abaurens          #+#    #+#              #
-#    Updated: 2018/12/13 18:04:26 by abaurens         ###   ########.fr        #
+#    Updated: 2019/01/02 22:17:36 by abaurens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,6 +66,7 @@ SRC		=		ft_absolute.c			\
 				ft_numlen_base.c		\
 				ft_unsignedlen.c		\
 				ft_unsignedlen_base.c	\
+				ft_strupcase.c			\
 				ft_putnbr_base.c		\
 				ft_putnbr_base_fd.c		\
 				ft_isbase.c				\

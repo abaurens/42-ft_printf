@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   ft_strupcase.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/11 15:58:22 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/02 22:30:23 by abaurens         ###   ########.fr       */
+/*   Created: 2019/01/02 22:12:22 by abaurens          #+#    #+#             */
+/*   Updated: 2019/01/02 22:15:51 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
-
-# include "ft_types.h"
-# include "ft_printf.h"
-
-extern int	(*const g_funcs[])(const char *, t_printf *, t_arg *);
-
-static int const g_flags_masks[] =
+char				*ft_strupcase(char *str)
 {
-	F_MINS,
-	F_ZERO,
-	F_PLUS,
-	F_SPAC,
-	F_HASH,
-	F_COLO
-};
+	register char	*s;
 
-int			get_chain_format(const char *format, t_printf *data, size_t *v);
-
-#endif
+	s = str;
+	while (s && *s)
+	{
+		if (*s >= 'a' && *s <= 'z')
+			*s -= ('a' - 'A');
+		s++;
+	}
+	return (str);
+}

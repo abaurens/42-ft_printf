@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 18:19:18 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/02 00:15:25 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/02 22:31:41 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,10 @@ static char		*build_res(t_arg *arg)
 	char		*val;
 	char		*rs;
 
-	add = 0;
 	if (!(val = ft_ldtoa(arg->ldbl)))
 		return (NULL);
+	if ((add = 0) || arg->conv.c == 'F')
+		ft_strupcase(val);
 	i = ft_idxof(0, val);
 	entl = ft_idxof('.', val);
 	while (--i > (size_t)entl)
@@ -63,8 +64,7 @@ static char		*build_res(t_arg *arg)
 		return (NULL);
 	add *= !(arg->flags & F_MINS);
 	ft_memcpy(rs + add + i, val, ft_min(ft_strlen(val), entl + arg->precision));
-	free(val);
-	if (i)
+	if (ft_freturn(val, i))
 		rs[add] = (arg->flags & F_PLUS) ? '+' : ' ';
 	return (rs);
 }
@@ -75,7 +75,8 @@ static char		*long_double(t_printf *const data, t_arg *const arg)
 	int			j;
 	char		*res;
 
-	j = 0;
+	j = arg->ldbl != arg->ldbl || arg->ldbl == 1.0 / 0.0;
+	arg->precision = (j ? 0 : arg->precision);
 	res = build_res(arg);
 	if ((arg->flags & F_ZERO) && arg->ldbl < 0.0 && (i = ft_idxof('-', res)))
 	{
@@ -120,9 +121,9 @@ char			*convert_double_floating(t_printf *data, t_arg *arg)
 
 	min = arg->min_width;
 	prec = arg->precision;
-	i = ((tmp = get_arg_f(data, arg->flag_idx)) == NULL);
-	i = (i || (arg->min_width_idx && get_arg(data, arg->min_width_idx, &min)));
-	if (i || (arg->precision_idx && get_arg(data, arg->precision_idx, &prec)))
+	i = (arg->min_width_idx && get_arg(data, arg->min_width_idx, &min));
+	i = (i || (arg->precision_idx && get_arg(data, arg->precision_idx, &prec)));
+	if (i || !(tmp = get_arg_f(data, arg->flag_idx)))
 		return (NULL);
 	i = 0;
 	arg->dbl = tmp->dbl;

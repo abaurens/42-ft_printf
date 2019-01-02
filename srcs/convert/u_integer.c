@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 18:25:04 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/16 20:39:08 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/02 22:22:52 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,10 @@ static char			*short_short_integer(t_printf *const data, t_arg *const arg)
 	return (data->buf = (char *)ft_freturn(data->buf, (long long)tab));
 }
 
-static char		*intmax_integer(t_printf *const data, t_arg *const arg)
+static char			*intmax_integer(t_printf *const data, t_arg *const arg)
 {
-	uintmax_t	v;
-	char		*tab;
+	uintmax_t		v;
+	char			*tab;
 
 	v = (uintmax_t)arg->value;
 	if (arg->flags & F_ZERO)
@@ -117,10 +117,10 @@ static char		*intmax_integer(t_printf *const data, t_arg *const arg)
 	return (data->buf = (char *)ft_freturn(data->buf, (long long)tab));
 }
 
-static char		*size_integer(t_printf *const data, t_arg *const arg)
+static char			*size_integer(t_printf *const data, t_arg *const arg)
 {
-	size_t		v;
-	char		*tab;
+	size_t			v;
+	char			*tab;
 
 	v = (size_t)arg->value;
 	if (arg->flags & F_ZERO)
@@ -134,10 +134,10 @@ static char		*size_integer(t_printf *const data, t_arg *const arg)
 	return (data->buf = (char *)ft_freturn(data->buf, (long long)tab));
 }
 
-static char		*ssize_integer(t_printf *const data, t_arg *const arg)
+static char			*ssize_integer(t_printf *const data, t_arg *const arg)
 {
-	ssize_t		v;
-	char		*tab;
+	ssize_t			v;
+	char			*tab;
 
 	v = (ssize_t)arg->value;
 	if (arg->flags & F_ZERO)
@@ -151,10 +151,10 @@ static char		*ssize_integer(t_printf *const data, t_arg *const arg)
 	return (data->buf = (char *)ft_freturn(data->buf, (long long)tab));
 }
 
-static char		*ptrdiff_integer(t_printf *const data, t_arg *const arg)
+static char			*ptrdiff_integer(t_printf *const data, t_arg *const arg)
 {
-	ptrdiff_t	v;
-	char		*tab;
+	ptrdiff_t		v;
+	char			*tab;
 
 	v = (ptrdiff_t)arg->value;
 	if (arg->flags & F_ZERO)
@@ -185,9 +185,9 @@ static const t_converter	g_funcs[] =
 
 char				*convert_u_integer(t_printf *data, t_arg *arg)
 {
-	int			i;
-	long long	prec;
-	long long	min;
+	int				i;
+	long long		prec;
+	long long		min;
 
 	min = arg->min_width;
 	prec = arg->precision;

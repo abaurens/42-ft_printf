@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 21:02:59 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/16 20:39:19 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/02 22:26:31 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,11 +125,11 @@ static char			*short_short_integer(t_printf *const data, t_arg *const arg)
 	return (data->buf = (char *)ft_freturn(data->buf, (long long)tab));
 }
 
-static char		*intmax_integer(t_printf *const data, t_arg *const arg)
+static char			*intmax_integer(t_printf *const data, t_arg *const arg)
 {
-	uintmax_t	v;
-	char		*tab;
-	int			len;
+	uintmax_t		v;
+	char			*tab;
+	int				len;
 
 	v = (uintmax_t)arg->value;
 	if ((len = ft_unsignedlen_base(v, "01234567")) > arg->precision)
@@ -147,11 +147,11 @@ static char		*intmax_integer(t_printf *const data, t_arg *const arg)
 	return (data->buf = (char *)ft_freturn(data->buf, (long long)tab));
 }
 
-static char		*size_integer(t_printf *const data, t_arg *const arg)
+static char			*size_integer(t_printf *const data, t_arg *const arg)
 {
-	size_t		v;
-	char		*tab;
-	int			len;
+	size_t			v;
+	char			*tab;
+	int				len;
 
 	v = (size_t)arg->value;
 	if ((len = ft_unsignedlen_base(v, "01234567")) > arg->precision)
@@ -169,11 +169,11 @@ static char		*size_integer(t_printf *const data, t_arg *const arg)
 	return (data->buf = (char *)ft_freturn(data->buf, (long long)tab));
 }
 
-static char		*ssize_integer(t_printf *const data, t_arg *const arg)
+static char			*ssize_integer(t_printf *const data, t_arg *const arg)
 {
-	ssize_t		v;
-	char		*tab;
-	int			len;
+	ssize_t			v;
+	char			*tab;
+	int				len;
 
 	v = (ssize_t)arg->value;
 	if ((len = ft_unsignedlen_base(v, "01234567")) > arg->precision)
@@ -191,11 +191,11 @@ static char		*ssize_integer(t_printf *const data, t_arg *const arg)
 	return (data->buf = (char *)ft_freturn(data->buf, (long long)tab));
 }
 
-static char		*ptrdiff_integer(t_printf *const data, t_arg *const arg)
+static char			*ptrdiff_integer(t_printf *const data, t_arg *const arg)
 {
-	ptrdiff_t	v;
-	char		*tab;
-	int			len;
+	ptrdiff_t		v;
+	char			*tab;
+	int				len;
 
 	v = (ptrdiff_t)arg->value;
 	if ((len = ft_unsignedlen_base(v, "01234567")) > arg->precision)
@@ -228,11 +228,11 @@ static const t_converter	g_funcs[] =
 	{'\0', FALSE, NULL}
 };
 
-char	*convert_u_integer_octal(t_printf *data, t_arg *arg)
+char				*convert_u_integer_octal(t_printf *data, t_arg *arg)
 {
-	int			i;
-	long long	prec;
-	long long	min;
+	int				i;
+	long long		prec;
+	long long		min;
 
 	min = arg->min_width;
 	prec = arg->precision;

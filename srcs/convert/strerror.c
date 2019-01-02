@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:36:51 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/15 18:25:09 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/02 22:21:47 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static const t_converter	g_funcs[] =
 	{'\0', FALSE, NULL}
 };
 
-char	*convert_strerror(t_printf *data, t_arg *arg)
+char			*convert_strerror(t_printf *data, t_arg *arg)
 {
 	int			i;
 	long long	prec;

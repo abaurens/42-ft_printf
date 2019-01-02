@@ -6,10 +6,11 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 16:39:57 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/02 20:28:57 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/02 21:11:15 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <math.h>
 #include <float.h>
 #include <stdlib.h>
 #include "ft_bigfloat.h"
@@ -142,6 +143,10 @@ char				*ft_ldtoa(long double d)
 	char			*res;
 
 	res = NULL;
+	if (d == (1.0 / 0.0))
+		return (ft_strdup("inf"));
+	if (d != d)
+		return (ft_strdup("nan"));
 	fl = get_float_components(d);
 	mant = get_mantissa(&fl);
 	expo = two_pow(fl.exponent);
