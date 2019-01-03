@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 16:39:57 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/02 21:11:15 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/03 19:23:03 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,8 @@ static t_float		get_float_components(long double d)
 	ret.exponent = *((unsigned short *)(conv.bytes + (man_ln / 8)));
 	ret.sign = ret.exponent >> exp_ln;
 	ret.exponent &= ~(1 << exp_ln);
-	ret.exponent -= (LDBL_MAX_EXP - 1);
+	if (d != 0.0 && d != -0.0)
+		ret.exponent -= (LDBL_MAX_EXP - 1);
 	return (ret);
 }
 
@@ -160,5 +161,34 @@ char				*ft_ldtoa(long double d)
 	del_bflt(expo);
 	if (fl.sign)
 		res = (char *)ft_freturn(res, (long)ft_strmcat("-", res, -1));
+	return (res);
+}
+
+char				*exp_dbl(long double d, size_t prec)
+{
+	size_t			expl;
+	char			sign;
+	int				exp;
+	char			*tmp;
+	char			*res;
+
+	exp = 0;
+	if (d == (1.0 / 0.0) || d != d)
+		return (ft_strdup((d == (1.0 / 0.0)) ? "inf" : "nan"));
+	if ((sign = get_float_components(d).sign))
+		d = -d;
+	while (d != 0.0 && ((d < 1.0 && --exp) || (d >= 10.0 && ++exp)))
+		d = (d >= 10.0 ? d / 10.0 : d * 10.0);
+	expl = ft_max(2, ft_unsignedlen(ft_abs(exp)));
+	tmp = round_tabflt(ft_ldtoa(d), prec, &exp);
+	if (!tmp || !(res = ft_memalloc(sign + 2 + prec + 2 + expl + 1)))
+		return ((char *)ft_freturn(tmp, 0x0));
+	*res = '-';
+	ft_memset(res + sign, '0', sign + 2 + prec);
+	ft_strncpy(res + sign, tmp, ft_min(sign + 2 + prec, ft_strlen(tmp)));
+	ft_memcpy(res + sign + 2 + prec, (exp < 0 ? "e-" : "e+"), 2);
+	exp = ft_freturn(tmp, ft_abs(exp));
+	while (expl-- > 0 && (res[sign + 4 + prec + expl] = (exp % 10) + '0'))
+		exp /= 10;
 	return (res);
 }

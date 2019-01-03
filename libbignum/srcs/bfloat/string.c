@@ -6,13 +6,14 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 07:28:35 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/31 13:35:13 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/03 18:51:17 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <unistd.h>
 #include "ft_bigfloat.h"
+#include "libft.h"
 
 char		*bflt_tostr(t_bflt const *const num)
 {
@@ -25,7 +26,7 @@ char		*bflt_tostr(t_bflt const *const num)
 		return (NULL);
 	if (!(dec = (num->dec != NULL)))
 		dec = 2;
-	if (!(res = malloc(num->len + dec)))
+	if (!(res = ft_memalloc(num->len + dec + 1)))
 		return (NULL);
 	res[num->len + dec - 1] = 0;
 	while (i < num->len + dec - 1)

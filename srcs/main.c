@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 22:25:56 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/02 22:20:28 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/03 20:24:03 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,10 @@ int				main(void)
 {
 	long double	d;
 
-	d = 0.0 / 0.0;
-	printf("R : %20Lf\n", d);
+	d = -99.99;
+	printf("%d\n", -0.0 == 0.0);
+	ft_printf("F : %#0.1Le\n", d);
+	printf("R : %#0.1Le\n", d);
 	fflush(stdout);
-	ft_printf("F : %20Lf\n", d);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 18:19:18 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/02 22:31:41 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/03 20:11:41 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,11 @@ static char		*build_res(t_arg *arg)
 	char		*val;
 	char		*rs;
 
-	if (!(val = ft_ldtoa(arg->ldbl)))
+	if (!(val = round_tabflt(ft_ldtoa(arg->ldbl), arg->precision, NULL)))
 		return (NULL);
-	if ((add = 0) || arg->conv.c == 'F')
+	if ((add = 0) || ft_isupper(arg->conv.c))
 		ft_strupcase(val);
-	i = ft_idxof(0, val);
 	entl = ft_idxof('.', val);
-	while (--i > (size_t)entl)
-		if (val[i - 1] != '.' && val[i] >= '5' && (val[i] = '0'))
-			val[i - 1]++;
 	i = (arg->ldbl >= 0.0 && (arg->flags & (F_SPAC | F_PLUS)));
 	if ((entl + (int)i + arg->precision + (!!arg->precision)) < arg->min_width)
 		add = arg->min_width - (entl + i + arg->precision + (!!arg->precision));
@@ -65,7 +61,7 @@ static char		*build_res(t_arg *arg)
 	add *= !(arg->flags & F_MINS);
 	ft_memcpy(rs + add + i, val, ft_min(ft_strlen(val), entl + arg->precision));
 	if (ft_freturn(val, i))
-		rs[add] = (arg->flags & F_PLUS) ? '+' : ' ';
+		rs[add * !(arg->flags & F_ZERO)] = (arg->flags & F_PLUS) ? '+' : ' ';
 	return (rs);
 }
 
@@ -75,8 +71,8 @@ static char		*long_double(t_printf *const data, t_arg *const arg)
 	int			j;
 	char		*res;
 
-	j = arg->ldbl != arg->ldbl || arg->ldbl == 1.0 / 0.0;
-	arg->precision = (j ? 0 : arg->precision);
+	j = 0;
+	arg->precision *= !(arg->ldbl != arg->ldbl || arg->ldbl == 1.0 / 0.0);
 	res = build_res(arg);
 	if ((arg->flags & F_ZERO) && arg->ldbl < 0.0 && (i = ft_idxof('-', res)))
 	{
@@ -87,8 +83,8 @@ static char		*long_double(t_printf *const data, t_arg *const arg)
 	while (!(arg->flags & F_ZERO) && j < arg->precision && res[i + ++j])
 		if (res[i + j] == ' ')
 			res[i + j] = '0';
-	j = 0;
-	while (res[j] >= '0' && res[j] <= '9')
+	j = (*res == '+' || *res == '-' || *res == ' ');
+	while (res[j] >= '0' && res[j] <= ':')
 		j++;
 	if (arg->flags & F_HASH)
 		res[j] = '.';

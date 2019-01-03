@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 18:29:02 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/31 12:37:22 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/03 11:42:59 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@
 **	I = print the value with the locale digits if any (only used for i, u and d)
 */
 
-typedef struct s_arg	t_arg;
 typedef struct s_printf	t_printf;
+typedef struct s_arg	t_arg;
 typedef struct tm		t_tm;
 
 typedef enum			e_bool

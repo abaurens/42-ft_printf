@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 21:56:12 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/30 22:10:38 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/03 19:03:13 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,8 @@ int				ft_printf(const char *format, ...)
 	if (!format)
 		return (ERROR);
 	data.buf = NULL;
+	ft_bzero(&data, sizeof(data));
 	data.err = errno;
-	data.arg_count = 0;
-	data.args.size = 0;
-	data.args.head = NULL;
-	data.args.tail = NULL;
 	data.use_chain_format = MAYBE;
 	va_start(data.va_lst, format);
 	if ((size = get_non_arg(format, &data)) < 0)
