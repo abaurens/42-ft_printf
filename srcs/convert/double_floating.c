@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 18:19:18 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/03 20:11:41 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/04 18:46:01 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static char		*long_double(t_printf *const data, t_arg *const arg)
 		res[0] = '-';
 	}
 	i = ft_idxof('.', res);
-	while (!(arg->flags & F_ZERO) && j < arg->precision && res[i + ++j])
+	while (!(arg->flags & F_ZERO) && j < arg->precision && res[i + j++])
 		if (res[i + j] == ' ')
 			res[i + j] = '0';
 	j = (*res == '+' || *res == '-' || *res == ' ');
@@ -88,10 +88,10 @@ static char		*long_double(t_printf *const data, t_arg *const arg)
 		j++;
 	if (arg->flags & F_HASH)
 		res[j] = '.';
-	res = (char *)ft_freturn(res, (long long)ft_strmcat(data->buf, res, -1));
+	res = (char *)ft_freturn(res, (long)ft_strmcat(data->buf, res, -1));
 	if (!res)
 		return (NULL);
-	return (data->buf = (char *)ft_freturn(data->buf, (long long)res));
+	return (data->buf = (char *)ft_freturn(data->buf, (long)res));
 }
 
 static char		*std_double(t_printf *const data, t_arg *const arg)

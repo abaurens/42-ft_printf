@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 16:39:57 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/03 19:23:03 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/04 18:51:37 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,30 +87,7 @@ static const char				*g_man_vals[] =
 	NULL
 };
 
-static t_float		get_float_components(long double d)
-{
-	t_float			ret;
-	t_float_conv	conv;
-	int				exp_ln;
-	int				man_ln;
-
-	exp_ln = 0;
-	ft_bzero(&conv, sizeof(conv));
-	conv.value = d;
-	man_ln = LDBL_MAX_EXP;
-	while (man_ln != 0 && ++exp_ln)
-		man_ln >>= 1;
-	man_ln = LDBL_MANT_DIG - (sizeof(d) == sizeof(double));
-	ft_memcpy(&ret.mantissa, conv.bytes, man_ln / 8);
-	ret.exponent = *((unsigned short *)(conv.bytes + (man_ln / 8)));
-	ret.sign = ret.exponent >> exp_ln;
-	ret.exponent &= ~(1 << exp_ln);
-	if (d != 0.0 && d != -0.0)
-		ret.exponent -= (LDBL_MAX_EXP - 1);
-	return (ret);
-}
-
-static t_bflt		*get_mantissa(t_float *f)
+t_bflt				*get_mantissa(t_float *f)
 {
 	int				i;
 	t_bflt			expo;
@@ -135,6 +112,40 @@ static t_bflt		*get_mantissa(t_float *f)
 	return (mant);
 }
 
+t_float				get_float_components(long double d)
+{
+	t_float			ret;
+	t_float_conv	conv;
+	int				exp_ln;
+	int				man_ln;
+
+	exp_ln = 0;
+	ft_bzero(&conv, sizeof(conv));
+	conv.value = d;
+	man_ln = LDBL_MAX_EXP;
+	while (man_ln != 0 && ++exp_ln)
+		man_ln >>= 1;
+	man_ln = LDBL_MANT_DIG - (sizeof(d) == sizeof(double));
+	ft_memcpy(&ret.mantissa, conv.bytes, man_ln / 8);
+	ret.exponent = *((unsigned short *)(conv.bytes + (man_ln / 8)));
+	ret.sign = ret.exponent >> exp_ln;
+	ret.exponent &= ~(1 << exp_ln);
+	if (d != 0.0 && d != -0.0)
+		ret.exponent -= (LDBL_MAX_EXP - 1);
+	return (ret);
+}
+
+long double			dbl_abs(long double *d, char *sign)
+{
+	char			s;
+
+	if (d && (s = get_float_components(*d).sign))
+		*d = -*d;
+	if (d && sign)
+		*sign = s;
+	return (d ? *d : 0.0 / 0.0);
+}
+
 char				*ft_ldtoa(long double d)
 {
 	t_float			fl;
@@ -143,23 +154,23 @@ char				*ft_ldtoa(long double d)
 	t_bflt			*mant;
 	char			*res;
 
-	res = NULL;
-	if (d == (1.0 / 0.0))
-		return (ft_strdup("inf"));
 	if (d != d)
 		return (ft_strdup("nan"));
+	if (d == (1.0 / 0.0) || d == -(1.0 / 0.0))
+		return (ft_strdup(d < 0.0 ? "-inf" : "inf"));
 	fl = get_float_components(d);
 	mant = get_mantissa(&fl);
-	expo = two_pow(fl.exponent);
-	tmp = expo;
-	if ((expo && mant) || (expo = NULL))
-		expo = mul_bflt(expo, mant);
-	del_bflt(mant);
-	del_bflt(tmp);
-	if (expo)
-		res = bflt_tostr(expo);
+	expo = new_bflt(fl.exponent < 0 ? "0.5" : "2");
+	while ((expo && mant) && fl.exponent && ((tmp = mant) || 1))
+	{
+		fl.exponent += (fl.exponent < 0 ? 1 : -1);
+		mant = mul_bflt(expo, mant);
+		del_bflt(tmp);
+	}
 	del_bflt(expo);
-	if (fl.sign)
+	res = expo ? bflt_tostr(mant) : NULL;
+	del_bflt(mant);
+	if (res && fl.sign)
 		res = (char *)ft_freturn(res, (long)ft_strmcat("-", res, -1));
 	return (res);
 }
@@ -172,23 +183,23 @@ char				*exp_dbl(long double d, size_t prec)
 	char			*tmp;
 	char			*res;
 
-	exp = 0;
-	if (d == (1.0 / 0.0) || d != d)
-		return (ft_strdup((d == (1.0 / 0.0)) ? "inf" : "nan"));
-	if ((sign = get_float_components(d).sign))
-		d = -d;
+	if ((sign = 0) || d != d)
+		return (ft_strdup("nan"));
+	if ((exp = 0) || dbl_abs(&d, &sign) == (1.0 / 0.0))
+		return (ft_strdup(sign ? "-inf" : "inf"));
+	if (!(tmp = ft_ldtoa(d)))
+		return (NULL);
+	((char *)ft_memmove(tmp + 1, tmp, ft_idxof('.', tmp)))[0] = '.';
 	while (d != 0.0 && ((d < 1.0 && --exp) || (d >= 10.0 && ++exp)))
 		d = (d >= 10.0 ? d / 10.0 : d * 10.0);
+	round_tabflt(tmp, prec, &exp);
 	expl = ft_max(2, ft_unsignedlen(ft_abs(exp)));
-	tmp = round_tabflt(ft_ldtoa(d), prec, &exp);
 	if (!tmp || !(res = ft_memalloc(sign + 2 + prec + 2 + expl + 1)))
 		return ((char *)ft_freturn(tmp, 0x0));
-	*res = '-';
-	ft_memset(res + sign, '0', sign + 2 + prec);
+	*res = ft_freturn(NULL + !ft_memset(res + sign, 48, sign + 2 + prec), '-');
 	ft_strncpy(res + sign, tmp, ft_min(sign + 2 + prec, ft_strlen(tmp)));
 	ft_memcpy(res + sign + 2 + prec, (exp < 0 ? "e-" : "e+"), 2);
-	exp = ft_freturn(tmp, ft_abs(exp));
-	while (expl-- > 0 && (res[sign + 4 + prec + expl] = (exp % 10) + '0'))
-		exp /= 10;
-	return (res);
+	while (expl-- > 0 && (res[sign + 4 + prec + expl] = ft_abs(exp % 10) + '0'))
+		exp = ft_abs(exp / 10);
+	return ((char *)ft_freturn(tmp, (long)res));
 }

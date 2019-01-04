@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:34:47 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/30 21:44:04 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/04 14:33:18 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char						*wide_character_string(t_printf *data, t_arg *arg)
 	ft_memset(res, (arg->flags & F_ZERO) ? '0' : ' ', wchr_ln * tab_len);
 	tab_len -= ((arg->flags & F_MINS) ? tab_len : len);
 	ft_wstrtostr(res, v);
-	res = (char *)ft_freturn(res, (long long)ft_strmcat(data->buf, res, -1));
+	res = (char *)ft_freturn(res, (long)ft_strmcat(data->buf, res, -1));
 	if (!res)
 		return (NULL);
 	free(data->buf);

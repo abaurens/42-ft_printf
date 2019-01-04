@@ -31,10 +31,10 @@ static char			*integer(t_printf *const data, t_arg *const arg)
 	if (!(tab = padded_ulltoa_octal(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
-	tab = (char *)ft_freturn(tab, (long long)ft_strmcat(data->buf, tab, -1));
+	tab = (char *)ft_freturn(tab, (long)ft_strmcat(data->buf, tab, -1));
 	if (!tab)
 		return (NULL);
-	return (data->buf = (char *)ft_freturn(data->buf, (long long)tab));
+	return (data->buf = (char *)ft_freturn(data->buf, (long)tab));
 }
 
 static char			*long_integer(t_printf *const data, t_arg *const arg)
@@ -53,10 +53,10 @@ static char			*long_integer(t_printf *const data, t_arg *const arg)
 	if (!(tab = padded_ulltoa_octal(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
-	tab = (char *)ft_freturn(tab, (long long)ft_strmcat(data->buf, tab, -1));
+	tab = (char *)ft_freturn(tab, (long)ft_strmcat(data->buf, tab, -1));
 	if (!tab)
 		return (NULL);
-	return (data->buf = (char *)ft_freturn(data->buf, (long long)tab));
+	return (data->buf = (char *)ft_freturn(data->buf, (long)tab));
 }
 
 static char			*long_long_integer(t_printf *const data, t_arg *const arg)
@@ -75,10 +75,10 @@ static char			*long_long_integer(t_printf *const data, t_arg *const arg)
 	if (!(tab = padded_ulltoa_octal(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
-	tab = (char *)ft_freturn(tab, (long long)ft_strmcat(data->buf, tab, -1));
+	tab = (char *)ft_freturn(tab, (long)ft_strmcat(data->buf, tab, -1));
 	if (!tab)
 		return (NULL);
-	return (data->buf = (char *)ft_freturn(data->buf, (long long)tab));
+	return (data->buf = (char *)ft_freturn(data->buf, (long)tab));
 }
 
 static char			*short_integer(t_printf *const data, t_arg *const arg)
@@ -97,10 +97,10 @@ static char			*short_integer(t_printf *const data, t_arg *const arg)
 	if (!(tab = padded_ulltoa_octal(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
-	tab = (char *)ft_freturn(tab, (long long)ft_strmcat(data->buf, tab, -1));
+	tab = (char *)ft_freturn(tab, (long)ft_strmcat(data->buf, tab, -1));
 	if (!tab)
 		return (NULL);
-	return (data->buf = (char *)ft_freturn(data->buf, (long long)tab));
+	return (data->buf = (char *)ft_freturn(data->buf, (long)tab));
 }
 
 static char			*short_short_integer(t_printf *const data, t_arg *const arg)
@@ -119,10 +119,10 @@ static char			*short_short_integer(t_printf *const data, t_arg *const arg)
 	if (!(tab = padded_ulltoa_octal(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
-	tab = (char *)ft_freturn(tab, (long long)ft_strmcat(data->buf, tab, -1));
+	tab = (char *)ft_freturn(tab, (long)ft_strmcat(data->buf, tab, -1));
 	if (!tab)
 		return (NULL);
-	return (data->buf = (char *)ft_freturn(data->buf, (long long)tab));
+	return (data->buf = (char *)ft_freturn(data->buf, (long)tab));
 }
 
 static char			*intmax_integer(t_printf *const data, t_arg *const arg)
@@ -141,10 +141,10 @@ static char			*intmax_integer(t_printf *const data, t_arg *const arg)
 	if (!(tab = padded_ulltoa_octal(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
-	tab = (char *)ft_freturn(tab, (long long)ft_strmcat(data->buf, tab, -1));
+	tab = (char *)ft_freturn(tab, (long)ft_strmcat(data->buf, tab, -1));
 	if (!tab)
 		return (NULL);
-	return (data->buf = (char *)ft_freturn(data->buf, (long long)tab));
+	return (data->buf = (char *)ft_freturn(data->buf, (long)tab));
 }
 
 static char			*size_integer(t_printf *const data, t_arg *const arg)
@@ -163,10 +163,10 @@ static char			*size_integer(t_printf *const data, t_arg *const arg)
 	if (!(tab = padded_ulltoa_octal(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
-	tab = (char *)ft_freturn(tab, (long long)ft_strmcat(data->buf, tab, -1));
+	tab = (char *)ft_freturn(tab, (long)ft_strmcat(data->buf, tab, -1));
 	if (!tab)
 		return (NULL);
-	return (data->buf = (char *)ft_freturn(data->buf, (long long)tab));
+	return (data->buf = (char *)ft_freturn(data->buf, (long)tab));
 }
 
 static char			*ssize_integer(t_printf *const data, t_arg *const arg)
@@ -185,10 +185,10 @@ static char			*ssize_integer(t_printf *const data, t_arg *const arg)
 	if (!(tab = padded_ulltoa_octal(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
-	tab = (char *)ft_freturn(tab, (long long)ft_strmcat(data->buf, tab, -1));
+	tab = (char *)ft_freturn(tab, (long)ft_strmcat(data->buf, tab, -1));
 	if (!tab)
 		return (NULL);
-	return (data->buf = (char *)ft_freturn(data->buf, (long long)tab));
+	return (data->buf = (char *)ft_freturn(data->buf, (long)tab));
 }
 
 static char			*ptrdiff_integer(t_printf *const data, t_arg *const arg)
@@ -207,10 +207,10 @@ static char			*ptrdiff_integer(t_printf *const data, t_arg *const arg)
 	if (!(tab = padded_ulltoa_octal(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
-	tab = (char *)ft_freturn(tab, (long long)ft_strmcat(data->buf, tab, -1));
+	tab = (char *)ft_freturn(tab, (long)ft_strmcat(data->buf, tab, -1));
 	if (!tab)
 		return (NULL);
-	return (data->buf = (char *)ft_freturn(data->buf, (long long)tab));
+	return (data->buf = (char *)ft_freturn(data->buf, (long)tab));
 }
 
 static const t_converter	g_funcs[] =

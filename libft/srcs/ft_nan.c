@@ -1,36 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_nan.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/20 06:43:32 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/04 12:43:14 by abaurens         ###   ########.fr       */
+/*   Created: 2019/01/04 18:03:01 by abaurens          #+#    #+#             */
+/*   Updated: 2019/01/04 18:10:00 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "ft_bigfloat.h"
-
-t_bflt			*ent_longer(t_bflt *n1, t_bflt *n2)
+char		fnan(long double d)
 {
-	if (n1->entl < n2->entl)
-		return (n2);
-	return (n1);
-}
-
-t_bflt			*dec_longer(t_bflt *n1, t_bflt *n2)
-{
-	if (n1->decl < n2->decl)
-		return (n2);
-	return (n1);
-}
-
-void			*abort_bflt(t_bflt const *const to_abort, char step)
-{
-	if (step > 0)
-		free(to_abort->ent);
-	free((void *)to_abort);
-	return (NULL);
+	return (d != d);
 }

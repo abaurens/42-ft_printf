@@ -6,7 +6,7 @@
 #    By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 16:08:06 by abaurens          #+#    #+#              #
-#    Updated: 2019/01/02 22:17:36 by abaurens         ###   ########.fr        #
+#    Updated: 2019/01/04 18:04:46 by abaurens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,8 @@ DNE_STR	=	<----------------------------- DONE ! ----------------------------->
 
 SRC_DIR	=		srcs
 OBJ_DIR	=		objs
-SRC		=		ft_absolute.c			\
+SRC		=		ft_nan.c				\
+				ft_absolute.c			\
 				ft_minimum.c			\
 				ft_maximum.c			\
 				ft_strmapi.c			\

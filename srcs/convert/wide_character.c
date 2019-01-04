@@ -38,10 +38,10 @@ char					*wide_character(t_printf *data, t_arg *arg)
 	ft_memset(res, (arg->flags & F_ZERO) ? '0' : ' ', wchr_ln * tab_len);
 	tab_len -= ((arg->flags & F_MINS) ? tab_len : len);
 	ft_wstrtostr(res, v);
-	res = (char *)ft_freturn(res, (long long)ft_strmcat(data->buf, res, -1));
+	res = (char *)ft_freturn(res, (long)ft_strmcat(data->buf, res, -1));
 	if (!res)
 		return (NULL);
-	data->buf = (char *)ft_freturn(data->buf, (long long)res);
+	data->buf = (char *)ft_freturn(data->buf, (long)res);
 	return (res);
 }
 

@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:44:41 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/30 21:44:09 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/04 14:33:18 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static char			*non_printable(t_printf *data, t_arg *arg)
 	ft_memset(res, (arg->flags & F_ZERO) ? '0' : ' ', tab_len);
 	tab_len -= ((arg->flags & F_MINS) ? tab_len : len);
 	ft_unprint_strncpy(res + tab_len, v, len, (arg->flags & F_HASH));
-	res = (char *)ft_freturn(res, (long long)ft_strmcat(data->buf, res, -1));
+	res = (char *)ft_freturn(res, (long)ft_strmcat(data->buf, res, -1));
 	if (!res)
 		return (NULL);
 	free(data->buf);

@@ -6,31 +6,57 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:28:58 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/03 20:24:59 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/04 18:06:42 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
+#include <stdlib.h>
 #include "ft_printf.h"
 #include "ft_types.h"
 #include "libft.h"
 
-static char		*long_double(t_printf *const data, t_arg *const arg)
+static char		*insert_buffer(t_printf *const data, char *str)
+{
+	if (!str)
+		return (NULL);
+	if (!(str = (char *)ft_freturn(str, (long)ft_strmcat(data->buf, str, -1))))
+		return (NULL);
+	return (data->buf = (char *)ft_freturn(data->buf, (long)str));
+}
+
+static char		ldbl_num(long double d)
+{
+	return (!fnan(d) && dbl_abs(&d, NULL) != (1.0 / 0.0));
+}
+
+static char		*long_double(t_printf *const data, t_arg *const ar)
 {
 	size_t		l;
 	size_t		add;
+	char		s;
+	char		*t;
 	char		*res;
 
-	if (!(res = exp_dbl(arg->ldbl, arg->precision)))
+	if (!(t = exp_dbl(ar->ldbl, ar->precision)))
 		return (NULL);
-	if (ft_isupper(arg->conv.c))
-		ft_strupcase(res);
-	if ((arg->flags & (F_PLUS | F_SPAC)))
-		res = (char *)ft_freturn(res, (long)ft_strmcat(" ", res, -1));
-	l = ft_strlen(res);
-	printf("r = %s\n", res);
-	free(res);
-	return (NULL);
+	if (ft_isupper(ar->conv.c))
+		ft_strupcase(t);
+	if ((s = (*t != '-' && (ar->flags & (F_PLUS | F_SPAC)))) && !fnan(ar->ldbl))
+		t = (char *)ft_freturn(t, (long)ft_strmcat(" ", t, -1));
+	s = ((s || *t == '-') && !fnan(ar->ldbl));
+	if (!(ar->flags & F_HASH) && !ar->precision && ldbl_num(ar->ldbl))
+		ft_memmove(t + s + 1, t + s + 2, ft_strlen(t + s + 1));
+	l = ft_strlen(t);
+	add = ((size_t)ar->min_width > l) ? ar->min_width - l : 0;
+	if (!(res = ft_memalloc(l + add + 1)))
+		return ((char *)ft_freturn(t, 0x0));
+	if (*t == '-' || (*t == ' ' && (ar->flags & F_PLUS) && (*t = '+')))
+		*res = *t;
+	s *= !!(ar->flags & F_ZERO);
+	ft_memset(res + s, (ar->flags & F_ZERO) ? '0' : '#', add + l - s);
+	ft_memcpy(res + add * !(ar->flags & F_MINS) + s, t + s, l - s);
+	return ((char *)ft_freturn(t, (long)insert_buffer(data, res)));
 }
 
 static char		*std_double(t_printf *const data, t_arg *const arg)

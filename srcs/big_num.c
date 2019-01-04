@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 20:22:26 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/03 15:52:43 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/04 13:26:15 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,26 @@
 #include "ft_bigfloat.h"
 #include "libft.h"
 
-t_bflt			*two_pow(int pow)
+t_bflt		*new_ftobflt(long double d)
 {
-	t_bflt		two;
-	t_bflt		*tmp;
-	t_bflt		*res;
+	t_float	fl;
+	t_bflt	*res;
+	t_bflt	*tmp;
+	t_bflt	*expo;
 
-	if (!set_bflt(&two, pow < 0 ? "0.5" : "2.0"))
+	if (d == (1.0 / 0.0))
 		return (NULL);
-	res = new_bflt("1.0");
-	while (res && pow != 0)
+	if (d != d)
+		return (NULL);
+	fl = get_float_components(d);
+	res = get_mantissa(&fl);
+	expo = new_bflt(fl.exponent < 0 ? "0.5" : "2");
+	while ((expo && res) && fl.exponent--)
 	{
 		tmp = res;
-		res = mul_bflt(&two, res);
+		res = mul_bflt(expo, res);
 		del_bflt(tmp);
-		pow < 0 ? ++pow : --pow;
 	}
-	unset_bflt(&two);
+	del_bflt(expo);
 	return (res);
 }
