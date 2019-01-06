@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 18:29:02 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/06 15:27:01 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/06 18:58:43 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ struct					s_printf
 {
 	t_bool				use_chain_format;
 	size_t				arg_count;
+	size_t				len;
 	t_ftlist			args;
 	char				*buf;
 	int					err;

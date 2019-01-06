@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 11:21:48 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/11 18:56:03 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/06 20:19:55 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,6 @@ int				parse_arg(const char **format, t_printf *data, t_arg *arg)
 
 	i = 0;
 	f = (*format)++;
-	while (NO_ARG[i] && **format != NO_ARG[i])
-		i++;
-	if (**format == '%')
-	{
-		arg->conv = g_converters[0];
-		return (++(*format) - f);
-	}
 	if ((i = get_chain_format(*format, data, &arg->flag_idx)) >= 0)
 		*format += i;
 	i = 0;

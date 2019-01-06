@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:36:51 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/02 22:21:47 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/06 22:54:17 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,9 @@ static char		*character_string(t_printf *data, t_arg *arg)
 	ft_memset(res, (arg->flags & F_ZERO) ? '0' : ' ', tab_len);
 	tab_len -= ((arg->flags & F_MINS) ? tab_len : len);
 	ft_strncpy(res + tab_len, v, len);
-	res = (char *)ft_freturn(res, (long)ft_strmcat(data->buf, res, -1));
-	if (!res)
-		return (NULL);
-	free(data->buf);
-	data->buf = res;
-	return (res);
+	insert_buffer(data, res, ft_strlen(res));
+	free(res);
+	return (data->buf);
 }
 
 static const t_converter	g_funcs[] =

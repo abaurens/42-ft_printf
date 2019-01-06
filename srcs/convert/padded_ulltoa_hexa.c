@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   padded_ulltoa_hexahup.c                            :+:      :+:    :+:   */
+/*   padded_ulltoa_hexa.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 19:02:00 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/14 16:29:08 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/06 22:22:14 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include "libft.h"
 
-char		*padded_ulltoa_hexahup(unsigned long long nb, const int min_d,
+char		*padded_ulltoa_hexa(unsigned long long nb, const int min_d,
 	const int pad, char r)
 {
 	int		len;
@@ -23,7 +23,7 @@ char		*padded_ulltoa_hexahup(unsigned long long nb, const int min_d,
 	char	*base;
 
 	r = (r != 0);
-	base = "0123456789ABCDEF";
+	base = "0123456789abcdef";
 	if ((len = ft_unsignedlen_base(nb, base)) < min_d)
 		len = min_d;
 	pad_i = (pad > len) ? (pad - len) : 0;

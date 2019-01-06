@@ -6,20 +6,19 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 18:17:28 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/30 21:44:13 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/06 22:52:31 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "ft_types.h"
-#include "libft.h"
 
 static char		*integer(t_printf *const data, t_arg *const arg)
 {
 	int			*v;
 
 	v = (int *)arg->value;
-	*v = ft_strlen(data->buf);
+	*v = data->len;
 	return (data->buf);
 }
 
@@ -28,7 +27,7 @@ static char		*long_integer(t_printf *const data, t_arg *const arg)
 	long int	*v;
 
 	v = (long int *)arg->value;
-	*v = ft_strlen(data->buf);
+	*v = data->len;
 	return (data->buf);
 }
 
@@ -37,7 +36,7 @@ static char		*long_long_integer(t_printf *const data, t_arg *const arg)
 	long long	*v;
 
 	v = (long long int *)arg->value;
-	*v = ft_strlen(data->buf);
+	*v = data->len;
 	return (data->buf);
 }
 
@@ -46,7 +45,7 @@ static char		*short_integer(t_printf *const data, t_arg *const arg)
 	short int	*v;
 
 	v = (short int *)arg->value;
-	*v = ft_strlen(data->buf);
+	*v = data->len;
 	return (data->buf);
 }
 
@@ -55,7 +54,7 @@ static char		*short_short_integer(t_printf *const data, t_arg *const arg)
 	signed char	*v;
 
 	v = (signed char *)arg->value;
-	*v = ft_strlen(data->buf);
+	*v = data->len;
 	return (data->buf);
 }
 
@@ -64,7 +63,7 @@ static char		*intmax_integer(t_printf *const data, t_arg *const arg)
 	intmax_t	*v;
 
 	v = (intmax_t *)arg->value;
-	*v = ft_strlen(data->buf);
+	*v = data->len;
 	return (data->buf);
 }
 
@@ -73,7 +72,7 @@ static char		*size_integer(t_printf *const data, t_arg *const arg)
 	size_t		*v;
 
 	v = (size_t *)arg->value;
-	*v = ft_strlen(data->buf);
+	*v = data->len;
 	return (data->buf);
 }
 
@@ -82,7 +81,7 @@ static char		*ssize_integer(t_printf *const data, t_arg *const arg)
 	ssize_t		*v;
 
 	v = (ssize_t *)arg->value;
-	*v = ft_strlen(data->buf);
+	*v = data->len;
 	return (data->buf);
 }
 
@@ -91,7 +90,7 @@ static char		*ptrdiff_integer(t_printf *const data, t_arg *const arg)
 	ptrdiff_t	*v;
 
 	v = (ptrdiff_t *)arg->value;
-	*v = ft_strlen(data->buf);
+	*v = data->len;
 	return (data->buf);
 }
 

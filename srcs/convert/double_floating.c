@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 18:19:18 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/06 18:20:28 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/06 20:06:06 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ static const t_converter	g_funcs[] =
 char			*convert_double_floating(t_printf *data, t_arg *arg)
 {
 	int			i;
+	char		*res;
 	long long	min;
 	long long	prec;
 	t_lst_elem	*tmp;
@@ -129,7 +130,7 @@ char			*convert_double_floating(t_printf *data, t_arg *arg)
 		arg->flags &= ~F_ZERO;
 	while (g_funcs[i].c && g_funcs[i].c != LEN_MD_CHRS[arg->length_modifier])
 		i++;
-	if (!g_funcs[i].c)
-		return (insert_buffer(data, g_funcs[0].func(data, arg)));
-	return (insert_buffer(data, g_funcs[i].func(data, arg)));
+	res = g_funcs[!!g_funcs[i].c * i].func(data, arg);
+	ft_freturn(res, (long)insert_buffer(data, res, ft_idxof(0, res)));
+	return (data->buf);
 }

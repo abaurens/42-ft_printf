@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:34:47 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/04 14:33:18 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/06 22:45:41 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,18 @@ char						*wide_character_string(t_printf *data, t_arg *arg)
 		v = L"(null)";
 	if ((len = ft_wstrlen(v)) > arg->precision && arg->precision)
 		len = arg->precision;
+	printf("len = %d\n", len);
 	if ((tab_len = arg->min_width) < len)
 		tab_len = len;
-	if (!(res = malloc((wchr_ln * tab_len) + 1)))
+	printf("len = %d\n", tab_len);
+	if (!(res = ft_memalloc(tab_len + 1)))
 		return (NULL);
-	res[wchr_ln * tab_len] = 0;
-	ft_memset(res, (arg->flags & F_ZERO) ? '0' : ' ', wchr_ln * tab_len);
+	ft_memset(res, (arg->flags & F_ZERO) ? '0' : ' ', tab_len);
 	tab_len -= ((arg->flags & F_MINS) ? tab_len : len);
-	ft_wstrtostr(res, v);
-	res = (char *)ft_freturn(res, (long)ft_strmcat(data->buf, res, -1));
-	if (!res)
-		return (NULL);
-	free(data->buf);
-	data->buf = res;
-	return (res);
+	ft_wstrtostr(res + tab_len, v);
+	insert_buffer(data, res, ft_strlen(res));
+	free(res);
+	return (data->buf);
 }
 
 static const t_converter	g_funcs[] =

@@ -6,7 +6,7 @@
 #    By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 16:23:33 by abaurens          #+#    #+#              #
-#    Updated: 2019/01/06 18:13:18 by abaurens         ###   ########.fr        #
+#    Updated: 2019/01/06 22:20:54 by abaurens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,29 +40,27 @@ SRC         =   debug.c								\
 				convert/printf_lltoa.c				\
 				convert/padded_ulltoa.c				\
 				convert/padded_ulltoa_bin.c			\
+				convert/padded_ulltoa_hexa.c		\
 				convert/padded_ulltoa_octal.c		\
-				convert/padded_ulltoa_hexahup.c		\
-				convert/padded_ulltoa_hexadown.c	\
 				\
 				convert/char.c						\
-				convert/double_compact.c			\
-				convert/double_floating.c			\
-				convert/double_hexa.c				\
-				convert/double_scientific.c			\
-				convert/integer.c					\
-				convert/iso_formated_date.c			\
+				convert/string.c					\
 				convert/length.c					\
-				convert/non_printable_string.c		\
+				convert/integer.c					\
 				convert/percent.c					\
 				convert/pointer.c					\
 				convert/strerror.c					\
-				convert/string.c					\
 				convert/u_integer.c					\
-				convert/u_integer_binary.c			\
-				convert/u_integer_hexahup.c			\
-				convert/u_integer_hexadown.c		\
-				convert/u_integer_octal.c			\
+				convert/double_hexa.c				\
+				convert/double_compact.c			\
+				convert/u_integer_hexa.c			\
 				convert/wide_character.c			\
+				convert/u_integer_octal.c			\
+				convert/double_floating.c			\
+				convert/u_integer_binary.c			\
+				convert/double_scientific.c			\
+				convert/iso_formated_date.c			\
+				convert/non_printable_string.c		\
 				convert/wide_character_string.c
 
 CFLAGS      +=  -I./includes -g -W -Wall -Wextra #-ansi #-Werror #-pedantic

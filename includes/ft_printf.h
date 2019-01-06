@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 21:58:06 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/06 18:19:20 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/06 22:22:05 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@
 */
 int				get_non_arg(const char *format, t_printf *data);
 int				parse_conversion(const char **format, t_printf *data);
+
+/*
+**	buffer.c
+*/
+char			*insert_buffer(t_printf *const data, const char *str,
+								size_t len);
 
 /*
 **	args.c
@@ -64,9 +70,7 @@ char			*padded_ulltoa_bin(unsigned long long nb, const int min_d,
 								const int pad, char r);
 char			*padded_ulltoa_octal(unsigned long long nb, const int min_d,
 									const int pad, char r);
-char			*padded_ulltoa_hexahup(unsigned long long nb, const int min_d,
-									const int pad, char r);
-char			*padded_ulltoa_hexadown(unsigned long long nb, const int min_d,
+char			*padded_ulltoa_hexa(unsigned long long nb, const int min_d,
 									const int pad, char r);
 
 /*
@@ -98,11 +102,6 @@ char			*round_tabflt(char *val, size_t prec, int *exp);
 **	big_num.c
 */
 t_bflt			*new_ftobflt(long double d);
-
-/*
-**	buffer.c
-*/
-char			*insert_buffer(t_printf *const data, char *str);
 
 /*
 **	double_floating.c

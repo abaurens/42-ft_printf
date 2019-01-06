@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 21:56:12 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/03 19:03:13 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/06 20:07:54 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int				ft_printf(const char *format, ...)
 
 	if (!format)
 		return (ERROR);
-	data.buf = NULL;
 	ft_bzero(&data, sizeof(data));
 	data.err = errno;
 	data.use_chain_format = MAYBE;
@@ -41,5 +40,5 @@ int				ft_printf(const char *format, ...)
 	}
 	va_end(data.va_lst);
 	clear_list(&data.args);
-	return (ft_freturn(data.buf, write(1, data.buf, ft_strlen(data.buf))));
+	return (ft_freturn(data.buf, write(1, data.buf, data.len)));
 }

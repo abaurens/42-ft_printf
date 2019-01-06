@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:31:35 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/17 16:03:52 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/06 22:45:02 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,14 @@ char					*wide_character(t_printf *data, t_arg *arg)
 		len = arg->precision;
 	if ((tab_len = arg->min_width) < len)
 		tab_len = len;
-	if (!(res = malloc((wchr_ln * tab_len) + 1)))
+	if (!(res = ft_memalloc(tab_len + 1)))
 		return (NULL);
-	res[wchr_ln * tab_len] = 0;
-	ft_memset(res, (arg->flags & F_ZERO) ? '0' : ' ', wchr_ln * tab_len);
+	ft_memset(res, (arg->flags & F_ZERO) ? '0' : ' ', tab_len);
 	tab_len -= ((arg->flags & F_MINS) ? tab_len : len);
-	ft_wstrtostr(res, v);
-	res = (char *)ft_freturn(res, (long)ft_strmcat(data->buf, res, -1));
-	if (!res)
-		return (NULL);
-	data->buf = (char *)ft_freturn(data->buf, (long)res);
-	return (res);
+	ft_wstrtostr(res + tab_len, v);
+	insert_buffer(data, res, ft_strlen(res));
+	free(res);
+	return (data->buf);
 }
 
 static const t_converter	g_funcs[] =

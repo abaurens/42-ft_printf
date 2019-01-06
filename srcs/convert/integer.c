@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 18:20:02 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/04 14:33:18 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/06 20:34:47 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,9 @@ static char		*integer(t_printf *const data, t_arg *const arg)
 		return (NULL);
 	if ((arg->flags & (F_PLUS | F_SPAC)) && (int)arg->value >= 0)
 		tab[ft_idxof('0', tab)] = (arg->flags & F_PLUS) ? '+' : ' ';
-	tab = (char *)ft_freturn(tab, (long)ft_strmcat(data->buf, tab, -1));
-	if (!tab)
-		return (NULL);
-	return (data->buf = (char *)ft_freturn(data->buf, (long)tab));
+	insert_buffer(data, tab, ft_strlen(tab));
+	free(tab);
+	return (data->buf);
 }
 
 static char		*long_integer(t_printf *const data, t_arg *const arg)
@@ -51,10 +50,9 @@ static char		*long_integer(t_printf *const data, t_arg *const arg)
 		return (NULL);
 	if ((arg->flags & (F_PLUS | F_SPAC)) && (long int)arg->value >= 0)
 		tab[ft_idxof('0', tab)] = (arg->flags & F_PLUS) ? '+' : ' ';
-	tab = (char *)ft_freturn(tab, (long)ft_strmcat(data->buf, tab, -1));
-	if (!tab)
-		return (NULL);
-	return (data->buf = (char *)ft_freturn(data->buf, (long)tab));
+	insert_buffer(data, tab, ft_strlen(tab));
+	free(tab);
+	return (data->buf);
 }
 
 static char		*long_long_integer(t_printf *const data, t_arg *const arg)
@@ -72,10 +70,9 @@ static char		*long_long_integer(t_printf *const data, t_arg *const arg)
 		return (NULL);
 	if ((arg->flags & (F_PLUS | F_SPAC)) && (long long)arg->value >= 0)
 		tab[ft_idxof('0', tab)] = (arg->flags & F_PLUS) ? '+' : ' ';
-	tab = (char *)ft_freturn(tab, (long)ft_strmcat(data->buf, tab, -1));
-	if (!tab)
-		return (NULL);
-	return (data->buf = (char *)ft_freturn(data->buf, (long)tab));
+	insert_buffer(data, tab, ft_strlen(tab));
+	free(tab);
+	return (data->buf);
 }
 
 static char		*short_integer(t_printf *const data, t_arg *const arg)
@@ -93,10 +90,9 @@ static char		*short_integer(t_printf *const data, t_arg *const arg)
 		return (NULL);
 	if ((arg->flags & (F_PLUS | F_SPAC)) && (short int)arg->value >= 0)
 		tab[ft_idxof('0', tab)] = (arg->flags & F_PLUS) ? '+' : ' ';
-	tab = (char *)ft_freturn(tab, (long)ft_strmcat(data->buf, tab, -1));
-	if (!tab)
-		return (NULL);
-	return (data->buf = (char *)ft_freturn(data->buf, (long)tab));
+	insert_buffer(data, tab, ft_strlen(tab));
+	free(tab);
+	return (data->buf);
 }
 
 static char		*short_short_integer(t_printf *const data, t_arg *const arg)
@@ -114,10 +110,9 @@ static char		*short_short_integer(t_printf *const data, t_arg *const arg)
 		return (NULL);
 	if ((arg->flags & (F_PLUS | F_SPAC)) && (signed char)arg->value >= 0)
 		tab[ft_idxof('0', tab)] = (arg->flags & F_PLUS) ? '+' : ' ';
-	tab = (char *)ft_freturn(tab, (long)ft_strmcat(data->buf, tab, -1));
-	if (!tab)
-		return (NULL);
-	return (data->buf = (char *)ft_freturn(data->buf, (long)tab));
+	insert_buffer(data, tab, ft_strlen(tab));
+	free(tab);
+	return (data->buf);
 }
 
 static char		*intmax_integer(t_printf *const data, t_arg *const arg)
@@ -135,10 +130,9 @@ static char		*intmax_integer(t_printf *const data, t_arg *const arg)
 		return (NULL);
 	if ((arg->flags & (F_PLUS | F_SPAC)) && (intmax_t)arg->value >= 0)
 		tab[ft_idxof('0', tab)] = (arg->flags & F_PLUS) ? '+' : ' ';
-	tab = (char *)ft_freturn(tab, (long)ft_strmcat(data->buf, tab, -1));
-	if (!tab)
-		return (NULL);
-	return (data->buf = (char *)ft_freturn(data->buf, (long)tab));
+	insert_buffer(data, tab, ft_strlen(tab));
+	free(tab);
+	return (data->buf);
 }
 
 static char		*size_integer(t_printf *const data, t_arg *const arg)
@@ -156,10 +150,9 @@ static char		*size_integer(t_printf *const data, t_arg *const arg)
 		return (NULL);
 	if ((arg->flags & (F_PLUS | F_SPAC)) && (long long)v >= 0)
 		tab[ft_idxof('0', tab)] = (arg->flags & F_PLUS) ? '+' : ' ';
-	tab = (char *)ft_freturn(tab, (long)ft_strmcat(data->buf, tab, -1));
-	if (!tab)
-		return (NULL);
-	return (data->buf = (char *)ft_freturn(data->buf, (long)tab));
+	insert_buffer(data, tab, ft_strlen(tab));
+	free(tab);
+	return (data->buf);
 }
 
 static char		*ssize_integer(t_printf *const data, t_arg *const arg)
@@ -177,10 +170,9 @@ static char		*ssize_integer(t_printf *const data, t_arg *const arg)
 		return (NULL);
 	if ((arg->flags & (F_PLUS | F_SPAC)) && (long long)v >= 0)
 		tab[ft_idxof('0', tab)] = (arg->flags & F_PLUS) ? '+' : ' ';
-	tab = (char *)ft_freturn(tab, (long)ft_strmcat(data->buf, tab, -1));
-	if (!tab)
-		return (NULL);
-	return (data->buf = (char *)ft_freturn(data->buf, (long)tab));
+	insert_buffer(data, tab, ft_strlen(tab));
+	free(tab);
+	return (data->buf);
 }
 
 static char		*ptrdiff_integer(t_printf *const data, t_arg *const arg)
@@ -198,10 +190,9 @@ static char		*ptrdiff_integer(t_printf *const data, t_arg *const arg)
 		return (NULL);
 	if ((arg->flags & (F_PLUS | F_SPAC)) && (ptrdiff_t)arg->value >= 0)
 		tab[ft_idxof('0', tab)] = (arg->flags & F_PLUS) ? '+' : ' ';
-	tab = (char *)ft_freturn(tab, (long)ft_strmcat(data->buf, tab, -1));
-	if (!tab)
-		return (NULL);
-	return (data->buf = (char *)ft_freturn(data->buf, (long)tab));
+	insert_buffer(data, tab, ft_strlen(tab));
+	free(tab);
+	return (data->buf);
 }
 
 static const t_converter	g_funcs[] =

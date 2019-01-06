@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:28:58 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/06 18:13:22 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/06 20:02:21 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static char		*long_double(t_printf *const data, t_arg *const ar)
 	size_t		add;
 	char		s;
 	char		*t;
-	char		*res;
+	char		*r;
 
 	if (!(t = exp_dbl(ar->ldbl, ar->precision)))
 		return (NULL);
@@ -40,14 +40,14 @@ static char		*long_double(t_printf *const data, t_arg *const ar)
 		ft_memmove(t + s + 1, t + s + 2, ft_strlen(t + s + 1));
 	l = ft_strlen(t);
 	add = ((size_t)ar->min_width > l) ? ar->min_width - l : 0;
-	if (!(res = ft_memalloc(l + add + 1)))
+	if (!(r = ft_memalloc(l + add + 1)))
 		return ((char *)ft_freturn(t, 0x0));
 	if (*t == '-' || (*t == ' ' && (ar->flags & F_PLUS) && (*t = '+')))
-		*res = *t;
+		*r = *t;
 	s *= !!(ar->flags & F_ZERO);
-	ft_memset(res + s, (ar->flags & F_ZERO) ? '0' : '#', add + l - s);
-	ft_memcpy(res + add * !(ar->flags & F_MINS) + s, t + s, l - s);
-	return ((char *)ft_freturn(t, (long)insert_buffer(data, res)));
+	ft_memset(r + s, (ar->flags & F_ZERO) ? '0' : '#', add + l - s);
+	ft_memcpy(r + add * !(ar->flags & F_MINS) + s, t + s, l - s);
+	return ((char *)ft_freturn(t, (long)insert_buffer(data, r, ft_strlen(r))));
 }
 
 static char		*std_double(t_printf *const data, t_arg *const arg)
