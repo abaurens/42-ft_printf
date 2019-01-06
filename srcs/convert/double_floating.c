@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 18:19:18 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/04 18:46:01 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/06 18:20:28 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,17 @@ static char		*build_res(t_arg *arg)
 	return (rs);
 }
 
-static char		*long_double(t_printf *const data, t_arg *const arg)
+char			*printf_ldbl(t_printf *const data, t_arg *const arg)
 {
 	size_t		i;
 	int			j;
 	char		*res;
 
 	j = 0;
+	((void)data);
 	arg->precision *= !(arg->ldbl != arg->ldbl || arg->ldbl == 1.0 / 0.0);
-	res = build_res(arg);
+	if (!(res = build_res(arg)))
+		return (NULL);
 	if ((arg->flags & F_ZERO) && arg->ldbl < 0.0 && (i = ft_idxof('-', res)))
 	{
 		res[i] = res[0];
@@ -86,25 +88,22 @@ static char		*long_double(t_printf *const data, t_arg *const arg)
 	j = (*res == '+' || *res == '-' || *res == ' ');
 	while (res[j] >= '0' && res[j] <= ':')
 		j++;
-	if (arg->flags & F_HASH)
-		res[j] = '.';
-	res = (char *)ft_freturn(res, (long)ft_strmcat(data->buf, res, -1));
-	if (!res)
-		return (NULL);
-	return (data->buf = (char *)ft_freturn(data->buf, (long)res));
+	if (arg->ldbl != 1.0 / 0 && arg->ldbl != -(1.0 / 0) && arg->flags & F_HASH)
+		res[j] = fnan(arg->ldbl) ? res[j] : '.';
+	return (res);
 }
 
 static char		*std_double(t_printf *const data, t_arg *const arg)
 {
 	arg->ldbl = (long double)arg->dbl;
-	return (long_double(data, arg));
+	return (printf_ldbl(data, arg));
 }
 
 static const t_converter	g_funcs[] =
 {
 	{' ', TRUE, std_double},
 	{'l', TRUE, std_double},
-	{'L', TRUE, long_double},
+	{'L', TRUE, printf_ldbl},
 	{'\0', FALSE, NULL}
 };
 
@@ -131,6 +130,6 @@ char			*convert_double_floating(t_printf *data, t_arg *arg)
 	while (g_funcs[i].c && g_funcs[i].c != LEN_MD_CHRS[arg->length_modifier])
 		i++;
 	if (!g_funcs[i].c)
-		return (g_funcs[0].func(data, arg));
-	return (g_funcs[i].func(data, arg));
+		return (insert_buffer(data, g_funcs[0].func(data, arg)));
+	return (insert_buffer(data, g_funcs[i].func(data, arg)));
 }

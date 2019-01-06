@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:28:58 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/04 18:06:42 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/06 18:13:22 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,6 @@
 #include "ft_printf.h"
 #include "ft_types.h"
 #include "libft.h"
-
-static char		*insert_buffer(t_printf *const data, char *str)
-{
-	if (!str)
-		return (NULL);
-	if (!(str = (char *)ft_freturn(str, (long)ft_strmcat(data->buf, str, -1))))
-		return (NULL);
-	return (data->buf = (char *)ft_freturn(data->buf, (long)str));
-}
 
 static char		ldbl_num(long double d)
 {

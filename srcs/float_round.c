@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/03 19:22:34 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/04 17:50:53 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/06 17:50:47 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,12 @@ char			*round_tabflt(char *val, size_t prec, int *exp)
 	if (i && (!ft_strcmp(val, "nan") || !ft_strcmp(val + (*val == '-'), "inf")))
 		return (val);
 	while (val && i-- > entl + prec + 1)
-		if (val[i] >= '5')
+		if (val[i] > '5' || (val[i - 1] != '.' && val[i] >= '5'))
 		{
 			val[i - (val[i - 1] == '.' ? 2 : 1)]++;
-			val[i] = '0';
 		}
+	if (val[entl] == '.' && val[entl + 1] == '5' && val[entl + 2] != 0)
+		val[entl - 1]++;
 	i++;
 	while (val && i-- > entl)
 		if (val[i] != '.' && val[i] > '9')

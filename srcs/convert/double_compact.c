@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:29:42 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/04 18:41:20 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/06 18:19:48 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,32 @@
 #include "ft_types.h"
 #include "libft.h"
 
+static char		*remove_zeros(char *str, t_arg *arg)
+{
+	size_t		i;
+	size_t		len;
+	char		type;
+
+	if (!str || !ft_strchr(str, '.'))
+		return (str);
+	len = ft_min(ft_idxof('e', str), ft_idxof('E', str));
+	type = (str[len] == 'e');
+	i = len;
+	while (str[--i] == '0' || str[i] == ' ')
+		str[i] = (i < (size_t)arg->min_width) || type ? ' ' : 0;
+	if (str[i] == '.')
+		str[i] = (i < (size_t)arg->min_width) || type ? ' ' : 0;
+	if (type)
+		ft_memmove(str + i + 1, str + len, ft_strlen(str + len - 1));
+	return (str);
+}
+
 static char		*long_double(t_printf *const data, t_arg *const arg)
 {
+	long double	tmp;
 	char		num;
 	int			exp;
-	long double	tmp;
+	char		*res;
 
 	exp = 0;
 	tmp = arg->ldbl;
@@ -30,9 +51,14 @@ static char		*long_double(t_printf *const data, t_arg *const arg)
 	num = (num && tmp != (1.0 / 0.0));
 	while (num && tmp != .0 && ((tmp < 1.0 && --exp) || (tmp >= 10.0 && ++exp)))
 		tmp = (tmp >= 10.0 ? tmp / 10.0 : tmp * 10.0);
-	if (num && (exp < -4 || exp >= arg->precision))
-		return (convert_double_scientific(data, arg));
-	return (convert_double_floating(data, arg));
+	if (num && (exp < -4 || exp >= arg->precision) && arg->precision--)
+		return (remove_zeros(convert_double_scientific(data, arg), arg));
+	arg->precision -= (exp + 1);
+	if (!(res = remove_zeros(printf_ldbl(data, arg), arg)))
+		return (NULL);
+	if (!(res = (char *)ft_freturn(res, (long)ft_strmcat(data->buf, res, -1))))
+		return (NULL);
+	return (data->buf = (char *)ft_freturn(data->buf, (long)res));
 }
 
 static char		*std_double(t_printf *const data, t_arg *const arg)

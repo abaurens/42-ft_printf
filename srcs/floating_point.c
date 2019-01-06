@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 16:39:57 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/04 18:51:37 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/06 18:00:12 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,33 +146,15 @@ long double			dbl_abs(long double *d, char *sign)
 	return (d ? *d : 0.0 / 0.0);
 }
 
-char				*ft_ldtoa(long double d)
+static char			*process_exponent(char *val, int exp)
 {
-	t_float			fl;
-	t_bflt			*tmp;
-	t_bflt			*expo;
-	t_bflt			*mant;
-	char			*res;
-
-	if (d != d)
-		return (ft_strdup("nan"));
-	if (d == (1.0 / 0.0) || d == -(1.0 / 0.0))
-		return (ft_strdup(d < 0.0 ? "-inf" : "inf"));
-	fl = get_float_components(d);
-	mant = get_mantissa(&fl);
-	expo = new_bflt(fl.exponent < 0 ? "0.5" : "2");
-	while ((expo && mant) && fl.exponent && ((tmp = mant) || 1))
+	if (exp < 0)
 	{
-		fl.exponent += (fl.exponent < 0 ? 1 : -1);
-		mant = mul_bflt(expo, mant);
-		del_bflt(tmp);
+		exp = ft_abs(exp);
+		ft_memmove(val, val + exp + 1, ft_strlen(val + exp));
 	}
-	del_bflt(expo);
-	res = expo ? bflt_tostr(mant) : NULL;
-	del_bflt(mant);
-	if (res && fl.sign)
-		res = (char *)ft_freturn(res, (long)ft_strmcat("-", res, -1));
-	return (res);
+	((char *)ft_memmove(val + 1, val, ft_idxof('.', val)))[0] = '.';
+	return (val);
 }
 
 char				*exp_dbl(long double d, size_t prec)
@@ -189,9 +171,9 @@ char				*exp_dbl(long double d, size_t prec)
 		return (ft_strdup(sign ? "-inf" : "inf"));
 	if (!(tmp = ft_ldtoa(d)))
 		return (NULL);
-	((char *)ft_memmove(tmp + 1, tmp, ft_idxof('.', tmp)))[0] = '.';
 	while (d != 0.0 && ((d < 1.0 && --exp) || (d >= 10.0 && ++exp)))
 		d = (d >= 10.0 ? d / 10.0 : d * 10.0);
+	tmp = process_exponent(tmp, exp);
 	round_tabflt(tmp, prec, &exp);
 	expl = ft_max(2, ft_unsignedlen(ft_abs(exp)));
 	if (!tmp || !(res = ft_memalloc(sign + 2 + prec + 2 + expl + 1)))

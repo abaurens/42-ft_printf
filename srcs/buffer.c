@@ -1,36 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   buffer.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/03 22:25:56 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/06 18:22:04 by abaurens         ###   ########.fr       */
+/*   Created: 2019/01/06 18:12:42 by abaurens          #+#    #+#             */
+/*   Updated: 2019/01/06 18:13:10 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <limits.h>
-#include <locale.h>
-#include <fcntl.h>
-#include <float.h>
-#include <errno.h>
-#include <stdio.h>
-#include <time.h>
-#include <math.h>
-
-#include "ft_printf.h"
-#include "ft_error.h"
+#include "ft_types.h"
 #include "libft.h"
 
-int				main(void)
+char		*insert_buffer(t_printf *const data, char *str)
 {
-	long double	d;
-
-	d = 684351465.54513600000;
-	printf("R : %-2.5Lg\n", d);
-	fflush(stdout);
-	ft_printf("F : %-2.5Lg\n", d);
-	return (0);
+	if (!str)
+		return (NULL);
+	if (!(str = (char *)ft_freturn(str, (long)ft_strmcat(data->buf, str, -1))))
+		return (NULL);
+	return (data->buf = (char *)ft_freturn(data->buf, (long)str));
 }
