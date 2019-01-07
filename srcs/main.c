@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 22:25:56 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/06 23:07:05 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/07 22:13:16 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,20 @@ int				main(void)
 
 	l = 0;
 	d = 684351465.54513600000;
+	d = 0.9;
+	d = 22;
 	setlocale(LC_ALL, "");
-	printf("R : %.3Le\n", d);
-	printf("R : %.3La\n\n", d);
+	/*while (d <= 1.001)
+	{
+		printf("num : %Lf\n", d);
+		ft_printf("%La\n", d);
+		printf("R : %La\n=======================\n", d);
+		fflush(stdout);
+		d += 0.001;
+	}*/
+	printf("num : %Lf\n", d);
+	ft_printf("%La\n", d);
+	printf("R : %La\n=======================\n", d);
 	fflush(stdout);
-	ft_printf("R : %.3Le\n", d);
-	ft_printf("F : %.3La\n", d);
 	return (0);
 }

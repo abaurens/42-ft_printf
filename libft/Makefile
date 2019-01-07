@@ -6,7 +6,7 @@
 #    By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 16:08:06 by abaurens          #+#    #+#              #
-#    Updated: 2019/01/06 19:05:49 by abaurens         ###   ########.fr        #
+#    Updated: 2019/01/07 18:10:35 by abaurens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,8 @@ SRC_DIR	=		srcs
 OBJ_DIR	=		objs
 SRC		=		\
 				ft_nan.c				\
+				ft_pow.c				\
+				ft_sqrt.c				\
 				ft_itoa.c				\
 				ft_atoi.c				\
 				ft_bzero.c				\

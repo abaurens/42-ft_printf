@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 21:58:06 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/06 22:22:05 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/07 21:17:18 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ char			*ft_wstrtostr(char *dst, const wchar_t *src);
 **	ft_ldtoa.c
 */
 char			*ft_ldtoa(long double d);
+char			*exp_dbl(long double d, size_t prec);
+char			*exp_dbl_hex(long double d, size_t prec);
 
 /*
 **	floating_point.c
@@ -91,7 +93,6 @@ char			*ft_ldtoa(long double d);
 t_bflt			*get_mantissa(t_float *f);
 long double		dbl_abs(long double *d, char *sign);
 t_float			get_float_components(long double d);
-char			*exp_dbl(long double d, size_t prec);
 
 /*
 **	float_round.c
@@ -101,6 +102,7 @@ char			*round_tabflt(char *val, size_t prec, int *exp);
 /*
 **	big_num.c
 */
+char			*to_hex(t_bflt *deci);
 t_bflt			*new_ftobflt(long double d);
 
 /*

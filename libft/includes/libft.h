@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 16:09:37 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/04 18:07:42 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/07 18:26:28 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,9 +115,16 @@ char				*ft_strnstr(const char *haystack, const char *needle,
 
 char				**ft_strsplit(char const *s, char c);
 
+long long int		ft_freturn(void *ptr, long long int ret);
+
+/*
+**	maths
+*/
+long double			ft_sqrt(long double nb);
+long double			ft_pow(long double v, long long int p);
+
 long long int		ft_abs(long long int nb);
 long long int		ft_min(long long int a, long long int b);
 long long int		ft_max(long long int a, long long int b);
-long long int		ft_freturn(void *ptr, long long int ret);
 
 #endif

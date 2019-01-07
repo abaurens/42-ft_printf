@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:30:24 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/06 23:13:43 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/07 18:29:05 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,7 @@
 
 static char		*long_double(t_printf *const data, t_arg *const arg)
 {
-	t_float		fl;
-
-	fl = get_float_components(arg->ldbl);
-	printf("sign : %d\nexponent = %d\n", fl.sign, fl.exponent);
+	exp_dbl_hex(arg->ldbl, arg->precision);
 	return (NULL);
 }
 
