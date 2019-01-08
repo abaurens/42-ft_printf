@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 18:26:04 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/06 22:22:54 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/08 18:15:44 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,6 +240,31 @@ static char			*ptrdiff_integer(t_printf *const data, t_arg *const arg)
 	return (data->buf);
 }
 
+static char			*quad_integer(t_printf *const data, t_arg *const arg)
+{
+	u_quad_t		v;
+	int				len;
+	char			*tab;
+
+	v = (u_quad_t)arg->value;
+	if ((len = ft_unsignedlen_base(v, "0123456789abcdef")) > arg->precision)
+		arg->precision = len;
+	if (arg->flags & F_ZERO && arg->min_width > arg->precision)
+		arg->precision = arg->min_width;
+	if ((arg->flags & F_HASH) && v != 0 && arg->precision == len)
+		arg->precision += ((len + 2) - arg->precision);
+	if (!(tab = padded_ulltoa_hexa(v, arg->precision, arg->min_width,
+		(arg->flags & F_MINS) != 0)))
+		return (NULL);
+	if ((arg->flags & F_HASH) && v != 0)
+		tab[ft_idxof('0', tab) + 1] = 'x';
+	if (ft_isupper(arg->conv.c))
+		ft_strupcase(tab);
+	insert_buffer(data, tab, ft_strlen(tab));
+	free(tab);
+	return (data->buf);
+}
+
 static const t_converter	g_funcs[] =
 {
 	{'H', TRUE, short_short_integer},
@@ -248,7 +273,7 @@ static const t_converter	g_funcs[] =
 	{'j', TRUE, intmax_integer},
 	{'l', TRUE, long_integer},
 	{'L', TRUE, long_long_integer},
-	{'q', TRUE, long_long_integer},
+	{'q', TRUE, quad_integer},
 	{'z', TRUE, size_integer},
 	{'Z', TRUE, ssize_integer},
 	{'t', TRUE, ptrdiff_integer},

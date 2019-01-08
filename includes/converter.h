@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 13:53:50 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/06 22:21:49 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/08 18:06:48 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "ft_types.h"
 
-# define CONV_V "diuoxXfFeEgGaAcCsSpnmbrk"
+# define CONV_V "%diuoxXfFeEgGaAcCsSpnmbrk"
 
 /*
 **	i, d = signed decimal

@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:28:58 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/06 20:02:21 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/08 16:48:42 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,6 @@
 #include "ft_printf.h"
 #include "ft_types.h"
 #include "libft.h"
-
-static char		ldbl_num(long double d)
-{
-	return (!fnan(d) && dbl_abs(&d, NULL) != (1.0 / 0.0));
-}
 
 static char		*long_double(t_printf *const data, t_arg *const ar)
 {
@@ -45,7 +40,7 @@ static char		*long_double(t_printf *const data, t_arg *const ar)
 	if (*t == '-' || (*t == ' ' && (ar->flags & F_PLUS) && (*t = '+')))
 		*r = *t;
 	s *= !!(ar->flags & F_ZERO);
-	ft_memset(r + s, (ar->flags & F_ZERO) ? '0' : '#', add + l - s);
+	ft_memset(r + s, (ar->flags & F_ZERO) ? '0' : ' ', add + l - s);
 	ft_memcpy(r + add * !(ar->flags & F_MINS) + s, t + s, l - s);
 	return ((char *)ft_freturn(t, (long)insert_buffer(data, r, ft_strlen(r))));
 }

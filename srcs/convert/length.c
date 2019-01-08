@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 18:17:28 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/06 22:52:31 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/08 18:13:35 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,15 @@ static char		*ptrdiff_integer(t_printf *const data, t_arg *const arg)
 	return (data->buf);
 }
 
+static char		*quad_integer(t_printf *const data, t_arg *const arg)
+{
+	quad_t		*v;
+
+	v = (quad_t *)arg->value;
+	*v = data->len;
+	return (data->buf);
+}
+
 static const t_converter	g_funcs[] =
 {
 	{'H', TRUE, short_short_integer},
@@ -102,7 +111,7 @@ static const t_converter	g_funcs[] =
 	{'j', TRUE, intmax_integer},
 	{'l', TRUE, long_integer},
 	{'L', TRUE, long_long_integer},
-	{'q', TRUE, long_long_integer},
+	{'q', TRUE, quad_integer},
 	{'z', TRUE, size_integer},
 	{'Z', TRUE, ssize_integer},
 	{'t', TRUE, ptrdiff_integer},

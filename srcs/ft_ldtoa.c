@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/06 17:51:08 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/08 01:24:44 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/08 17:43:49 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,68 +109,31 @@ static char		*get_exp_hex(long double *d, int *exp)
 	return (res);
 }
 
-static char		*round_hex(char *val, size_t prec, int *exp)
+char			*exp_dbl_hex(long double d, int prec)
 {
-	size_t		i;
-	size_t		entl;
-	char		digit;
-	char		sign;
-
-	i = ft_idxof(0, val);
-	if (i && (!ft_strcmp(val, "nan") || !ft_strcmp(val + (*val == '-'), "inf")))
-		return (val);
-	while (val && i-- > entl + prec + 1)
-	{
-		if (val[i] == ':')
-			val[i] = 'a';
-		digit = ft_idxof(val[i], "0123456789abcdef");
-		if (digit > 8 || (val[i - 1] != '.' && val[i] >= 8))
-			val[i - (val[i - 1] == '.' ? 2 : 1)]++;
-	}
-	printf("MID : %s\n", val);
-	exit(0);
-	if (val && (val[entl] == '.' && val[entl + 1] == '8' && val[entl + 2] != 0))
-		val[entl - 1]++;
-	i++;
-	while (val && i-- > entl)
-	{
-		if (val[i] == ':')
-			val[i] = 'a';
-		if (val[i] != '.' && ft_idxof(val[i], "0123456789abcdef") >= 16)
-		{
-			val[i - (val[i - 1] == '.' ? 2 : 1)]++;
-			val[i] = '0';
-		}
-	}
-	if (val && (sign = ft_contains(*val, " +-")))
-		val++;
-	if (val && ft_idxof(*val, "0123456789abcdef") >= 16)
-	{
-		*val = '1';
-		(*exp) += 4;
-	}
-	if (val && sign)
-		val--;
-	return (val);
-}
-
-char			*exp_dbl_hex(long double d, size_t prec)
-{
-	size_t			expl;
-	char			sign;
 	int				exp;
+	char			sign;
 	char			*tmp;
 	char			*res;
+	size_t			expl;
 
 	if ((sign = 0) || d != d)
 		return (ft_strdup("nan"));
 	if ((exp = 0) || dbl_abs(&d, &sign) == (1.0 / 0.0))
 		return (ft_strdup(sign ? "-inf" : "inf"));
-	/*if (!(tmp = ft_ldtoa(d)))
-		return (NULL);*/
-	res = get_exp_hex(&d, &exp);
-	printf("    0x%sp%+d\n", res, exp);
-	res = round_hex(res, prec, &exp);
-	printf("    0x%sp%+d\n", res, exp);
-	return (NULL);
+	tmp = get_exp_hex(&d, &exp);
+	if (!tmp || (prec >= 0 && !round_hex(tmp, prec, &exp)))
+		return (NULL);
+	prec = (prec < 0 ? ft_strlen(tmp) : prec + 2);
+	expl = ft_unsignedlen(ft_abs(exp));
+	if (!tmp || !(res = ft_memalloc(sign + 2 + prec + 2 + expl + 1)))
+		return (NULL);
+	*res = '-';
+	ft_memset(res + sign, '0', 2 + prec + 2 + expl);
+	ft_memcpy(res + sign, "0x", 2);
+	ft_memcpy(res + sign + 2, tmp, ft_min(prec + 2, ft_strlen(tmp)));
+	ft_memcpy(res + sign + 2 + prec, (exp < 0 ? "p-" : "p+"), 2);
+	while (expl-- > 0 && (res[sign + 4 + prec + expl] = ft_abs(exp % 10) + '0'))
+		exp = ft_abs(exp / 10);
+	return (res);
 }

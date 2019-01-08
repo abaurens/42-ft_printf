@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 20:22:26 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/08 00:50:35 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/08 17:46:49 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_bflt		*new_ftobflt(long double d)
 	fl = get_float_components(d);
 	res = get_mantissa(&fl);
 	expo = new_bflt(fl.exponent < 0 ? "0.5" : "2");
-	while ((expo && res) && fl.exponent--)
+	while ((expo && res) && fl.exponent < 0 ? fl.exponent++ : fl.exponent--)
 	{
 		tmp = res;
 		res = mul_bflt(expo, res);

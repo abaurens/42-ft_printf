@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 18:29:02 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/08 00:17:45 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/08 18:12:00 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <stdarg.h>
 # include <stddef.h>
 # include <inttypes.h>
+# include <sys/types.h>
 
 # define ERROR -1
 

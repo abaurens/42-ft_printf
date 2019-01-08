@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:34:47 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/06 22:45:41 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/08 17:55:34 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,8 @@ char						*wide_character_string(t_printf *data, t_arg *arg)
 		v = L"(null)";
 	if ((len = ft_wstrlen(v)) > arg->precision && arg->precision)
 		len = arg->precision;
-	printf("len = %d\n", len);
 	if ((tab_len = arg->min_width) < len)
 		tab_len = len;
-	printf("len = %d\n", tab_len);
 	if (!(res = ft_memalloc(tab_len + 1)))
 		return (NULL);
 	ft_memset(res, (arg->flags & F_ZERO) ? '0' : ' ', tab_len);

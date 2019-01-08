@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 21:02:59 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/06 22:10:34 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/08 18:15:17 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,6 +204,27 @@ static char			*ptrdiff_integer(t_printf *const data, t_arg *const arg)
 	return (data->buf);
 }
 
+static char			*quad_integer(t_printf *const data, t_arg *const arg)
+{
+	u_quad_t		v;
+	char			*tab;
+	int				len;
+
+	v = (u_quad_t)arg->value;
+	if ((len = ft_unsignedlen_base(v, "01234567")) > arg->precision)
+		arg->precision = len;
+	if (arg->flags & F_ZERO && arg->min_width > arg->precision)
+		arg->precision = arg->min_width;
+	if (arg->flags & F_HASH && v != 0 && arg->precision <= len)
+		arg->precision++;
+	if (!(tab = padded_ulltoa_octal(v, arg->precision, arg->min_width,
+		(arg->flags & F_MINS) != 0)))
+		return (NULL);
+	insert_buffer(data, tab, ft_strlen(tab));
+	free(tab);
+	return (data->buf);
+}
+
 static const t_converter	g_funcs[] =
 {
 	{'H', TRUE, short_short_integer},
@@ -212,7 +233,7 @@ static const t_converter	g_funcs[] =
 	{'j', TRUE, intmax_integer},
 	{'l', TRUE, long_integer},
 	{'L', TRUE, long_long_integer},
-	{'q', TRUE, long_long_integer},
+	{'q', TRUE, quad_integer},
 	{'z', TRUE, size_integer},
 	{'Z', TRUE, ssize_integer},
 	{'t', TRUE, ptrdiff_integer},
