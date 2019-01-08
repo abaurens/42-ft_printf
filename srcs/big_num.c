@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 20:22:26 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/07 22:14:43 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/08 00:50:35 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,26 +74,64 @@ static unsigned long	div_tab(char *v, unsigned long div)
 
 char		*to_hex(t_bflt *deci)
 {
-	t_bflt	bse;
+	t_bflt	base;
+	t_bflt	*tmp;
 	char	*tab;
-	char	res[51];
+	char	*res;
 	int		l;
 
-	res[50] = 0;
-	set_bflt(&bse, "16.0");
-	ft_memset(res, '0', 50);
-	while (deci->decl > 0)
-		deci = mul_bflt(deci, &bse);
-	tab = bflt_tostr(deci);
+	/*
+	**	mooving the dot in the hex form so there's no decimal part anymore
+	**	l takes care not to delete the first instance of deci
+	**	(deleting deci is none of this function buisness)
+	*/
 	l = 0;
-	printf("before | %s\n", tab);
+	set_bflt(&base, "16.0");
+	while (deci && deci->decl > 0 && (tmp = deci))
+		if ((deci = mul_bflt(deci, &base)) && l++)
+			del_bflt(tmp);
+	unset_bflt(&base);
+
+	/*
+	**	convert deci into two string instances then
+	**	delete it if it has been modified.
+	*/
+	if (!(tab = bflt_tostr(deci)) || l)
+		del_bflt(deci);
+	if (!tab || !(res = ft_strdup(tab)))
+		return ((char *)ft_freturn(tab, 0x0));
+	tab[ft_idxof('.', tab)] = 0;
+	res[ft_idxof('.', res)] = 0;
+
+	/*
+	**	compute the length of the result string then delete the first
+	**	string instance.
+	*/
+	l = 0;
+	while ((tab[0] != '0' || tab[1] != 0) && ++l)
+		div_tab(tab, 16);
+	free(tab);
+	tab = res;
+
+	/*
+	**	allocate the final string result and take care of deleting tab if failed
+	*/
+	if (!(res = ft_memalloc(l + 2)))
+		return ((char *)ft_freturn(tab, 0x0));
+
+	/*
+	**	insert the digits into the final string result
+	*/
 	while ((tab[0] != '0' || tab[1] != 0))
-	{
-		res[l] = "0123456789abcdef"[div_tab(tab, 16)];
-		printf("%c\n", res[l]);
-		l++;
-	}
-	printf("%d\n", l);
-	printf("res = %s\n", res);
-	return (NULL);
+		res[l--] = "0123456789abcdef"[div_tab(tab, 16)];
+	/*
+	**	move the first digit at the begining and insert the dot in right place
+	*/
+	res[0] = (char)ft_freturn(tab, (long)res[1]);
+	res[1] = '.';
+
+	/*
+	**	return the final result
+	*/
+	return (res);
 }
