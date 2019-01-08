@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 18:25:04 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/08 18:14:49 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/08 23:49:48 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,7 @@ static char			*quad_integer(t_printf *const data, t_arg *const arg)
 
 	v = (quad_t)arg->value;
 	if (arg->flags & F_ZERO)
-		arg->precision = arg->min_width - (v < 0);
+		arg->precision = arg->min_width;
 	if (!(tab = padded_ulltoa(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);

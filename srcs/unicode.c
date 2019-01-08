@@ -6,12 +6,26 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 16:02:45 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/06 22:43:45 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/09 00:51:12 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_types.h"
 #include "libft.h"
+
+size_t					ft_wchar_len(const wchar_t chr)
+{
+	size_t				l;
+
+	l = 1;
+	if (chr >= 0x80)
+		l++;
+	if (chr >= 0x800)
+		l++;
+	if (chr >= 0x10000)
+		l++;
+	return (l);
+}
 
 size_t					ft_wstrlen(const wchar_t *wstr)
 {
@@ -22,13 +36,7 @@ size_t					ft_wstrlen(const wchar_t *wstr)
 	s = (wchar_t *)wstr;
 	while (*s)
 	{
-		l++;
-		if (*s >= 0x80)
-			l++;
-		if (*s >= 0x800)
-			l++;
-		if (*s >= 0x10000)
-			l++;
+		l += ft_wchar_len(*s);
 		s++;
 	}
 	return (l);
@@ -63,13 +71,18 @@ size_t					wchartochars(char *dst, wchar_t c)
 
 char					*ft_wstrtostr(char *dst, const wchar_t *src)
 {
-	char				l;
+	size_t				l;
 	char				*d;
 
 	d = (char *)dst;
 	while (*src)
 	{
-		l = wchartochars(d, *src);
+		if ((l = ft_wchar_len(*src)) > ft_strlen(d))
+		{
+			ft_bzero(d, ft_strlen(d));
+			break ;
+		}
+		wchartochars(d, *src);
 		d += l;
 		src++;
 	}
