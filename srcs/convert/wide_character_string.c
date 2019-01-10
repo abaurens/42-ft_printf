@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:34:47 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/08 17:55:34 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/09 00:52:34 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,8 @@ char						*wide_character_string(t_printf *data, t_arg *arg)
 	wchar_t					*v;
 	char					*res;
 	int						len;
-	size_t					wchr_ln;
 	int						tab_len;
 
-	wchr_ln = sizeof(wchar_t);
 	if (!(v = (wchar_t *)arg->value))
 		v = L"(null)";
 	if ((len = ft_wstrlen(v)) > arg->precision && arg->precision)

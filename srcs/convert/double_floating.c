@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 18:19:18 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/06 20:06:06 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/08 23:53:13 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ char			*printf_ldbl(t_printf *const data, t_arg *const arg)
 	j = (*res == '+' || *res == '-' || *res == ' ');
 	while (res[j] >= '0' && res[j] <= ':')
 		j++;
-	if (arg->ldbl != 1.0 / 0 && arg->ldbl != -(1.0 / 0) && arg->flags & F_HASH)
-		res[j] = fnan(arg->ldbl) ? res[j] : '.';
+	if (ldbl_num(arg->ldbl) && arg->flags & F_HASH)
+		res[j] = '.';
 	return (res);
 }
 

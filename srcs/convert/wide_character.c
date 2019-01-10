@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:31:35 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/06 22:45:02 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/09 00:56:22 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,12 @@ char					*wide_character(t_printf *data, t_arg *arg)
 	wchar_t				v[2];
 	char				*res;
 	int					len;
-	size_t				wchr_ln;
 	int					tab_len;
 
 	v[1] = 0;
-	wchr_ln = sizeof(wchar_t);
 	if (!(*v = (wchar_t)arg->value))
 		return (data->buf);
-	if ((len = ft_wstrlen(v)) > arg->precision && arg->precision)
-		len = arg->precision;
+	len = ft_wchar_len(*v);
 	if ((tab_len = arg->min_width) < len)
 		tab_len = len;
 	if (!(res = ft_memalloc(tab_len + 1)))
