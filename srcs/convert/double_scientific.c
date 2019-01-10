@@ -6,14 +6,14 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:28:58 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/08 16:48:42 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/10 15:20:05 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
 #include <stdlib.h>
-#include "ft_core.h"
-#include "ft_types.h"
+#include "core/ft_core.h"
+#include "core/ft_types.h"
 #include "libft.h"
 
 static char		*long_double(t_printf *const data, t_arg *const ar)

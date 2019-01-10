@@ -6,17 +6,15 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:45:31 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/10 12:27:51 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/10 15:29:32 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <time.h>
 #include <stdlib.h>
-#include "ft_core.h"
-#include "ft_types.h"
+#include "core/ft_core.h"
+#include "core/ft_types.h"
 #include "libft.h"
-
-//2019-01-10T12:08:00Z
 
 static const char *g_months[] =
 {

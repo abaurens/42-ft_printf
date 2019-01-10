@@ -6,13 +6,13 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:29:42 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/06 18:19:48 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/10 15:19:25 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_core.h"
-#include "converter.h"
-#include "ft_types.h"
+#include "core/ft_core.h"
+#include "core/converter.h"
+#include "core/ft_types.h"
 #include "libft.h"
 
 static char		*remove_zeros(char *str, t_arg *arg)

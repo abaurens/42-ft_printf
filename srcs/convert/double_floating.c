@@ -6,15 +6,15 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 18:19:18 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/08 23:53:13 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/10 15:19:36 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <float.h>
 #include <stdarg.h>
 #include <stdlib.h>
-#include "ft_core.h"
-#include "ft_types.h"
+#include "core/ft_core.h"
+#include "core/ft_types.h"
 #include "libft.h"
 
 static char		*alloc_res(size_t dtl, t_arg *arg, size_t add)

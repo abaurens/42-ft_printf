@@ -6,13 +6,13 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:44:41 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/06 22:58:00 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/10 15:37:57 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "ft_core.h"
-#include "ft_types.h"
+#include "core/ft_core.h"
+#include "core/ft_types.h"
 #include "libft.h"
 
 static size_t		ft_unprint_strlen(const char *s)

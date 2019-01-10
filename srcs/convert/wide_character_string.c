@@ -6,14 +6,13 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:34:47 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/09 00:52:34 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/10 15:39:44 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "ft_core.h"
-#include "ft_types.h"
-#include "converter.h"
+#include "core/ft_core.h"
+#include "core/ft_types.h"
 #include "libft.h"
 
 char						*wide_character_string(t_printf *data, t_arg *arg)

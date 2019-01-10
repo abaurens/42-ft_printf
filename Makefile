@@ -6,7 +6,7 @@
 #    By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 16:23:33 by abaurens          #+#    #+#              #
-#    Updated: 2019/01/10 15:15:43 by abaurens         ###   ########.fr        #
+#    Updated: 2019/01/10 16:03:00 by abaurens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,21 +29,41 @@ SRC         =   main.c	\
 				ft_asprintf.c	\
 				ft_dprintf.c	\
 				\
+				convert/integer/integer.c			\
+				convert/integer/long.c				\
+				convert/integer/short.c				\
+				convert/integer/exotic.c			\
+				\
+				convert/length/length.c				\
+				convert/length/long.c				\
+				convert/length/short.c				\
+				convert/length/exotic.c				\
+				\
+				convert/uinteger/uinteger.c			\
+				convert/uinteger/long.c				\
+				convert/uinteger/short.c			\
+				convert/uinteger/exotic.c			\
+				\
+				convert/ubinary/ubinary.c			\
+				convert/ubinary/long.c				\
+				convert/ubinary/short.c				\
+				convert/ubinary/exotic.c			\
+				\
+				convert/uhexa/uhexa.c				\
+				convert/uhexa/long.c				\
+				convert/uhexa/short.c				\
+				convert/uhexa/exotic.c				\
+				\
 				convert/char.c					\
 				convert/string.c				\
-				convert/length.c				\
-				convert/integer.c				\
 				convert/percent.c				\
 				convert/pointer.c				\
 				convert/strerror.c				\
-				convert/u_integer.c				\
 				convert/double_hexa.c			\
 				convert/double_compact.c		\
-				convert/u_integer_hexa.c		\
 				convert/wide_character.c		\
 				convert/u_integer_octal.c		\
 				convert/double_floating.c		\
-				convert/u_integer_binary.c		\
 				convert/double_scientific.c		\
 				convert/iso_formated_date.c		\
 				convert/non_printable_string.c	\

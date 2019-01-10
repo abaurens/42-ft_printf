@@ -1,54 +1,66 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wide_character.c                                   :+:      :+:    :+:   */
+/*   uhexa.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/09 17:31:35 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/10 15:40:03 by abaurens         ###   ########.fr       */
+/*   Created: 2018/12/07 18:26:04 by abaurens          #+#    #+#             */
+/*   Updated: 2019/01/10 16:01:06 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "uhexa.h"
 #include "core/ft_core.h"
 #include "core/ft_types.h"
 #include "libft.h"
 
-char					*wide_character(t_printf *data, t_arg *arg)
+static char			*hexa(t_printf *const data, t_arg *const arg)
 {
-	wchar_t				v[2];
-	char				*res;
-	int					len;
-	int					tab_len;
+	unsigned int	v;
+	int				len;
+	char			*tab;
 
-	v[1] = 0;
-	if (!(*v = (wchar_t)arg->value))
-		return (data->buf);
-	len = ft_wchar_len(*v);
-	if ((tab_len = arg->min_width) < len)
-		tab_len = len;
-	if (!(res = ft_memalloc(tab_len + 1)))
+	v = (unsigned int)arg->value;
+	if ((len = ft_unsignedlen_base(v, "0123456789abcdef")) > arg->precision)
+		arg->precision = len;
+	if (arg->flags & F_ZERO && arg->min_width > arg->precision)
+		arg->precision = arg->min_width;
+	if ((arg->flags & F_HASH) && v != 0 && arg->precision == len)
+		arg->precision += ((len + 2) - arg->precision);
+	if (!(tab = padded_ulltoa_hexa(v, arg->precision, arg->min_width,
+		(arg->flags & F_MINS) != 0)))
 		return (NULL);
-	ft_memset(res, (arg->flags & F_ZERO) ? '0' : ' ', tab_len);
-	tab_len -= ((arg->flags & F_MINS) ? tab_len : len);
-	ft_wstrtostr(res + tab_len, v);
-	insert_buffer(data, res, ft_strlen(res));
-	free(res);
+	if ((arg->flags & F_HASH) && v != 0)
+		tab[ft_idxof('0', tab) + 1] = 'x';
+	if (ft_isupper(arg->conv.c))
+		ft_strupcase(tab);
+	insert_buffer(data, tab, ft_strlen(tab));
+	free(tab);
 	return (data->buf);
 }
 
 static const t_converter	g_funcs[] =
 {
-	{' ', TRUE, wide_character},
+	{'H', TRUE, short_short_hexa},
+	{'h', TRUE, short_hexa},
+	{' ', TRUE, hexa},
+	{'j', TRUE, intmax_hexa},
+	{'l', TRUE, long_hexa},
+	{'L', TRUE, long_long_hexa},
+	{'q', TRUE, quad_hexa},
+	{'z', TRUE, size_hexa},
+	{'Z', TRUE, ssize_hexa},
+	{'t', TRUE, ptrdiff_hexa},
 	{'\0', FALSE, NULL}
 };
 
-char					*convert_wide_char(t_printf *data, t_arg *arg)
+char				*convert_u_integer_hexa(t_printf *data, t_arg *arg)
 {
-	int					i;
-	long long			prec;
-	long long			min;
+	int				i;
+	long long		min;
+	long long		prec;
 
 	min = arg->min_width;
 	prec = arg->precision;
@@ -56,11 +68,11 @@ char					*convert_wide_char(t_printf *data, t_arg *arg)
 	i = (i || (arg->min_width_idx && get_arg(data, arg->min_width_idx, &min)));
 	if (i || (arg->precision_idx && get_arg(data, arg->precision_idx, &prec)))
 		return (NULL);
-	i = 0;
 	arg->min_width = (((int)min) < 0 ? 0 : (int)min);
 	if ((arg->precision = (((int)prec) < 0 ? 0 : (int)prec))
 		|| (arg->flags & F_MINS))
 		arg->flags &= ~F_ZERO;
+	i = 0;
 	while (g_funcs[i].c && g_funcs[i].c != LEN_MD_CHRS[arg->length_modifier])
 		i++;
 	if (!g_funcs[i].c)

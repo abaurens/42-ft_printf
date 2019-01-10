@@ -6,12 +6,12 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:30:24 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/08 19:50:01 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/10 15:19:54 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_core.h"
-#include "ft_types.h"
+#include "core/ft_core.h"
+#include "core/ft_types.h"
 #include "libft.h"
 
 static char		*manage_prefix(char *r, t_printf *const data, t_arg *const ar)

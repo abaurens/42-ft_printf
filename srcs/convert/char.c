@@ -6,14 +6,14 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 18:16:59 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/06 20:01:22 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/10 15:19:08 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "ft_core.h"
-#include "converter.h"
-#include "ft_types.h"
+#include "core/ft_core.h"
+#include "core/converter.h"
+#include "core/ft_types.h"
 #include "libft.h"
 
 static char		*character(t_printf *data, t_arg *arg)
