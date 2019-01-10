@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:45:31 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/06 22:58:19 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/10 12:05:48 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,24 @@
 #include "ft_types.h"
 #include "libft.h"
 
-static void		get_time_iso(char str[21], time_t time)
+static char		get_time_iso(char str[21], time_t time)
 {
 	int			i;
 	int			j;
-	t_tm		tm;
+	t_tm		*tm;
 	char		*sep;
 	int			tab[6];
 
 	j = -1;
 	sep = "--T::Z";
-	tm = *localtime(&time);
-	tab[0] = tm.tm_year + 1900;
-	tab[1] = tm.tm_mon + 1;
-	tab[2] = tm.tm_mday;
-	tab[3] = tm.tm_hour;
-	tab[4] = tm.tm_min;
-	tab[5] = tm.tm_sec;
+	if (!(tm = localtime(&time)))
+		return (-1);
+	tab[0] = tm->tm_year + 1900;
+	tab[1] = tm->tm_mon + 1;
+	tab[2] = tm->tm_mday;
+	tab[3] = tm->tm_hour;
+	tab[4] = tm->tm_min;
+	tab[5] = tm->tm_sec;
 	while (++j < 6 && (i = -1))
 	{
 		while (++i < (!j ? 4 : 2))
@@ -43,43 +44,21 @@ static void		get_time_iso(char str[21], time_t time)
 		str[i++] = sep[j];
 		str += i;
 	}
+	return (0);
 }
 
-static const char *g_months[] =
+static char		get_time_ls(char str[21], time_t cur_time)
 {
-	"Jan ",
-	"Feb ",
-	"Mar ",
-	"Apr ",
-	"May ",
-	"Jun ",
-	"Jul ",
-	"Aug ",
-	"Sep ",
-	"Oct ",
-	"Nov ",
-	"Dec ",
-	NULL
-};
-
-static void		get_time_ls(char str[21], time_t cur_time)
-{
-	t_tm		tm;
-	char		year[4];
 	time_t		rest;
+	char		*tm;
 
-	tm = *localtime(&cur_time);
-	ft_memcpy(year, str, 4);
-	ft_strcpy(str, g_months[tm.tm_mon]);
-	ft_memmove(str + 4, str + 8, 3);
-	if (str[4] == '0')
-		str[4] = ' ';
-	ft_memcpy(str + 6, "  ", 2);
+	if (!(tm = ctime(&cur_time)))
+		return (-1);
+	ft_memcpy(str, tm + 4, 7);
+	ft_memcpy(str + 7, tm + 11, 5);
 	if ((rest = (time(NULL) - cur_time)) < 0 || rest >= 15728400)
-		ft_memcpy(str + 8, year, 4);
-	else
-		ft_memmove(str + 7, str + 11, 5);
-	ft_bzero(str + 12, 9);
+		ft_memcpy(str + 7, tm + 19, 5);
+	return (0);
 }
 
 static char		*date(t_printf *data, t_arg *arg)
@@ -90,9 +69,10 @@ static char		*date(t_printf *data, t_arg *arg)
 	int			tab_len;
 
 	ft_bzero(str, 21);
-	get_time_iso(str, (time_t)arg->value);
-	if ((arg->flags & F_HASH))
-		get_time_ls(str, (time_t)arg->value);
+	if ((arg->flags & F_HASH) && get_time_ls(str, (time_t)arg->value))
+		return (NULL);
+	else if (!(arg->flags & F_HASH) && get_time_iso(str, (time_t)arg->value))
+		return (NULL);
 	if ((len = ft_strlen(str)) > arg->precision && arg->precision)
 		len = arg->precision;
 	if ((tab_len = arg->min_width) < len)
