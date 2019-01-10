@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:30:24 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/08 16:52:26 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/08 19:50:01 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static char		*manage_prefix(char *r, t_printf *const data, t_arg *const ar)
 	return (insert_buffer(data, r, ft_strlen(r)));
 }
 
-static char		*long_double(t_printf *const data, t_arg *const ar)
+static char		*long_double_h(t_printf *const data, t_arg *const ar)
 {
 	size_t		l;
 	size_t		add;
@@ -56,14 +56,14 @@ static char		*long_double(t_printf *const data, t_arg *const ar)
 static char		*std_double(t_printf *const data, t_arg *const arg)
 {
 	arg->ldbl = (long double)arg->dbl;
-	return (printf_ldbl(data, arg));
+	return (long_double_h(data, arg));
 }
 
 static const t_converter	g_funcs[] =
 {
 	{' ', TRUE, std_double},
 	{'l', TRUE, std_double},
-	{'L', TRUE, long_double},
+	{'L', TRUE, long_double_h},
 	{'\0', FALSE, NULL}
 };
 
