@@ -6,7 +6,7 @@
 #    By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 16:23:33 by abaurens          #+#    #+#              #
-#    Updated: 2019/01/10 15:09:26 by abaurens         ###   ########.fr        #
+#    Updated: 2019/01/10 15:15:43 by abaurens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,7 @@ SRC         =   main.c	\
 				core/tostr_conv/padded_ulltoa_hexa.c	\
 				core/tostr_conv/padded_ulltoa_octal.c
 
-CFLAGS      +=  -I./includes -W -Wall -Wextra -Werror
+CFLAGS      +=  -I./includes -I./includes/core -W -Wall -Wextra -Werror
 
 OBJ         :=  $(addprefix $(OBJD)/,$(SRC:.c=.o))
 SRC         :=  $(addprefix $(SRCD)/,$(SRC))
