@@ -6,44 +6,57 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:45:31 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/10 12:05:48 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/10 12:27:51 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <time.h>
 #include <stdlib.h>
-#include "ft_printf.h"
+#include "ft_core.h"
 #include "ft_types.h"
 #include "libft.h"
 
+//2019-01-10T12:08:00Z
+
+static const char *g_months[] =
+{
+	"Jan ",
+	"Feb ",
+	"Mar ",
+	"Apr ",
+	"May ",
+	"Jun ",
+	"Jul ",
+	"Aug ",
+	"Sep ",
+	"Oct ",
+	"Nov ",
+	"Dec ",
+	NULL
+};
+
 static char		get_time_iso(char str[21], time_t time)
 {
-	int			i;
 	int			j;
-	t_tm		*tm;
-	char		*sep;
-	int			tab[6];
+	char		*tm;
 
-	j = -1;
-	sep = "--T::Z";
-	if (!(tm = localtime(&time)))
+	j = 0;
+	if (!(tm = ctime(&time)))
 		return (-1);
-	tab[0] = tm->tm_year + 1900;
-	tab[1] = tm->tm_mon + 1;
-	tab[2] = tm->tm_mday;
-	tab[3] = tm->tm_hour;
-	tab[4] = tm->tm_min;
-	tab[5] = tm->tm_sec;
-	while (++j < 6 && (i = -1))
-	{
-		while (++i < (!j ? 4 : 2))
-		{
-			str[(!j ? 3 : 1) - i] = (tab[j] % 10 + '0');
-			tab[j] /= 10;
-		}
-		str[i++] = sep[j];
-		str += i;
-	}
+	ft_memcpy(str, tm + 20, 4);
+	str[4] = '-';
+	ft_memcpy(str + 5, tm + 4, 2);
+	str[7] = '-';
+	ft_memcpy(str + 8, tm + 8, 2);
+	str[10] = 'T';
+	ft_memcpy(str + 11, tm + 11, 8);
+	str[11 + 8] = 'Z';
+	while (g_months[j] && ft_strncmp(g_months[j], tm + 4, 3))
+		j++;
+	if (str[8] == ' ')
+		str[8] = '0';
+	str[5] = ++j / 10 + '0';
+	str[6] = j % 10 + '0';
 	return (0);
 }
 

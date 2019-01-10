@@ -6,16 +6,15 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 17:45:42 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/06 22:48:10 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/10 12:46:21 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "ft_printf.h"
+#include "ft_core.h"
 #include "ft_types.h"
 #include "converter.h"
 #include "libft.h"
-#include "debug.h"
 
 static char		*character_string(t_printf *data, t_arg *arg)
 {

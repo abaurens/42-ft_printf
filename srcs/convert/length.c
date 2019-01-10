@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_core.h"
 #include "ft_types.h"
 
 static char		*integer(t_printf *const data, t_arg *const arg)

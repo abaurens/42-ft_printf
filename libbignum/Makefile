@@ -6,7 +6,7 @@
 #    By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/20 04:12:39 by abaurens          #+#    #+#              #
-#    Updated: 2018/12/21 16:04:34 by abaurens         ###   ########.fr        #
+#    Updated: 2019/01/10 12:47:16 by abaurens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ LNK		=	ar -rc
 RM		=	rm -rf
 CC		=	gcc
 
-CFLAGS	+=	-g -I./includes -I$(dir $(LIBFT))includes -W -Wall -Wextra -ansi
+CFLAGS	+=	-I./includes -I$(dir $(LIBFT))includes -W -Wall -Wextra -ansi
 
 SRC		:=	bint/instance.c			\
 			bint/string.c			\

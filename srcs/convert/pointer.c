@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_types.h"
-#include "ft_printf.h"
+#include "ft_core.h"
 #include "converter.h"
 #include "libft.h"
 

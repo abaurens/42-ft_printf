@@ -6,7 +6,7 @@
 #    By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 16:23:33 by abaurens          #+#    #+#              #
-#    Updated: 2019/01/08 19:22:51 by abaurens         ###   ########.fr        #
+#    Updated: 2019/01/10 14:47:35 by abaurens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,16 +20,13 @@ LIBBNUM		=	./libbignum/libbnum.a
 SRCD        =   srcs
 OBJD        =   objs
 
-SRC         =   debug.c								\
-				\
-				main.c								\
+SRC         =   main.c								\
 				core.c								\
 				buffer.c							\
 				big_num.c							\
 				unicode.c							\
 				ft_ldtoa.c							\
 				ft_error.c							\
-				ft_printf.c							\
 				parse_args.c						\
 				list_manager.c						\
 				float_round.c						\
@@ -61,9 +58,16 @@ SRC         =   debug.c								\
 				convert/double_scientific.c			\
 				convert/iso_formated_date.c			\
 				convert/non_printable_string.c		\
-				convert/wide_character_string.c
+				convert/wide_character_string.c		\
+				\
+				ft_printf_d/ft_printf.c				\
+				ft_printf_d/ft_fprintf.c			\
+				ft_printf_d/ft_sprintf.c			\
+				ft_printf_d/ft_snprintf.c			\
+				ft_printf_d/ft_asprintf.c			\
+				ft_printf_d/ft_dprintf.c
 
-CFLAGS      +=  -I./includes -g -W -Wall -Wextra #-Werror #-pedantic
+CFLAGS      +=  -I./includes -W -Wall -Wextra -Werror
 
 OBJ         :=  $(addprefix $(OBJD)/,$(SRC:.c=.o))
 SRC         :=  $(addprefix $(SRCD)/,$(SRC))
