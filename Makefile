@@ -6,7 +6,7 @@
 #    By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 16:23:33 by abaurens          #+#    #+#              #
-#    Updated: 2019/01/10 14:47:35 by abaurens         ###   ########.fr        #
+#    Updated: 2019/01/10 15:09:26 by abaurens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,52 +20,53 @@ LIBBNUM		=	./libbignum/libbnum.a
 SRCD        =   srcs
 OBJD        =   objs
 
-SRC         =   main.c								\
-				core.c								\
-				buffer.c							\
-				big_num.c							\
-				unicode.c							\
-				ft_ldtoa.c							\
-				ft_error.c							\
-				parse_args.c						\
-				list_manager.c						\
-				float_round.c						\
-				floating_point.c					\
-				parser_functions.c					\
-				argument_manager.c					\
-				convert/padded_lltoa.c				\
-				convert/printf_lltoa.c				\
-				convert/padded_ulltoa.c				\
-				convert/padded_ulltoa_bin.c			\
-				convert/padded_ulltoa_hexa.c		\
-				convert/padded_ulltoa_octal.c		\
+SRC         =   main.c	\
 				\
-				convert/char.c						\
-				convert/string.c					\
-				convert/length.c					\
-				convert/integer.c					\
-				convert/percent.c					\
-				convert/pointer.c					\
-				convert/strerror.c					\
-				convert/u_integer.c					\
-				convert/double_hexa.c				\
-				convert/double_compact.c			\
-				convert/u_integer_hexa.c			\
-				convert/wide_character.c			\
-				convert/u_integer_octal.c			\
-				convert/double_floating.c			\
-				convert/u_integer_binary.c			\
-				convert/double_scientific.c			\
-				convert/iso_formated_date.c			\
-				convert/non_printable_string.c		\
-				convert/wide_character_string.c		\
+				ft_printf.c		\
+				ft_fprintf.c	\
+				ft_sprintf.c	\
+				ft_snprintf.c	\
+				ft_asprintf.c	\
+				ft_dprintf.c	\
 				\
-				ft_printf_d/ft_printf.c				\
-				ft_printf_d/ft_fprintf.c			\
-				ft_printf_d/ft_sprintf.c			\
-				ft_printf_d/ft_snprintf.c			\
-				ft_printf_d/ft_asprintf.c			\
-				ft_printf_d/ft_dprintf.c
+				convert/char.c					\
+				convert/string.c				\
+				convert/length.c				\
+				convert/integer.c				\
+				convert/percent.c				\
+				convert/pointer.c				\
+				convert/strerror.c				\
+				convert/u_integer.c				\
+				convert/double_hexa.c			\
+				convert/double_compact.c		\
+				convert/u_integer_hexa.c		\
+				convert/wide_character.c		\
+				convert/u_integer_octal.c		\
+				convert/double_floating.c		\
+				convert/u_integer_binary.c		\
+				convert/double_scientific.c		\
+				convert/iso_formated_date.c		\
+				convert/non_printable_string.c	\
+				convert/wide_character_string.c	\
+				\
+				core/core.c								\
+				core/buffer.c							\
+				core/big_num.c							\
+				core/unicode.c							\
+				core/ft_error.c							\
+				core/parse_args.c						\
+				core/list_manager.c						\
+				core/float_round.c						\
+				core/floating_point.c					\
+				core/parser_functions.c					\
+				core/argument_manager.c					\
+				core/tostr_conv/ft_ldtoa.c				\
+				core/tostr_conv/printf_lltoa.c			\
+				core/tostr_conv/padded_lltoa.c			\
+				core/tostr_conv/padded_ulltoa.c			\
+				core/tostr_conv/padded_ulltoa_bin.c		\
+				core/tostr_conv/padded_ulltoa_hexa.c	\
+				core/tostr_conv/padded_ulltoa_octal.c
 
 CFLAGS      +=  -I./includes -W -Wall -Wextra -Werror
 

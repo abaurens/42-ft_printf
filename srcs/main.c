@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 22:25:56 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/10 14:56:06 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/10 15:11:47 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 int	main(void)
 {
-	ft_printf("TEST\n");
+	ft_printf("TEST %d %s %x\n", 42, "FourtyTwo", 84);
 	return (0);
 }
