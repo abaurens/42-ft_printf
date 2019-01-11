@@ -6,21 +6,21 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 20:22:26 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/08 17:46:49 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/11 21:55:58 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "ft_core.h"
+#include "core/ft_core.h"
 #include "ft_bigfloat.h"
 #include "libft.h"
 
-t_bflt		*new_ftobflt(long double d)
+t_bflt					*new_ftobflt(long double d)
 {
-	t_float	fl;
-	t_bflt	*res;
-	t_bflt	*tmp;
-	t_bflt	*expo;
+	t_float				fl;
+	t_bflt				*res;
+	t_bflt				*tmp;
+	t_bflt				*expo;
 
 	if (d == (1.0 / 0.0))
 		return (NULL);
@@ -72,66 +72,42 @@ static unsigned long	div_tab(char *v, unsigned long div)
 	return (d);
 }
 
-char		*to_hex(t_bflt *deci)
+static char				*to_hex_two(char *tab, char *res)
 {
-	t_bflt	base;
-	t_bflt	*tmp;
-	char	*tab;
-	char	*res;
-	int		l;
+	size_t				l;
 
-	/*
-	**	mooving the dot in the hex form so there's no decimal part anymore
-	**	l takes care not to delete the first instance of deci
-	**	(deleting deci is none of this function buisness)
-	*/
+	l = 0;
+	while ((tab[0] != '0' || tab[1] != 0) && ++l)
+		div_tab(tab, 16);
+	tab = (char *)ft_freturn(tab, (long)res);
+	if (!(res = ft_memalloc(l + 2)))
+		return ((char *)ft_freturn(tab, 0x0));
+	while ((tab[0] != '0' || tab[1] != 0))
+		res[l--] = "0123456789abcdef"[div_tab(tab, 16)];
+	res[0] = (char)ft_freturn(tab, (long)res[1]);
+	res[1] = '.';
+	return (res);
+}
+
+char					*to_hex(t_bflt *deci)
+{
+	t_bflt				base;
+	t_bflt				*tmp;
+	char				*tab;
+	char				*res;
+	int					l;
+
 	l = 0;
 	set_bflt(&base, "16.0");
 	while (deci && deci->decl > 0 && (tmp = deci))
 		if ((deci = mul_bflt(deci, &base)) && l++)
 			del_bflt(tmp);
 	unset_bflt(&base);
-
-	/*
-	**	convert deci into two string instances then
-	**	delete it if it has been modified.
-	*/
 	if (!(tab = bflt_tostr(deci)) || l)
 		del_bflt(deci);
 	if (!tab || !(res = ft_strdup(tab)))
 		return ((char *)ft_freturn(tab, 0x0));
 	tab[ft_idxof('.', tab)] = 0;
 	res[ft_idxof('.', res)] = 0;
-
-	/*
-	**	compute the length of the result string then delete the first
-	**	string instance.
-	*/
-	l = 0;
-	while ((tab[0] != '0' || tab[1] != 0) && ++l)
-		div_tab(tab, 16);
-	free(tab);
-	tab = res;
-
-	/*
-	**	allocate the final string result and take care of deleting tab if failed
-	*/
-	if (!(res = ft_memalloc(l + 2)))
-		return ((char *)ft_freturn(tab, 0x0));
-
-	/*
-	**	insert the digits into the final string result
-	*/
-	while ((tab[0] != '0' || tab[1] != 0))
-		res[l--] = "0123456789abcdef"[div_tab(tab, 16)];
-	/*
-	**	move the first digit at the begining and insert the dot in right place
-	*/
-	res[0] = (char)ft_freturn(tab, (long)res[1]);
-	res[1] = '.';
-
-	/*
-	**	return the final result
-	*/
-	return (res);
+	return (to_hex_two(tab, res));
 }

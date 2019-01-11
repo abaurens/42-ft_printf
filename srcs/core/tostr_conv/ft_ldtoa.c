@@ -6,13 +6,13 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/06 17:51:08 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/10 11:32:35 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/11 21:56:38 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_bigfloat.h"
-#include "ft_core.h"
-#include "ft_types.h"
+#include "core/ft_core.h"
+#include "core/ft_types.h"
 #include "libft.h"
 
 char				*ft_ldtoa(long double d)
@@ -81,11 +81,11 @@ char				*exp_dbl(long double d, size_t prec)
 	return ((char *)ft_freturn(tmp, (long)res));
 }
 
-static char		*get_exp_hex(long double *d, int *expo)
+static char			*get_exp_hex(long double *d, int *expo)
 {
-	t_bflt		two;
-	t_bflt		*tmp;
-	char		*res;
+	t_bflt			two;
+	t_bflt			*tmp;
+	char			*res;
 
 	*expo = 0;
 	dbl_abs(d, NULL);
@@ -109,7 +109,7 @@ static char		*get_exp_hex(long double *d, int *expo)
 	return (res);
 }
 
-char			*exp_dbl_hex(long double d, int prec)
+char				*exp_dbl_hex(long double d, int prec)
 {
 	int				expo;
 	char			sign;

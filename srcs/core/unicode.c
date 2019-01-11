@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 16:02:45 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/09 00:51:12 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/11 21:51:52 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,5 @@ char					*ft_wstrtostr(char *dst, const wchar_t *src)
 		d += l;
 		src++;
 	}
-	/**d = 0;*/
 	return (dst);
 }

@@ -6,12 +6,12 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 15:31:58 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/10 15:36:37 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/11 21:43:05 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LENGHT_H
-# define LENGHT_H
+#ifndef LENGTH_H
+# define LENGTH_H
 
 # include "core/ft_types.h"
 

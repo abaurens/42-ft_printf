@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 16:39:57 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/08 16:48:16 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/11 21:49:24 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ long double			dbl_abs(long double *d, char *sign)
 	return (d ? *d : 0.0 / 0.0);
 }
 
-char		ldbl_num(long double d)
+char				ldbl_num(long double d)
 {
 	return (!fnan(d) && dbl_abs(&d, NULL) != (1.0 / 0.0));
 }

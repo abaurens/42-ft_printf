@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 15:41:42 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/10 15:46:55 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/11 21:43:47 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char				*short_uinteger(t_printf *const data, t_arg *const arg)
 	return (data->buf);
 }
 
-char				*short_short_uinteger(t_printf *const data, t_arg *const arg)
+char				*short_short_uinteger(t_printf *const dta, t_arg *const arg)
 {
 	unsigned char	v;
 	char			*tab;
@@ -42,7 +42,7 @@ char				*short_short_uinteger(t_printf *const data, t_arg *const arg)
 	if (!(tab = padded_ulltoa(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
-	insert_buffer(data, tab, ft_strlen(tab));
+	insert_buffer(dta, tab, ft_strlen(tab));
 	free(tab);
-	return (data->buf);
+	return (dta->buf);
 }
