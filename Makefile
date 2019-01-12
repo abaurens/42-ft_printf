@@ -6,7 +6,7 @@
 #    By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 16:23:33 by abaurens          #+#    #+#              #
-#    Updated: 2019/01/12 21:22:46 by abaurens         ###   ########.fr        #
+#    Updated: 2019/01/12 21:26:01 by abaurens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -140,6 +140,7 @@ fcleanlib:
 	@make -C $(dir $(LIBBNUM)) fclean
 
 fcleand:	cleand
+	$(RM) ft_printf
 	$(RM) $(NAME)
 	$(RM) $(BONUS)
 
