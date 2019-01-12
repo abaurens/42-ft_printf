@@ -6,15 +6,15 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 11:21:48 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/06 20:19:55 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/12 17:23:01 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include <stdlib.h>
-#include "ft_core.h"
-#include "converter.h"
-#include "parser.h"
+#include "core/ft_core.h"
+#include "core/converter.h"
+#include "core/parser.h"
 #include "libft.h"
 
 int				parse_arg(const char **format, t_printf *data, t_arg *arg)

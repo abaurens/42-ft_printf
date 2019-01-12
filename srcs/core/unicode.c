@@ -6,11 +6,11 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 16:02:45 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/11 21:51:52 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/12 17:22:30 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_types.h"
+#include "core/ft_types.h"
 #include "libft.h"
 
 size_t					ft_wchar_len(const wchar_t chr)

@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 18:20:02 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/10 15:27:14 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/12 21:13:27 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,24 @@
 #include "core/ft_types.h"
 #include "libft.h"
 
-static char		*integer(t_printf *const data, t_arg *const arg)
+static char		*integer(t_printf *const data, t_arg *const ar)
 {
 	int			v;
+	size_t		l;
 	char		*tab;
 
-	v = (int)arg->value;
-	if (arg->flags & F_ZERO)
-		arg->precision = arg->min_width - (v < 0);
-	if ((arg->flags & (F_PLUS | F_SPAC)) && v >= 0)
-		arg->precision++;
-	if (!(tab = padded_lltoa(v, arg->precision, arg->min_width,
-		(arg->flags & F_MINS) != 0)))
+	v = (int)ar->value;
+	if ((l = (ft_numlen(v) - (v < 0))) > (size_t)ar->precision)
+		ar->precision = l;
+	if (ar->flags & F_ZERO && l < (size_t)ar->min_width)
+		ar->precision = ar->min_width - (v < 0);
+	if ((size_t)ar->min_width <= l && (ar->flags & (F_PLUS | F_SPAC)) && v >= 0)
+		ar->precision++;
+	if (!(tab = padded_lltoa(v, ar->precision, ar->min_width,
+		(ar->flags & F_MINS) != 0)))
 		return (NULL);
-	if ((arg->flags & (F_PLUS | F_SPAC)) && (int)arg->value >= 0)
-		tab[ft_idxof('0', tab)] = (arg->flags & F_PLUS) ? '+' : ' ';
+	if ((ar->flags & (F_PLUS | F_SPAC)) && (int)ar->value >= 0)
+		tab[ft_idxof('0', tab)] = (ar->flags & F_PLUS) ? '+' : ' ';
 	insert_buffer(data, tab, ft_strlen(tab));
 	free(tab);
 	return (data->buf);

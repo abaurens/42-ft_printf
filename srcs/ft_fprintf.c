@@ -6,19 +6,39 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 14:12:33 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/11 21:51:37 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/12 18:17:19 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
+#include <errno.h>
 #include <wchar.h>
+#include <stdarg.h>
+#include "core/ft_core.h"
+#include "libft.h"
 
 int		ft_vfprintf(FILE *stream, const char *format, va_list ap)
 {
-	(void)stream;
-	(void)format;
-	(void)ap;
-	return (-1);
+	int			size;
+	t_printf	data;
+
+	if (!format)
+		return (ERROR);
+	ft_bzero(&data, sizeof(data));
+	data.err = errno;
+	data.use_chain_format = MAYBE;
+	va_copy(data.va_lst, ap);
+	if ((size = get_non_arg(format, &data)) < 0)
+		return (ft_freturn(data.buf, ERROR));
+	while (*(format += size))
+	{
+		if ((size = parse_conversion(&format, &data)) < 0)
+			return (ft_freturn(data.buf, ERROR));
+		if ((size = get_non_arg(format, &data)) < 0)
+			return (ft_freturn(data.buf, ERROR));
+	}
+	va_end(data.va_lst);
+	clear_list(&data.args);
+	return (ft_freturn(data.buf, fputs(data.buf, stream)));
 }
 
 int		ft_fprintf(FILE *stream, const char *format, ...)

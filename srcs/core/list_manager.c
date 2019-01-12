@@ -6,12 +6,12 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/31 13:06:34 by abaurens          #+#    #+#             */
-/*   Updated: 2018/12/31 13:08:20 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/12 17:22:51 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "ft_types.h"
+#include "core/ft_types.h"
 
 static int			rm_first(t_ftlist *lst)
 {

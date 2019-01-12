@@ -6,14 +6,14 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 14:07:46 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/10 14:57:54 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/12 17:21:54 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <errno.h>
 #include <stdarg.h>
+#include "core/ft_core.h"
 #include "ft_printf.h"
-#include "ft_core.h"
 #include "libft.h"
 
 int				ft_vdprintf(int fd, const char *format, va_list ap)

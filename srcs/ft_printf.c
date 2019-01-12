@@ -6,16 +6,13 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 21:56:12 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/10 14:57:31 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/12 17:20:36 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdarg.h>
-#include <unistd.h>
 #include <errno.h>
-#include "ft_printf.h"
-#include "ft_core.h"
+#include <stdarg.h>
+#include "core/ft_core.h"
 #include "libft.h"
 
 int				ft_vprintf(const char *format, va_list ap)

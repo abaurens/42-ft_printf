@@ -6,12 +6,12 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 15:57:31 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/10 14:57:13 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/12 17:23:08 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_core.h"
-#include "parser.h"
+#include "core/ft_core.h"
+#include "core/parser.h"
 #include "libft.h"
 
 static int		get_flags(const char *format, t_arg *arg)

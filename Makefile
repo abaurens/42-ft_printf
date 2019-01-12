@@ -6,28 +6,28 @@
 #    By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 16:23:33 by abaurens          #+#    #+#              #
-#    Updated: 2019/01/11 21:56:54 by abaurens         ###   ########.fr        #
+#    Updated: 2019/01/12 21:22:46 by abaurens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC          =   gcc
 RM          =   rm -rf
 CP          =   cp -rf
-LINKER      =   gcc
-NAME        =   ft_printf
+LINKER      =   ar rc
+NAME        =   libftprintf.a
+BONUS		=	libftprintfb.a
 LIBFT		=	./libft/libft.a
 LIBBNUM		=	./libbignum/libbnum.a
 SRCD        =   srcs
 OBJD        =   objs
 
-SRC         =   main.c	\
-				\
-				ft_printf.c		\
-				ft_fprintf.c	\
+SRCB		:=	ft_fprintf.c	\
 				ft_sprintf.c	\
 				ft_snprintf.c	\
 				ft_asprintf.c	\
-				ft_dprintf.c	\
+				ft_dprintf.c
+
+SRC         :=	ft_printf.c		\
 				\
 				convert/integer/integer.c			\
 				convert/integer/long.c				\
@@ -92,16 +92,26 @@ SRC         =   main.c	\
 				core/tostr_conv/padded_ulltoa_hexa.c	\
 				core/tostr_conv/padded_ulltoa_octal.c
 
-CFLAGS      +=  -I./includes -W -Wall -Wextra -Werror
+CFLAGS      +=  -I./includes -W -Wall -Wextra #-Werror
 
 OBJ         :=  $(addprefix $(OBJD)/,$(SRC:.c=.o))
 SRC         :=  $(addprefix $(SRCD)/,$(SRC))
+
+BSRC		:=	$(SRC) $(addprefix $(SRCD)/,$(SRCB))
+BOBJ		:=	$(OBJ) $(addprefix $(OBJD)/,$(SRCB:.c=.o))
 
 CFLAGS      +=  -I$(dir $(LIBBNUM))includes -I$(dir $(LIBFT))includes
 LDFLAGS     +=  -L$(dir $(LIBBNUM)) -lbnum -L$(dir $(LIBFT)) -lft
 
 $(NAME):    $(LIBFT) $(LIBBNUM) $(OBJ)
-	$(LINKER) -o $(NAME) $(OBJ) $(LDFLAGS)
+	$(LINKER) $(NAME) $(OBJ)
+
+$(BONUS): BSRC	:=	$(SRC) $(addprefix $(SRCD)/,$(SRCB))
+$(BONUS): BOBJ	:=	$(OBJ) $(addprefix $(OBJD)/,$(SRCB:.c=.o))
+$(BONUS):	$(LIBFT) $(LIBBNUM) $(BOBJ)
+	$(LINKER) $(BONUS) $(BOBJ)
+
+all:    $(NAME)
 
 $(LIBFT):
 	@make -C $(dir $(LIBFT))
@@ -109,11 +119,12 @@ $(LIBFT):
 $(LIBBNUM):
 	@make -C $(dir $(LIBBNUM))
 
+test: $(NAME) $(BONUS)
+	$(CC) $(CFLAGS) -o ft_printf main.c $(LDFLAGS) -L. -lftprintfb
+
 objs/%.o:   $(SRCD)/%.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -o $@ -c $<
-
-all:    $(NAME)
 
 cleanlib:
 	@make -C $(dir $(LIBFT)) clean
@@ -130,6 +141,7 @@ fcleanlib:
 
 fcleand:	cleand
 	$(RM) $(NAME)
+	$(RM) $(BONUS)
 
 fclean:	fcleanlib fcleand
 

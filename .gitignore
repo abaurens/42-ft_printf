@@ -54,3 +54,4 @@ dkms.conf
 # other files
 ft_printf
 *.DS_Store
+main.c
