@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 14:53:12 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/12 21:05:04 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/14 20:12:12 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 
 # define LEN_MD			"qjzZtlLh"
 # define LEN_MD_CHRS	" qjzZtlLhH"
+
+# define DECI	"0123456789"
+# define HEXA	"0123456789abcdef"
 
 /*
 **	core.c

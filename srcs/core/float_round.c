@@ -6,136 +6,130 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/03 19:22:34 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/13 21:06:49 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/14 20:30:17 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
+#include "core/ft_core.h"
 #include "libft.h"
 
-static char		*round_int_part(char *val)
+void		print_digits(char *val, const size_t len)
 {
-	size_t		i;
-	char		cary;
-	char		sign;
+	size_t	i;
 
-	if (val && (sign = ft_contains(*val, " +-")))
-		val++;
-	i = ft_idxof('.', val);
-	while (val && i-- > 0)
-		if ((cary = (val[i] - '0') / 10))
-		{
-			if (i > 0)
-				val[i - 1] += cary;
-			val[i] = '0';
-		}
-	if (val && sign)
-		val--;
-	if (val && cary)
+	i = 0;
+	printf("   \e[0;49;32m");
+	while (i < len)
 	{
-		if (!(val = (char *)ft_freturn(val, (long)ft_strmcat("0", val, -1))))
-			return (NULL);
-		if ((val[1] < '0' || val[1] > '9') && (*val = val[1]))
-			val[1] = cary + '0';
+		if (val[i] == '.')
+			printf(".");
+		else
+			printf("%3d", val[i]);
+		i++;
+	}
+	printf("\e[0m\n");
+}
+
+void		print_digits_o(char *val, const size_t len)
+{
+	size_t	i;
+
+	i = 0;
+	printf("   \e[0;49;31m");
+	while (i < len)
+	{
+		if (val[i] == '.')
+			printf(".");
+		else
+			printf("%3d", val[i]);
+		i++;
+	}
+	printf("\e[0m\n");
+}
+
+char		*rnd(char *val, size_t ln, const size_t prec, const size_t blen)
+{
+	size_t	i;
+	size_t	lim;
+	char	*cur;
+	char	next;
+	char	f;
+
+	f = 0;
+	i = ln;
+	lim = blen / 2;
+	if (prec + 1 >= ln)
+		return (val);
+	while (--i > (prec + 1))
+		f = (f || val[i]);
+	i--;
+	cur = val + (i - (val[i] == '.'));
+	next = i + 1 > ln ? 0 : val[i + 1];
+	if ((size_t)next > lim || ((size_t)next == lim && (f || (*cur % 2))))
+		(*cur)++;
+	i = ln;
+	while (i-- > 1)
+	{
+		if (val[i] == '.')
+			continue;
+		if (val[i - 1] != '.')
+			val[i - 1] += (val[i] / blen);
+		else
+			val[i - 2] += (val[i] / blen);
+		val[i] %= blen;
+	}
+	if ((size_t)(*val) == blen)
+	{
+		ft_memmove(val + 1, val, ln++);
+		*val = val[1] / blen;
+		val[1] %= blen;
 	}
 	return (val);
 }
 
-static char		*round_scientific(char *val, int *exp)
-{
-	char		sign;
-
-	if (val && (sign = ft_contains(*val, " +-")))
-		val++;
-	if (val && *val > '9')
-	{
-		*val = '1';
-		(*exp)++;
-	}
-	if (val && sign)
-		val--;
-	return (val);
-}
-
-#include <stdio.h>
-
-char			banker_rounder(char *val, size_t len, size_t prec)
+char			*banker_round(char *val, const size_t prec, const char *base)
 {
 	size_t		i;
+	size_t		len;
 	size_t		entl;
-	char		*prev;
+	size_t		blen;
+	char		sign;
 
-	i = len;
+	sign = 0;
+	if (!val || !base)
+		return (val);
 	entl = ft_idxof('.', val);
-	printf("i : %lu\n", i);
-	printf("entl : %lu\n", entl);
-	printf("prec : %lu\n", prec);
-	while (i > entl + prec + 1)
-		i--;
-	prev = ((i - 1) == entl ? val + (i - 2) : val + (i - 1));
-	printf("val[i - 1] = %d. val[i] = %d. so val[i - 1] is now ",
-			*prev, val[i]);
-	if (val[i] > 5 || (val[i] == 5 && (*prev % 2)))
-		(*prev)++;
-	printf("%d\n", *prev);
-	fflush(stdout);
-	return (0);
+	blen = ft_strlen(base);
+	if (blen < 2 || !(len = ft_strlen(val)) || prec >= len || !val[entl])
+		return (val);
+	i = 0;
+	while (i < len)
+		if (i++ != entl)
+			val[i - 1] = ft_idxof(val[i - 1], base);
+	rnd(val, len, prec + entl, blen);
+	i = 0;
+	while (i < len)
+		if ((size_t)(val[i++]) < blen)
+			val[i - 1] = base[(int)val[i - 1]];
+	return (val);
 }
 
 char			*round_tabflt(char *val, size_t prec, int *exp)
 {
-	size_t		i;
-	size_t		len;
+	size_t		point;
 	char		sign;
 
-	if (val && (sign = ft_contains(*val, " +-")))
-		val++;
-	len = ft_idxof(0, val);
-	i = len;
-	while (val && i-- > 0)
-		val[i] = val[i] == '.' ? '.' : ft_idxof(val[i], "0123456789");
-	banker_rounder(val, len, prec);
-	i = 0;
-	while (val && i++ < len)
-		if (val[i - 1] != '.')
-			val[i - 1] = "0123456789:"[(int)val[i - 1]];
-	if (val && sign)
-		val--;
-	return (exp ? round_scientific(val, exp) : round_int_part(val));
-}
-
-/*char			*round_tabflt(char *val, size_t prec, int *exp)
-{
-	char		l;
-	size_t		i;
-	size_t		entl;
-
-	l = 0;
-	i = ft_idxof(0, val);
-	entl = ft_idxof('.', val);
-	if (i && (!ft_strcmp(val, "nan") || !ft_strcmp(val + (*val == '-'), "inf")))
+	if (!ft_strchr(val, '.'))
 		return (val);
-	while (val && i-- > entl + prec + 1)
-	{
-		if ((l = (val[i] > '5' || (val[i - 1] != '.' && val[i] == '5' && val[i + 1]))))
-		{
-			val[i - (val[i - 1] == '.' ? 2 : 1)]++;
-		}
-		val[i] = 0;
-	}
-	if (val && prec == 0)
-		if ((val[entl] == '.' && val[entl + 1] == '5' && val[entl + 2] != 0))
-			val[entl - 1]++;
-	i++;
-	while (val && i-- > entl)
-		if (val[i] != '.' && val[i] > '9')
-		{
-			val[i - (val[i - 1] == '.' ? 2 : 1)]++;
-			val[i] = '0';
-		}
-	return (exp ? round_scientific(val, exp) : round_int_part(val));
+	while (ft_contains(*val, " +-") && *(++val))
+		sign++;
+	banker_round(val, prec, DECI);
+	if (exp && (point = ft_idxof('.', val)) != 1 && (*exp)++)
+		*(((char *)ft_memmove(val + 2, val + 1, point - 1)) - 1) = '.';
+	return (val - sign);
 }
-*/
+
 static char		*round_hex_core(char *val, size_t prec, size_t len)
 {
 	size_t		i;
@@ -166,20 +160,24 @@ char			*round_hex(char *val, size_t prec, int *exp)
 	size_t		len;
 	char		sign;
 
-	if (val && (sign = ft_contains(*val, " +-")))
+	sign = 0;
+	if (!val || !exp)
+		return (val);
+	while (ft_contains(*val, " +-") && sign++)
 		val++;
-	len = ft_idxof(0, val);
+	len = ft_strlen(val);
 	i = len;
-	while (val && i-- > 0)
-		val[i] = val[i] == '.' ? '.' : ft_idxof(val[i], "0123456789abcdef");
-	val = round_hex_core(val, prec, len);
-	if (val && *val >= 16 && (*val = 1))
-		(*exp) += 4;
-	i = 0;
+	printf("res = %s\n", val);
+	/*while (val && i-- > 0)
+		val[i] = val[i] == '.' ? '.' : ft_idxof(val[i], HEXA);*/
+	banker_round(val, prec, HEXA);
+	/*val = round_hex_core(val, prec, len);*/
+	/*if (val && *val >= 16 && (*val = 1))
+		(*exp) += 4;*/
+	printf("res = %s\n", val);
+	/*i = 0;
 	while (val && i++ < len)
 		if (val[i - 1] != '.')
-			val[i - 1] = "0123456789abcdef"[(int)val[i - 1]];
-	if (val && sign)
-		val--;
-	return (val);
+			val[i - 1] = HEXA[(int)val[i - 1]];*/
+	return (val - sign);
 }

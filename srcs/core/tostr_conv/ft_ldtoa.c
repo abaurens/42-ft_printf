@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/06 17:51:08 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/11 21:56:38 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/14 20:12:55 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,34 @@ static char			*process_exponent(char *val, int expo)
 	return (val);
 }
 
+static char			*get_exp_hex(long double *d, int *expo)
+{
+	t_bflt			two;
+	t_bflt			*tmp;
+	char			*res;
+
+	*expo = 0;
+	dbl_abs(d, NULL);
+	set_bflt(&two, *d >= 16.0 ? "0.5" : "2.0");
+	tmp = new_ftobflt(*d);
+	if (*d >= 16.0)
+		while ((*d) >= 16.0 && ++(*expo))
+		{
+			*d *= 0.5;
+			tmp = mul_bflt(tmp, &two);
+		}
+	else if (*d <= 16.0)
+		while ((*d * 2.0) < 16.0 && --(*expo))
+		{
+			*d *= 2.0;
+			tmp = mul_bflt(tmp, &two);
+		}
+	unset_bflt(&two);
+	res = to_hex(tmp);
+	del_bflt(tmp);
+	return (res);
+}
+
 char				*exp_dbl(long double d, size_t prec)
 {
 	size_t			xpl;
@@ -79,34 +107,6 @@ char				*exp_dbl(long double d, size_t prec)
 	while (xpl-- > 0 && (res[sign + 4 + prec + xpl] = ft_abs(expo % 10) + '0'))
 		expo = ft_abs(expo / 10);
 	return ((char *)ft_freturn(tmp, (long)res));
-}
-
-static char			*get_exp_hex(long double *d, int *expo)
-{
-	t_bflt			two;
-	t_bflt			*tmp;
-	char			*res;
-
-	*expo = 0;
-	dbl_abs(d, NULL);
-	set_bflt(&two, *d >= 16.0 ? "0.5" : "2.0");
-	tmp = new_ftobflt(*d);
-	if (*d >= 16.0)
-		while ((*d) >= 16.0 && ++(*expo))
-		{
-			*d *= 0.5;
-			tmp = mul_bflt(tmp, &two);
-		}
-	else if (*d <= 16.0)
-		while ((*d * 2.0) < 16.0 && --(*expo))
-		{
-			*d *= 2.0;
-			tmp = mul_bflt(tmp, &two);
-		}
-	unset_bflt(&two);
-	res = to_hex(tmp);
-	del_bflt(tmp);
-	return (res);
 }
 
 char				*exp_dbl_hex(long double d, int prec)

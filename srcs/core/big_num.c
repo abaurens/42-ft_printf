@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 20:22:26 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/11 21:55:58 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/14 20:29:44 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,10 @@ static char				*to_hex_two(char *tab, char *res)
 	while ((tab[0] != '0' || tab[1] != 0) && ++l)
 		div_tab(tab, 16);
 	tab = (char *)ft_freturn(tab, (long)res);
-	if (!(res = ft_memalloc(l + 2)))
+	if (!(res = ft_memalloc(l + 3)))
 		return ((char *)ft_freturn(tab, 0x0));
 	while ((tab[0] != '0' || tab[1] != 0))
-		res[l--] = "0123456789abcdef"[div_tab(tab, 16)];
+		res[l--] = HEXA[div_tab(tab, 16)];
 	res[0] = (char)ft_freturn(tab, (long)res[1]);
 	res[1] = '.';
 	return (res);

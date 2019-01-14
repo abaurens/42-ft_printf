@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 18:19:18 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/10 15:19:36 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/14 18:47:29 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,28 +40,30 @@ static char		*alloc_res(size_t dtl, t_arg *arg, size_t add)
 	return (res);
 }
 
-static char		*build_res(t_arg *arg)
+static char		*build_res(t_arg *ar)
 {
 	size_t		i;
 	size_t		add;
-	int			entl;
+	int			enl;
 	char		*val;
 	char		*rs;
 
-	if (!(val = round_tabflt(ft_ldtoa(arg->ldbl), arg->precision, NULL)))
+	if (!(val = round_tabflt(ft_ldtoa(ar->ldbl), ar->precision, NULL)))
 		return (NULL);
-	if ((add = 0) || ft_isupper(arg->conv.c))
+	if ((add = 0) || ft_isupper(ar->conv.c))
 		ft_strupcase(val);
-	entl = ft_idxof('.', val);
-	i = (arg->ldbl >= 0.0 && (arg->flags & (F_SPAC | F_PLUS)));
-	if ((entl + (int)i + arg->precision + (!!arg->precision)) < arg->min_width)
-		add = arg->min_width - (entl + i + arg->precision + (!!arg->precision));
-	if (!(rs = alloc_res(entl + i, arg, add)) || (arg->precision && !++entl))
+	enl = ft_idxof('.', val);
+	i = (ar->ldbl >= 0.0 && (ar->flags & (F_SPAC | F_PLUS)));
+	if ((enl + (int)i + ar->precision + (!!ar->precision)) < ar->min_width)
+		add = ar->min_width - (enl + i + ar->precision + (!!ar->precision));
+	if (!(rs = alloc_res(enl + i, ar, add)) || (ar->precision && !++enl))
 		return (NULL);
-	add *= !(arg->flags & F_MINS);
-	ft_memcpy(rs + add + i, val, ft_min(ft_strlen(val), entl + arg->precision));
+	if (ldbl_num(ar->ldbl) && !ar->precision && (ar->flags & F_HASH) && enl++)
+		add--;
+	add *= !(ar->flags & F_MINS);
+	ft_memcpy(rs + add + i, val, ft_min(ft_strlen(val), enl + ar->precision));
 	if (ft_freturn(val, i))
-		rs[add * !(arg->flags & F_ZERO)] = (arg->flags & F_PLUS) ? '+' : ' ';
+		rs[add * !(ar->flags & F_ZERO)] = (ar->flags & F_PLUS) ? '+' : ' ';
 	return (rs);
 }
 
@@ -73,6 +75,7 @@ char			*printf_ldbl(t_printf *const data, t_arg *const arg)
 
 	j = 0;
 	((void)data);
+	arg->flags = (!ldbl_num(arg->ldbl) ? (arg->flags & ~F_ZERO) : arg->flags);
 	arg->precision *= !(arg->ldbl != arg->ldbl || arg->ldbl == 1.0 / 0.0);
 	if (!(res = build_res(arg)))
 		return (NULL);
@@ -88,8 +91,6 @@ char			*printf_ldbl(t_printf *const data, t_arg *const arg)
 	j = (*res == '+' || *res == '-' || *res == ' ');
 	while (res[j] >= '0' && res[j] <= ':')
 		j++;
-	if (ldbl_num(arg->ldbl) && arg->flags & F_HASH)
-		res[j] = '.';
 	return (res);
 }
 
