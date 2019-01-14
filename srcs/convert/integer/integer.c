@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 18:20:02 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/12 21:13:27 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/13 16:07:35 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,12 @@ static char		*integer(t_printf *const data, t_arg *const ar)
 	v = (int)ar->value;
 	if ((l = (ft_numlen(v) - (v < 0))) > (size_t)ar->precision)
 		ar->precision = l;
-	if (ar->flags & F_ZERO && l < (size_t)ar->min_width)
-		ar->precision = ar->min_width - (v < 0);
-	if ((size_t)ar->min_width <= l && (ar->flags & (F_PLUS | F_SPAC)) && v >= 0)
+	if ((ar->flags & (F_PLUS | F_SPAC)) && v >= 0 && ++l)
 		ar->precision++;
+	if ((l + (v < 0)) > (size_t)ar->min_width)
+		ar->min_width = l + (v < 0);
+	if ((ar->flags & F_ZERO) && ar->precision < ar->min_width)
+		ar->precision = ar->min_width - (v < 0);
 	if (!(tab = padded_lltoa(v, ar->precision, ar->min_width,
 		(ar->flags & F_MINS) != 0)))
 		return (NULL);
@@ -76,4 +78,11 @@ char			*convert_integer(t_printf *const data, t_arg *const arg)
 	if (!g_funcs[i].c)
 		return (g_funcs[0].func(data, arg));
 	return (g_funcs[i].func(data, arg));
+}
+
+char			*convert_linteger(t_printf *const data, t_arg *const arg)
+{
+	arg->conv.c = 'd';
+	arg->length_modifier = ft_idxof('l', LEN_MD_CHRS);
+	return (convert_integer(data, arg));
 }

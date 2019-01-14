@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 15:56:53 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/10 16:02:33 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/13 16:59:49 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ char				*long_hexa(t_printf *const data, t_arg *const arg)
 	v = (long int)arg->value;
 	if ((len = ft_unsignedlen_base(v, "0123456789abcdef")) > arg->precision)
 		arg->precision = len;
+	if ((arg->flags & F_HASH) && v != 0)
+		arg->precision += 2;
 	if (arg->flags & F_ZERO && arg->min_width > arg->precision)
 		arg->precision = arg->min_width;
-	if ((arg->flags & F_HASH) && v != 0 && arg->precision == len)
-		arg->precision += ((len + 2) - arg->precision);
 	if (!(tab = padded_ulltoa_hexa(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
@@ -49,10 +49,10 @@ char				*long_long_hexa(t_printf *const data, t_arg *const arg)
 	v = (unsigned long long)arg->value;
 	if ((len = ft_unsignedlen_base(v, "0123456789abcdef")) > arg->precision)
 		arg->precision = len;
+	if ((arg->flags & F_HASH) && v != 0)
+		arg->precision += 2;
 	if (arg->flags & F_ZERO && arg->min_width > arg->precision)
 		arg->precision = arg->min_width;
-	if ((arg->flags & F_HASH) && v != 0 && arg->precision == len)
-		arg->precision += ((len + 2) - arg->precision);
 	if (!(tab = padded_ulltoa_hexa(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);

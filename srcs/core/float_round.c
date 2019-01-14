@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/03 19:22:34 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/08 16:34:11 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/13 21:06:49 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static char		*round_int_part(char *val)
 	char		cary;
 	char		sign;
 
-	i = ft_idxof('.', val);
 	if (val && (sign = ft_contains(*val, " +-")))
 		val++;
+	i = ft_idxof('.', val);
 	while (val && i-- > 0)
 		if ((cary = (val[i] - '0') / 10))
 		{
@@ -57,20 +57,75 @@ static char		*round_scientific(char *val, int *exp)
 	return (val);
 }
 
-char			*round_tabflt(char *val, size_t prec, int *exp)
+#include <stdio.h>
+
+char			banker_rounder(char *val, size_t len, size_t prec)
 {
 	size_t		i;
 	size_t		entl;
+	char		*prev;
 
+	i = len;
+	entl = ft_idxof('.', val);
+	printf("i : %lu\n", i);
+	printf("entl : %lu\n", entl);
+	printf("prec : %lu\n", prec);
+	while (i > entl + prec + 1)
+		i--;
+	prev = ((i - 1) == entl ? val + (i - 2) : val + (i - 1));
+	printf("val[i - 1] = %d. val[i] = %d. so val[i - 1] is now ",
+			*prev, val[i]);
+	if (val[i] > 5 || (val[i] == 5 && (*prev % 2)))
+		(*prev)++;
+	printf("%d\n", *prev);
+	fflush(stdout);
+	return (0);
+}
+
+char			*round_tabflt(char *val, size_t prec, int *exp)
+{
+	size_t		i;
+	size_t		len;
+	char		sign;
+
+	if (val && (sign = ft_contains(*val, " +-")))
+		val++;
+	len = ft_idxof(0, val);
+	i = len;
+	while (val && i-- > 0)
+		val[i] = val[i] == '.' ? '.' : ft_idxof(val[i], "0123456789");
+	banker_rounder(val, len, prec);
+	i = 0;
+	while (val && i++ < len)
+		if (val[i - 1] != '.')
+			val[i - 1] = "0123456789:"[(int)val[i - 1]];
+	if (val && sign)
+		val--;
+	return (exp ? round_scientific(val, exp) : round_int_part(val));
+}
+
+/*char			*round_tabflt(char *val, size_t prec, int *exp)
+{
+	char		l;
+	size_t		i;
+	size_t		entl;
+
+	l = 0;
 	i = ft_idxof(0, val);
 	entl = ft_idxof('.', val);
 	if (i && (!ft_strcmp(val, "nan") || !ft_strcmp(val + (*val == '-'), "inf")))
 		return (val);
 	while (val && i-- > entl + prec + 1)
-		if (val[i] > '5' || (val[i - 1] != '.' && val[i] >= '5'))
+	{
+		if ((l = (val[i] > '5' || (val[i - 1] != '.' && val[i] == '5' && val[i + 1]))))
+		{
 			val[i - (val[i - 1] == '.' ? 2 : 1)]++;
-	if (val && (val[entl] == '.' && val[entl + 1] == '5' && val[entl + 2] != 0))
-		val[entl - 1]++;
+		}
+		val[i] = 0;
+	}
+	if (val && prec == 0)
+		if ((val[entl] == '.' && val[entl + 1] == '5' && val[entl + 2] != 0))
+			val[entl - 1]++;
 	i++;
 	while (val && i-- > entl)
 		if (val[i] != '.' && val[i] > '9')
@@ -80,7 +135,7 @@ char			*round_tabflt(char *val, size_t prec, int *exp)
 		}
 	return (exp ? round_scientific(val, exp) : round_int_part(val));
 }
-
+*/
 static char		*round_hex_core(char *val, size_t prec, size_t len)
 {
 	size_t		i;

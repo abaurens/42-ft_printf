@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 15:21:12 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/12 21:13:49 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/13 16:14:54 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@ char			*long_integer(t_printf *const data, t_arg *const ar)
 	v = (long int)ar->value;
 	if ((l = (ft_numlen(v) - (v < 0))) > (size_t)ar->precision)
 		ar->precision = l;
-	if (ar->flags & F_ZERO && l < (size_t)ar->min_width)
-		ar->precision = ar->min_width - (v < 0);
-	if ((size_t)ar->min_width <= l && (ar->flags & (F_PLUS | F_SPAC)) && v >= 0)
+	if ((ar->flags & (F_PLUS | F_SPAC)) && v >= 0 && ++l)
 		ar->precision++;
+	if ((l + (v < 0)) > (size_t)ar->min_width)
+		ar->min_width = l + (v < 0);
+	if ((ar->flags & F_ZERO) && ar->precision < ar->min_width)
+		ar->precision = ar->min_width - (v < 0);
 	if (!(tab = padded_lltoa(v, ar->precision, ar->min_width,
 		(ar->flags & F_MINS) != 0)))
 		return (NULL);
@@ -47,10 +49,12 @@ char			*long_long_integer(t_printf *const data, t_arg *const ar)
 	v = (long long)ar->value;
 	if ((l = (ft_numlen(v) - (v < 0))) > (size_t)ar->precision)
 		ar->precision = l;
-	if (ar->flags & F_ZERO && l < (size_t)ar->min_width)
-		ar->precision = ar->min_width - (v < 0);
-	if ((size_t)ar->min_width <= l && (ar->flags & (F_PLUS | F_SPAC)) && v >= 0)
+	if ((ar->flags & (F_PLUS | F_SPAC)) && v >= 0 && ++l)
 		ar->precision++;
+	if ((l + (v < 0)) > (size_t)ar->min_width)
+		ar->min_width = l + (v < 0);
+	if ((ar->flags & F_ZERO) && ar->precision < ar->min_width)
+		ar->precision = ar->min_width - (v < 0);
 	if (!(tab = padded_lltoa(v, ar->precision, ar->min_width,
 		(ar->flags & F_MINS) != 0)))
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 13:53:50 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/08 18:06:48 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/13 16:16:36 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "ft_types.h"
 
-# define CONV_V "%diuoxXfFeEgGaAcCsSpnmbrk"
+# define CONV_V "%dDiuoxXfFeEgGaAcCsSpnmbrk"
 
 /*
 **	i, d = signed decimal
@@ -53,8 +53,11 @@
 */
 char			*convert_percent(t_printf *data, t_arg *arg);
 char			*convert_integer(t_printf *const data, t_arg *const arg);
+char			*convert_linteger(t_printf *const data, t_arg *const arg);
 char			*convert_u_integer(t_printf *data, t_arg *arg);
+char			*convert_u_linteger(t_printf *data, t_arg *arg);
 char			*convert_u_integer_octal(t_printf *data, t_arg *arg);
+char			*convert_u_linteger_octal(t_printf *data, t_arg *arg);
 char			*convert_u_integer_hexa(t_printf *data, t_arg *arg);
 char			*convert_double_floating(t_printf *data, t_arg *arg);
 char			*convert_double_scientific(t_printf *data, t_arg *arg);
@@ -85,9 +88,12 @@ static const t_converter	g_converters[] =
 {
 	{'%', FALSE, convert_percent},
 	{'d', TRUE, convert_integer},
+	{'D', TRUE, convert_linteger},
 	{'i', TRUE, convert_integer},
 	{'u', TRUE, convert_u_integer},
+	{'U', TRUE, convert_u_linteger},
 	{'o', TRUE, convert_u_integer_octal},
+	{'O', TRUE, convert_u_linteger_octal},
 	{'x', TRUE, convert_u_integer_hexa},
 	{'X', TRUE, convert_u_integer_hexa},
 	{'f', TRUE, convert_double_floating},

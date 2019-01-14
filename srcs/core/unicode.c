@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 16:02:45 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/12 17:22:30 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/13 18:07:28 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ size_t					wchartochars(char *dst, wchar_t c)
 
 	len = 1;
 	ft_bzero(u, 4);
-	u[3] = (c & 0b01111111);
+	if (c > 0)
+		u[3] = (c & 0b01111111);
 	if (c >= 0x80 && len++)
 	{
 		u[3] = 0b10000000 | (c & 0b00111111);
@@ -74,13 +75,15 @@ char					*ft_wstrtostr(char *dst, const wchar_t *src)
 	size_t				l;
 	char				*d;
 
+	l = 0;
 	d = (char *)dst;
-	while (*src)
+	while (!l || *src)
 	{
 		if ((l = ft_wchar_len(*src)) > ft_strlen(d))
 		{
+			fflush(stdout);
 			ft_bzero(d, ft_strlen(d));
-			break ;
+			return (d);
 		}
 		wchartochars(d, *src);
 		d += l;

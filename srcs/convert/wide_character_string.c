@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:34:47 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/10 15:39:44 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/13 19:16:09 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,24 @@
 #include "core/ft_core.h"
 #include "core/ft_types.h"
 #include "libft.h"
+
+static char					*padd(char *res, t_arg *arg)
+{
+	int						from;
+	size_t					add;
+	size_t					len;
+
+	add = 0;
+	from = 0;
+	if ((len = ft_strlen(res)) < (size_t)arg->min_width)
+		add = arg->min_width - len;
+	if ((arg->flags & F_MINS))
+		from = len;
+	else
+		ft_memmove(res + add, res, len);
+	ft_memset(res + from, (arg->flags & F_ZERO) ? '0' : ' ', add);
+	return (res);
+}
 
 char						*wide_character_string(t_printf *data, t_arg *arg)
 {
@@ -30,9 +48,10 @@ char						*wide_character_string(t_printf *data, t_arg *arg)
 		tab_len = len;
 	if (!(res = ft_memalloc(tab_len + 1)))
 		return (NULL);
-	ft_memset(res, (arg->flags & F_ZERO) ? '0' : ' ', tab_len);
+	ft_memset(res, (arg->flags & F_ZERO) ? '0' : ' ', len);
 	tab_len -= ((arg->flags & F_MINS) ? tab_len : len);
-	ft_wstrtostr(res + tab_len, v);
+	ft_wstrtostr(res, v);
+	padd(res, arg);
 	insert_buffer(data, res, ft_strlen(res));
 	free(res);
 	return (data->buf);

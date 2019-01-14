@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 15:22:40 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/12 21:15:32 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/13 16:17:31 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@ char			*intmax_integer(t_printf *const data, t_arg *const ar)
 	v = (intmax_t)ar->value;
 	if ((l = (ft_numlen(v) - (v < 0))) > (size_t)ar->precision)
 		ar->precision = l;
-	if (ar->flags & F_ZERO && l < (size_t)ar->min_width)
-		ar->precision = ar->min_width - (v < 0);
-	if ((size_t)ar->min_width <= l && (ar->flags & (F_PLUS | F_SPAC)) && v >= 0)
+	if ((ar->flags & (F_PLUS | F_SPAC)) && v >= 0 && ++l)
 		ar->precision++;
+	if ((l + (v < 0)) > (size_t)ar->min_width)
+		ar->min_width = l + (v < 0);
+	if ((ar->flags & F_ZERO) && ar->precision < ar->min_width)
+		ar->precision = ar->min_width - (v < 0);
 	if (!(tab = padded_lltoa(v, ar->precision, ar->min_width,
 		(ar->flags & F_MINS) != 0)))
 		return (NULL);
@@ -45,13 +47,14 @@ char			*size_integer(t_printf *const data, t_arg *const ar)
 	char		*tab;
 
 	v = (size_t)ar->value;
-	if ((l = (ft_numlen(v) - ((long long)v < 0))) > (size_t)ar->precision)
+	if ((l = ft_numlen(v)) > (size_t)ar->precision)
 		ar->precision = l;
-	if (ar->flags & F_ZERO && l < (size_t)ar->min_width)
-		ar->precision = ar->min_width - ((long long)v < 0);
-	if ((size_t)ar->min_width <= l
-		&& (ar->flags & (F_PLUS | F_SPAC)) && (long long)v >= 0)
+	if ((ar->flags & (F_PLUS | F_SPAC)) && ++l)
 		ar->precision++;
+	if (l > (size_t)ar->min_width)
+		ar->min_width = l;
+	if ((ar->flags & F_ZERO) && ar->precision < ar->min_width)
+		ar->precision = ar->min_width;
 	if (!(tab = padded_lltoa(v, ar->precision, ar->min_width,
 		(ar->flags & F_MINS) != 0)))
 		return (NULL);
@@ -71,10 +74,12 @@ char			*ssize_integer(t_printf *const data, t_arg *const ar)
 	v = (ssize_t)ar->value;
 	if ((l = (ft_numlen(v) - (v < 0))) > (size_t)ar->precision)
 		ar->precision = l;
-	if (ar->flags & F_ZERO && l < (size_t)ar->min_width)
-		ar->precision = ar->min_width - (v < 0);
-	if ((size_t)ar->min_width <= l && (ar->flags & (F_PLUS | F_SPAC)) && v >= 0)
+	if ((ar->flags & (F_PLUS | F_SPAC)) && v >= 0 && ++l)
 		ar->precision++;
+	if ((l + (v < 0)) > (size_t)ar->min_width)
+		ar->min_width = l + (v < 0);
+	if ((ar->flags & F_ZERO) && ar->precision < ar->min_width)
+		ar->precision = ar->min_width - (v < 0);
 	if (!(tab = padded_lltoa(v, ar->precision, ar->min_width,
 		(ar->flags & F_MINS) != 0)))
 		return (NULL);
@@ -94,10 +99,12 @@ char			*ptrdiff_integer(t_printf *const data, t_arg *const ar)
 	v = (ptrdiff_t)ar->value;
 	if ((l = (ft_numlen(v) - (v < 0))) > (size_t)ar->precision)
 		ar->precision = l;
-	if (ar->flags & F_ZERO && l < (size_t)ar->min_width)
+	if ((ar->flags & (F_PLUS | F_SPAC)) && v >= 0 && ++l)
+		ar->precision++;
+	if ((l + (v < 0)) > (size_t)ar->min_width)
+		ar->min_width = l + (v < 0);
+	if ((ar->flags & F_ZERO) && ar->precision < ar->min_width)
 		ar->precision = ar->min_width - (v < 0);
-	if ((size_t)ar->min_width <= l && (ar->flags & (F_PLUS | F_SPAC)) && v >= 0)
-		v = -v;
 	if (!(tab = padded_lltoa(v, ar->precision, ar->min_width,
 		(ar->flags & F_MINS) != 0)))
 		return (NULL);
@@ -117,10 +124,12 @@ char			*quad_integer(t_printf *const data, t_arg *const ar)
 	v = (quad_t)ar->value;
 	if ((l = (ft_numlen(v) - (v < 0))) > (size_t)ar->precision)
 		ar->precision = l;
-	if (ar->flags & F_ZERO && l < (size_t)ar->min_width)
-		ar->precision = ar->min_width - (v < 0);
-	if ((size_t)ar->min_width <= l && (ar->flags & (F_PLUS | F_SPAC)) && v >= 0)
+	if ((ar->flags & (F_PLUS | F_SPAC)) && v >= 0 && ++l)
 		ar->precision++;
+	if ((l + (v < 0)) > (size_t)ar->min_width)
+		ar->min_width = l + (v < 0);
+	if ((ar->flags & F_ZERO) && ar->precision < ar->min_width)
+		ar->precision = ar->min_width - (v < 0);
 	if (!(tab = padded_lltoa(v, ar->precision, ar->min_width,
 		(ar->flags & F_MINS) != 0)))
 		return (NULL);

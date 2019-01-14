@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 18:25:04 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/10 15:47:56 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/13 16:11:59 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,11 @@ char				*convert_u_integer(t_printf *data, t_arg *arg)
 	if (!g_funcs[i].c)
 		return (g_funcs[0].func(data, arg));
 	return (g_funcs[i].func(data, arg));
+}
+
+char			*convert_u_linteger(t_printf *data, t_arg *arg)
+{
+	arg->conv.c = 'u';
+	arg->length_modifier = ft_idxof('l', LEN_MD_CHRS);
+	return (convert_u_integer(data, arg));
 }

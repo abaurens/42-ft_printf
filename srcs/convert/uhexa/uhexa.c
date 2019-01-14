@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 18:26:04 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/11 21:40:16 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/13 17:00:30 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ static char			*hexa(t_printf *const data, t_arg *const arg)
 	v = (unsigned int)arg->value;
 	if ((len = ft_unsignedlen_base(v, "0123456789abcdef")) > arg->precision)
 		arg->precision = len;
+	if ((arg->flags & F_HASH) && v != 0)
+		arg->precision += 2;
 	if (arg->flags & F_ZERO && arg->min_width > arg->precision)
 		arg->precision = arg->min_width;
-	if ((arg->flags & F_HASH) && v != 0 && arg->precision == len)
-		arg->precision += ((len + 2) - arg->precision);
 	if (!(tab = padded_ulltoa_hexa(v, arg->precision, arg->min_width,
 		(arg->flags & F_MINS) != 0)))
 		return (NULL);
