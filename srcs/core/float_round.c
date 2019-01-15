@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/03 19:22:34 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/14 20:30:17 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/15 18:33:10 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ char			*round_tabflt(char *val, size_t prec, int *exp)
 	size_t		point;
 	char		sign;
 
+	sign = 0;
 	if (!ft_strchr(val, '.'))
 		return (val);
 	while (ft_contains(*val, " +-") && *(++val))
@@ -159,25 +160,17 @@ char			*round_hex(char *val, size_t prec, int *exp)
 	size_t		i;
 	size_t		len;
 	char		sign;
+	size_t		point;
 
 	sign = 0;
 	if (!val || !exp)
 		return (val);
-	while (ft_contains(*val, " +-") && sign++)
-		val++;
+	while (ft_contains(*val, " +-") && *(++val))
+		sign++;
 	len = ft_strlen(val);
 	i = len;
-	printf("res = %s\n", val);
-	/*while (val && i-- > 0)
-		val[i] = val[i] == '.' ? '.' : ft_idxof(val[i], HEXA);*/
 	banker_round(val, prec, HEXA);
-	/*val = round_hex_core(val, prec, len);*/
-	/*if (val && *val >= 16 && (*val = 1))
-		(*exp) += 4;*/
-	printf("res = %s\n", val);
-	/*i = 0;
-	while (val && i++ < len)
-		if (val[i - 1] != '.')
-			val[i - 1] = HEXA[(int)val[i - 1]];*/
+	if (exp && (point = ft_idxof('.', val)) != 1 && ((*exp) += 4))
+		*(((char *)ft_memmove(val + 2, val + 1, point - 1)) - 1) = '.';
 	return (val - sign);
 }

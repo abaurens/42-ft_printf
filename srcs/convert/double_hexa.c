@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:30:24 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/10 15:19:54 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/15 18:34:36 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ static char		*long_double_h(t_printf *const data, t_arg *const ar)
 	char		*t;
 	char		*r;
 
-	if (!(t = exp_dbl_hex(ar->ldbl, ar->precision)))
+	if (!(t = exp_dbl_hex(ar->ldbl, ar->precision, !!ar->length_modifier)))
 		return (NULL);
 	if ((s = (*t != '-' && (ar->flags & (F_PLUS | F_SPAC)))) && !fnan(ar->ldbl))
 		t = (char *)ft_freturn(t, (long)ft_strmcat(" ", t, -1));
 	s = ((s || *t == '-') && !fnan(ar->ldbl));
 	if (!(ar->flags & F_HASH) && !ar->precision && ldbl_num(ar->ldbl))
-		ft_memmove(t + s + 1, t + s + 2, ft_strlen(t + s + 1));
+		ft_memmove(t + s + 3, t + s + 4, ft_strlen(t + s + 3));
 	l = ft_strlen(t);
 	add = ((size_t)ar->min_width > l) ? ar->min_width - l : 0;
 	if (!(r = ft_memalloc(l + add + 1)))
@@ -55,6 +55,7 @@ static char		*long_double_h(t_printf *const data, t_arg *const ar)
 
 static char		*std_double(t_printf *const data, t_arg *const arg)
 {
+	arg->length_modifier = 0;
 	arg->ldbl = (long double)arg->dbl;
 	return (long_double_h(data, arg));
 }
