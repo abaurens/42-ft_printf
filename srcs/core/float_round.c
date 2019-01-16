@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/03 19:22:34 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/15 18:33:10 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/16 19:56:34 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,12 @@ char		*rnd(char *val, size_t ln, const size_t prec, const size_t blen)
 	if (prec + 1 >= ln)
 		return (val);
 	while (--i > (prec + 1))
-		f = (f || val[i]);
+		f = (blen == 10 && (f || val[i]));
 	i--;
 	cur = val + (i - (val[i] == '.'));
 	next = i + 1 > ln ? 0 : val[i + 1];
-	if ((size_t)next > lim || ((size_t)next == lim && (f || (*cur % 2))))
+	f = (f || (i + 2 > ln ? 0 : val[i + 2]) % 2);
+	if ((size_t)next > lim || ((size_t)next == lim && (f || (blen == 10 && *cur % 2))))
 		(*cur)++;
 	i = ln;
 	while (i-- > 1)

@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:30:24 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/15 18:34:36 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/16 20:33:32 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,23 @@
 
 static char		*manage_prefix(char *r, t_printf *const data, t_arg *const ar)
 {
-	if ((ar->flags & F_ZERO))
+	int			i;
+	char		*sgns;
+	char		*s
+;
+	i = -1;
+	sgns = " +-";
+	if (ldbl_num(ar->ldbl) && (ar->flags & F_ZERO))
 	{
+		while (sgns[++i])
+			if ((s = ft_strchr(r, sgns[i])) && s[-1] != 'p')
+			{
+				r[ft_idxof(sgns[i], r)] = '0';
+				r[0] = sgns[i];
+				break;
+			}
 		r[ft_idxof('x', r)] = '0';
-		r[1] = 'x';
+		r[ft_idxof('0', r) + 1] = 'x';
 	}
 	if (ft_isupper(ar->conv.c))
 		ft_strupcase(r);
@@ -48,8 +61,8 @@ static char		*long_double_h(t_printf *const data, t_arg *const ar)
 	if (*t == '-' || (*t == ' ' && (ar->flags & F_PLUS) && (*t = '+')))
 		*r = *t;
 	s *= !!(ar->flags & F_ZERO);
-	ft_memset(r + s, (ar->flags & F_ZERO) ? '0' : ' ', add + l - s);
-	ft_memcpy(r + add * !(ar->flags & F_MINS) + s, t + s, l - s);
+	ft_memset(r, (ar->flags & F_ZERO) && ldbl_num(ar->ldbl) ? '0' : ' ', add + l);
+	ft_memcpy(r + add * !(ar->flags & F_MINS), t, l);
 	return ((char *)ft_freturn(t, (long)manage_prefix(r, data, ar)));
 }
 
