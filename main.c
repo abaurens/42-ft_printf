@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 20:21:47 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/17 20:30:28 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/17 20:33:01 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ int			main(void)
 	ft_printf("\n");
 
 	d = 0.0;
-	ft_printf("F:%a\n", d);
-	printf("F:%a\n", d);
+	ft_printf("F:%-o\n", -592920303);
+	printf("F:%-o\n", -592920303);
 	fflush(stdout);
 
 	ft_printf("%%m to be validated\n");
