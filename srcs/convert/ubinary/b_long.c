@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/11 21:29:23 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/11 21:29:30 by abaurens         ###   ########.fr       */
+/*   Created: 2018/12/09 17:40:26 by abaurens          #+#    #+#             */
+/*   Updated: 2019/01/17 19:41:58 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,43 +15,45 @@
 #include "core/ft_types.h"
 #include "libft.h"
 
-char			*long_uoctal(t_printf *const data, t_arg *const arg)
+char				*long_binary(t_printf *const data, t_arg *const arg)
 {
 	unsigned long	v;
 	char			*tab;
 	int				len;
 
 	v = (long int)arg->value;
-	if ((len = ft_unsignedlen_base(v, "01234567")) > arg->precision)
-		arg->precision = len;
-	if (arg->flags & F_ZERO && arg->min_width > arg->precision)
-		arg->precision = arg->min_width;
-	if (arg->flags & F_HASH && v != 0 && arg->precision <= len)
-		arg->precision++;
-	if (!(tab = padded_ulltoa_octal(v, arg->precision, arg->min_width,
-		(arg->flags & F_MINS) != 0)))
+	if ((len = ft_unsignedlen_base(v, "01")) > arg->prec)
+		arg->prec = len;
+	if (flag(arg, F_ZERO) && arg->min > arg->prec)
+		arg->prec = arg->min;
+	if (flag(arg, F_HASH) && v != 0 && arg->prec < (len + 2))
+		arg->prec += ((len + 2) - arg->prec);
+	if (!(tab = padded_ulltoa_bin(v, arg->prec, arg->min, flag(arg, F_MINS))))
 		return (NULL);
+	if (flag(arg, F_HASH) && v != 0)
+		tab[ft_idxof('0', tab) + 1] = 'b';
 	insert_buffer(data, tab, ft_strlen(tab));
 	free(tab);
 	return (data->buf);
 }
 
-char			*long_long_uoctal(t_printf *const data, t_arg *const arg)
+char				*long_long_binary(t_printf *const data, t_arg *const arg)
 {
 	unsigned long long	v;
 	char				*tab;
 	int					len;
 
 	v = (unsigned long long)arg->value;
-	if ((len = ft_unsignedlen_base(v, "01234567")) > arg->precision)
-		arg->precision = len;
-	if (arg->flags & F_ZERO && arg->min_width > arg->precision)
-		arg->precision = arg->min_width;
-	if (arg->flags & F_HASH && v != 0 && arg->precision <= len)
-		arg->precision++;
-	if (!(tab = padded_ulltoa_octal(v, arg->precision, arg->min_width,
-		(arg->flags & F_MINS) != 0)))
+	if ((len = ft_unsignedlen_base(v, "01")) > arg->prec)
+		arg->prec = len;
+	if (flag(arg, F_ZERO) && arg->min > arg->prec)
+		arg->prec = arg->min;
+	if (flag(arg, F_HASH) && v != 0 && arg->prec < (len + 2))
+		arg->prec += ((len + 2) - arg->prec);
+	if (!(tab = padded_ulltoa_bin(v, arg->prec, arg->min, flag(arg, F_MINS))))
 		return (NULL);
+	if (flag(arg, F_HASH) && v != 0)
+		tab[ft_idxof('0', tab) + 1] = 'b';
 	insert_buffer(data, tab, ft_strlen(tab));
 	free(tab);
 	return (data->buf);

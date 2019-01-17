@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/10 15:41:42 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/11 21:43:47 by abaurens         ###   ########.fr       */
+/*   Created: 2019/01/11 21:29:12 by abaurens          #+#    #+#             */
+/*   Updated: 2019/01/17 19:46:05 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,34 +15,42 @@
 #include "core/ft_types.h"
 #include "libft.h"
 
-char				*short_uinteger(t_printf *const data, t_arg *const arg)
+char			*short_uoctal(t_printf *const data, t_arg *const arg)
 {
 	unsigned short	v;
 	char			*tab;
+	int				len;
 
 	v = (unsigned short int)arg->value;
-	if (arg->flags & F_ZERO)
-		arg->precision = arg->min_width;
-	if (!(tab = padded_ulltoa(v, arg->precision, arg->min_width,
-		(arg->flags & F_MINS) != 0)))
+	if ((len = ft_unsignedlen_base(v, "01234567")) > arg->prec)
+		arg->prec = len;
+	if (flag(arg, F_ZERO) && arg->min > arg->prec)
+		arg->prec = arg->min;
+	if (flag(arg, F_HASH && v != 0 && arg->prec <= len))
+		arg->prec++;
+	if (!(tab = padded_ulltoa_octal(v, arg->prec, arg->min, flag(arg, F_MINS))))
 		return (NULL);
 	insert_buffer(data, tab, ft_strlen(tab));
 	free(tab);
 	return (data->buf);
 }
 
-char				*short_short_uinteger(t_printf *const dta, t_arg *const arg)
+char			*short_short_uoctal(t_printf *const data, t_arg *const arg)
 {
 	unsigned char	v;
 	char			*tab;
+	int				len;
 
 	v = (unsigned char)arg->value;
-	if (arg->flags & F_ZERO)
-		arg->precision = arg->min_width;
-	if (!(tab = padded_ulltoa(v, arg->precision, arg->min_width,
-		(arg->flags & F_MINS) != 0)))
+	if ((len = ft_unsignedlen_base(v, "01234567")) > arg->prec)
+		arg->prec = len;
+	if (flag(arg, F_ZERO) && arg->min > arg->prec)
+		arg->prec = arg->min;
+	if (flag(arg, F_HASH && v != 0 && arg->prec <= len))
+		arg->prec++;
+	if (!(tab = padded_ulltoa_octal(v, arg->prec, arg->min, flag(arg, F_MINS))))
 		return (NULL);
-	insert_buffer(dta, tab, ft_strlen(tab));
+	insert_buffer(data, tab, ft_strlen(tab));
 	free(tab);
-	return (dta->buf);
+	return (data->buf);
 }

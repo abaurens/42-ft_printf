@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:30:24 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/16 20:33:32 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/17 19:53:22 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char		*manage_prefix(char *r, t_printf *const data, t_arg *const ar)
 ;
 	i = -1;
 	sgns = " +-";
-	if (ldbl_num(ar->ldbl) && (ar->flags & F_ZERO))
+	if (ldbl_num(ar->ldbl) && flag(ar, F_ZERO))
 	{
 		while (sgns[++i])
 			if ((s = ft_strchr(r, sgns[i])) && s[-1] != 'p')
@@ -47,22 +47,22 @@ static char		*long_double_h(t_printf *const data, t_arg *const ar)
 	char		*t;
 	char		*r;
 
-	if (!(t = exp_dbl_hex(ar->ldbl, ar->precision, !!ar->length_modifier)))
+	if (!(t = exp_dbl_hex(ar->ldbl, ar->prec, !!ar->length_modifier)))
 		return (NULL);
-	if ((s = (*t != '-' && (ar->flags & (F_PLUS | F_SPAC)))) && !fnan(ar->ldbl))
+	if ((s = (*t != '-' && flag(ar, (F_PLUS | F_SPAC)))) && !fnan(ar->ldbl))
 		t = (char *)ft_freturn(t, (long)ft_strmcat(" ", t, -1));
 	s = ((s || *t == '-') && !fnan(ar->ldbl));
-	if (!(ar->flags & F_HASH) && !ar->precision && ldbl_num(ar->ldbl))
+	if (!flag(ar, F_HASH) && !ar->prec && ldbl_num(ar->ldbl))
 		ft_memmove(t + s + 3, t + s + 4, ft_strlen(t + s + 3));
 	l = ft_strlen(t);
-	add = ((size_t)ar->min_width > l) ? ar->min_width - l : 0;
+	add = ((size_t)ar->min > l) ? ar->min - l : 0;
 	if (!(r = ft_memalloc(l + add + 1)))
 		return ((char *)ft_freturn(t, 0x0));
-	if (*t == '-' || (*t == ' ' && (ar->flags & F_PLUS) && (*t = '+')))
+	if (*t == '-' || (*t == ' ' && flag(ar, F_PLUS) && (*t = '+')))
 		*r = *t;
-	s *= !!(ar->flags & F_ZERO);
-	ft_memset(r, (ar->flags & F_ZERO) && ldbl_num(ar->ldbl) ? '0' : ' ', add + l);
-	ft_memcpy(r + add * !(ar->flags & F_MINS), t, l);
+	s *= !!flag(ar, F_ZERO);
+	ft_memset(r, flag(ar, F_ZERO) && ldbl_num(ar->ldbl) ? '0' : ' ', add + l);
+	ft_memcpy(r + add * !flag(ar, F_MINS), t, l);
 	return ((char *)ft_freturn(t, (long)manage_prefix(r, data, ar)));
 }
 
@@ -88,18 +88,18 @@ char			*convert_double_hexa(t_printf *data, t_arg *arg)
 	long long	prec;
 	t_lst_elem	*tmp;
 
-	min = arg->min_width;
-	prec = arg->precision;
-	i = (arg->min_width_idx && get_arg(data, arg->min_width_idx, &min));
-	i = (i || (arg->precision_idx && get_arg(data, arg->precision_idx, &prec)));
+	min = arg->min;
+	prec = arg->prec;
+	i = (arg->min_idx && get_arg(data, arg->min_idx, &min));
+	i = (i || (arg->prec_idx && get_arg(data, arg->prec_idx, &prec)));
 	if (i || !(tmp = get_arg_f(data, arg->flag_idx)))
 		return (NULL);
 	i = 0;
 	arg->dbl = tmp->dbl;
 	arg->ldbl = tmp->ldbl;
-	arg->min_width = (((int)min) < 0 ? 0 : (int)min);
-	arg->precision = (((int)prec) < 0 ? -1 : (int)prec);
-	if (arg->flags & F_MINS)
+	arg->min = (((int)min) < 0 ? 0 : (int)min);
+	arg->prec = (((int)prec) < 0 ? -1 : (int)prec);
+	if (flag(arg, F_MINS))
 		arg->flags &= ~F_ZERO;
 	while (g_funcs[i].c && g_funcs[i].c != LEN_MD_CHRS[arg->length_modifier])
 		i++;

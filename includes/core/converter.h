@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 13:53:50 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/13 16:16:36 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/17 15:49:27 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # define CONV_V "%dDiuoxXfFeEgGaAcCsSpnmbrk"
 
 /*
+**	% = only print a percent char
+**		(because % is used to escape conversions) (NO ARG)
 **	i, d = signed decimal
 **	o = unsigned octal
 **	u = unsigned decimal
@@ -40,8 +42,6 @@
 **	n = place the number of character writed by this printf until this
 **		convertion into an int pointer
 **	m = prints the value of strerror(errno) (NO ARG)
-**	% = only print a percent char
-**		(because % is used to escape conversions) (NO ARG)
 **
 **	b = nombre binaire
 **	r = string avec caracteres non imprimable
@@ -83,6 +83,16 @@ char			*wide_character_string(t_printf *data, t_arg *arg);
 **	wide_character.c
 */
 char			*wide_character(t_printf *data, t_arg *arg);
+
+/*
+**	double_scientific.c
+*/
+char			*printf_ldbl_s(t_printf *const data, t_arg *const ar);
+
+/*
+**	double_floating.c
+*/
+char			*printf_ldbl(t_printf *const data, t_arg *const arg);
 
 static const t_converter	g_converters[] =
 {

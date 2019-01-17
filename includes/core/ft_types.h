@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 18:29:02 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/16 17:47:23 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/17 19:17:23 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,11 @@ struct					s_arg
 	long double			ldbl;
 	double				dbl;
 	size_t				flag_idx;
-	size_t				precision_idx;
-	size_t				min_width_idx;
+	size_t				prec_idx;
+	size_t				min_idx;
 	char				flags;
-	int					min_width;
-	int					precision;
+	int					min;
+	int					prec;
 	int					length_modifier;
 };
 

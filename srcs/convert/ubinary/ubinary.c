@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:40:26 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/10 15:54:02 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/17 19:41:04 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@ static char			*binary(t_printf *const data, t_arg *const arg)
 	int				len;
 
 	v = (unsigned int)arg->value;
-	if ((len = ft_unsignedlen_base(v, "01")) > arg->precision)
-		arg->precision = len;
-	if (arg->flags & F_ZERO && arg->min_width > arg->precision)
-		arg->precision = arg->min_width;
-	if ((arg->flags & F_HASH) && v != 0 && arg->precision < (len + 2))
-		arg->precision += ((len + 2) - arg->precision);
-	if (!(tab = padded_ulltoa_bin(v, arg->precision, arg->min_width,
-		(arg->flags & F_MINS) != 0)))
+	if ((len = ft_unsignedlen_base(v, "01")) > arg->prec)
+		arg->prec = len;
+	if (flag(arg, F_ZERO) && arg->min > arg->prec)
+		arg->prec = arg->min;
+	if (flag(arg, F_HASH) && v != 0 && arg->prec < (len + 2))
+		arg->prec += ((len + 2) - arg->prec);
+	if (!(tab = padded_ulltoa_bin(v, arg->prec, arg->min,
+		flag(arg, F_MINS) != 0)))
 		return (NULL);
-	if ((arg->flags & F_HASH) && v != 0)
+	if (flag(arg, F_HASH) && v != 0)
 		tab[ft_idxof('0', tab) + 1] = 'b';
 	insert_buffer(data, tab, ft_strlen(tab));
 	free(tab);
@@ -60,16 +60,16 @@ char				*convert_u_integer_binary(t_printf *data, t_arg *arg)
 	long long		prec;
 	long long		min;
 
-	min = arg->min_width;
-	prec = arg->precision;
+	min = arg->min;
+	prec = arg->prec;
 	i = get_arg(data, arg->flag_idx, &arg->value);
-	i = (i || (arg->min_width_idx && get_arg(data, arg->min_width_idx, &min)));
-	if (i || (arg->precision_idx && get_arg(data, arg->precision_idx, &prec)))
+	i = (i || (arg->min_idx && get_arg(data, arg->min_idx, &min)));
+	if (i || (arg->prec_idx && get_arg(data, arg->prec_idx, &prec)))
 		return (NULL);
 	i = 0;
-	arg->min_width = (((int)min) < 0 ? 0 : (int)min);
-	if ((arg->precision = (((int)prec) < 0 ? 0 : (int)prec))
-		|| (arg->flags & F_MINS))
+	arg->min = (((int)min) < 0 ? 0 : (int)min);
+	if ((arg->prec = (((int)prec) < 0 ? 0 : (int)prec))
+		|| flag(arg, F_MINS))
 		arg->flags &= ~F_ZERO;
 	while (g_funcs[i].c && g_funcs[i].c != LEN_MD_CHRS[arg->length_modifier])
 		i++;

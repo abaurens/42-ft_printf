@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 18:20:02 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/13 16:07:35 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/17 19:44:03 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,18 @@ static char		*integer(t_printf *const data, t_arg *const ar)
 	char		*tab;
 
 	v = (int)ar->value;
-	if ((l = (ft_numlen(v) - (v < 0))) > (size_t)ar->precision)
-		ar->precision = l;
-	if ((ar->flags & (F_PLUS | F_SPAC)) && v >= 0 && ++l)
-		ar->precision++;
-	if ((l + (v < 0)) > (size_t)ar->min_width)
-		ar->min_width = l + (v < 0);
-	if ((ar->flags & F_ZERO) && ar->precision < ar->min_width)
-		ar->precision = ar->min_width - (v < 0);
-	if (!(tab = padded_lltoa(v, ar->precision, ar->min_width,
-		(ar->flags & F_MINS) != 0)))
+	if ((l = (ft_numlen(v) - (v < 0))) > (size_t)ar->prec)
+		ar->prec = l;
+	if (flag(ar, (F_PLUS | F_SPAC)) && v >= 0 && ++l)
+		ar->prec++;
+	if ((l + (v < 0)) > (size_t)ar->min)
+		ar->min = l + (v < 0);
+	if (flag(ar, F_ZERO) && ar->prec < ar->min)
+		ar->prec = ar->min - (v < 0);
+	if (!(tab = padded_lltoa(v, ar->prec, ar->min, flag(ar, F_MINS))))
 		return (NULL);
-	if ((ar->flags & (F_PLUS | F_SPAC)) && (int)ar->value >= 0)
-		tab[ft_idxof('0', tab)] = (ar->flags & F_PLUS) ? '+' : ' ';
+	if (flag(ar, (F_PLUS | F_SPAC)) && (int)ar->value >= 0)
+		tab[ft_idxof('0', tab)] = flag(ar, F_PLUS) ? '+' : ' ';
 	insert_buffer(data, tab, ft_strlen(tab));
 	free(tab);
 	return (data->buf);
@@ -62,16 +61,15 @@ char			*convert_integer(t_printf *const data, t_arg *const arg)
 	long long	prec;
 	long long	min;
 
-	min = arg->min_width;
-	prec = arg->precision;
+	min = arg->min;
+	prec = arg->prec;
 	i = (get_arg(data, arg->flag_idx, &arg->value));
-	i = (i || (arg->min_width_idx && get_arg(data, arg->min_width_idx, &min)));
-	if (i || (arg->precision_idx && get_arg(data, arg->precision_idx, &prec)))
+	i = (i || (arg->min_idx && get_arg(data, arg->min_idx, &min)));
+	if (i || (arg->prec_idx && get_arg(data, arg->prec_idx, &prec)))
 		return (NULL);
 	i = 0;
-	arg->min_width = (((int)min) < 0 ? 0 : (int)min);
-	if ((arg->precision = (((int)prec) < 0 ? 0 : (int)prec))
-		|| (arg->flags & F_MINS))
+	arg->min = (((int)min) < 0 ? 0 : (int)min);
+	if ((arg->prec = (((int)prec) < 0 ? 0 : (int)prec)) || flag(arg, F_MINS))
 		arg->flags &= ~F_ZERO;
 	while (g_funcs[i].c && g_funcs[i].c != LEN_MD_CHRS[arg->length_modifier])
 		i++;

@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 20:21:47 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/16 20:28:03 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/17 20:30:28 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,32 +42,28 @@ int			main(void)
 	ft_printf("%%p validated\n");
 	ft_printf("%%f validated\n");
 	ft_printf("%%F validated\n");
+	ft_printf("%%g validated\n");
+	ft_printf("%%G validated\n");
+
+
+	ft_printf("%%e validated\n");
+	ft_printf("%%E validated\n");
+
+	/*to test with 0 (possible inf loop)*/
+	ft_printf("%%a validated\n");
+	ft_printf("%%A validated\n");
 
 	ft_printf("\n");
 
-	/*d = 0x1.fe0001fep-1027;
-	ft_printf("F:% 027.17la\n", d);
-	printf("R:% 027.17la\n", d);
-	fflush(stdout);*/
-
-	d = 0x1.fe0001fep-1027;
-	ft_printf("F:% 015.2la\n", d);
-	printf("R:% 015.2la\n", d);
+	d = 0.0;
+	ft_printf("F:%a\n", d);
+	printf("F:%a\n", d);
 	fflush(stdout);
 
-	d = 0x1.fe0001fep-1027;
-	ft_printf("F:% 15.2la\n", d);
-	printf("R:% 15.2la\n", d);
-	fflush(stdout);
+	ft_printf("%%m to be validated\n");
+	ft_printf("%%b to be validated\n");
+	ft_printf("%%r to be validated\n");
+	ft_printf("%%k to be validated\n");
 
-	d = 0x1.fe0001fep-1027;
-	ft_printf("F:%+032a\n", d);
-	printf("R:%+032a\n", d);
-	fflush(stdout);
-
-	d = 0x1.fe0001fep-1027;
-	ft_printf("F:%060la\n", d);
-	printf("R:%060la\n", d);
-	fflush(stdout);
 	return (0);
 }

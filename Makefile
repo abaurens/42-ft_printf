@@ -6,7 +6,7 @@
 #    By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 16:23:33 by abaurens          #+#    #+#              #
-#    Updated: 2019/01/15 19:40:33 by abaurens         ###   ########.fr        #
+#    Updated: 2019/01/17 20:18:17 by abaurens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,29 +35,29 @@ SRC         :=	ft_printf.c		\
 				convert/integer/exotic.c			\
 				\
 				convert/length/length.c				\
-				convert/length/long.c				\
-				convert/length/short.c				\
-				convert/length/exotic.c				\
+				convert/length/l_long.c				\
+				convert/length/l_short.c			\
+				convert/length/l_exotic.c			\
 				\
 				convert/uinteger/uinteger.c			\
-				convert/uinteger/long.c				\
-				convert/uinteger/short.c			\
-				convert/uinteger/exotic.c			\
+				convert/uinteger/u_long.c			\
+				convert/uinteger/u_short.c			\
+				convert/uinteger/u_exotic.c			\
 				\
 				convert/ubinary/ubinary.c			\
-				convert/ubinary/long.c				\
-				convert/ubinary/short.c				\
-				convert/ubinary/exotic.c			\
+				convert/ubinary/b_long.c			\
+				convert/ubinary/b_short.c			\
+				convert/ubinary/b_exotic.c			\
 				\
 				convert/uhexa/uhexa.c				\
-				convert/uhexa/long.c				\
-				convert/uhexa/short.c				\
-				convert/uhexa/exotic.c				\
+				convert/uhexa/h_long.c				\
+				convert/uhexa/h_short.c				\
+				convert/uhexa/h_exotic.c			\
 				\
 				convert/uoctal/uoctal.c				\
-				convert/uoctal/long.c				\
-				convert/uoctal/short.c				\
-				convert/uoctal/exotic.c				\
+				convert/uoctal/o_long.c				\
+				convert/uoctal/o_short.c			\
+				convert/uoctal/o_exotic.c			\
 				\
 				convert/char.c					\
 				convert/string.c				\
@@ -74,6 +74,7 @@ SRC         :=	ft_printf.c		\
 				convert/wide_character_string.c	\
 				\
 				core/core.c								\
+				core/flags.c							\
 				core/buffer.c							\
 				core/big_num.c							\
 				core/unicode.c							\

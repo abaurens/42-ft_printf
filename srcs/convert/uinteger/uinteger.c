@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 18:25:04 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/13 16:11:59 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/17 19:46:56 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,9 @@ static char			*uinteger(t_printf *const data, t_arg *const arg)
 	char			*tab;
 
 	v = (unsigned int)arg->value;
-	if (arg->flags & F_ZERO)
-		arg->precision = arg->min_width;
-	if (!(tab = padded_ulltoa(v, arg->precision, arg->min_width,
-		(arg->flags & F_MINS) != 0)))
+	if (flag(arg, F_ZERO))
+		arg->prec = arg->min;
+	if (!(tab = padded_ulltoa(v, arg->prec, arg->min, flag(arg, F_MINS))))
 		return (NULL);
 	insert_buffer(data, tab, ft_strlen(tab));
 	free(tab);
@@ -53,16 +52,16 @@ char				*convert_u_integer(t_printf *data, t_arg *arg)
 	long long		prec;
 	long long		min;
 
-	min = arg->min_width;
-	prec = arg->precision;
+	min = arg->min;
+	prec = arg->prec;
 	i = get_arg(data, arg->flag_idx, &arg->value);
-	i = (i || (arg->min_width_idx && get_arg(data, arg->min_width_idx, &min)));
-	if (i || (arg->precision_idx && get_arg(data, arg->precision_idx, &prec)))
+	i = (i || (arg->min_idx && get_arg(data, arg->min_idx, &min)));
+	if (i || (arg->prec_idx && get_arg(data, arg->prec_idx, &prec)))
 		return (NULL);
 	i = 0;
-	arg->min_width = (((int)min) < 0 ? 0 : (int)min);
-	if ((arg->precision = (((int)prec) < 0 ? 0 : (int)prec))
-		|| (arg->flags & F_MINS))
+	arg->min = (((int)min) < 0 ? 0 : (int)min);
+	if ((arg->prec = (((int)prec) < 0 ? 0 : (int)prec))
+		|| flag(arg, F_MINS))
 		arg->flags &= ~F_ZERO;
 	while (g_funcs[i].c && g_funcs[i].c != LEN_MD_CHRS[arg->length_modifier])
 		i++;

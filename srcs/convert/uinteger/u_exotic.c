@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 15:41:40 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/10 15:47:08 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/17 19:47:19 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,9 @@ char			*intmax_uinteger(t_printf *const data, t_arg *const arg)
 	char			*tab;
 
 	v = (uintmax_t)arg->value;
-	if (arg->flags & F_ZERO)
-		arg->precision = arg->min_width;
-	if (!(tab = padded_ulltoa(v, arg->precision, arg->min_width,
-		(arg->flags & F_MINS) != 0)))
+	if (flag(arg, F_ZERO))
+		arg->prec = arg->min;
+	if (!(tab = padded_ulltoa(v, arg->prec, arg->min, flag(arg, F_MINS))))
 		return (NULL);
 	insert_buffer(data, tab, ft_strlen(tab));
 	free(tab);
@@ -37,10 +36,9 @@ char			*size_uinteger(t_printf *const data, t_arg *const arg)
 	char			*tab;
 
 	v = (size_t)arg->value;
-	if (arg->flags & F_ZERO)
-		arg->precision = arg->min_width;
-	if (!(tab = padded_ulltoa(v, arg->precision, arg->min_width,
-		(arg->flags & F_MINS) != 0)))
+	if (flag(arg, F_ZERO))
+		arg->prec = arg->min;
+	if (!(tab = padded_ulltoa(v, arg->prec, arg->min, flag(arg, F_MINS))))
 		return (NULL);
 	insert_buffer(data, tab, ft_strlen(tab));
 	free(tab);
@@ -53,10 +51,9 @@ char			*ssize_uinteger(t_printf *const data, t_arg *const arg)
 	char			*tab;
 
 	v = (ssize_t)arg->value;
-	if (arg->flags & F_ZERO)
-		arg->precision = arg->min_width;
-	if (!(tab = padded_ulltoa(v, arg->precision, arg->min_width,
-		(arg->flags & F_MINS) != 0)))
+	if (flag(arg, F_ZERO))
+		arg->prec = arg->min;
+	if (!(tab = padded_ulltoa(v, arg->prec, arg->min, flag(arg, F_MINS))))
 		return (NULL);
 	insert_buffer(data, tab, ft_strlen(tab));
 	free(tab);
@@ -69,10 +66,9 @@ char			*ptrdiff_uinteger(t_printf *const data, t_arg *const arg)
 	char			*tab;
 
 	v = (ptrdiff_t)arg->value;
-	if (arg->flags & F_ZERO)
-		arg->precision = arg->min_width - (v < 0);
-	if (!(tab = padded_ulltoa(v, arg->precision, arg->min_width,
-		(arg->flags & F_MINS) != 0)))
+	if (flag(arg, F_ZERO))
+		arg->prec = arg->min - (v < 0);
+	if (!(tab = padded_ulltoa(v, arg->prec, arg->min, flag(arg, F_MINS))))
 		return (NULL);
 	insert_buffer(data, tab, ft_strlen(tab));
 	free(tab);
@@ -85,10 +81,9 @@ char			*quad_uinteger(t_printf *const data, t_arg *const arg)
 	char			*tab;
 
 	v = (quad_t)arg->value;
-	if (arg->flags & F_ZERO)
-		arg->precision = arg->min_width;
-	if (!(tab = padded_ulltoa(v, arg->precision, arg->min_width,
-		(arg->flags & F_MINS) != 0)))
+	if (flag(arg, F_ZERO))
+		arg->prec = arg->min;
+	if (!(tab = padded_ulltoa(v, arg->prec, arg->min, flag(arg, F_MINS))))
 		return (NULL);
 	insert_buffer(data, tab, ft_strlen(tab));
 	free(tab);

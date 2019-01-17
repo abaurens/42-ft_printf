@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:40:26 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/10 15:53:42 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/17 19:42:18 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,15 @@ char				*short_binary(t_printf *const data, t_arg *const arg)
 	int				len;
 
 	v = (unsigned short int)arg->value;
-	if ((len = ft_unsignedlen_base(v, "01")) > arg->precision)
-		arg->precision = len;
-	if (arg->flags & F_ZERO && arg->min_width > arg->precision)
-		arg->precision = arg->min_width;
-	if ((arg->flags & F_HASH) && v != 0 && arg->precision < (len + 2))
-		arg->precision += ((len + 2) - arg->precision);
-	if (!(tab = padded_ulltoa_bin(v, arg->precision, arg->min_width,
-		(arg->flags & F_MINS) != 0)))
+	if ((len = ft_unsignedlen_base(v, "01")) > arg->prec)
+		arg->prec = len;
+	if (flag(arg, F_ZERO) && arg->min > arg->prec)
+		arg->prec = arg->min;
+	if (flag(arg, F_HASH) && v != 0 && arg->prec < (len + 2))
+		arg->prec += ((len + 2) - arg->prec);
+	if (!(tab = padded_ulltoa_bin(v, arg->prec, arg->min, flag(arg, F_MINS))))
 		return (NULL);
-	if ((arg->flags & F_HASH) && v != 0)
+	if (flag(arg, F_HASH) && v != 0)
 		tab[ft_idxof('0', tab) + 1] = 'b';
 	insert_buffer(data, tab, ft_strlen(tab));
 	free(tab);
@@ -45,16 +44,15 @@ char				*short_short_binary(t_printf *const data, t_arg *const arg)
 	int				len;
 
 	v = (unsigned char)arg->value;
-	if ((len = ft_unsignedlen_base(v, "01")) > arg->precision)
-		arg->precision = len;
-	if (arg->flags & F_ZERO && arg->min_width > arg->precision)
-		arg->precision = arg->min_width;
-	if ((arg->flags & F_HASH) && v != 0 && arg->precision < (len + 2))
-		arg->precision += ((len + 2) - arg->precision);
-	if (!(tab = padded_ulltoa_bin(v, arg->precision, arg->min_width,
-		(arg->flags & F_MINS) != 0)))
+	if ((len = ft_unsignedlen_base(v, "01")) > arg->prec)
+		arg->prec = len;
+	if (flag(arg, F_ZERO) && arg->min > arg->prec)
+		arg->prec = arg->min;
+	if (flag(arg, F_HASH) && v != 0 && arg->prec < (len + 2))
+		arg->prec += ((len + 2) - arg->prec);
+	if (!(tab = padded_ulltoa_bin(v, arg->prec, arg->min, flag(arg, F_MINS))))
 		return (NULL);
-	if ((arg->flags & F_HASH) && v != 0)
+	if (flag(arg, F_HASH) && v != 0)
 		tab[ft_idxof('0', tab) + 1] = 'b';
 	insert_buffer(data, tab, ft_strlen(tab));
 	free(tab);

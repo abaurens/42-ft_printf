@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 20:54:23 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/10 15:38:16 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/17 19:51:26 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ static char	*percent(t_printf *data, t_arg *arg)
 	char	*res;
 	size_t	len;
 
-	len = ft_max(1, arg->min_width);
+	len = ft_max(1, arg->min);
 	if (!(res = ft_memalloc(len + 1)))
 		return (NULL);
-	ft_memset(res, (arg->flags & F_ZERO) ? '0' : ' ', len);
-	res[(len - 1) * !(arg->flags & F_MINS)] = '%';
+	ft_memset(res, flag(arg, F_ZERO) ? '0' : ' ', len);
+	res[(len - 1) * !flag(arg, F_MINS)] = '%';
 	return (insert_buffer(data, res, len));
 }
 
@@ -34,14 +34,14 @@ char		*convert_percent(t_printf *data, t_arg *arg)
 	long long	prec;
 	long long	min;
 
-	min = arg->min_width;
-	prec = arg->precision;
+	min = arg->min;
+	prec = arg->prec;
 	i = (get_arg(data, arg->flag_idx, &arg->value));
-	if (i || (arg->min_width_idx && get_arg(data, arg->min_width_idx, &min)))
+	if (i || (arg->min_idx && get_arg(data, arg->min_idx, &min)))
 		return (NULL);
 	i = 0;
-	arg->min_width = (((int)min) < 0 ? 1 : (int)min);
-	if (arg->flags & F_MINS)
+	arg->min = (((int)min) < 0 ? 1 : (int)min);
+	if (flag(arg, F_MINS))
 		arg->flags &= ~F_ZERO;
 	return (percent(data, arg));
 }

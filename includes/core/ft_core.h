@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 14:53:12 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/15 18:22:38 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/17 19:21:58 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ int				parse_conversion(const char **format, t_printf *data);
 */
 char			*insert_buffer(t_printf *const data, const char *str,
 								size_t len);
+
+/*
+**	flags.c
+*/
+char			flag(t_arg *arg, char mask);
 
 /*
 **	args.c

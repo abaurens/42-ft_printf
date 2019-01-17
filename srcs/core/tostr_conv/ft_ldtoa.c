@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/06 17:51:08 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/15 19:53:13 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/17 17:11:45 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ char				*exp_dbl(long double d, size_t prec)
 		return ((char *)ft_freturn(tmp, 0x0));
 	*res = ft_freturn(NULL + !ft_memset(res + sign, 48, sign + 2 + prec), '-');
 	ft_memcpy(res + sign + 2 + prec, (expo < 0 ? "e-" : "e+"), 2);
-	ft_strncpy(res + sign, tmp, ft_min(sign + 2 + prec, ft_strlen(tmp)));
+	ft_strncpy(res + sign, tmp, ft_min(2 + prec, ft_strlen(tmp)));
 	while (xpl-- > 0 && (res[sign + 4 + prec + xpl] = ft_abs(expo % 10) + '0'))
 		expo = ft_abs(expo / 10);
 	return ((char *)ft_freturn(tmp, (long)res));
@@ -123,7 +123,6 @@ char				*exp_dbl_hex(long double d, int prec, t_bool lng)
 	if ((expo = 0) || dbl_abs(&d, &sign) == (1.0 / 0.0))
 		return (ft_strdup(sign ? "-inf" : "inf"));
 	tmp = get_exp_hex(&d, &expo, lng);
-	/*printf("t:%s\n", tmp);*/
 	if (!tmp || (prec >= 0 && !round_hex(tmp, prec, &expo)))
 		return (NULL);
 	prec = (prec < 0 ? ft_strlen(tmp) : (size_t)(prec + 2));

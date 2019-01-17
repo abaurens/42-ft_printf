@@ -41,16 +41,16 @@ static int		get_min_width(const char *format, t_printf *data, t_arg *arg)
 	i = 0;
 	f = format;
 	format += get_flags(format, arg);
-	arg->min_width_idx = 0;
-	if ((arg->min_width = 0) || *format == '*')
+	arg->min_idx = 0;
+	if ((arg->min = 0) || *format == '*')
 	{
-		arg->min_width_idx = ++data->arg_count;
-		if ((i = get_chain_format(format + 1, data, &arg->min_width_idx)) < 0)
+		arg->min_idx = ++data->arg_count;
+		if ((i = get_chain_format(format + 1, data, &arg->min_idx)) < 0)
 			return (0);
 		++i;
 		return ((format + i) - f);
 	}
-	arg->min_width = ft_atoi(format);
+	arg->min = ft_atoi(format);
 	while (format[i] && format[i] >= '0' && format[i] <= '9')
 		i++;
 	return ((format + i) - f);
@@ -63,21 +63,21 @@ static int		get_precision(const char *format, t_printf *data, t_arg *arg)
 
 	i = 0;
 	f = format;
-	arg->precision = -1;
-	arg->precision_idx = 0;
+	arg->prec = -1;
+	arg->prec_idx = 0;
 	if (*format++ != '.')
 		return (0);
 	if (*format == '*')
 	{
 		format += 1;
-		arg->precision_idx = ++data->arg_count;
-		if ((i = get_chain_format(format, data, &arg->precision_idx)) < 0)
+		arg->prec_idx = ++data->arg_count;
+		if ((i = get_chain_format(format, data, &arg->prec_idx)) < 0)
 			return (0);
 		return ((format + i) - f);
 	}
 	while (format[i] && format[i] >= '0' && format[i] <= '9')
 		i++;
-	arg->precision = ft_atoi(format);
+	arg->prec = ft_atoi(format);
 	return ((format + i) - f);
 }
 
