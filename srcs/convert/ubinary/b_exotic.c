@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exotic.c                                           :+:      :+:    :+:   */
+/*   b_exotic.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:40:26 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/17 19:43:25 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/18 18:24:43 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char				*intmax_binary(t_printf *const data, t_arg *const arg)
 	char			*tab;
 	int				len;
 
-	v = (uintmax_t)arg->value;
+	v = (uintmax_t)arg->val.i;
 	if ((len = ft_unsignedlen_base(v, "01")) > arg->prec)
 		arg->prec = len;
 	if (flag(arg, F_ZERO) && arg->min > arg->prec)
@@ -43,7 +43,7 @@ char				*size_binary(t_printf *const data, t_arg *const arg)
 	char			*tab;
 	int				len;
 
-	v = (size_t)arg->value;
+	v = (size_t)arg->val.i;
 	if ((len = ft_unsignedlen_base(v, "01")) > arg->prec)
 		arg->prec = len;
 	if (flag(arg, F_ZERO) && arg->min > arg->prec)
@@ -65,7 +65,7 @@ char				*ssize_binary(t_printf *const data, t_arg *const arg)
 	char			*tab;
 	int				len;
 
-	v = (ssize_t)arg->value;
+	v = (ssize_t)arg->val.i;
 	if ((len = ft_unsignedlen_base(v, "01")) > arg->prec)
 		arg->prec = len;
 	if (flag(arg, F_ZERO) && arg->min > arg->prec)
@@ -87,7 +87,7 @@ char				*ptrdiff_binary(t_printf *const data, t_arg *const arg)
 	char			*tab;
 	int				len;
 
-	v = (ptrdiff_t)arg->value;
+	v = (ptrdiff_t)arg->val.i;
 	if ((len = ft_unsignedlen_base(v, "01")) > arg->prec)
 		arg->prec = len;
 	if (flag(arg, F_ZERO) && arg->min > arg->prec)
@@ -109,7 +109,7 @@ char				*quad_binary(t_printf *const data, t_arg *const arg)
 	char			*tab;
 	int				len;
 
-	v = (u_quad_t)arg->value;
+	v = (u_quad_t)arg->val.i;
 	if ((len = ft_unsignedlen_base(v, "01")) > arg->prec)
 		arg->prec = len;
 	if (flag(arg, F_ZERO) && arg->min > arg->prec)

@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:29:42 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/17 19:53:36 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/18 19:40:42 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,24 @@
 
 static char		*padd(char *str, t_arg *arg)
 {
+	long double	v;
 	size_t		add;
 	size_t		len;
 	char		*res;
 	char		sign;
 
 	sign = 0;
+	return (str);
 	if (!str)
 		return (str);
+	v = arg->val.lf;
 	len = ft_strlen(str);
 	if (flag(arg, F_ZERO) && ft_contains(*str, " +-") && (sign = *str))
 		str++;
 	add = ((size_t)arg->min > len ? arg->min - len : 0);
 	if (!(res = ft_memalloc(len + add + 1)))
 		return ((char *)ft_freturn(str, 0x0));
-	ft_memset(res, flag(arg, F_ZERO) && ldbl_num(arg->ldbl) ? '0' : ' ', len + add);
+	ft_memset(res, flag(arg, F_ZERO) && ldbl_num(v) ? '0' : ' ', len + add);
 	add *= !flag(arg, F_MINS);
 	ft_memmove(res + add + !!sign, str, ft_strlen(str));
 	if (sign && --str)
@@ -47,7 +50,7 @@ static char		*remove_zeros(char *str, t_arg *arg)
 	char		type;
 
 	if (!str || !ft_strchr(str, '.'))
-		return (padd(str, arg));
+		return (str);
 	len = ft_min(ft_idxof('e', str), ft_idxof('E', str));
 	type = (str[len] == 'e' || str[len] == 'E');
 	i = len - 1;
@@ -70,23 +73,20 @@ static char		*long_double(t_printf *const data, t_arg *const arg)
 	int			min;
 
 	exp = 0;
-	tmp = arg->ldbl;
 	if (!arg->prec)
 		arg->prec++;
 	min = arg->min;
 	arg->min = 0;
+	tmp = arg->val.lf;
 	if ((num = (!fnan(tmp))))
 		dbl_abs(&tmp, NULL);
 	num = (num && tmp != (1.0 / 0.0));
 	while (num && tmp != .0 && ((tmp < 1.0 && --exp) || (tmp >= 10.0 && ++exp)))
 		tmp = (tmp >= 10.0 ? tmp / 10.0 : tmp * 10.0);
 	if (num && (exp < -4 || exp >= arg->prec) && arg->prec--)
-		res = printf_ldbl_s(data, arg);
-	else
-	{
-		arg->prec -= (exp + 1);
+		res = printf_ldbl_s(arg);
+	else if ((arg->prec -= (exp + 1)) || 1)
 		res = printf_ldbl(data, arg);
-	}
 	arg->min = min;
 	res = padd(remove_zeros(res, arg), arg);
 	return (insert_buffer(data, res, ft_strlen(res)));
@@ -94,7 +94,7 @@ static char		*long_double(t_printf *const data, t_arg *const arg)
 
 static char		*std_double(t_printf *const data, t_arg *const arg)
 {
-	arg->ldbl = (long double)arg->dbl;
+	arg->val.lf = (long double)arg->val.f;
 	return (long_double(data, arg));
 }
 
@@ -109,19 +109,16 @@ static const t_converter	g_funcs[] =
 char			*convert_double_compact(t_printf *data, t_arg *arg)
 {
 	int			i;
-	long long	min;
-	long long	prec;
-	t_lst_elem	*tmp;
+	int			min;
+	int			prec;
 
 	min = arg->min;
 	prec = arg->prec;
-	i = (arg->min_idx && get_arg(data, arg->min_idx, &min));
-	i = (i || (arg->prec_idx && get_arg(data, arg->prec_idx, &prec)));
-	if (i || !(tmp = get_arg_f(data, arg->flag_idx)))
+	i = (arg->min_idx && get_arg_i(data, arg->min_idx, &min));
+	i = (i || (arg->prec_idx && get_arg_i(data, arg->prec_idx, &prec)));
+	if (i || get_arg_a(data, arg->flag_idx, arg))
 		return (NULL);
 	i = 0;
-	arg->dbl = tmp->dbl;
-	arg->ldbl = tmp->ldbl;
 	arg->min = (((int)min) < 0 ? 0 : (int)min);
 	arg->prec = (((int)prec) < 0 ? 6 : (int)prec);
 	if (flag(arg, F_MINS))

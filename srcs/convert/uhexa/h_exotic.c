@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exotic.c                                           :+:      :+:    :+:   */
+/*   h_exotic.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 15:57:11 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/17 19:49:16 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/18 18:24:09 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char				*intmax_hexa(t_printf *const data, t_arg *const arg)
 	int				len;
 	char			*tab;
 
-	v = (uintmax_t)arg->value;
+	v = (uintmax_t)arg->val.i;
 	if ((len = ft_unsignedlen_base(v, "0123456789abcdef")) > arg->prec)
 		arg->prec = len;
 	if (flag(arg, F_HASH) && v != 0)
@@ -45,7 +45,7 @@ char				*size_hexa(t_printf *const data, t_arg *const arg)
 	int				len;
 	char			*tab;
 
-	v = (size_t)arg->value;
+	v = (size_t)arg->val.i;
 	if ((len = ft_unsignedlen_base(v, "0123456789abcdef")) > arg->prec)
 		arg->prec = len;
 	if (flag(arg, F_HASH) && v != 0)
@@ -69,7 +69,7 @@ char				*ssize_hexa(t_printf *const data, t_arg *const arg)
 	int				len;
 	char			*tab;
 
-	v = (ssize_t)arg->value;
+	v = (ssize_t)arg->val.i;
 	if ((len = ft_unsignedlen_base(v, "0123456789abcdef")) > arg->prec)
 		arg->prec = len;
 	if (flag(arg, F_HASH) && v != 0)
@@ -93,7 +93,7 @@ char				*ptrdiff_hexa(t_printf *const data, t_arg *const arg)
 	int				len;
 	char			*tab;
 
-	v = (ptrdiff_t)arg->value;
+	v = (ptrdiff_t)arg->val.i;
 	if ((len = ft_unsignedlen_base(v, "0123456789abcdef")) > arg->prec)
 		arg->prec = len;
 	if (flag(arg, F_HASH) && v != 0)
@@ -117,7 +117,7 @@ char				*quad_hexa(t_printf *const data, t_arg *const arg)
 	int				len;
 	char			*tab;
 
-	v = (u_quad_t)arg->value;
+	v = (u_quad_t)arg->val.i;
 	if ((len = ft_unsignedlen_base(v, "0123456789abcdef")) > arg->prec)
 		arg->prec = len;
 	if (flag(arg, F_HASH) && v != 0)

@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:40:26 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/17 19:41:04 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/18 19:26:40 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char			*binary(t_printf *const data, t_arg *const arg)
 	char			*tab;
 	int				len;
 
-	v = (unsigned int)arg->value;
+	v = (unsigned int)arg->val.i;
 	if ((len = ft_unsignedlen_base(v, "01")) > arg->prec)
 		arg->prec = len;
 	if (flag(arg, F_ZERO) && arg->min > arg->prec)
@@ -57,14 +57,14 @@ static const t_converter	g_funcs[] =
 char				*convert_u_integer_binary(t_printf *data, t_arg *arg)
 {
 	int				i;
-	long long		prec;
-	long long		min;
+	int				prec;
+	int				min;
 
 	min = arg->min;
 	prec = arg->prec;
-	i = get_arg(data, arg->flag_idx, &arg->value);
-	i = (i || (arg->min_idx && get_arg(data, arg->min_idx, &min)));
-	if (i || (arg->prec_idx && get_arg(data, arg->prec_idx, &prec)))
+	i = get_arg_a(data, arg->flag_idx, arg);
+	i = (i || (arg->min_idx && get_arg_i(data, arg->min_idx, &min)));
+	if (i || (arg->prec_idx && get_arg_i(data, arg->prec_idx, &prec)))
 		return (NULL);
 	i = 0;
 	arg->min = (((int)min) < 0 ? 0 : (int)min);

@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 18:17:28 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/10 15:37:37 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/18 19:23:22 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static char		*length(t_printf *const data, t_arg *const arg)
 {
 	int			*v;
 
-	v = (int *)arg->value;
+	v = (int *)arg->val.p;
 	*v = data->len;
 	return (data->buf);
 }
@@ -43,7 +43,7 @@ char			*convert_length(t_printf *data, t_arg *arg)
 	int			i;
 
 	i = 0;
-	if (get_arg(data, arg->flag_idx, &arg->value))
+	if (get_arg_a(data, arg->flag_idx, arg))
 		return (NULL);
 	while (g_funcs[i].c && g_funcs[i].c != LEN_MD_CHRS[arg->length_modifier])
 		i++;

@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 18:19:18 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/17 19:53:55 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/18 19:22:16 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,19 @@ static char		*build_res(t_arg *ar)
 	char		*val;
 	char		*rs;
 
-	if (!ldbl_num(ar->ldbl))
+	if (!ldbl_num(ar->val.lf))
 		ar->flags &= ~F_HASH;
-	if (!(val = round_tabflt(ft_ldtoa(ar->ldbl), ar->prec, NULL)))
+	if (!(val = round_tabflt(ft_ldtoa(ar->val.lf), ar->prec, NULL)))
 		return (NULL);
 	if ((add = 0) || ft_isupper(ar->conv.c))
 		ft_strupcase(val);
 	enl = ft_idxof('.', val);
-	i = (ar->ldbl >= 0.0 && flag(ar, F_SPAC | F_PLUS));
+	i = (ar->val.lf >= 0.0 && flag(ar, F_SPAC | F_PLUS));
 	if ((enl + i + ar->prec + (ar->prec || flag(ar, F_HASH))) < ar->min)
 		add = ar->min - (enl + i + ar->prec + (ar->prec || flag(ar, F_HASH)));
 	if (!(rs = alloc_res(enl + i, ar, add)) || (ar->prec && !++enl))
 		return (NULL);
-	if (ldbl_num(ar->ldbl) && !ar->prec && flag(ar, F_HASH))
+	if (ldbl_num(ar->val.lf) && !ar->prec && flag(ar, F_HASH))
 		enl++;
 	add *= !flag(ar, F_MINS);
 	ft_memcpy(rs + add + i, val, ft_min(ft_strlen(val), enl + ar->prec));
@@ -75,11 +75,11 @@ char			*printf_ldbl(t_printf *const data, t_arg *const arg)
 
 	j = 0;
 	((void)data);
-	arg->flags = (!ldbl_num(arg->ldbl) ? flag(arg, ~F_ZERO) : arg->flags);
-	arg->prec *= !(arg->ldbl != arg->ldbl || arg->ldbl == 1.0 / 0.0);
+	arg->flags = (!ldbl_num(arg->val.lf) ? flag(arg, ~F_ZERO) : arg->flags);
+	arg->prec *= !(arg->val.lf != arg->val.lf || arg->val.lf == 1.0 / 0.0);
 	if (!(res = build_res(arg)))
 		return (NULL);
-	if (flag(arg, F_ZERO) && arg->ldbl < 0.0 && (i = ft_idxof('-', res)))
+	if (flag(arg, F_ZERO) && arg->val.lf < 0.0 && (i = ft_idxof('-', res)))
 	{
 		res[i] = res[0];
 		res[0] = '-';
@@ -96,7 +96,7 @@ char			*printf_ldbl(t_printf *const data, t_arg *const arg)
 
 static char		*std_double(t_printf *const data, t_arg *const arg)
 {
-	arg->ldbl = (long double)arg->dbl;
+	arg->val.lf = (long double)arg->val.f;
 	return (printf_ldbl(data, arg));
 }
 
@@ -112,19 +112,16 @@ char			*convert_double_floating(t_printf *data, t_arg *arg)
 {
 	int			i;
 	char		*res;
-	long long	min;
-	long long	prec;
-	t_lst_elem	*tmp;
+	int			min;
+	int			prec;
 
 	min = arg->min;
 	prec = arg->prec;
-	i = (arg->min_idx && get_arg(data, arg->min_idx, &min));
-	i = (i || (arg->prec_idx && get_arg(data, arg->prec_idx, &prec)));
-	if (i || !(tmp = get_arg_f(data, arg->flag_idx)))
+	i = (arg->min_idx && get_arg_i(data, arg->min_idx, &min));
+	i = (i || (arg->prec_idx && get_arg_i(data, arg->prec_idx, &prec)));
+	if (i || get_arg_a(data, arg->flag_idx, arg))
 		return (NULL);
 	i = 0;
-	arg->dbl = tmp->dbl;
-	arg->ldbl = tmp->ldbl;
 	arg->min = (((int)min) < 0 ? 0 : (int)min);
 	arg->prec = (((int)prec) < 0 ? 6 : (int)prec);
 	if (flag(arg, F_MINS))

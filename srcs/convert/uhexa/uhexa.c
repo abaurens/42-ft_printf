@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 18:26:04 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/17 19:50:05 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/18 19:26:26 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char			*hexa(t_printf *const data, t_arg *const arg)
 	int				len;
 	char			*tab;
 
-	v = (unsigned int)arg->value;
+	v = (unsigned int)arg->val.i;
 	if ((len = ft_unsignedlen_base(v, "0123456789abcdef")) > arg->prec)
 		arg->prec = len;
 	if (flag(arg, F_HASH) && v != 0)
@@ -58,14 +58,14 @@ static const t_converter	g_funcs[] =
 char				*convert_u_integer_hexa(t_printf *data, t_arg *arg)
 {
 	int				i;
-	long long		min;
-	long long		prec;
+	int				min;
+	int				prec;
 
 	min = arg->min;
 	prec = arg->prec;
-	i = get_arg(data, arg->flag_idx, &arg->value);
-	i = (i || (arg->min_idx && get_arg(data, arg->min_idx, &min)));
-	if (i || (arg->prec_idx && get_arg(data, arg->prec_idx, &prec)))
+	i = get_arg_a(data, arg->flag_idx, arg);
+	i = (i || (arg->min_idx && get_arg_i(data, arg->min_idx, &min)));
+	if (i || (arg->prec_idx && get_arg_i(data, arg->prec_idx, &prec)))
 		return (NULL);
 	arg->min = (((int)min) < 0 ? 0 : (int)min);
 	if ((arg->prec = (((int)prec) < 0 ? 0 : (int)prec))

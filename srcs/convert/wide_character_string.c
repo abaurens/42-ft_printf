@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:34:47 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/17 19:54:37 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/18 19:21:13 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char						*wide_character_string(t_printf *data, t_arg *arg)
 	int						len;
 	int						tab_len;
 
-	if (!(v = (wchar_t *)arg->value))
+	if (!(v = (wchar_t *)arg->val.p))
 		v = L"(null)";
 	if ((len = ft_wstrlen(v)) > arg->prec && arg->prec)
 		len = arg->prec;
@@ -67,14 +67,14 @@ char						*convert_wide_char_string(t_printf *data,
 								t_arg *arg)
 {
 	int						i;
-	long long				prec;
-	long long				min;
+	int						prec;
+	int						min;
 
 	min = arg->min;
 	prec = arg->prec;
-	i = get_arg(data, arg->flag_idx, &arg->value);
-	i = (i || (arg->min_idx && get_arg(data, arg->min_idx, &min)));
-	if (i || (arg->prec_idx && get_arg(data, arg->prec_idx, &prec)))
+	i = get_arg_a(data, arg->flag_idx, arg);
+	i = (i || (arg->min_idx && get_arg_i(data, arg->min_idx, &min)));
+	if (i || (arg->prec_idx && get_arg_i(data, arg->prec_idx, &prec)))
 		return (NULL);
 	i = 0;
 	arg->min = (((int)min) < 0 ? 0 : (int)min);

@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:45:31 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/10 15:29:32 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/18 19:21:51 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,9 @@ static char		*date(t_printf *data, t_arg *arg)
 	int			tab_len;
 
 	ft_bzero(str, 21);
-	if (flag(arg, F_HASH) && get_time_ls(str, (time_t)arg->value))
+	if (flag(arg, F_HASH) && get_time_ls(str, (time_t)arg->val.i))
 		return (NULL);
-	else if (!flag(arg, F_HASH) && get_time_iso(str, (time_t)arg->value))
+	else if (!flag(arg, F_HASH) && get_time_iso(str, (time_t)arg->val.i))
 		return (NULL);
 	if ((len = ft_strlen(str)) > arg->prec && arg->prec)
 		len = arg->prec;
@@ -108,14 +108,14 @@ static const t_converter	g_funcs[] =
 char			*convert_iso_date(t_printf *data, t_arg *arg)
 {
 	int			i;
-	long long	prec;
-	long long	min;
+	int			prec;
+	int			min;
 
 	min = arg->min;
 	prec = arg->prec;
-	i = get_arg(data, arg->flag_idx, &arg->value);
-	i = (i || (arg->min_idx && get_arg(data, arg->min_idx, &min)));
-	if (i || (arg->prec_idx && get_arg(data, arg->prec_idx, &prec)))
+	i = get_arg_a(data, arg->flag_idx, arg);
+	i = (i || (arg->min_idx && get_arg_i(data, arg->min_idx, &min)));
+	if (i || (arg->prec_idx && get_arg_i(data, arg->prec_idx, &prec)))
 		return (NULL);
 	arg->min = (((int)min) < 0 ? 0 : (int)min);
 	if ((arg->prec = (((int)prec) < 0 ? 0 : (int)prec))

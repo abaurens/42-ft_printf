@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   long.c                                             :+:      :+:    :+:   */
+/*   b_long.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:40:26 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/17 19:41:58 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/18 18:25:10 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char				*long_binary(t_printf *const data, t_arg *const arg)
 	char			*tab;
 	int				len;
 
-	v = (long int)arg->value;
+	v = (unsigned long int)arg->val.i;
 	if ((len = ft_unsignedlen_base(v, "01")) > arg->prec)
 		arg->prec = len;
 	if (flag(arg, F_ZERO) && arg->min > arg->prec)
@@ -43,7 +43,7 @@ char				*long_long_binary(t_printf *const data, t_arg *const arg)
 	char				*tab;
 	int					len;
 
-	v = (unsigned long long)arg->value;
+	v = (unsigned long long)arg->val.i;
 	if ((len = ft_unsignedlen_base(v, "01")) > arg->prec)
 		arg->prec = len;
 	if (flag(arg, F_ZERO) && arg->min > arg->prec)

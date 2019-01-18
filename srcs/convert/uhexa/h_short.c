@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   short.c                                            :+:      :+:    :+:   */
+/*   h_short.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 15:56:59 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/17 19:49:50 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/18 18:23:51 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char				*short_hexa(t_printf *const data, t_arg *const arg)
 	int				len;
 	char			*tab;
 
-	v = (unsigned short int)arg->value;
+	v = (unsigned short int)arg->val.i;
 	if ((len = ft_unsignedlen_base(v, "0123456789abcdef")) > arg->prec)
 		arg->prec = len;
 	if (flag(arg, F_HASH) && v != 0)
@@ -45,7 +45,7 @@ char				*short_short_hexa(t_printf *const data, t_arg *const arg)
 	int				len;
 	char			*tab;
 
-	v = (unsigned char)arg->value;
+	v = (unsigned char)arg->val.i;
 	if ((len = ft_unsignedlen_base(v, "0123456789abcdef")) > arg->prec)
 		arg->prec = len;
 	if (flag(arg, F_HASH) && v != 0)

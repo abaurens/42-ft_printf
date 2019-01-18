@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 21:02:59 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/18 15:08:04 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/18 19:38:45 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char			*uoctal(t_printf *const data, t_arg *const arg)
 	char			*tab;
 	int				len;
 
-	v = (unsigned int)arg->value;
+	v = (unsigned int)arg->val.i;
 	if ((len = ft_unsignedlen_base(v, "01234567")) > arg->prec)
 		arg->prec = len;
 	if (flag(arg, F_ZERO) && arg->min > arg->prec)
@@ -54,14 +54,14 @@ static const t_converter	g_funcs[] =
 char				*convert_u_integer_octal(t_printf *data, t_arg *arg)
 {
 	int				i;
-	long long		prec;
-	long long		min;
+	int				prec;
+	int				min;
 
 	min = arg->min;
 	prec = arg->prec;
-	i = get_arg(data, arg->flag_idx, &arg->value);
-	i = (i || (arg->min_idx && get_arg(data, arg->min_idx, &min)));
-	if (i || (arg->prec_idx && get_arg(data, arg->prec_idx, &prec)))
+	i = get_arg_a(data, arg->flag_idx, arg);
+	i = (i || (arg->min_idx && get_arg_i(data, arg->min_idx, &min)));
+	if (i || (arg->prec_idx && get_arg_i(data, arg->prec_idx, &prec)))
 		return (NULL);
 	i = 0;
 	arg->min = (((int)min) < 0 ? 0 : (int)min);
@@ -75,7 +75,7 @@ char				*convert_u_integer_octal(t_printf *data, t_arg *arg)
 	return (g_funcs[i].func(data, arg));
 }
 
-char			*convert_u_linteger_octal(t_printf *data, t_arg *arg)
+char				*convert_u_linteger_octal(t_printf *data, t_arg *arg)
 {
 	arg->conv.c = 'o';
 	arg->length_modifier = ft_idxof('l', LEN_MD_CHRS);

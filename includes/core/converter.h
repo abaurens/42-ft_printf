@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 13:53:50 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/17 15:49:27 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/18 19:03:22 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char			*wide_character(t_printf *data, t_arg *arg);
 /*
 **	double_scientific.c
 */
-char			*printf_ldbl_s(t_printf *const data, t_arg *const ar);
+char			*printf_ldbl_s(t_arg *const ar);
 
 /*
 **	double_floating.c

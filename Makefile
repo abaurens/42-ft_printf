@@ -6,7 +6,7 @@
 #    By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 16:23:33 by abaurens          #+#    #+#              #
-#    Updated: 2019/01/17 20:18:17 by abaurens         ###   ########.fr        #
+#    Updated: 2019/01/18 19:53:59 by abaurens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,9 +81,10 @@ SRC         :=	ft_printf.c		\
 				core/ft_error.c							\
 				core/parse_args.c						\
 				core/list_manager.c						\
-				core/float_round.c						\
+				core/bankers_round.c					\
 				core/floating_point.c					\
 				core/parser_functions.c					\
+				core/argument_getter.c					\
 				core/argument_manager.c					\
 				core/tostr_conv/ft_ldtoa.c				\
 				core/tostr_conv/printf_lltoa.c			\

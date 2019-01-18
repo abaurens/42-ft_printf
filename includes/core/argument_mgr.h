@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   l_short.c                                          :+:      :+:    :+:   */
+/*   argument_mgr.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/10 15:31:05 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/18 19:24:01 by abaurens         ###   ########.fr       */
+/*   Created: 2019/01/18 17:22:04 by abaurens          #+#    #+#             */
+/*   Updated: 2019/01/18 19:42:39 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "core/ft_types.h"
+#ifndef ARGUMENT_MGR_H
+# define ARGUMENT_MGR_H
 
-char			*short_length(t_printf *const data, t_arg *const arg)
-{
-	short int	*v;
+# include "core/ft_types.h"
 
-	v = (short int *)arg->val.p;
-	*v = data->len;
-	return (data->buf);
-}
+t_val	get_pointer(va_list ap, const char t, const int l);
+t_val	get_double(va_list ap, const char t, const int l);
+t_val	get_integer(va_list ap, const char t, const int l);
 
-char			*short_short_length(t_printf *const data, t_arg *const arg)
-{
-	signed char	*v;
-
-	v = (signed char *)arg->val.p;
-	*v = data->len;
-	return (data->buf);
-}
+#endif

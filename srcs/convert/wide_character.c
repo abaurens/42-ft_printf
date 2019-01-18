@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:31:35 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/18 15:42:23 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/18 19:20:51 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 #include "core/ft_types.h"
 #include "libft.h"
 
-char					*wide_character(t_printf *data, t_arg *arg)
+char			*wide_character(t_printf *data, t_arg *arg)
 {
-	wchar_t				v[2];
-	char				*res;
-	int					len;
-	int					tab_len;
+	wchar_t		v[2];
+	char		*res;
+	int			len;
+	int			tab_len;
 
 	v[1] = 0;
-	*v = (wchar_t)arg->value;
+	*v = (wchar_t)arg->val.i;
 	len = ft_wchar_len(*v);
 	if ((tab_len = arg->min) < len)
 		tab_len = len;
@@ -45,17 +45,17 @@ static const t_converter	g_funcs[] =
 	{'\0', FALSE, NULL}
 };
 
-char					*convert_wide_char(t_printf *data, t_arg *arg)
+char			*convert_wide_char(t_printf *data, t_arg *arg)
 {
-	int					i;
-	long long			prec;
-	long long			min;
+	int			i;
+	int			prec;
+	int			min;
 
 	min = arg->min;
 	prec = arg->prec;
-	i = get_arg(data, arg->flag_idx, &arg->value);
-	i = (i || (arg->min_idx && get_arg(data, arg->min_idx, &min)));
-	if (i || (arg->prec_idx && get_arg(data, arg->prec_idx, &prec)))
+	i = get_arg_a(data, arg->flag_idx, arg);
+	i = (i || (arg->min_idx && get_arg_i(data, arg->min_idx, &min)));
+	if (i || (arg->prec_idx && get_arg_i(data, arg->prec_idx, &prec)))
 		return (NULL);
 	i = 0;
 	arg->min = (((int)min) < 0 ? 0 : (int)min);

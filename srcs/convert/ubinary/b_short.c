@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   short.c                                            :+:      :+:    :+:   */
+/*   b_short.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:40:26 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/17 19:42:18 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/18 18:24:55 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char				*short_binary(t_printf *const data, t_arg *const arg)
 	char			*tab;
 	int				len;
 
-	v = (unsigned short int)arg->value;
+	v = (unsigned short int)arg->val.i;
 	if ((len = ft_unsignedlen_base(v, "01")) > arg->prec)
 		arg->prec = len;
 	if (flag(arg, F_ZERO) && arg->min > arg->prec)
@@ -43,7 +43,7 @@ char				*short_short_binary(t_printf *const data, t_arg *const arg)
 	char			*tab;
 	int				len;
 
-	v = (unsigned char)arg->value;
+	v = (unsigned char)arg->val.i;
 	if ((len = ft_unsignedlen_base(v, "01")) > arg->prec)
 		arg->prec = len;
 	if (flag(arg, F_ZERO) && arg->min > arg->prec)

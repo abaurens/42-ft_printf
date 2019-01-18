@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 15:22:40 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/17 19:45:20 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/18 18:12:08 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char			*intmax_integer(t_printf *const data, t_arg *const ar)
 	size_t		l;
 	char		*tab;
 
-	v = (intmax_t)ar->value;
+	v = (intmax_t)ar->val.i;
 	if ((l = (ft_numlen(v) - (v < 0))) > (size_t)ar->prec)
 		ar->prec = l;
 	if (flag(ar, (F_PLUS | F_SPAC)) && v >= 0 && ++l)
@@ -32,7 +32,7 @@ char			*intmax_integer(t_printf *const data, t_arg *const ar)
 		ar->prec = ar->min - (v < 0);
 	if (!(tab = padded_lltoa(v, ar->prec, ar->min, flag(ar, F_MINS))))
 		return (NULL);
-	if (flag(ar, (F_PLUS | F_SPAC)) && (intmax_t)ar->value >= 0)
+	if (flag(ar, (F_PLUS | F_SPAC)) && (intmax_t)ar->val.i >= 0)
 		tab[ft_idxof('0', tab)] = flag(ar, F_PLUS) ? '+' : ' ';
 	insert_buffer(data, tab, ft_strlen(tab));
 	free(tab);
@@ -45,7 +45,7 @@ char			*size_integer(t_printf *const data, t_arg *const ar)
 	size_t		l;
 	char		*tab;
 
-	v = (size_t)ar->value;
+	v = (size_t)ar->val.i;
 	if ((l = ft_numlen(v)) > (size_t)ar->prec)
 		ar->prec = l;
 	if (flag(ar, (F_PLUS | F_SPAC)) && ++l)
@@ -69,7 +69,7 @@ char			*ssize_integer(t_printf *const data, t_arg *const ar)
 	size_t		l;
 	char		*tab;
 
-	v = (ssize_t)ar->value;
+	v = (ssize_t)ar->val.i;
 	if ((l = (ft_numlen(v) - (v < 0))) > (size_t)ar->prec)
 		ar->prec = l;
 	if (flag(ar, (F_PLUS | F_SPAC)) && v >= 0 && ++l)
@@ -93,7 +93,7 @@ char			*ptrdiff_integer(t_printf *const data, t_arg *const ar)
 	size_t		l;
 	char		*tab;
 
-	v = (ptrdiff_t)ar->value;
+	v = (ptrdiff_t)ar->val.i;
 	if ((l = (ft_numlen(v) - (v < 0))) > (size_t)ar->prec)
 		ar->prec = l;
 	if (flag(ar, (F_PLUS | F_SPAC)) && v >= 0 && ++l)
@@ -104,7 +104,7 @@ char			*ptrdiff_integer(t_printf *const data, t_arg *const ar)
 		ar->prec = ar->min - (v < 0);
 	if (!(tab = padded_lltoa(v, ar->prec, ar->min, flag(ar, F_MINS))))
 		return (NULL);
-	if (flag(ar, (F_PLUS | F_SPAC)) && (ptrdiff_t)ar->value >= 0)
+	if (flag(ar, (F_PLUS | F_SPAC)) && (ptrdiff_t)ar->val.i >= 0)
 		tab[ft_idxof('0', tab)] = flag(ar, F_PLUS) ? '+' : ' ';
 	insert_buffer(data, tab, ft_strlen(tab));
 	free(tab);
@@ -117,7 +117,7 @@ char			*quad_integer(t_printf *const data, t_arg *const ar)
 	size_t		l;
 	char		*tab;
 
-	v = (quad_t)ar->value;
+	v = (quad_t)ar->val.i;
 	if ((l = (ft_numlen(v) - (v < 0))) > (size_t)ar->prec)
 		ar->prec = l;
 	if (flag(ar, (F_PLUS | F_SPAC)) && v >= 0 && ++l)
@@ -128,7 +128,7 @@ char			*quad_integer(t_printf *const data, t_arg *const ar)
 		ar->prec = ar->min - (v < 0);
 	if (!(tab = padded_lltoa(v, ar->prec, ar->min, flag(ar, F_MINS))))
 		return (NULL);
-	if (flag(ar, (F_PLUS | F_SPAC)) && (quad_t)ar->value >= 0)
+	if (flag(ar, (F_PLUS | F_SPAC)) && (quad_t)ar->val.i >= 0)
 		tab[ft_idxof('0', tab)] = flag(ar, F_PLUS) ? '+' : ' ';
 	insert_buffer(data, tab, ft_strlen(tab));
 	free(tab);

@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 20:54:23 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/18 16:02:23 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/18 19:15:13 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,12 @@
 
 char		*convert_percent(t_printf *data, t_arg *arg)
 {
-	int			i;
-	long long	min;
-	size_t		len;
-	char		*res;
+	size_t	len;
+	char	*res;
+	int		min;
 
 	min = arg->min;
-	if (arg->min_idx && get_arg(data, arg->min_idx, &min))
+	if (arg->min_idx && get_arg_i(data, arg->min_idx, &min))
 		return (NULL);
 	arg->min = (((int)min) < 0 ? 1 : (int)min);
 	if (flag(arg, F_MINS))

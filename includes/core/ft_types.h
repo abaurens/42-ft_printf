@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 18:29:02 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/17 19:17:23 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/18 17:26:56 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,19 @@ typedef struct			s_converter
 	char				*(*func)(t_printf *data, t_arg *arg);
 }						t_converter;
 
+typedef union			u_val
+{
+	void				*p;
+	double				f;
+	long double			lf;
+	wchar_t				lc;
+	long long int		i;
+}						t_val;
+
 struct					s_arg
 {
 	t_converter			conv;
+	t_val				val;
 	long long int		value;
 	long double			ldbl;
 	double				dbl;
@@ -85,6 +95,7 @@ struct					s_arg
 
 typedef struct			s_lst_elem
 {
+	t_val				val;
 	long long int		value;
 	long double			ldbl;
 	double				dbl;

@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:44:41 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/17 19:54:30 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/18 19:21:39 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static char			*non_printable(t_printf *data, t_arg *arg)
 	int			len;
 	int			tab_len;
 
-	v = (!arg->value) ? "(null)" : (char *)arg->value;
+	v = (!arg->val.p) ? "(null)" : (char *)arg->val.p;
 	if ((len = ft_unprint_strlen(v)) > arg->prec && arg->prec)
 		len = arg->prec;
 	len += flag(arg, F_HASH) ? 3 : 0;
@@ -91,14 +91,14 @@ static const t_converter	g_funcs[] =
 char				*convert_non_printable_string(t_printf *data, t_arg *arg)
 {
 	int				i;
-	long long		prec;
-	long long		min;
+	int				prec;
+	int				min;
 
 	min = arg->min;
 	prec = arg->prec;
-	i = get_arg(data, arg->flag_idx, &arg->value);
-	i = (i || (arg->min_idx && get_arg(data, arg->min_idx, &min)));
-	if (i || (arg->prec_idx && get_arg(data, arg->prec_idx, &prec)))
+	i = get_arg_a(data, arg->flag_idx, arg);
+	i = (i || (arg->min_idx && get_arg_i(data, arg->min_idx, &min)));
+	if (i || (arg->prec_idx && get_arg_i(data, arg->prec_idx, &prec)))
 		return (NULL);
 	i = 0;
 	arg->min = (((int)min) < 0 ? 0 : (int)min);

@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 14:53:12 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/17 19:21:58 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/18 19:45:45 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,15 @@ char			flag(t_arg *arg, char mask);
 int				parse_arg(const char **format, t_printf *data, t_arg *arg);
 
 /*
-**	argument_manager.c
+**	list_manager.c
 */
 void			clear_list(t_ftlist *lst);
-t_lst_elem		*get_arg_f(t_printf *data, const size_t idx);
-int				get_arg(t_printf *data, size_t idx, long long int *val);
+
+/*
+**	argument_manager.c
+*/
+int				get_arg_a(t_printf *data, const size_t idx, t_arg *a);
+int				get_arg_i(t_printf *data, const size_t idx, int *v);
 
 /*
 **	printf_lltoa.c
@@ -87,6 +91,11 @@ char			*exp_dbl_hex(long double d, int prec, t_bool lng);
 t_bflt			*get_mantissa(t_float *f);
 long double		dbl_abs(long double *d, char *sign);
 t_float			get_float_components(long double d);
+
+/*
+**	bankers_round.c
+*/
+char			*banker_round(char *val, const size_t prec, const char *base);
 
 /*
 **	float_round.c

@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 20:21:47 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/18 16:04:40 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/18 19:51:38 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,29 +16,39 @@
 #include <unistd.h>
 #include <float.h>
 #include <math.h>
-
-#include <stdio.h> ///
+#include <stdio.h>
 #include "libft.h"
+#include "core/ft_types.h"
 #include "ft_printf.h"
 #include "ft_printf_unwarn.h"
 
 int			main(void)
 {
-	double	d;
-	char	t[5];
-
-	*t = 'A';
-	t[1] = 0;
-	t[2] = 0;
-	t[3] = 0;
-	t[4] = 0;
+	ft_printf("%1$*2$p\n", "test", 15);
+	printf("%1$*2$p\n", "test", 15);
+	fflush(stdout);
 	/*
 	**	validated
 	*/
 	setlocale(LC_ALL, "");
-	ft_printf("%%i : %C\t%%o : %C\t%%u : %C\t%%x : %C\t%%c : %C\t%%s : %C\t%%p : %C\n", L'✅', L'✅', L'✅', L'✅', L'✅', L'✅', L'✅');
-	ft_printf("%%d : %C\t%%O : %C\t%%U : %C\t%%X : %C\t%%C : %C\t%%S : %C\n", L'✅', L'✅', L'✅', L'✅', L'✅', L'✅', L'✅');
-	ft_printf("%%D : %C\n", L'✅');
+	ft_printf("%%i : %lc\t%%o : %C\t%%u : %C\t%%x : %C\t%%c : %C\t%%s : %C\t%%p : %C\n",
+		L'✔', /* i */
+		L'✔', /* o */
+		L'✔', /* u */
+		L'✔', /* x */
+		L'✔', /* c */
+		L'✔', /* s */
+		L'✔' /* p */
+	);
+	ft_printf("%%d : %C\t%%O : %C\t%%U : %C\t%%X : %C\t%%C : %C\t%%S : %C\n",
+		L'✔', /* d */
+		L'✔', /* O */
+		L'✔', /* U */
+		L'✔', /* X */
+		L'✔', /* C */
+		L'✔' /* S */
+	);
+	ft_printf("%%D : %C\n", L'✔'); /* D */
 	ft_printf("\n");
 
 	/*
