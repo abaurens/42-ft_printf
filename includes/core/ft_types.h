@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 18:29:02 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/18 17:26:56 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/18 20:00:16 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ typedef union			u_val
 	void				*p;
 	double				f;
 	long double			lf;
-	wchar_t				lc;
 	long long int		i;
 }						t_val;
 
@@ -81,9 +80,6 @@ struct					s_arg
 {
 	t_converter			conv;
 	t_val				val;
-	long long int		value;
-	long double			ldbl;
-	double				dbl;
 	size_t				flag_idx;
 	size_t				prec_idx;
 	size_t				min_idx;
@@ -96,9 +92,6 @@ struct					s_arg
 typedef struct			s_lst_elem
 {
 	t_val				val;
-	long long int		value;
-	long double			ldbl;
-	double				dbl;
 	struct s_lst_elem	*next;
 	struct s_lst_elem	*prev;
 }						t_lst_elem;
