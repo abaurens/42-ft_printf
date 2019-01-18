@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 21:02:59 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/17 19:43:42 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/18 15:08:04 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static char			*uoctal(t_printf *const data, t_arg *const arg)
 		arg->prec = len;
 	if (flag(arg, F_ZERO) && arg->min > arg->prec)
 		arg->prec = arg->min;
-	if (flag(arg, F_HASH && v != 0 && arg->prec <= len))
+	if (flag(arg, F_HASH) && v != 0 && arg->prec <= len)
 		arg->prec++;
 	if (!(tab = padded_ulltoa_octal(v, arg->prec, arg->min, flag(arg, F_MINS))))
 		return (NULL);

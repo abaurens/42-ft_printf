@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 16:17:43 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/12 17:22:18 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/18 16:00:10 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int				parse_conversion(const char **format, t_printf *data)
 	if ((i = parse_arg(format, data, &arg)) < 0)
 		return (0);
 	if (data->use_chain_format == FALSE)
-		arg.flag_idx = ++data->arg_count;
+		arg.flag_idx = (data->arg_count += arg.conv.w_arg);
 	if (arg.conv.func != NULL)
 		arg.conv.func(data, &arg);
 	return (i);

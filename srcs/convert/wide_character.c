@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:31:35 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/13 17:14:11 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/18 15:42:23 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,7 @@ char					*convert_wide_char(t_printf *data, t_arg *arg)
 		return (NULL);
 	i = 0;
 	arg->min = (((int)min) < 0 ? 0 : (int)min);
-	if ((arg->prec = (((int)prec) < 0 ? 0 : (int)prec))
-		|| flag(arg, F_MINS))
+	if ((arg->prec = (((int)prec) < 0 ? 0 : (int)prec)) || flag(arg, F_MINS))
 		arg->flags &= ~F_ZERO;
 	while (g_funcs[i].c && g_funcs[i].c != LEN_MD_CHRS[arg->length_modifier])
 		i++;

@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 20:21:47 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/17 20:33:01 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/18 16:04:40 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,45 +25,35 @@
 int			main(void)
 {
 	double	d;
+	char	t[5];
 
-	ft_printf("%%i validated\n");
-	ft_printf("%%d validated\n");
-	ft_printf("%%D validated\n");
-	ft_printf("%%o validated\n");
-	ft_printf("%%O validated\n");
-	ft_printf("%%u validated\n");
-	ft_printf("%%U validated\n");
-	ft_printf("%%x validated\n");
-	ft_printf("%%X validated\n");
-	ft_printf("%%c validated\n");
-	ft_printf("%%C validated\n");
-	ft_printf("%%s validated\n");
-	ft_printf("%%S validated\n");
-	ft_printf("%%p validated\n");
-	ft_printf("%%f validated\n");
-	ft_printf("%%F validated\n");
-	ft_printf("%%g validated\n");
-	ft_printf("%%G validated\n");
-
-
-	ft_printf("%%e validated\n");
-	ft_printf("%%E validated\n");
-
-	/*to test with 0 (possible inf loop)*/
-	ft_printf("%%a validated\n");
-	ft_printf("%%A validated\n");
-
+	*t = 'A';
+	t[1] = 0;
+	t[2] = 0;
+	t[3] = 0;
+	t[4] = 0;
+	/*
+	**	validated
+	*/
+	setlocale(LC_ALL, "");
+	ft_printf("%%i : %C\t%%o : %C\t%%u : %C\t%%x : %C\t%%c : %C\t%%s : %C\t%%p : %C\n", L'✅', L'✅', L'✅', L'✅', L'✅', L'✅', L'✅');
+	ft_printf("%%d : %C\t%%O : %C\t%%U : %C\t%%X : %C\t%%C : %C\t%%S : %C\n", L'✅', L'✅', L'✅', L'✅', L'✅', L'✅', L'✅');
+	ft_printf("%%D : %C\n", L'✅');
 	ft_printf("\n");
 
-	d = 0.0;
-	ft_printf("F:%-o\n", -592920303);
-	printf("F:%-o\n", -592920303);
-	fflush(stdout);
+	/*
+	**	to be tested
+	**	test %a with 0 (possible inf loop)
+	*/
+	ft_printf("%%f : %C\t%%g : %C\t%%e : %C\t%%a : %C\n", L'🕓', L'🕓', L'🕓', L'💥');
+	ft_printf("%%F : %C\t%%G : %C\t%%E : %C\t%%A : %C\n", L'🕓', L'🕓', L'🕓', L'💥');
+	ft_printf("\n");
 
-	ft_printf("%%m to be validated\n");
-	ft_printf("%%b to be validated\n");
-	ft_printf("%%r to be validated\n");
-	ft_printf("%%k to be validated\n");
+	/*
+	**	not tested yet
+	*/
+	ft_printf("%%m : %C\t%%b : %C\t%%r : %C\t%%k : %C\n", L'🚫', L'🚫', L'🚫', L'🚫');
+	ft_printf("\n");
 
 	return (0);
 }

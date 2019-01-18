@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exotic.c                                           :+:      :+:    :+:   */
+/*   o_exotic.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 21:27:11 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/17 19:46:43 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/18 15:08:55 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char			*intmax_uoctal(t_printf *const data, t_arg *const arg)
 		arg->prec = len;
 	if (flag(arg, F_ZERO) && arg->min > arg->prec)
 		arg->prec = arg->min;
-	if (flag(arg, F_HASH && v != 0 && arg->prec <= len))
+	if (flag(arg, F_HASH) && v != 0 && arg->prec <= len)
 		arg->prec++;
 	if (!(tab = padded_ulltoa_octal(v, arg->prec, arg->min, flag(arg, F_MINS))))
 		return (NULL);
@@ -46,7 +46,7 @@ char			*size_uoctal(t_printf *const data, t_arg *const arg)
 		arg->prec = len;
 	if (flag(arg, F_ZERO) && arg->min > arg->prec)
 		arg->prec = arg->min;
-	if (flag(arg, F_HASH && v != 0 && arg->prec <= len))
+	if (flag(arg, F_HASH) && v != 0 && arg->prec <= len)
 		arg->prec++;
 	if (!(tab = padded_ulltoa_octal(v, arg->prec, arg->min, flag(arg, F_MINS))))
 		return (NULL);
@@ -66,7 +66,7 @@ char			*ssize_uoctal(t_printf *const data, t_arg *const arg)
 		arg->prec = len;
 	if (flag(arg, F_ZERO) && arg->min > arg->prec)
 		arg->prec = arg->min;
-	if (flag(arg, F_HASH && v != 0 && arg->prec <= len))
+	if (flag(arg, F_HASH) && v != 0 && arg->prec <= len)
 		arg->prec++;
 	if (!(tab = padded_ulltoa_octal(v, arg->prec, arg->min, flag(arg, F_MINS))))
 		return (NULL);
@@ -86,7 +86,7 @@ char			*ptrdiff_uoctal(t_printf *const data, t_arg *const arg)
 		arg->prec = len;
 	if (flag(arg, F_ZERO) && arg->min > arg->prec)
 		arg->prec = arg->min;
-	if (flag(arg, F_HASH && v != 0 && arg->prec <= len))
+	if (flag(arg, F_HASH) && v != 0 && arg->prec <= len)
 		arg->prec++;
 	if (!(tab = padded_ulltoa_octal(v, arg->prec, arg->min, flag(arg, F_MINS))))
 		return (NULL);
@@ -106,7 +106,7 @@ char			*quad_uoctal(t_printf *const data, t_arg *const arg)
 		arg->prec = len;
 	if (flag(arg, F_ZERO) && arg->min > arg->prec)
 		arg->prec = arg->min;
-	if (flag(arg, F_HASH && v != 0 && arg->prec <= len))
+	if (flag(arg, F_HASH) && v != 0 && arg->prec <= len)
 		arg->prec++;
 	if (!(tab = padded_ulltoa_octal(v, arg->prec, arg->min, flag(arg, F_MINS))))
 		return (NULL);
