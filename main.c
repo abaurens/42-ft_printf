@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 20:21:47 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/18 19:51:38 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/21 17:34:17 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@
 
 int			main(void)
 {
-	ft_printf("%1$*2$p\n", "test", 15);
+	/*ft_printf("%1$*2$p\n", "test", 15);
 	printf("%1$*2$p\n", "test", 15);
-	fflush(stdout);
+	fflush(stdout);*/
 	/*
 	**	validated
 	*/
@@ -64,6 +64,7 @@ int			main(void)
 	*/
 	ft_printf("%%m : %C\t%%b : %C\t%%r : %C\t%%k : %C\n", L'🚫', L'🚫', L'🚫', L'🚫');
 	ft_printf("\n");
+	ft_printf("%5$s%2$c%4$s%2$c%3$s%6$s%1$c", '\n', ' ', "alone", "am", "i", "!", "?");
 
 	return (0);
 }
