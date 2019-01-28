@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/06 17:51:08 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/17 17:11:45 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/28 20:39:20 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ char				*ft_ldtoa(long double d)
 	del_bflt(mant);
 	if (res && fl.sign)
 		res = (char *)ft_freturn(res, (long)ft_strmcat("-", res, -1));
+	printf("ft_ldtoa returned '%s'\n", res);
 	return (res);
 }
 
