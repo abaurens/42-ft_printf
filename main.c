@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 20:21:47 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/28 20:40:28 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/29 00:06:20 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <stdio.h>
 #include "libft.h"
 #include "core/ft_types.h"
+#include "core/dragon.h"
 #include "ft_printf.h"
 #include "ft_printf_unwarn.h"
 
@@ -65,6 +66,7 @@ int			main(void)
 	ft_printf("%%m : %C\t%%b : %C\t%%r : %C\t%%k : %C\n", L'🚫', L'🚫', L'🚫', L'🚫');
 	ft_printf("\n");
 	ft_printf("%Lf\n", (long double)42);
+	free(ft_ldtoa2((long double)42));
 
 	return (0);
 }

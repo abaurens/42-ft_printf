@@ -6,7 +6,7 @@
 #    By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 16:23:33 by abaurens          #+#    #+#              #
-#    Updated: 2019/01/18 19:53:59 by abaurens         ###   ########.fr        #
+#    Updated: 2019/01/29 00:02:38 by abaurens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,13 +86,28 @@ SRC         :=	ft_printf.c		\
 				core/parser_functions.c					\
 				core/argument_getter.c					\
 				core/argument_manager.c					\
+				\
 				core/tostr_conv/ft_ldtoa.c				\
 				core/tostr_conv/printf_lltoa.c			\
 				core/tostr_conv/padded_lltoa.c			\
 				core/tostr_conv/padded_ulltoa.c			\
 				core/tostr_conv/padded_ulltoa_bin.c		\
 				core/tostr_conv/padded_ulltoa_hexa.c	\
-				core/tostr_conv/padded_ulltoa_octal.c
+				core/tostr_conv/padded_ulltoa_octal.c	\
+				\
+				core/tostr_conv/dragon4/ft_ldtoa2.c		\
+				core/tostr_conv/dragon4/dragon_buffer.c	\
+				\
+				core/tostr_conv/dragon4/bigint/bint.c		\
+				core/tostr_conv/dragon4/bigint/bint_add.c	\
+				core/tostr_conv/dragon4/bigint/bint_cmp.c	\
+				core/tostr_conv/dragon4/bigint/bint_div.c	\
+				core/tostr_conv/dragon4/bigint/bint_mul.c	\
+				core/tostr_conv/dragon4/bigint/bint_pow.c	\
+				core/tostr_conv/dragon4/bigint/bint_sub.c	\
+				core/tostr_conv/dragon4/bigint/bint_shift.c	\
+				core/tostr_conv/dragon4/bigint/bint_utils.c
+
 
 CFLAGS      +=  -g -I./includes -W -Wall -Wextra #-Werror
 
@@ -106,13 +121,13 @@ CFLAGS      +=  -I$(dir $(LIBBNUM))includes -I$(dir $(LIBFT))includes
 LDFLAGS     +=  -L$(dir $(LIBBNUM)) -lbnum -L$(dir $(LIBFT)) -lft
 
 $(NAME):    $(LIBFT) $(LIBBNUM) $(OBJ)
-	$(CC) -shared -fPIC $(OBJ) -o libftprintf.so $(LDFLAGS)
+	#$(CC) -shared -fPIC $(OBJ) -o libftprintf.so $(LDFLAGS)
 	$(LINKER) $(NAME) $(OBJ)
 
 $(BONUS): BSRC	:=	$(SRC) $(addprefix $(SRCD)/,$(SRCB))
 $(BONUS): BOBJ	:=	$(OBJ) $(addprefix $(OBJD)/,$(SRCB:.c=.o))
 $(BONUS):	$(LIBFT) $(LIBBNUM) $(BOBJ)
-	$(CC) -shared -fPIC $(BOBJ) -o libftprintf.so $(LDFLAGS)
+	#$(CC) -shared -fPIC $(BOBJ) -o libftprintf.so $(LDFLAGS)
 	$(LINKER) $(BONUS) $(BOBJ)
 
 all:    $(NAME)
@@ -124,7 +139,7 @@ $(LIBBNUM):
 	@make -C $(dir $(LIBBNUM))
 
 test: $(NAME) $(BONUS)
-	$(CC) $(CFLAGS) -o ft_printf main.c $(LDFLAGS) -L. -lftprintfb
+	$(CC) $(CFLAGS) -o ft_printf main.c -L./ -lftprintfb $(LDFLAGS)
 
 objs/%.o:   $(SRCD)/%.c
 	@mkdir -p $(dir $@)

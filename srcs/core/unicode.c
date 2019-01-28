@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 16:02:45 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/18 15:42:31 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/28 22:20:04 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ char					*ft_wstrtostr(char *dst, const wchar_t *src)
 	{
 		if ((l = ft_wchar_len(*src)) > ft_strlen(d))
 		{
-			fflush(stdout);
 			ft_bzero(d, ft_strlen(d));
 			return (d);
 		}

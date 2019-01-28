@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:29:42 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/18 19:40:42 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/28 22:19:37 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static char		*padd(char *str, t_arg *arg)
 	ft_memmove(res + add + !!sign, str, ft_strlen(str));
 	if (sign && --str)
 		*res = sign;
-	fflush(stdout);
 	return ((char *)ft_freturn(str, (long)res));
 }
 
