@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 18:19:18 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/18 19:22:16 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/29 19:52:48 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static char		*build_res(t_arg *ar)
 
 	if (!ldbl_num(ar->val.lf))
 		ar->flags &= ~F_HASH;
-	if (!(val = round_tabflt(ft_ldtoa(ar->val.lf), ar->prec, NULL)))
+	if (!(val = round_tabflt(ft_ldtoa2(ar->val.lf), ar->prec, NULL)))
 		return (NULL);
 	if ((add = 0) || ft_isupper(ar->conv.c))
 		ft_strupcase(val);
@@ -75,7 +75,7 @@ char			*printf_ldbl(t_printf *const data, t_arg *const arg)
 
 	j = 0;
 	((void)data);
-	arg->flags = (!ldbl_num(arg->val.lf) ? flag(arg, ~F_ZERO) : arg->flags);
+	arg->flags = (!ldbl_num(arg->val.lf) ? arg->flags & ~F_ZERO : arg->flags);
 	arg->prec *= !(arg->val.lf != arg->val.lf || arg->val.lf == 1.0 / 0.0);
 	if (!(res = build_res(arg)))
 		return (NULL);
@@ -128,7 +128,9 @@ char			*convert_double_floating(t_printf *data, t_arg *arg)
 		arg->flags &= ~F_ZERO;
 	while (g_funcs[i].c && g_funcs[i].c != LEN_MD_CHRS[arg->length_modifier])
 		i++;
+	/*printf("MIN FLAG : %d\n", arg->flags & F_MINS);*/
 	res = g_funcs[!!g_funcs[i].c * i].func(data, arg);
+	/*printf("MIN FLAG : %d\n", arg->flags & F_MINS);*/
 	ft_freturn(res, (long)insert_buffer(data, res, ft_idxof(0, res)));
 	return (data->buf);
 }

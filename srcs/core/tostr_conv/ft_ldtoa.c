@@ -6,14 +6,16 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/06 17:51:08 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/28 20:39:20 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/29 20:31:50 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_bigfloat.h"
 #include "core/ft_core.h"
 #include "core/ft_types.h"
+#include "core/dragon.h"
 #include "libft.h"
+
 
 char				*ft_ldtoa(long double d)
 {
@@ -45,11 +47,21 @@ char				*ft_ldtoa(long double d)
 	return (res);
 }
 
+
 static char			*process_exponent(char *val, int expo)
 {
+	size_t			l;
+	size_t			nl;
+
+	l = ft_strlen(val);
 	if (expo < 0)
 		ft_memmove(val, val - expo + 1, ft_strlen(val - expo));
+	nl = ft_strlen(val);
+	while (nl < l)
+		val[nl++] = 0;
 	((char *)ft_memmove(val + 1, val, ft_idxof('.', val)))[0] = '.';
+	if (val[ft_idxof('.', val) + 1] == 0)
+		val[ft_idxof('.', val) + 1] = '0';
 	return (val);
 }
 
@@ -94,7 +106,7 @@ char				*exp_dbl(long double d, size_t prec)
 		return (ft_strdup("nan"));
 	if ((expo = 0) || dbl_abs(&d, &sign) == (1.0 / 0.0))
 		return (ft_strdup(sign ? "-inf" : "inf"));
-	if (!(tmp = ft_ldtoa(d)))
+	if (!(tmp = ft_ldtoa2(d)))
 		return (NULL);
 	while (d != 0.0 && ((d < 1.0 && --expo) || (d >= 10.0 && ++expo)))
 		d = (d >= 10.0 ? d / 10.0 : d * 10.0);

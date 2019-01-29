@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 20:21:47 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/29 00:06:20 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/29 20:48:40 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,13 @@
 #include <stdio.h>
 #include "libft.h"
 #include "core/ft_types.h"
+#include "core/ft_core.h"
 #include "core/dragon.h"
 #include "ft_printf.h"
 #include "ft_printf_unwarn.h"
 
 int			main(void)
 {
-	/*ft_printf("%1$*2$p\n", "test", 15);
-	printf("%1$*2$p\n", "test", 15);
-	fflush(stdout);*/
 	/*
 	**	validated
 	*/
@@ -56,8 +54,8 @@ int			main(void)
 	**	to be tested
 	**	test %a with 0 (possible inf loop)
 	*/
-	ft_printf("%%f : %C\t%%g : %C\t%%e : %C\t%%a : %C\n", L'🕓', L'🕓', L'🕓', L'💥');
-	ft_printf("%%F : %C\t%%G : %C\t%%E : %C\t%%A : %C\n", L'🕓', L'🕓', L'🕓', L'💥');
+	ft_printf("%%f : %C\t%%g : %C\t%%e : %C\t%%a : %C\n", L'✔', L'✔', L'🕓', L'💥');
+	ft_printf("%%F : %C\t%%G : %C\t%%E : %C\t%%A : %C\n", L'✔', L'✔', L'🕓', L'💥');
 	ft_printf("\n");
 
 	/*
@@ -65,8 +63,60 @@ int			main(void)
 	*/
 	ft_printf("%%m : %C\t%%b : %C\t%%r : %C\t%%k : %C\n", L'🚫', L'🚫', L'🚫', L'🚫');
 	ft_printf("\n");
-	ft_printf("%Lf\n", (long double)42);
-	free(ft_ldtoa2((long double)42));
+/*
+	printf("R: % 48e\n", 0.0 / 0.0);
+	ft_printf("F: % 48e\n\n", 0.0 / 0.0);
 
+	printf("R: %048e\n", 0.0 / 0.0);
+	ft_printf("F: %048e\n\n", 0.0 / 0.0);
+
+	printf("R: %-48e\n", 0.0 / 0.0);
+	ft_printf("F: %-48e\n\n", 0.0 / 0.0);
+
+	printf("R: % 48.1e\n", 42.0);
+	ft_printf("F: % 48.1e\n\n", 42.0);
+
+	ft_printf("F: % 48.1e\n", 2.5);
+	printf("R: % 48.1e\n\n", 2.5);
+	fflush(stdout);
+
+	ft_printf("F: % 48.1e\n", 2.0);
+	printf("R: % 48.1e\n\n", 2.0);
+	fflush(stdout);
+
+	ft_printf("F: % 48.1e\n", 0.5);
+	printf("R: % 48.1e\n\n", 0.5);
+	fflush(stdout);
+
+	ft_printf("F: % 48.1e\n", 0.05);
+	printf("R: % 48.1e\n\n", 0.05);
+	fflush(stdout);
+
+	ft_printf("F: % 48.1e\n", 0.52);
+	printf("R: % 48.1e\n\n", 0.52);
+	fflush(stdout);
+
+
+	printf("R: % 48.1e\n", 0.0);
+	ft_printf("F: % 48.1e\n\n", 0.0);
+
+	printf("R: |%.4e|\n", 2.176286e+02);
+	ft_printf("F: |%.4e|\n\n", 2.176286e+02);
+
+	printf("R: |%.4e|\n", DBL_MAX);
+	ft_printf("F: |%.4e|\n\n", DBL_MAX);
+
+	ft_printf("F: |%022e|\n", -0x1.fe0001fep-1027);
+	printf("R: |%022e|\n\n", -0x1.fe0001fep-1027);
+	fflush(stdout);
+
+	ft_printf("F: |%052.2e|\n", 1.385239e-309);
+	printf("R: |%052.2e|\n\n", 1.385239e-309);
+	fflush(stdout);
+
+	ft_printf("F: |%020e|\n", 1.385239e-309);
+	printf("R: |%020e|\n\n", 1.385239e-309);
+	fflush(stdout);
+*/
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 20:44:53 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/29 00:07:17 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/29 19:47:04 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static size_t	dragon_end(int i, long fdig, char **res, size_t len)
 	return (len);
 }
 
-static size_t	dragon4(char **res, long fdig, t_float *fc)
+static size_t	dragon4(char **res, const long fdig, t_float *fc)
 {
 	int			i;
 	size_t		len;
@@ -72,7 +72,7 @@ static size_t	dragon4(char **res, long fdig, t_float *fc)
 
 	len = 0;
 	i = dragon_prepare(fc, &num, &den);
-	while (i++ <= -fdig)
+	while (fdig < 0 && i++ <= -fdig)
 		len = add_digit(res, len, '0');
 	if (fdig > 0)
 		bimul_pow10(&den, &den, fdig);
@@ -80,7 +80,7 @@ static size_t	dragon4(char **res, long fdig, t_float *fc)
 		bimul_pow10(&num, &num, -fdig);
 	while (bicmplng(&num, 0) > 0)
 	{
-		if (i != (fdig + 2))
+		if (i != (fdig + 1))
 		{
 			len = add_digit(res, len, '0' + bidiv_maxq92(&num, &den));
 			bimul10(&num, &num);
@@ -101,14 +101,17 @@ char			*ft_ldtoa2(long double d)
 	t_float		fc;
 
 	res = NULL;
+	if (d != d)
+		return (ft_strdup("nan"));
+	if (d == (1.0 / 0.0) || d == -(1.0 / 0.0))
+		return (ft_strdup(d < 0.0 ? "-inf" : "inf"));
 	fc = get_float_components(d);
 	fc.exponent -= (LDBL_MANT_DIG - 1);
 	if ((sign = fc.sign))
 		d = -d;
 	fdig = get_fdig((long double)d);
 	ln = dragon4(&res, fdig, &fc);
-	if (res && res[(fdig = ft_idxof('.', res))] == '.' && !res[fdig + 1])
-		add_digit(&res, ln, '0');
-	printf("%s\n", res);
+	/*if (res && res[(fdig = ft_idxof('.', res))] == '.' && !res[fdig + 1])
+		add_digit(&res, ln, '0');*/
 	return (res);
 }

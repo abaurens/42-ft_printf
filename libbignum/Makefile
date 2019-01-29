@@ -6,7 +6,7 @@
 #    By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/20 04:12:39 by abaurens          #+#    #+#              #
-#    Updated: 2019/01/10 12:47:16 by abaurens         ###   ########.fr        #
+#    Updated: 2019/01/29 19:08:07 by abaurens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,13 +20,7 @@ CC		=	gcc
 
 CFLAGS	+=	-I./includes -I$(dir $(LIBFT))includes -W -Wall -Wextra -ansi
 
-SRC		:=	bint/instance.c			\
-			bint/string.c			\
-			bint/utils.c			\
-			bint/add.c				\
-			bint/mul.c				\
-			\
-			bfloat/instance.c		\
+SRC		:=	bfloat/instance.c		\
 			bfloat/string.c			\
 			bfloat/utils.c			\
 			bfloat/add.c			\

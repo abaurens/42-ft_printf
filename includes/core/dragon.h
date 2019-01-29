@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 20:45:57 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/29 00:08:33 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/29 19:02:04 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ size_t			add_digit(char **buffer, const size_t l, const char c);
 /*
 **	ft_ldtoa2.c
 */
+/*
 char			*ft_ldtoa2(long double d);
+*/
 
 #endif

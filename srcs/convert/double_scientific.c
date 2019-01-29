@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:28:58 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/18 19:21:57 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/29 20:41:34 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char			*printf_ldbl_s(t_arg *const ar)
 	if (*t == '-' || (*t == ' ' && ((flag(ar, F_PLUS) && (*t = '+')) || 1)))
 		*r = *t;
 	s *= flag(ar, F_ZERO);
-	ft_memset(r + s, (s && ldbl_num(ar->val.lf)) ? '0' : ' ', add + l - s);
+	ft_memset(r + s, (flag(ar, F_ZERO)) ? '0' : ' ', add + l - s);
 	ft_memcpy(r + add * !flag(ar, F_MINS) + s, t + s, l - s);
 	return (r);
 }
@@ -48,12 +48,16 @@ char			*printf_ldbl_s(t_arg *const ar)
 static char		*std_ldouble(t_printf *const data, t_arg *const arg)
 {
 	((void)data);
+	if (!ldbl_num(arg->val.lf))
+		arg->flags &= ~F_ZERO;
 	return (printf_ldbl_s(arg));
 }
 
 static char		*std_double(t_printf *const data, t_arg *const arg)
 {
 	arg->val.lf = (long double)arg->val.f;
+	if (!ldbl_num(arg->val.lf))
+		arg->flags &= ~F_ZERO;
 	return (std_ldouble(data, arg));
 }
 
