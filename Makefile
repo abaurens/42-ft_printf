@@ -6,7 +6,7 @@
 #    By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 16:23:33 by abaurens          #+#    #+#              #
-#    Updated: 2019/01/29 20:47:54 by abaurens         ###   ########.fr        #
+#    Updated: 2019/01/29 21:12:41 by abaurens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -121,13 +121,13 @@ CFLAGS      +=  -I$(dir $(LIBBNUM))includes -I$(dir $(LIBFT))includes
 LDFLAGS     +=  -L$(dir $(LIBBNUM)) -lbnum -L$(dir $(LIBFT)) -lft
 
 $(NAME):    $(LIBFT) $(LIBBNUM) $(OBJ)
-	#$(CC) -shared -fPIC $(OBJ) -o libftprintf.so $(LDFLAGS)
+	$(CC) -shared -fPIC $(OBJ) -o libftprintf.so $(LDFLAGS)
 	$(LINKER) $(NAME) $(OBJ)
 
 $(BONUS): BSRC	:=	$(SRC) $(addprefix $(SRCD)/,$(SRCB))
 $(BONUS): BOBJ	:=	$(OBJ) $(addprefix $(OBJD)/,$(SRCB:.c=.o))
 $(BONUS):	$(LIBFT) $(LIBBNUM) $(BOBJ)
-	#$(CC) -shared -fPIC $(BOBJ) -o libftprintf.so $(LDFLAGS)
+	$(CC) -shared -fPIC $(BOBJ) -o libftprintf.so $(LDFLAGS)
 	$(LINKER) $(BONUS) $(BOBJ)
 
 all:    $(NAME)

@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:29:42 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/28 22:19:37 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/29 21:22:00 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static char		*padd(char *str, t_arg *arg)
 	char		sign;
 
 	sign = 0;
-	return (str);
 	if (!str)
 		return (str);
 	v = arg->val.lf;
