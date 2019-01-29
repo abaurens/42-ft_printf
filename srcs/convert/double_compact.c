@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:29:42 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/29 21:22:00 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/29 21:42:16 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,31 +62,29 @@ static char		*remove_zeros(char *str, t_arg *arg)
 	return (str);
 }
 
-static char		*long_double(t_printf *const data, t_arg *const arg)
+static char		*long_double(t_printf *const data, t_arg *const ar)
 {
 	long double	tmp;
-	char		num;
 	int			exp;
 	char		*res;
 	int			min;
+	char		n;
 
-	exp = 0;
-	if (!arg->prec)
-		arg->prec++;
-	min = arg->min;
-	arg->min = 0;
-	tmp = arg->val.lf;
-	if ((num = (!fnan(tmp))))
+	min = ar->min;
+	ar->min = 0;
+	tmp = ar->val.lf;
+	ar->prec += !ar->prec;
+	if ((n = (!fnan(tmp))))
 		dbl_abs(&tmp, NULL);
-	num = (num && tmp != (1.0 / 0.0));
-	while (num && tmp != .0 && ((tmp < 1.0 && --exp) || (tmp >= 10.0 && ++exp)))
-		tmp = (tmp >= 10.0 ? tmp / 10.0 : tmp * 10.0);
-	if (num && (exp < -4 || exp >= arg->prec) && arg->prec--)
-		res = printf_ldbl_s(arg);
-	else if ((arg->prec -= (exp + 1)) || 1)
-		res = printf_ldbl(data, arg);
-	arg->min = min;
-	res = padd(remove_zeros(res, arg), arg);
+	ar->prec--;
+	if (!(res = printf_ldbl_s(ar)))
+		return (NULL);
+	ar->prec++;
+	exp = ldbl_num(ar->val.lf) ? ft_atoi(res + ft_idxof('e', res) + 1) : 0;
+	if (!(n && (exp < -4 || exp >= ar->prec)) && ((ar->prec -= (exp + 1)) || 1))
+		res = (char *)ft_freturn(res, (long)printf_ldbl(data, ar));
+	ar->min = min;
+	res = padd(remove_zeros(res, ar), ar);
 	return (insert_buffer(data, res, ft_strlen(res)));
 }
 

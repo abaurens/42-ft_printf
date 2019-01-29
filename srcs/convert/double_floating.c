@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 18:19:18 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/29 19:52:48 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/29 21:40:52 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char			*printf_ldbl(t_printf *const data, t_arg *const arg)
 	j = 0;
 	((void)data);
 	arg->flags = (!ldbl_num(arg->val.lf) ? arg->flags & ~F_ZERO : arg->flags);
-	arg->prec *= !(arg->val.lf != arg->val.lf || arg->val.lf == 1.0 / 0.0);
+	arg->prec *= ldbl_num(arg->val.lf);
 	if (!(res = build_res(arg)))
 		return (NULL);
 	if (flag(arg, F_ZERO) && arg->val.lf < 0.0 && (i = ft_idxof('-', res)))

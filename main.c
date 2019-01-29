@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 20:21:47 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/29 21:23:06 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/29 21:45:04 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ int			main(void)
 	**	to be tested
 	**	test %a with 0 (possible inf loop)
 	*/
-	ft_printf("%%f : %C\t%%g : %C\t%%e : %C\t%%a : %C\n", L'✔', L'✔', L'🕓', L'💥');
-	ft_printf("%%F : %C\t%%G : %C\t%%E : %C\t%%A : %C\n", L'✔', L'✔', L'🕓', L'💥');
+	ft_printf("%%f : %C\t%%g : %C\t%%e : %C\t%%a : %C\n", L'✔', L'🕓', L'✔', L'💥');
+	ft_printf("%%F : %C\t%%G : %C\t%%E : %C\t%%A : %C\n", L'✔', L'🕓', L'✔', L'💥');
 	ft_printf("\n");
 
 	/*
@@ -65,8 +65,7 @@ int			main(void)
 	ft_printf("\n");
 
 	/*
-	**	%g has to switch to %e when the exponent is greater or equals to the DISPLAYED exponent.
-	**		this means the value of the exponent after rounding !
+	**	%g seems to be working. need to do real check anyway
 	**	%a may infinite loop with 0.0
 	*/
 
@@ -77,8 +76,28 @@ int			main(void)
 	printf("R: |%-26g|\n\n", 1.385239e-309);
 	fflush(stdout);
 
-	ft_printf("F: |% .3lg|\n", 99.562182840363405489370052237063646316528320312);
-	printf("R: |% .3lg|\n\n", 99.562182840363405489370052237063646316528320312);
+	ft_printf("F: |% .2lg|\n", 99.562182840363405489370052237063646316528320312);
+	printf("R: |% .2lg|\n\n", 99.562182840363405489370052237063646316528320312);
+	fflush(stdout);
+
+	ft_printf("F: |% .2lg|\n", 0.0 / 0.0);
+	printf("R: |% .2lg|\n\n", 0.0 / 0.0);
+	fflush(stdout);
+
+	ft_printf("F: |% .2lg|\n", 1.0 / 0.0);
+	printf("R: |% .2lg|\n\n", 1.0 / 0.0);
+	fflush(stdout);
+
+	ft_printf("F: |% .2lg|\n", -1.0 / 0.0);
+	printf("R: |% .2lg|\n\n", -1.0 / 0.0);
+	fflush(stdout);
+
+	ft_printf("F: |% .2le|\n", -1.0 / 0.0);
+	printf("R: |% .2le|\n\n", -1.0 / 0.0);
+	fflush(stdout);
+
+	ft_printf("F: |% .2lf|\n", -1.0 / 0.0);
+	printf("R: |% .2lf|\n\n", -1.0 / 0.0);
 	fflush(stdout);
 
 	return (0);
