@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 14:53:12 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/29 19:01:54 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/30 20:39:08 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ char			*ft_wstrtostr(char *dst, const wchar_t *src);
 **	ft_ldtoa.c
 */
 char			*ft_ldtoa(long double d);
-char			*ft_ldtoa2(long double d);
 char			*exp_dbl(long double d, size_t prec);
 char			*exp_dbl_hex(long double d, int prec, t_bool lng);
 

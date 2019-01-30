@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/20 18:25:03 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/28 20:57:20 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/30 20:40:24 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ unsigned int	bidiv_maxq92(t_bint *n1, t_bint *n2)
 {
 	unsigned int	r;
 	t_bint			m;
-	long			c;
 
 	r = 5;
 	if (bicmp(n1, n2) < 0)
@@ -56,7 +55,6 @@ unsigned int	bidiv_maxq93(t_bint *n1, t_bint *n2)
 {
 	unsigned int	r;
 	t_bint			m;
-	long			c;
 
 	r = 5;
 	if (bicmp(n1, n2) < 0)

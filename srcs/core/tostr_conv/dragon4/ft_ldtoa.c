@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 20:44:53 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/30 15:34:17 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/30 20:37:34 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static size_t	dragon4(char **res, const long fdig, t_float *fc)
 	return (dragon_end(i, fdig, res, len));
 }
 
-char			*ft_ldtoa2(long double d)
+char			*ft_ldtoa(long double d)
 {
 	char		sign;
 	char		*res;

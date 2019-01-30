@@ -6,7 +6,7 @@
 #    By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 16:23:33 by abaurens          #+#    #+#              #
-#    Updated: 2019/01/29 21:12:41 by abaurens         ###   ########.fr        #
+#    Updated: 2019/01/30 20:38:35 by abaurens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,15 +87,15 @@ SRC         :=	ft_printf.c		\
 				core/argument_getter.c					\
 				core/argument_manager.c					\
 				\
-				core/tostr_conv/ft_ldtoa.c				\
 				core/tostr_conv/printf_lltoa.c			\
 				core/tostr_conv/padded_lltoa.c			\
 				core/tostr_conv/padded_ulltoa.c			\
 				core/tostr_conv/padded_ulltoa_bin.c		\
 				core/tostr_conv/padded_ulltoa_hexa.c	\
 				core/tostr_conv/padded_ulltoa_octal.c	\
+				core/tostr_conv/ft_ldtoa_scientific.c	\
 				\
-				core/tostr_conv/dragon4/ft_ldtoa2.c		\
+				core/tostr_conv/dragon4/ft_ldtoa.c		\
 				core/tostr_conv/dragon4/dragon_buffer.c	\
 				\
 				core/tostr_conv/dragon4/bigint/bint.c		\

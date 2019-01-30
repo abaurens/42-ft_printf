@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 18:19:18 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/29 21:40:52 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/30 20:39:46 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static char		*build_res(t_arg *ar)
 
 	if (!ldbl_num(ar->val.lf))
 		ar->flags &= ~F_HASH;
-	if (!(val = round_tabflt(ft_ldtoa2(ar->val.lf), ar->prec, NULL)))
+	if (!(val = round_tabflt(ft_ldtoa(ar->val.lf), ar->prec, NULL)))
 		return (NULL);
 	if ((add = 0) || ft_isupper(ar->conv.c))
 		ft_strupcase(val);

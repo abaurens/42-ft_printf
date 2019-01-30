@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ldtoa.c                                         :+:      :+:    :+:   */
+/*   ft_ldtoa_scientific.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/06 17:51:08 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/30 19:28:18 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/30 20:39:26 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char				*exp_dbl(long double d, size_t prec)
 		return (ft_strdup("nan"));
 	if ((expo = 0) || dbl_abs(&d, &sign) == (1.0 / 0.0))
 		return (ft_strdup(sign ? "-inf" : "inf"));
-	if (!(tmp = ft_ldtoa2(d)))
+	if (!(tmp = ft_ldtoa(d)))
 		return (NULL);
 	while (d != 0.0 && ((d < 1.0 && --expo) || (d >= 10.0 && ++expo)))
 		d = (d >= 10.0 ? d / 10.0 : d * 10.0);
