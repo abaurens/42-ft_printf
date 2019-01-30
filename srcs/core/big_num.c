@@ -6,36 +6,24 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 20:22:26 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/30 14:27:48 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/30 23:18:54 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "core/ft_core.h"
-#include "ft_bigfloat.h"
-#include "libft.h"
+#include "core/ft_bigfloat.h"
+#include "core/libft.h"
 
 t_bflt					*new_ftobflt(long double d)
 {
-	t_float				fl;
 	t_bflt				*res;
-	t_bflt				*tmp;
-	t_bflt				*expo;
+	char				*tmp;
 
-	if (d == (1.0 / 0.0))
+	if (!(tmp = ft_ldtoa(d)))
 		return (NULL);
-	if (d != d)
-		return (NULL);
-	fl = get_float_components(d);
-	res = get_mantissa(&fl);
-	expo = new_bflt(fl.exponent < 0 ? "0.5" : "2");
-	while ((expo && res) && fl.exponent < 0 ? fl.exponent++ : fl.exponent--)
-	{
-		tmp = res;
-		res = mul_bflt(expo, res);
-		del_bflt(tmp);
-	}
-	del_bflt(expo);
+	res = new_bflt(tmp);
+	free(tmp);
 	return (res);
 }
 

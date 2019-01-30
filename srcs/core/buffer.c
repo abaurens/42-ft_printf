@@ -12,7 +12,7 @@
 
 #include <stdlib.h>
 #include "core/ft_types.h"
-#include "libft.h"
+#include "core/libft.h"
 
 char		*insert_buffer(t_printf *const data, const char *str, size_t len)
 {

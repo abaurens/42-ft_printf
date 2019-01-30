@@ -12,7 +12,7 @@
 
 #include <string.h>
 #include "core/ft_core.h"
-#include "libft.h"
+#include "core/libft.h"
 
 char		*rnd_2(char *val, const size_t ln, const size_t blen)
 {

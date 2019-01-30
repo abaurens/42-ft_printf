@@ -12,7 +12,7 @@
 
 #include "core/ft_core.h"
 #include "core/parser.h"
-#include "libft.h"
+#include "core/libft.h"
 
 static int		get_flags(const char *format, t_arg *arg)
 {

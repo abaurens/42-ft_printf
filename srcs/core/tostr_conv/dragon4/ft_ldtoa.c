@@ -18,7 +18,7 @@
 #include "core/ft_types.h"
 #include "core/ft_core.h"
 #include "core/dragon.h"
-#include "libft.h"
+#include "core/libft.h"
 
 static long		get_fdig(long double d)
 {

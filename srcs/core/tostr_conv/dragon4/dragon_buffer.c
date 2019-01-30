@@ -12,7 +12,7 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include "libft.h"
+#include "core/libft.h"
 
 size_t	add_digit(char **buffer, const size_t l, const char c)
 {

@@ -12,7 +12,7 @@
 
 #include "core/ft_core.h"
 #include "core/ft_types.h"
-#include "libft.h"
+#include "core/libft.h"
 
 static char		*manage_prefix(char *r, t_printf *const data, t_arg *const ar)
 {

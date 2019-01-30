@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 20:21:47 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/30 19:54:18 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/30 23:59:32 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <float.h>
 #include <math.h>
 #include <stdio.h>
-#include "libft.h"
+#include "core/libft.h"
 #include "core/ft_types.h"
 #include "core/ft_core.h"
 #include "core/dragon.h"
@@ -81,6 +81,9 @@ int			main(void)
 	**		need of bigfloats. this way increase the speed of %e, %g and %a conversions
 	**		and allow me to remove the bignum library.
 	*/
+
+	printf("R: |%La|\n", LDBL_MAX);
+	ft_printf("F: |%La|\n", LDBL_MAX);
 
 	return (0);
 }

@@ -6,14 +6,14 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 13:53:50 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/18 19:03:22 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/30 22:54:34 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONVERTER_H
 # define CONVERTER_H
 
-# include "ft_types.h"
+# include "core/ft_types.h"
 
 # define CONV_V "%dDiuoxXfFeEgGaAcCsSpnmbrk"
 

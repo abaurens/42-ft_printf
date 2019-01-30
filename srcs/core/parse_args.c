@@ -15,7 +15,7 @@
 #include "core/ft_core.h"
 #include "core/converter.h"
 #include "core/parser.h"
-#include "libft.h"
+#include "core/libft.h"
 
 int				parse_arg(const char **format, t_printf *data, t_arg *arg)
 {

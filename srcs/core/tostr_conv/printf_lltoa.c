@@ -12,7 +12,7 @@
 
 #include <string.h>
 #include <stdlib.h>
-#include "libft.h"
+#include "core/libft.h"
 
 char		*printf_lltoa(long long int nb, const int min)
 {

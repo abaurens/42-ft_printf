@@ -13,7 +13,7 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include "core/ft_core.h"
-#include "libft.h"
+#include "core/libft.h"
 
 int				get_non_arg(const char *format, t_printf *data)
 {

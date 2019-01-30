@@ -14,7 +14,7 @@
 #include "core/ft_types.h"
 #include "core/ft_core.h"
 #include "core/converter.h"
-#include "libft.h"
+#include "core/libft.h"
 
 static char		*long_hexa_ptr(t_printf *const data, t_arg *const arg)
 {

@@ -13,7 +13,7 @@
 #include <unistd.h>
 #include <errno.h>
 #include "core/ft_error.h"
-#include "libft.h"
+#include "core/libft.h"
 
 char		*ft_strerror(const int errnum)
 {

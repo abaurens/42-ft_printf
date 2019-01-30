@@ -14,7 +14,7 @@
 #include "core/ft_core.h"
 #include "core/converter.h"
 #include "core/ft_types.h"
-#include "libft.h"
+#include "core/libft.h"
 
 static char		*character(t_printf *data, t_arg *arg)
 {

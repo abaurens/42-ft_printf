@@ -6,15 +6,15 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/06 17:51:08 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/30 20:39:26 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/30 23:14:51 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_bigfloat.h"
-#include "core/ft_core.h"
+#include "core/ft_bigfloat.h"
 #include "core/ft_types.h"
+#include "core/ft_core.h"
 #include "core/dragon.h"
-#include "libft.h"
+#include "core/libft.h"
 
 static char			*process_exponent(char *val, int expo)
 {

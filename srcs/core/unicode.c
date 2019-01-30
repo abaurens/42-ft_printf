@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "core/ft_types.h"
-#include "libft.h"
+#include "core/libft.h"
 
 size_t					ft_wchar_len(const wchar_t chr)
 {

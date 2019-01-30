@@ -6,14 +6,14 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 14:53:12 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/30 20:39:08 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/30 22:49:25 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_CORE_H
 # define FT_CORE_H
 
-# include "ft_types.h"
+# include "core/ft_types.h"
 # include "ft_bigfloat.h"
 
 # define LEN_MD			"qjzZtlLh"

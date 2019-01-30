@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include "core/ft_core.h"
 #include "core/ft_types.h"
-#include "libft.h"
+#include "core/libft.h"
 
 static char		*alloc_res(size_t dtl, t_arg *arg, size_t add)
 {

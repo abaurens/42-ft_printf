@@ -12,7 +12,7 @@
 
 #include <stdlib.h>
 #include <stdarg.h>
-#include "libft.h"
+#include "core/libft.h"
 #include "core/ft_types.h"
 #include "core/argument_mgr.h"
 

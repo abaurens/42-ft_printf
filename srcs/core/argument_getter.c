@@ -13,7 +13,7 @@
 #include <stdlib.h>
 #include "core/ft_core.h"
 #include "core/ft_types.h"
-#include "libft.h"
+#include "core/libft.h"
 
 t_val				get_pointer(va_list ap, const char t, const int l)
 {
