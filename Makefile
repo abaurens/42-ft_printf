@@ -6,7 +6,7 @@
 #    By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 16:23:33 by abaurens          #+#    #+#              #
-#    Updated: 2019/01/31 00:02:31 by abaurens         ###   ########.fr        #
+#    Updated: 2019/01/31 00:19:28 by abaurens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -147,7 +147,7 @@ SRC         :=	ft_printf.c		\
 				libft/ft_strncmp.c
 
 
-CFLAGS      +=  -g -I./includes -W -Wall -Wextra #-Werror
+CFLAGS      +=  -I./includes -W -Wall -Wextra -Werror
 
 OBJ         :=  $(addprefix $(OBJD)/,$(SRC:.c=.o))
 SRC         :=  $(addprefix $(SRCD)/,$(SRC))
@@ -164,6 +164,9 @@ $(BONUS): BOBJ	:=	$(OBJ) $(addprefix $(OBJD)/,$(SRCB:.c=.o))
 $(BONUS):	$(BOBJ)
 	$(CC) -shared -fPIC $(BOBJ) -o libftprintf.so
 	$(LINKER) $(BONUS) $(BOBJ)
+
+fast:	CFLAGS += -O3 -Ofast
+fast:	$(BONUS)
 
 all:    $(NAME)
 
