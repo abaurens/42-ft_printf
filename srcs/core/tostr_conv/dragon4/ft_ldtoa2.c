@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 20:44:53 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/29 19:47:04 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/01/30 15:34:17 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ char			*ft_ldtoa2(long double d)
 		d = -d;
 	fdig = get_fdig((long double)d);
 	ln = dragon4(&res, fdig, &fc);
-	/*if (res && res[(fdig = ft_idxof('.', res))] == '.' && !res[fdig + 1])
-		add_digit(&res, ln, '0');*/
+	if (res && res[(fdig = ft_idxof('.', res))] == '.' && !res[fdig + 1])
+		add_digit(&res, ln, '0');
 	return (res);
 }
