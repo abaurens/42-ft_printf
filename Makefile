@@ -6,7 +6,7 @@
 #    By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 16:23:33 by abaurens          #+#    #+#              #
-#    Updated: 2019/01/31 00:19:28 by abaurens         ###   ########.fr        #
+#    Updated: 2019/02/01 18:03:34 by abaurens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,164 +15,89 @@ RM          =   rm -rf
 CP          =   cp -rf
 LINKER      =   ar rc
 NAME        =   libftprintf.a
-BONUS		=	libftprintfb.a
-#LIBFT		=	./libft/libft.a
-#LIBBNUM		=	./libbignum/libbnum.a
+SHARED		=	libftprintf.so
+
 SRCD        =   srcs
 OBJD        =   objs
 
-SRCB		:=	ft_fprintf.c	\
-				ft_sprintf.c	\
-				ft_snprintf.c	\
-				ft_asprintf.c	\
-				ft_dprintf.c
+SRCB		:=	ft_fprintf.c	convert/iso_date.c
 
-SRC         :=	ft_printf.c		\
-				\
-				convert/integer/integer.c	\
-				convert/integer/long.c		\
-				convert/integer/short.c		\
-				convert/integer/exotic.c	\
-				\
-				convert/length/length.c		\
-				convert/length/l_long.c		\
-				convert/length/l_short.c	\
-				convert/length/l_exotic.c	\
-				\
-				convert/uinteger/uinteger.c	\
-				convert/uinteger/u_long.c	\
-				convert/uinteger/u_short.c	\
-				convert/uinteger/u_exotic.c	\
-				\
-				convert/ubinary/ubinary.c	\
-				convert/ubinary/b_long.c	\
-				convert/ubinary/b_short.c	\
-				convert/ubinary/b_exotic.c	\
-				\
-				convert/uhexa/uhexa.c		\
-				convert/uhexa/h_long.c		\
-				convert/uhexa/h_short.c		\
-				convert/uhexa/h_exotic.c	\
-				\
-				convert/uoctal/uoctal.c		\
-				convert/uoctal/o_long.c		\
-				convert/uoctal/o_short.c	\
-				convert/uoctal/o_exotic.c	\
-				\
-				convert/char.c					\
-				convert/string.c				\
-				convert/percent.c				\
-				convert/pointer.c				\
-				convert/strerror.c				\
-				convert/double_hexa.c			\
-				convert/double_compact.c		\
-				convert/wide_character.c		\
-				convert/double_floating.c		\
-				convert/double_scientific.c		\
-				convert/iso_formated_date.c		\
-				convert/non_printable_string.c	\
-				convert/wide_character_string.c	\
-				\
-				core/core.c				\
-				core/flags.c			\
-				core/buffer.c			\
-				core/big_num.c			\
-				core/unicode.c			\
-				core/ft_error.c			\
-				core/parse_args.c		\
-				core/list_manager.c		\
-				core/bankers_round.c	\
-				core/floating_point.c	\
-				core/parser_functions.c	\
-				core/argument_getter.c	\
-				core/argument_manager.c	\
-				\
-				core/tostr_conv/printf_lltoa.c			\
-				core/tostr_conv/padded_lltoa.c			\
-				core/tostr_conv/padded_ulltoa.c			\
-				core/tostr_conv/padded_ulltoa_bin.c		\
-				core/tostr_conv/padded_ulltoa_hexa.c	\
-				core/tostr_conv/padded_ulltoa_octal.c	\
-				core/tostr_conv/ft_ldtoa_scientific.c	\
-				\
-				core/tostr_conv/dragon4/ft_ldtoa.c		\
-				core/tostr_conv/dragon4/dragon_buffer.c	\
-				\
-				core/tostr_conv/bfloat/set.c		\
-				core/tostr_conv/bfloat/add.c		\
-				core/tostr_conv/bfloat/mul.c		\
-				core/tostr_conv/bfloat/string.c		\
-				core/tostr_conv/bfloat/utils.c		\
-				core/tostr_conv/bfloat/instance.c	\
-				\
-				core/tostr_conv/dragon4/bigint/bint.c		\
-				core/tostr_conv/dragon4/bigint/bint_add.c	\
-				core/tostr_conv/dragon4/bigint/bint_cmp.c	\
-				core/tostr_conv/dragon4/bigint/bint_div.c	\
-				core/tostr_conv/dragon4/bigint/bint_mul.c	\
-				core/tostr_conv/dragon4/bigint/bint_pow.c	\
-				core/tostr_conv/dragon4/bigint/bint_sub.c	\
-				core/tostr_conv/dragon4/bigint/bint_shift.c	\
-				core/tostr_conv/dragon4/bigint/bint_utils.c	\
-				\
-				libft/ft_atoi.c				\
-				libft/ft_bzero.c			\
-				libft/ft_contains.c			\
-				libft/ft_freturn.c			\
-				libft/ft_idxof.c			\
-				libft/ft_isprint.c			\
-				libft/ft_isupper.c			\
-				libft/ft_maximum.c			\
-				libft/ft_minimum.c			\
-				libft/ft_memalloc.c			\
-				libft/ft_memcpy.c			\
-				libft/ft_memmove.c			\
-				libft/ft_memset.c			\
-				libft/ft_nan.c				\
-				libft/ft_numlen.c			\
-				libft/ft_putnbr_fd.c		\
-				libft/ft_strchr.c			\
-				libft/ft_strdup.c			\
-				libft/ft_strmcat.c			\
-				libft/ft_strncpy.c			\
-				libft/ft_strupcase.c		\
-				libft/ft_unsignedlen_base.c	\
-				libft/ft_unsignedlen.c		\
-				libft/ft_strlen.c			\
-				libft/ft_absolute.c			\
-				libft/ft_atol_base.c		\
-				libft/ft_isbase.c			\
-				libft/ft_putchar_fd.c		\
-				libft/ft_putstr_fd.c		\
-				libft/ft_strncmp.c
+CONV		:=	$(addprefix uhexa/,uhexa.c h_len.c h_exotic.c)				\
+				$(addprefix integer/,integer.c len.c exotic.c)				\
+				$(addprefix length/,length.c l_len.c l_exotic.c)			\
+				$(addprefix uoctal/,uoctal.c o_len.c o_exotic.c)			\
+				$(addprefix ubinary/,ubinary.c b_len.c b_exotic.c)			\
+				$(addprefix uinteger/,uinteger.c u_len.c u_exotic.c)		\
+				char.c		wchar.c		string.c	wstring.c	npstring.c	\
+				percent.c	strerror.c	pointer.c	dbl_hex.c				\
+				dbl_compact.c	dbl_floating.c	dbl_scientific.c
+CONV		:=	$(addprefix convert/,$(CONV))
 
+STR_BUILD	:=	printf_lltoa.c			padded_ulltoa_hexa.c	\
+				padded_lltoa.c			padded_ulltoa_octal.c	\
+				padded_ulltoa.c			ft_ldtoa_scientific.c	\
+				padded_ulltoa_bin.c
+STR_BUILD	:=	$(addprefix tostr_conv/,$(STR_BUILD))
 
-CFLAGS      +=  -I./includes -W -Wall -Wextra -Werror
+BFLOAT		:=	set.c	utils.c		\
+				add.c	string.c	\
+				mul.c	instance.c
+BFLOAT		:=	$(addprefix bfloat/,$(BFLOAT))
 
+CORE		:=	core.c		unicode.c		bankers_round.c		\
+				flags.c		ft_error.c		floating_point.c	\
+				buffer.c	parse_args.c	argument_getter.c	\
+				big_num.c	list_manager.c	parser_functions.c	\
+				arg_mgr.c
+CORE		:=	$(addprefix core/,$(CORE))
+
+LIBFT		:=	ft_nan.c		ft_memcpy.c		ft_contains.c		\
+				ft_atoi.c		ft_strncmp.c	ft_absolute.c		\
+				ft_idxof.c		ft_strmcat.c	ft_memalloc.c		\
+				ft_bzero.c		ft_maximum.c	ft_strupcase.c		\
+				ft_memset.c		ft_strncpy.c	ft_putnbr_fd.c		\
+				ft_strchr.c		ft_minimum.c	ft_atol_base.c		\
+				ft_strlen.c		ft_freturn.c	ft_putstr_fd.c		\
+				ft_strdup.c		ft_isupper.c	ft_putchar_fd.c		\
+				ft_isbase.c		ft_memmove.c	ft_unsignedlen.c	\
+				ft_numlen.c		ft_isprint.c	ft_unsignedlen_base.c
+LIBFT		:=	$(addprefix libft/,$(LIBFT))
+
+DRAGON		:=	bint.c		bint_div.c	bint_sub.c		\
+				bint_add.c	bint_mul.c	bint_shift.c	\
+				bint_cmp.c	bint_pow.c	bint_utils.c
+DRAGON		:=	$(addprefix bigint/,$(DRAGON))			\
+				ft_ldtoa.c	dragon_buffer.c
+DRAGON		:=	$(addprefix dragon4/,$(DRAGON))
+
+SRC         :=	$(CONV)							\
+				$(CORE)							\
+				$(LIBFT)						\
+				$(BFLOAT)						\
+				$(DRAGON)						\
+				$(STR_BUILD)					\
+				ft_sprintf.c	ft_asprintf.c	\
+				ft_dprintf.c	ft_snprintf.c	\
+				ft_printf.c
 OBJ         :=  $(addprefix $(OBJD)/,$(SRC:.c=.o))
 SRC         :=  $(addprefix $(SRCD)/,$(SRC))
 
-BSRC		:=	$(SRC) $(addprefix $(SRCD)/,$(SRCB))
-BOBJ		:=	$(OBJ) $(addprefix $(OBJD)/,$(SRCB:.c=.o))
+BSRC		:=	$(addprefix $(SRCD)/,$(SRCB))
+BOBJ		:=	$(addprefix $(OBJD)/,$(SRCB:.c=.o))
+
+CFLAGS      :=  -I./includes -W -Wall -Wextra
 
 $(NAME):    $(OBJ)
-	$(CC) -shared -fPIC $(OBJ) -o libftprintf.so
-	$(LINKER) $(NAME) $(OBJ)
-
-$(BONUS): BSRC	:=	$(SRC) $(addprefix $(SRCD)/,$(SRCB))
-$(BONUS): BOBJ	:=	$(OBJ) $(addprefix $(OBJD)/,$(SRCB:.c=.o))
-$(BONUS):	$(BOBJ)
-	$(CC) -shared -fPIC $(BOBJ) -o libftprintf.so
-	$(LINKER) $(BONUS) $(BOBJ)
-
-fast:	CFLAGS += -O3 -Ofast
-fast:	$(BONUS)
+	$(CC) -shared -fPIC $(OBJ) -o $(SHARED)
+	@$(LINKER) $(NAME) $(OBJ)
 
 all:    $(NAME)
 
-test: $(NAME) $(BONUS)
-	$(CC) $(CFLAGS) -o ft_printf main.c -L./ -lftprintfb
+bonus:	CFLAGS	+=	-DBONUS=1 -O3 -Ofast
+bonus:	OBJ		+=	$(BOBJ)
+bonus:	$(BOBJ) $(NAME)
 
+objs/%.o:	CFLAGS	+= -Werror
 objs/%.o:   $(SRCD)/%.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -o $@ -c $<
@@ -181,10 +106,11 @@ clean:
 	$(RM) $(OBJD)
 
 fclean:	clean
-	$(RM) ft_printf
 	$(RM) $(NAME)
-	$(RM) $(BONUS)
+	$(RM) $(SHARED)
 
-re:	fclean all
+re:		fclean all
 
-.PHONY: all clean fclean re
+reb:	fclean bonus
+
+.PHONY: all bonus clean fclean re reb

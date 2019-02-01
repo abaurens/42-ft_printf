@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 13:53:50 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/30 22:54:34 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/02/01 17:33:42 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,6 @@
 # define CONVERTER_H
 
 # include "core/ft_types.h"
-
-# define CONV_V "%dDiuoxXfFeEgGaAcCsSpnmbrk"
-
-/*
-**	% = only print a percent char
-**		(because % is used to escape conversions) (NO ARG)
-**	i, d = signed decimal
-**	o = unsigned octal
-**	u = unsigned decimal
-**	x, X = unsigned hexadecimal (low and up case)
-**	f = double (and floats casted to double)
-**	F = double (and floats casted to double) but NAN and INFINITY are upcase
-**	e = double (and floats casted to double) but printd in the form xxxxe+-yyy
-**	E = same as e but the exposant letter 'e' is upcase
-**	g = the most compact between f and e
-**	G = same as g but between f and E
-**	a = double (and floats casted to double) in lowcase hexadecimal
-**		with the form [-]0xh.hhhhp+-dd
-**	A = double (and floats casted to double) in upcase hexadecimal
-**		with the form [-]0Xh.hhhhP+-dd (same as a, but X and P are upcase)
-**	c = 1 byte character
-**	C = wide character (wchar)
-**	s = 1 byte character string
-**	S = wide character string
-**	p = pointer address (in hexadecimal format)
-**	n = place the number of character writed by this printf until this
-**		convertion into an int pointer
-**	m = prints the value of strerror(errno) (NO ARG)
-**
-**	b = nombre binaire
-**	r = string avec caracteres non imprimable
-**	k = date au format ISO
-*/
 
 /*
 **	convert/
@@ -72,8 +39,12 @@ char			*convert_length(t_printf *data, t_arg *arg);
 char			*convert_strerror(t_printf *data, t_arg *arg);
 char			*convert_u_integer_binary(t_printf *data, t_arg *arg);
 char			*convert_non_printable_string(t_printf *data, t_arg *arg);
+
+# ifdef BONUS
+
 char			*convert_iso_date(t_printf *data, t_arg *arg);
 
+# endif
 /*
 **	wide_character_string.c
 */
@@ -93,6 +64,40 @@ char			*printf_ldbl_s(t_arg *const ar);
 **	double_floating.c
 */
 char			*printf_ldbl(t_printf *const data, t_arg *const arg);
+
+/*
+**	% = only print a percent char
+**		(because % is used to escape conversions) (NO ARG)
+**	i, d = signed decimal
+**	o = unsigned octal
+**	u = unsigned decimal
+**	x, X = unsigned hexadecimal (low and up case)
+**	f = double (and floats casted to double)
+**	F = double (and floats casted to double) but NAN and INFINITY are upcase
+**	e = double (and floats casted to double) but printd in the form xxxxe+-yyy
+**	E = same as e but the exposant letter 'e' is upcase
+**	g = the most compact between f and e
+**	G = same as g but between f and E
+**	a = double (and floats casted to double) in lowcase hexadecimal
+**		with the form [-]0xh.hhhhp+-dd
+**	A = double (and floats casted to double) in upcase hexadecimal
+**		with the form [-]0Xh.hhhhP+-dd (same as a, but X and P are upcase)
+**	c = 1 byte character
+**	C = wide character (wchar)
+**	s = 1 byte character string
+**	S = wide character string
+**	p = pointer address (in hexadecimal format)
+**	n = place the number of character writed by this printf until this
+**		convertion into an int pointer
+**
+**	[BONUS ONLY]
+**	b = unsigned binary
+**		(prefixed with 0b with flag #)
+**	k = ISO formated date (ls formated with flag #)
+**	r = string avec caracteres non imprimable
+**		(prints the null terminating zero with flag #)
+**	m = prints the value of strerror(errno) (NO ARG)
+*/
 
 static const t_converter	g_converters[] =
 {
@@ -120,10 +125,16 @@ static const t_converter	g_converters[] =
 	{'S', TRUE, convert_wide_char_string},
 	{'p', TRUE, convert_pointer},
 	{'n', TRUE, convert_length},
+
+# ifdef BONUS
+
 	{'m', FALSE, convert_strerror},
 	{'b', TRUE, convert_u_integer_binary},
 	{'r', TRUE, convert_non_printable_string},
 	{'k', TRUE, convert_iso_date},
+
+# endif
+
 	{'\0', MAYBE, (void *)0x0}
 };
 

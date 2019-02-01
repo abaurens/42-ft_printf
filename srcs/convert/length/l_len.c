@@ -1,16 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   l_short.c                                          :+:      :+:    :+:   */
+/*   l_len.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/10 15:31:05 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/18 19:24:01 by abaurens         ###   ########.fr       */
+/*   Created: 2019/01/10 15:30:32 by abaurens          #+#    #+#             */
+/*   Updated: 2019/02/01 15:12:29 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core/ft_types.h"
+
+char			*short_short_length(t_printf *const data, t_arg *const arg)
+{
+	signed char	*v;
+
+	v = (signed char *)arg->val.p;
+	*v = data->len;
+	return (data->buf);
+}
 
 char			*short_length(t_printf *const data, t_arg *const arg)
 {
@@ -21,11 +30,20 @@ char			*short_length(t_printf *const data, t_arg *const arg)
 	return (data->buf);
 }
 
-char			*short_short_length(t_printf *const data, t_arg *const arg)
+char			*long_length(t_printf *const data, t_arg *const arg)
 {
-	signed char	*v;
+	long int	*v;
 
-	v = (signed char *)arg->val.p;
+	v = (long int *)arg->val.p;
+	*v = data->len;
+	return (data->buf);
+}
+
+char			*long_long_length(t_printf *const data, t_arg *const arg)
+{
+	long long	*v;
+
+	v = (long long int *)arg->val.p;
 	*v = data->len;
 	return (data->buf);
 }
