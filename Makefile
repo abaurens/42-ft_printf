@@ -6,7 +6,7 @@
 #    By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 16:23:33 by abaurens          #+#    #+#              #
-#    Updated: 2019/02/01 18:03:34 by abaurens         ###   ########.fr        #
+#    Updated: 2019/02/02 16:28:06 by abaurens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SHARED		=	libftprintf.so
 SRCD        =   srcs
 OBJD        =   objs
 
-SRCB		:=	ft_fprintf.c	convert/iso_date.c
+BSRC		:=	ft_fprintf.c	convert/iso_date.c
 
 CONV		:=	$(addprefix uhexa/,uhexa.c h_len.c h_exotic.c)				\
 				$(addprefix integer/,integer.c len.c exotic.c)				\
@@ -82,8 +82,8 @@ SRC         :=	$(CONV)							\
 OBJ         :=  $(addprefix $(OBJD)/,$(SRC:.c=.o))
 SRC         :=  $(addprefix $(SRCD)/,$(SRC))
 
-BSRC		:=	$(addprefix $(SRCD)/,$(SRCB))
-BOBJ		:=	$(addprefix $(OBJD)/,$(SRCB:.c=.o))
+BSRC		:=	$(addprefix $(SRCD)/,$(BSRC))
+BOBJ		:=	$(addprefix $(OBJD)/,$(BSRC:.c=.o))
 
 CFLAGS      :=  -I./includes -W -Wall -Wextra
 

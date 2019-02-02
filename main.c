@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 20:21:47 by abaurens          #+#    #+#             */
-/*   Updated: 2019/02/01 17:14:39 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/02/01 19:50:44 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@
 #include <float.h>
 #include <math.h>
 #include <stdio.h>
+/*
 #include "core/libft.h"
 #include "core/ft_types.h"
 #include "core/ft_core.h"
 #include "core/dragon.h"
 #include "ft_printf.h"
-
+*/
 int			main(void)
 {
 	/*
@@ -30,23 +31,23 @@ int			main(void)
 	*/
 	setlocale(LC_ALL, "");
 	ft_printf("%%i : %lc\t%%o : %C\t%%u : %C\t%%x : %C\t%%c : %C\t%%s : %C\t%%p : %C\n",
-		L'✔', /* i */
-		L'✔', /* o */
-		L'✔', /* u */
-		L'✔', /* x */
-		L'✔', /* c */
-		L'✔', /* s */
-		L'✔' /* p */
+		L'✔',
+		L'✔',
+		L'✔',
+		L'✔',
+		L'✔',
+		L'✔',
+		L'✔'
 	);
 	ft_printf("%%d : %C\t%%O : %C\t%%U : %C\t%%X : %C\t%%C : %C\t%%S : %C\n",
-		L'✔', /* d */
-		L'✔', /* O */
-		L'✔', /* U */
-		L'✔', /* X */
-		L'✔', /* C */
-		L'✔' /* S */
+		L'✔',
+		L'✔',
+		L'✔',
+		L'✔',
+		L'✔',
+		L'✔'
 	);
-	ft_printf("%%D : %C\n", L'✔'); /* D */
+	ft_printf("%%D : %C\n", L'✔');
 	ft_printf("\n");
 
 	/*
@@ -84,17 +85,18 @@ int			main(void)
 #ifdef BONUS
 
 	ft_printf("BONUS = %d\n", 1);
-	ft_printf("42 binary = %b\n", 42);
 
 #else
 
 	ft_printf("BONUS = %d\n", 1);
-	ft_printf("42 binary = %b\n", 42);
 
 #endif
 
+	ft_printf("42 binary = %b\n", 42);
 	printf("R: |%La|\n", LDBL_MAX);
 	ft_printf("F: |%La|\n", LDBL_MAX);
+
+	printf("|%-10.-5d|\n", 42);
 
 	return (0);
 }
