@@ -6,7 +6,7 @@
 #    By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 16:23:33 by abaurens          #+#    #+#              #
-#    Updated: 2019/02/02 19:03:02 by abaurens         ###   ########.fr        #
+#    Updated: 2019/02/02 19:28:37 by abaurens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,6 +92,7 @@ CFLAGS      :=  -I./includes -W -Wall -Wextra -Werror
 $(NAME):    $(OBJ)
 	$(CC) -shared -fPIC $(OBJ) -o $(SHARED)
 	@$(LINKER) $(NAME) $(OBJ)
+	ranlib $(NAME)
 
 all:    $(NAME)
 
