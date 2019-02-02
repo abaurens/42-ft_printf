@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   double_scientific.c                                :+:      :+:    :+:   */
+/*   dbl_scientific.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:28:58 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/29 20:41:34 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/02/02 19:48:20 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char			*printf_ldbl_s(t_arg *const ar)
 	s *= flag(ar, F_ZERO);
 	ft_memset(r + s, (flag(ar, F_ZERO)) ? '0' : ' ', add + l - s);
 	ft_memcpy(r + add * !flag(ar, F_MINS) + s, t + s, l - s);
-	return (r);
+	return ((char *)ft_freturn(t, (long)r));
 }
 
 static char		*std_ldouble(t_printf *const data, t_arg *const arg)

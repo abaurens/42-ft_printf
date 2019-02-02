@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 18:16:59 by abaurens          #+#    #+#             */
-/*   Updated: 2019/02/02 17:37:29 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/02/02 19:42:26 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ static char		*character(t_printf *data, t_arg *arg)
 	if (arg->min < 1)
 		arg->min = 1;
 	tab_len = arg->min;
-	if (!(res = malloc(arg->min + 1)))
+	if (!(res = ft_memalloc(arg->min + 1)))
 		return (NULL);
 	res[tab_len] = 0;
 	ft_memset(res, flag(arg, F_ZERO) ? '0' : ' ', tab_len);
 	tab_len -= (flag(arg, F_MINS) ? tab_len : 1);
 	ft_strncpy(res + tab_len, v, 1);
-	return (insert_buffer(data, res, arg->min));
+	return ((char *)ft_freturn(res, (long)insert_buffer(data, res, arg->min)));
 }
 
 static char		*wide_char(t_printf *data, t_arg *arg)

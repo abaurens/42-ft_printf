@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   double_compact.c                                   :+:      :+:    :+:   */
+/*   dbl_compact.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:29:42 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/29 21:42:16 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/02/02 19:44:44 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ static char		*long_double(t_printf *const data, t_arg *const ar)
 		res = (char *)ft_freturn(res, (long)printf_ldbl(data, ar));
 	ar->min = min;
 	res = padd(remove_zeros(res, ar), ar);
-	return (insert_buffer(data, res, ft_strlen(res)));
+	exp = ft_strlen(res);
+	return ((char *)ft_freturn(res, (long)insert_buffer(data, res, exp)));
 }
 
 static char		*std_double(t_printf *const data, t_arg *const arg)

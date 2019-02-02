@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 20:21:47 by abaurens          #+#    #+#             */
-/*   Updated: 2019/02/01 19:50:44 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/02/02 19:35:44 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,8 @@
 #include <float.h>
 #include <math.h>
 #include <stdio.h>
-/*
-#include "core/libft.h"
-#include "core/ft_types.h"
-#include "core/ft_core.h"
-#include "core/dragon.h"
 #include "ft_printf.h"
-*/
+
 int			main(void)
 {
 	/*
@@ -82,21 +77,10 @@ int			main(void)
 	**		and allow me to remove the bignum library.
 	*/
 
-#ifdef BONUS
-
-	ft_printf("BONUS = %d\n", 1);
-
-#else
-
-	ft_printf("BONUS = %d\n", 1);
-
-#endif
-
-	ft_printf("42 binary = %b\n", 42);
-	printf("R: |%La|\n", LDBL_MAX);
-	ft_printf("F: |%La|\n", LDBL_MAX);
-
-	printf("|%-10.-5d|\n", 42);
+	ft_printf("%d | %o | %u | %x | %c | %C | %s | %S | %p | %f | %e | %g | %a\n",
+			42, 84, 21, 4242, 'E', L'€', "L0L", L"L€L", "test", 42.6, 84.3, 21.42, 84.4221);
+	printf("%d | %o | %u | %x | %c | %C | %s | %S | %p | %f | %e | %g | %a\n",
+			42, 84, 21, 4242, 'E', L'€', "L0L", L"L€L", "test", 42.6, 84.3, 21.42, 84.4221);
 
 	return (0);
 }

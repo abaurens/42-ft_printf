@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/06 17:51:08 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/30 23:14:51 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/02/02 19:56:25 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,16 @@ static char			*process_exponent(char *val, int expo)
 	return (val);
 }
 
+static t_bflt		*mul_realloc(t_bflt *a, t_bflt *b)
+{
+	t_bflt			*tmp;
+
+	tmp = a;
+	a = mul_bflt(a, b);
+	del_bflt(tmp);
+	return (a);
+}
+
 static char			*get_exp_hex(long double *d, int *expo, t_bool lng)
 {
 	t_bflt			two;
@@ -48,13 +58,13 @@ static char			*get_exp_hex(long double *d, int *expo, t_bool lng)
 		while (*d >= (lng ? 16.0 : 2.0) && ++(*expo))
 		{
 			*d *= 0.5;
-			tmp = mul_bflt(tmp, &two);
+			tmp = mul_realloc(tmp, &two);
 		}
 	else if (*d <= 16.0)
 		while ((*d * (long double)(1 + lng)) < lim && --(*expo))
 		{
 			*d *= 2.0;
-			tmp = mul_bflt(tmp, &two);
+			tmp = mul_realloc(tmp, &two);
 		}
 	unset_bflt(&two);
 	res = to_hex(tmp);
@@ -109,7 +119,7 @@ char				*exp_dbl_hex(long double d, int prec, t_bool lng)
 	prec = (prec < 0 ? ft_strlen(tmp) : (size_t)(prec + 2));
 	xpl = ft_unsignedlen(ft_abs(expo));
 	if (!tmp || !(res = ft_memalloc(sign + 2 + prec + 2 + xpl + 1)))
-		return (NULL);
+		return ((char *)ft_freturn(tmp, 0x0));
 	*res = '-';
 	ft_memset(res + sign, '0', 2 + prec + 2 + xpl);
 	ft_memcpy(res + sign, "0x", 2);
@@ -117,5 +127,5 @@ char				*exp_dbl_hex(long double d, int prec, t_bool lng)
 	ft_memcpy(res + sign + 2 + prec, (expo < 0 ? "p-" : "p+"), 2);
 	while (xpl-- > 0 && (res[sign + 4 + prec + xpl] = ft_abs(expo % 10) + '0'))
 		expo = ft_abs(expo / 10);
-	return (res);
+	return ((char *)ft_freturn(tmp, (long)res));
 }

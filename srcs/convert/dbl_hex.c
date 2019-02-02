@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   double_hexa.c                                      :+:      :+:    :+:   */
+/*   dbl_hex.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:30:24 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/30 14:30:01 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/02/02 19:52:39 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ static char		*manage_prefix(char *r, t_printf *const data, t_arg *const ar)
 	}
 	if (ft_isupper(ar->conv.c))
 		ft_strupcase(r);
-	return (insert_buffer(data, r, ft_strlen(r)));
+	i = ft_strlen(r);
+	return ((char *)ft_freturn(r, (long)insert_buffer(data, r, i)));
 }
 
 static char		*long_double_h(t_printf *const data, t_arg *const ar)

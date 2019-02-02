@@ -6,7 +6,7 @@
 #    By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 16:23:33 by abaurens          #+#    #+#              #
-#    Updated: 2019/02/02 19:28:37 by abaurens         ###   ########.fr        #
+#    Updated: 2019/02/02 19:39:10 by abaurens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,7 +87,7 @@ SRC         :=  $(addprefix $(SRCD)/,$(SRC))
 BOBJ		:=	$(addprefix $(OBJD)/,$(BSRC:.c=.o))
 BSRC		:=	$(addprefix $(SRCD)/,$(BSRC))
 
-CFLAGS      :=  -I./includes -W -Wall -Wextra -Werror
+CFLAGS      :=  -g -I./includes -W -Wall -Wextra -Werror
 
 $(NAME):    $(OBJ)
 	$(CC) -shared -fPIC $(OBJ) -o $(SHARED)
