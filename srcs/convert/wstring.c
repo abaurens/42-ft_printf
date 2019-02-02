@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wide_character_string.c                            :+:      :+:    :+:   */
+/*   wstring.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:34:47 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/18 19:21:13 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/02/02 17:46:07 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "core/ft_core.h"
 #include "core/ft_types.h"
 #include "core/libft.h"
-
+/*
 static char					*padd(char *res, t_arg *arg)
 {
 	int						from;
@@ -33,7 +33,7 @@ static char					*padd(char *res, t_arg *arg)
 	return (res);
 }
 
-char						*wide_character_string(t_printf *data, t_arg *arg)
+char						*wide_string(t_printf *data, t_arg *arg)
 {
 	wchar_t					*v;
 	char					*res;
@@ -55,6 +55,11 @@ char						*wide_character_string(t_printf *data, t_arg *arg)
 	insert_buffer(data, res, ft_strlen(res));
 	free(res);
 	return (data->buf);
+}
+
+static char					*wide_character_string(t_printf *data, t_arg *arg)
+{
+	return (wide_string(data, arg));
 }
 
 static const t_converter	g_funcs[] =
@@ -87,3 +92,4 @@ char						*convert_wide_char_string(t_printf *data,
 		return (g_funcs[0].func(data, arg));
 	return (g_funcs[i].func(data, arg));
 }
+*/

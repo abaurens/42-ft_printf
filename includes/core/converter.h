@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 13:53:50 by abaurens          #+#    #+#             */
-/*   Updated: 2019/02/01 17:33:42 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/02/02 18:43:39 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@ char			*convert_double_scientific(t_printf *data, t_arg *arg);
 char			*convert_double_compact(t_printf *data, t_arg *arg);
 char			*convert_double_hexa(t_printf *data, t_arg *arg);
 char			*convert_char(t_printf *data, t_arg *arg);
-char			*convert_wide_char(t_printf *data, t_arg *arg);
+char			*convert_wchar(t_printf *data, t_arg *arg);
 char			*convert_string(t_printf *data, t_arg *arg);
+char			*convert_wstring(t_printf *data, t_arg *arg);
 char			*convert_wide_char_string(t_printf *data, t_arg *arg);
 char			*convert_pointer(t_printf *data, t_arg *arg);
 char			*convert_length(t_printf *data, t_arg *arg);
@@ -47,13 +48,13 @@ char			*convert_iso_date(t_printf *data, t_arg *arg);
 # endif
 /*
 **	wide_character_string.c
+char			*wide_string(t_printf *data, t_arg *arg);
 */
-char			*wide_character_string(t_printf *data, t_arg *arg);
 
 /*
 **	wide_character.c
+char			*wide_char(t_printf *data, t_arg *arg);
 */
-char			*wide_character(t_printf *data, t_arg *arg);
 
 /*
 **	double_scientific.c
@@ -120,17 +121,17 @@ static const t_converter	g_converters[] =
 	{'a', TRUE, convert_double_hexa},
 	{'A', TRUE, convert_double_hexa},
 	{'c', TRUE, convert_char},
-	{'C', TRUE, convert_wide_char},
+	{'C', TRUE, convert_wchar},
 	{'s', TRUE, convert_string},
-	{'S', TRUE, convert_wide_char_string},
+	{'S', TRUE, convert_wstring},
 	{'p', TRUE, convert_pointer},
 	{'n', TRUE, convert_length},
+	{'b', TRUE, convert_u_integer_binary},
+	{'r', TRUE, convert_non_printable_string},
 
 # ifdef BONUS
 
 	{'m', FALSE, convert_strerror},
-	{'b', TRUE, convert_u_integer_binary},
-	{'r', TRUE, convert_non_printable_string},
 	{'k', TRUE, convert_iso_date},
 
 # endif

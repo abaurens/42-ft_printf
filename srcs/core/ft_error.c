@@ -6,12 +6,12 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 04:02:07 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/12 17:22:38 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/02/02 18:56:54 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <errno.h>
+#include "core/ft_error_vals.h"
 #include "core/ft_error.h"
 #include "core/libft.h"
 
@@ -30,7 +30,7 @@ void		ft_perror(const char *str)
 	int		i;
 	int		err;
 
-	err = errno;
+	err = get_errno();
 	if (str)
 		ft_putstr_fd(str, 2);
 	ft_putstr_fd(": ", 2);
@@ -41,4 +41,11 @@ void		ft_perror(const char *str)
 	if (g_error_table[i].value < 0)
 		ft_putnbr_fd(err, 2);
 	write(2, "\n", 1);
+}
+
+int		get_errno(void)
+{
+	if (g_get_errno[0] != NULL)
+		return (g_get_errno[0]());
+	return (0);
 }

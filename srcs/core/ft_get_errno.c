@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.h                                         :+:      :+:    :+:   */
+/*   ft_get_errno.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/02 18:28:58 by abaurens          #+#    #+#             */
-/*   Updated: 2019/02/02 18:36:55 by abaurens         ###   ########.fr       */
+/*   Created: 2019/02/02 18:38:02 by abaurens          #+#    #+#             */
+/*   Updated: 2019/02/02 18:38:24 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_ERROR_H
-# define FT_ERROR_H
+#include <errno.h>
 
-void			ft_perror(const char *str);
-char			*ft_strerror(const int errnum);
-
-int				get_errno(void);
-
-#endif
+int	get_errno_real(void)
+{
+	return (errno);
+}

@@ -1,42 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wide_character.c                                   :+:      :+:    :+:   */
+/*   wchar.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 17:31:35 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/18 19:20:51 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/02/02 17:33:44 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "core/ft_core.h"
 #include "core/ft_types.h"
+#include "core/ft_core.h"
 #include "core/libft.h"
 
-char			*wide_character(t_printf *data, t_arg *arg)
+/*
+static char		*wide_character(t_printf *data, t_arg *arg)
 {
-	wchar_t		v[2];
-	char		*res;
-	int			len;
-	int			tab_len;
-
-	v[1] = 0;
-	*v = (wchar_t)arg->val.i;
-	len = ft_wchar_len(*v);
-	if ((tab_len = arg->min) < len)
-		tab_len = len;
-	if (!(res = ft_memalloc(tab_len + 1)))
-		return (NULL);
-	ft_memset(res, flag(arg, F_ZERO) ? '0' : ' ', tab_len);
-	len = tab_len - len;
-	if (flag(arg, F_MINS))
-		len = 0;
-	ft_wstrtostr(res + len, v);
-	insert_buffer(data, res, tab_len);
-	free(res);
-	return (data->buf);
+	return (wide_char(data, arg));
 }
 
 static const t_converter	g_funcs[] =
@@ -67,3 +49,4 @@ char			*convert_wide_char(t_printf *data, t_arg *arg)
 		return (g_funcs[0].func(data, arg));
 	return (g_funcs[i].func(data, arg));
 }
+*/

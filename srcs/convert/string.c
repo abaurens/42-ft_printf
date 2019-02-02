@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 17:45:42 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/18 19:21:22 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/02/02 17:50:56 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,48 @@
 #include "core/ft_types.h"
 #include "core/converter.h"
 #include "core/libft.h"
+
+static char					*padd(char *res, t_arg *arg)
+{
+	int						from;
+	size_t					add;
+	size_t					len;
+
+	add = 0;
+	from = 0;
+	if ((len = ft_strlen(res)) < (size_t)arg->min)
+		add = arg->min - len;
+	if (flag(arg, F_MINS))
+		from = len;
+	else
+		ft_memmove(res + add, res, len);
+	ft_memset(res + from, flag(arg, F_ZERO) ? '0' : ' ', add);
+	return (res);
+}
+
+static char					*wide_string(t_printf *data, t_arg *arg)
+{
+	wchar_t					*v;
+	char					*res;
+	int						len;
+	int						tab_len;
+
+	if (!(v = (wchar_t *)arg->val.p))
+		v = L"(null)";
+	if ((len = ft_wstrlen(v)) > arg->prec && arg->prec)
+		len = arg->prec;
+	if ((tab_len = arg->min) < len)
+		tab_len = len;
+	if (!(res = ft_memalloc(tab_len + 1)))
+		return (NULL);
+	ft_memset(res, flag(arg, F_ZERO) ? '0' : ' ', len);
+	tab_len -= (flag(arg, F_MINS) ? tab_len : len);
+	ft_wstrtostr(res, v);
+	padd(res, arg);
+	insert_buffer(data, res, ft_strlen(res));
+	free(res);
+	return (data->buf);
+}
 
 static char		*character_string(t_printf *data, t_arg *arg)
 {
@@ -43,7 +85,7 @@ static char		*character_string(t_printf *data, t_arg *arg)
 static const t_converter	g_funcs[] =
 {
 	{' ', TRUE, character_string},
-	{'l', TRUE, wide_character_string},
+	{'l', TRUE, wide_string},
 	{'\0', FALSE, NULL}
 };
 
@@ -69,4 +111,11 @@ char			*convert_string(t_printf *data, t_arg *arg)
 	if (!g_funcs[i].c)
 		return (g_funcs[0].func(data, arg));
 	return (g_funcs[i].func(data, arg));
+}
+
+char			*convert_wstring(t_printf *data, t_arg *arg)
+{
+	arg->conv.c = 's';
+	arg->length_modifier = ft_idxof('l', LEN_MD_CHRS);
+	return (convert_string(data, arg));
 }

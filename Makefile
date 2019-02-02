@@ -6,7 +6,7 @@
 #    By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 16:23:33 by abaurens          #+#    #+#              #
-#    Updated: 2019/02/02 16:28:06 by abaurens         ###   ########.fr        #
+#    Updated: 2019/02/02 19:03:02 by abaurens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,9 @@ SHARED		=	libftprintf.so
 SRCD        =   srcs
 OBJD        =   objs
 
-BSRC		:=	ft_fprintf.c	convert/iso_date.c
+BSRC		:=	ft_fprintf.c		\
+				core/ft_get_errno.c	\
+				convert/iso_date.c	convert/strerror.c
 
 CONV		:=	$(addprefix uhexa/,uhexa.c h_len.c h_exotic.c)				\
 				$(addprefix integer/,integer.c len.c exotic.c)				\
@@ -28,9 +30,9 @@ CONV		:=	$(addprefix uhexa/,uhexa.c h_len.c h_exotic.c)				\
 				$(addprefix uoctal/,uoctal.c o_len.c o_exotic.c)			\
 				$(addprefix ubinary/,ubinary.c b_len.c b_exotic.c)			\
 				$(addprefix uinteger/,uinteger.c u_len.c u_exotic.c)		\
-				char.c		wchar.c		string.c	wstring.c	npstring.c	\
-				percent.c	strerror.c	pointer.c	dbl_hex.c				\
-				dbl_compact.c	dbl_floating.c	dbl_scientific.c
+				char.c		string.c	npstring.c							\
+				percent.c	dbl_hex.c	pointer.c							\
+				dbl_compact.c			dbl_floating.c	dbl_scientific.c
 CONV		:=	$(addprefix convert/,$(CONV))
 
 STR_BUILD	:=	printf_lltoa.c			padded_ulltoa_hexa.c	\
@@ -82,10 +84,10 @@ SRC         :=	$(CONV)							\
 OBJ         :=  $(addprefix $(OBJD)/,$(SRC:.c=.o))
 SRC         :=  $(addprefix $(SRCD)/,$(SRC))
 
-BSRC		:=	$(addprefix $(SRCD)/,$(BSRC))
 BOBJ		:=	$(addprefix $(OBJD)/,$(BSRC:.c=.o))
+BSRC		:=	$(addprefix $(SRCD)/,$(BSRC))
 
-CFLAGS      :=  -I./includes -W -Wall -Wextra
+CFLAGS      :=  -I./includes -W -Wall -Wextra -Werror
 
 $(NAME):    $(OBJ)
 	$(CC) -shared -fPIC $(OBJ) -o $(SHARED)
@@ -97,7 +99,6 @@ bonus:	CFLAGS	+=	-DBONUS=1 -O3 -Ofast
 bonus:	OBJ		+=	$(BOBJ)
 bonus:	$(BOBJ) $(NAME)
 
-objs/%.o:	CFLAGS	+= -Werror
 objs/%.o:   $(SRCD)/%.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -o $@ -c $<

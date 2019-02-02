@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 18:29:02 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/29 18:33:45 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/02/02 17:05:54 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define FT_TYPES_H
 
 # include <time.h>
-# include <wchar.h>
 # include <unistd.h>
 # include <string.h>
 # include <stdarg.h>

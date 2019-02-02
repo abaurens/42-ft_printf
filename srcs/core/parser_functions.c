@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 15:57:31 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/12 17:23:08 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/02/02 17:02:03 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int		get_flags(const char *format, t_arg *arg)
 	return (j);
 }
 
-static int		get_min_width(const char *format, t_printf *data, t_arg *arg)
+int				get_min_width(const char *format, t_printf *data, t_arg *arg)
 {
 	int			i;
 	const char	*f;
@@ -56,7 +56,7 @@ static int		get_min_width(const char *format, t_printf *data, t_arg *arg)
 	return ((format + i) - f);
 }
 
-static int		get_precision(const char *format, t_printf *data, t_arg *arg)
+int				get_precision(const char *format, t_printf *data, t_arg *arg)
 {
 	int			i;
 	const char	*f;
@@ -81,7 +81,7 @@ static int		get_precision(const char *format, t_printf *data, t_arg *arg)
 	return ((format + i) - f);
 }
 
-static int		get_length_modifier(const char *frm, t_printf *data, t_arg *arg)
+int				get_length_modifier(const char *frm, t_printf *data, t_arg *arg)
 {
 	char		c;
 	int			i;
@@ -133,10 +133,3 @@ int				get_chain_format(const char *format, t_printf *data, size_t *v)
 	*v = ft_atoi(format);
 	return (i + 1);
 }
-
-int		(*const g_funcs[])(const char *, t_printf *, t_arg *) =
-{
-	get_min_width,
-	get_precision,
-	get_length_modifier
-};

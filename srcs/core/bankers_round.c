@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 19:44:18 by abaurens          #+#    #+#             */
-/*   Updated: 2019/01/29 18:58:42 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/02/02 16:56:00 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,7 @@ char		*banker_round(char *val, const size_t prec, const char *base)
 	size_t	len;
 	size_t	entl;
 	size_t	blen;
-	char	sign;
 
-	sign = 0;
 	if (!val || !base)
 		return (val);
 	entl = ft_idxof('.', val);
@@ -107,8 +105,6 @@ char		*round_tabflt(char *val, size_t prec, int *exp)
 
 char		*round_hex(char *val, size_t prec, int *exp)
 {
-	size_t	i;
-	size_t	len;
 	char	sign;
 	size_t	point;
 
@@ -117,8 +113,6 @@ char		*round_hex(char *val, size_t prec, int *exp)
 		return (val);
 	while (ft_contains(*val, " +-") && *(++val))
 		sign++;
-	len = ft_strlen(val);
-	i = len;
 	banker_round(val, prec, HEXA);
 	if (exp && (point = ft_idxof('.', val)) != 1 && ((*exp) += 4))
 		*(((char *)ft_memmove(val + 2, val + 1, point - 1)) - 1) = '.';
