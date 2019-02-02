@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 13:53:50 by abaurens          #+#    #+#             */
-/*   Updated: 2019/02/02 18:43:39 by abaurens         ###   ########.fr       */
+/*   Updated: 2019/02/02 19:59:03 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,13 @@ char			*printf_ldbl(t_printf *const data, t_arg *const arg);
 **	p = pointer address (in hexadecimal format)
 **	n = place the number of character writed by this printf until this
 **		convertion into an int pointer
-**
-**	[BONUS ONLY]
 **	b = unsigned binary
 **		(prefixed with 0b with flag #)
-**	k = ISO formated date (ls formated with flag #)
 **	r = string avec caracteres non imprimable
 **		(prints the null terminating zero with flag #)
+**
+**	[BONUS ONLY]
+**	k = ISO formated date (ls formated with flag #)
 **	m = prints the value of strerror(errno) (NO ARG)
 */
 
